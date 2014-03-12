@@ -1,0 +1,35 @@
+---
+layout: default
+title: Home
+---
+{% include JB/setup %}
+
+{% for post in paginator.posts %}
+    <article class="index">
+        <header>
+            <h1 class="title">
+                <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+            </h1>
+        </header>
+        {{ post.content }}
+        <p class="signoff">
+            &mdash;
+            <a href="{{ post.url }}" title="{{ post.title }}"><time datetime="{{ post.date | date_to_xmlschema }}" pubdate>{{ post.date | date_to_string }}</time></a>
+            (<a href="{{ post.url }}#disqus_thread" class="post_comment_link">Comments</a>)
+        </p>
+    </article>
+    <hr />
+{% endfor %}
+<footer>
+    {% if paginator.next_page %}
+        <a href="/page{{ paginator.next_page }}/">&larr; Older</a>
+    {% endif %}
+    {% include search.html %}
+    {% if paginator.previous_page %}
+        {% if paginator.previous_page == 1 %}
+            <a href="/">Newer &rarr;</a>
+        {% else %}
+            <a href="/page{{ paginator.previous_page }}">Newer &rarr;</a>
+        {% endif %}
+    {% endif %}
+</footer>
