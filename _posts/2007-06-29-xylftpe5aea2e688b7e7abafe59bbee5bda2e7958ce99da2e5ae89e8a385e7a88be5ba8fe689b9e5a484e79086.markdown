@@ -1,0 +1,35 @@
+---
+author: amosk
+comments: true
+date: 2007-06-29 13:59:59+00:00
+layout: post
+slug: xylftp%e5%ae%a2%e6%88%b7%e7%ab%af%e5%9b%be%e5%bd%a2%e7%95%8c%e9%9d%a2%e5%ae%89%e8%a3%85%e7%a8%8b%e5%ba%8f%e6%89%b9%e5%a4%84%e7%90%86
+title: XylFTP客户端图形界面安装程序批处理
+wordpress_id: 50
+categories:
+- Web
+---
+
+我用vb写了一个引导程序，实际用批处理完成安装过程。这个批处理还有个问题，就是直接拷贝编译好的jar文件到指定目录，并且连桌面和开始菜单里的快捷方式都是提前做好直接拷贝的，有待更新。
+::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
+::2007.6.29
+@echo off
+
+if not exist C:\"Program Files"\xylftp mkdir C:\"Program Files"\xylftp 
+move xylftp.jar C:\"Program Files"\xylftp\xylftpgui.jar
+cd ..\doc
+copy User_Manual_Client.pdf C:\"Program
+
+Files"\xylftp\User_Manual_Client_GUI.pdf
+cd ..\src
+echo Creat link!
+echo @echo off >C:\"Program Files"\xylftp\xylftpgui.bat
+echo java -jar "C:\Program Files\xylftp\xylftpgui.jar" %%1 %%2 %%3 %%4 %%5 %%6
+
+%%7 %%8 %%9 >>C:\"Program Files"\xylftp\xylftpgui.bat
+mkdir C:\"Documents and Settings"\"All Users"\「开始」菜单\程序\xylftp
+copy XylFTP.lnk C:\"Documents and Settings"\"All Users"\「开始」菜单\程序
+
+\xylftp
+copy XylFTP.lnk C:\"Documents and Settings"\%username%\桌面\
+pause

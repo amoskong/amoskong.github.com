@@ -1,0 +1,15 @@
+---
+author: amosk
+comments: true
+date: 2007-10-16 05:09:13+00:00
+layout: post
+slug: '%e5%9e%83%e5%9c%be%e8%af%84%e8%ae%ba'
+title: 垃圾评论
+wordpress_id: 121
+categories:
+- Programming
+---
+
+今天进博客后台看了一下，在垃圾评论里捡回了好多评论。这个插件帮了不少忙，一般每天就有几十条。被拦截的非垃圾评论一般是短小、感叹词较多、或者纯标点符号、超链接过多等语句，在此提醒大家，查看自己的后台有无重要评论被拦截。
+
+WangCong采用的是验证码，那样有点太麻烦了。

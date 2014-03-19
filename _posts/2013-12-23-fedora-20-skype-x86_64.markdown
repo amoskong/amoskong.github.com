@@ -1,0 +1,33 @@
+---
+author: amosk
+comments: true
+date: 2013-12-23 10:52:36+00:00
+layout: post
+slug: fedora-20-skype-x86_64
+title: Fedora 20 Skype @ x86_64
+wordpress_id: 1009
+categories:
+- Linux
+- Web
+---
+
+[![Screenshot from 2013-12-23 18:49:37](http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png)](http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png)
+
+    
+    
+    # <a href="http://negativo17.org/repos/skype/fedora-20/x86_64/">http://negativo17.org/repos/skype/fedora-20/x86_64/</a>
+    [DIR] repodata/                             2013-12-19 06:10    -   
+    [   ] skype-4.2.0.11-8.fc20.i686.rpm        2013-12-19 06:10   12M  
+    [   ] skype-data-4.2.0.11-8.fc20.noarch.rpm 2013-12-19 06:10  2.1M
+
+
+
+    
+    # cat /etc/yum.repos.d/skype.repo
+    
+    [skype]
+    name=skype repo
+    baseurl=http://negativo17.org/repos/skype/fedora-20/x86_64/
+    enabled=1
+    
+    # yum install skype

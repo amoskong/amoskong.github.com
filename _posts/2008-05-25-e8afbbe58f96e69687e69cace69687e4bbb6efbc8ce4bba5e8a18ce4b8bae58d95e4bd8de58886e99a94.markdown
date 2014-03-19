@@ -1,0 +1,79 @@
+---
+author: amosk
+comments: true
+date: 2008-05-25 13:49:21+00:00
+layout: post
+slug: '%e8%af%bb%e5%8f%96%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6%ef%bc%8c%e4%bb%a5%e8%a1%8c%e4%b8%ba%e5%8d%95%e4%bd%8d%e5%88%86%e9%9a%94'
+title: 读取文本文件，以行为单位分隔
+wordpress_id: 241
+categories:
+- Web
+---
+
+今天小康让我给他写个程序，要求读取文本文件，并以行为单位保存在一个数组里，然后用一个循环使用每行的内容。
+下面两个程序只是对单位行输出，但分隔为单位行的目的达到。
+
+/*FileName: readline.c*/
+#include
+#include
+#include
+#include
+#include
+#define MAX 256
+
+char s[MAX][MAX];
+
+int read_line(int fd,char *buf)
+{
+        char ch;
+        int i = 0,j;
+
+        if ((j = read(fd,&ch,1)) == 0) {
+                return EOF;
+        }
+        while (ch != '\n' && j != 0 ){
+                buf[i++] = ch;
+                j = read(fd,&ch,1);
+        }
+
+        buf[i++] = '';
+        return 1;
+}
+
+int string()
+{
+	char buf[MAX];
+	int fd=open("readline.c", O_RDONLY);
+	int j=0;
+	int i=read_line(fd, (char *)buf);
+ 	while (i != EOF ){
+		if (i == 1){
+			 strcpy(s[j++], buf);
+                         fflush(stdout);
+	         }
+                 i = read_line(fd,buf);
+        }
+	return j;
+}
+
+int main(void)
+{
+	int i;
+	int j=string();
+	for(i=0; i<j; i++)
+		printf("%s\n", s[i]);
+	return 0;
+}
+
+
+#!/bin/bash
+#FileName: readline.sh
+L=`cat readline.c|wc -l`
+i=1
+while [ $i -le $L ]
+do
+	p='p'
+	IP=$i$p
+	sed -n `echo $IP` readline.c
+	let i=$i+1
+done

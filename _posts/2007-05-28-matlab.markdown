@@ -1,0 +1,52 @@
+---
+author: amosk
+comments: true
+date: 2007-05-28 10:01:45+00:00
+layout: post
+slug: matlab
+title: matlab
+wordpress_id: 17
+categories:
+- Web
+---
+
+用Matlab编写的两个简单程序
+
+1.在屏幕上输出k到N再到k的数列
+如：N=8 k=1时，输出１　２　３　４　５　６　７　８　７　６　５　４　３　２　１
+
+程序代码：
+
+function Answer_Of_Programme=test0123210(P1,P2)
+k=1;
+for i=P1:1:P2
+    Answer_Of_Programme(k,:)=i;
+    k=k+1;
+end
+for i=P2-1:-1:P1
+    Answer_Of_Programme(k,:)=i;
+    k=k+1;
+end
+运行程序:Answer_Of_Programme=test0123210(P1的值,P2的值)
+
+2.用Matlab编写的一个实现，输出feboca级数的前N项的程序
+
+程序代码：<!-- more -->
+
+function Answer_Of_Programme=feibo(N)
+k=1;
+a1=0;
+a2=1;
+Answer_Of_Programme(k,:)=a1;
+k=k+1;
+Answer_Of_Programme(k,:)=a1+a2;
+k=k+1;
+for i=0:1:N-3
+    Answer_Of_Programme(k,:)=a1+a2;
+    k=k+1;
+    b=a1+a2;
+    a1=a2;
+    a2=b;
+end
+
+运行程序:Answer_Of_Programme=feibo(N的值)

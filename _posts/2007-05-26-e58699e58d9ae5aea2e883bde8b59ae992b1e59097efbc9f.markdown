@@ -1,0 +1,19 @@
+---
+author: amosk
+comments: true
+date: 2007-05-26 11:44:53+00:00
+layout: post
+slug: '%e5%86%99%e5%8d%9a%e5%ae%a2%e8%83%bd%e8%b5%9a%e9%92%b1%e5%90%97%ef%bc%9f'
+title: 写博客能赚钱吗？
+wordpress_id: 13
+categories:
+- Life
+---
+
+要说写博客能赚钱，你可能不大相信，但我要告诉你这是真的，一个名叫[Bloggerwave](http://www.bloggerwave.com/)的国外话题广告公司给我们提供了这样的一个平台，你可以在你的博客里为他们写相关的文章，文章内容包含指定的内容，可能是链接、图片之类的东西，文章在自己的博客里保留一个月。这个听起来似乎很容易，其实我也是报着试一试的态度。关于如何注册帐号，如何申请……百度里边有一大堆的帮助信息，这里就不多费口舌了。详情见：[Bloggerwave](http://www.bloggerwave.com/)
+
+[](http://www.bloggerwave.com/)<!-- more -->
+
+        function submitIframeBlogId1508OppId4(linkId){document.getElementById("iframeBloggerwaveBlogId1508OppId4").src="http://www.bloggerwave.com/ClickTrack.aspx?OpportunityId=4&BlogId=1508&LinkId=" + linkId;}
+
+

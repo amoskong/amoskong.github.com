@@ -1,0 +1,42 @@
+---
+author: amosk
+comments: true
+date: 2007-11-10 15:52:06+00:00
+layout: post
+slug: '%e6%a8%a1%e6%8b%9f%e4%b8%8b%e8%bd%bd%e8%bf%9b%e5%ba%a6%e6%9d%a1'
+title: 模拟下载进度条
+wordpress_id: 138
+categories:
+- Web
+---
+
+#include <stdio.h>#include <unistd.h>
+    int main (){
+            int i,j;
+            for (j=0;j<23;j++){
+                    printf("\n");
+            }
+            printf("[   >\t\t\t\t\t\t\t\t   ]");
+            for (j=0;j<64;j++)
+                    printf("\b");
+            for (i=0;i<61;i++){
+                    printf("\b");
+                    for (j=i;j<i+1;j++)
+                            printf("=");
+                    printf(">");
+                    for (j=0;j<64-i;j++)
+                            printf(" ");
+                    printf("] %d\%",i);
+                    for (j=0;j<67-i;j++)
+                            printf("\b");
+                    for (j=i;j/10!=0;j=j/10)
+                            printf("\b");
+                    fflush(stdout);
+                    sleep (1);
+            }
+            printf("\n");
+            return 0;
+    }
+
+
+存在问题：1、对不同大小终端识别2、加快更新频率3、输出百分比

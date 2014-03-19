@@ -1,0 +1,23 @@
+---
+author: amosk
+comments: true
+date: 2009-03-20 10:40:23+00:00
+layout: post
+slug: '%e9%80%83%e4%ba%a1%e8%80%85%e6%89%8b%e6%9c%ba%e6%b8%b8%e6%88%8f'
+title: 逃亡者手机游戏
+wordpress_id: 322
+categories:
+- Web
+---
+
+下载地址：[http://kongove.whostas.com/down/prog/Escaper.rar](http://kongove.whostas.com/down/prog/Escaper.rar)
+
+集体合影：[http://picasaweb.google.com/lh/photo/PKnFnE7O_Y45q0UPB_pJJw?feat=directlink](http://picasaweb.google.com/lh/photo/PKnFnE7O_Y45q0UPB_pJJw?feat=directlink)
+
+这个代码基本是四天时间我一个人写出来的，使用myEclipse+WTK开发。还有一些功能没有实现，还存在一些bug。不过想学习j2me游戏开发的人，可以读一下源码。这个程序还有很多扩展开发的空间，有时间在研究吧，下来得忙毕设了。
+
+![null](http://kongove.whostas.com/blog/download/game-escape1.png)![null](http://kongove.whostas.com/blog/download/game-escape3.png)<!-- more -->
+
+![null](http://kongove.whostas.com/blog/download/game-escape2.png)![null](http://kongove.whostas.com/blog/download/game-escape6.png)
+![null](http://kongove.whostas.com/blog/download/game-escape4.png)![null](http://kongove.whostas.com/blog/download/game-escape5.png)
+![null](http://kongove.whostas.com/blog/download/game-escape7.png)

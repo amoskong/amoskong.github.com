@@ -1,0 +1,35 @@
+---
+author: amosk
+comments: true
+date: 2008-03-31 00:17:27+00:00
+layout: post
+slug: '%e6%88%91%e7%9a%84ubuntu%e7%9a%84%e4%b8%80%e4%ba%9b%e9%97%ae%e9%a2%98'
+title: 我的ubuntu的一些问题
+wordpress_id: 212
+categories:
+- Linux
+---
+
+今天一大早起来开机， 掸出一个提示窗口：
+_______________________________________________
+启动 GNOME 设置守护进程时出错。
+主题、声音或者背景设置等可能不会正常工作。
+最后的错误信息是：
+Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+GNOME 在您下次登录时仍将试图重启动设置守护进程。-------------------------------------------
+
+这种情况以前也出现过，一般注销一下就可以了。不过这次我试了好几次都不行。网上有的建议设置成默认主题，有的说是网络设置上的问题。
+
+看到出错信息后边的reply，我推测是我使用别人代理上网的问题。于是把网关由192.168.12.99改为192.168.12.1就好了。难道我舍友不开机出错可能性就增大？
+
+每次启动ubuntu过程中，都提示windows C盘/Documents and Settings/Administrator/Local Settings/Temporary Internet Files有坏文件，我在两个系统都清理过，有一个空文件删不了，创建日期：1986**** 搞笑了~~。我知道最好的解决方法是format c:
+
+查上面问题时，看到建议修改fstab最后一个参数为0，加快开机速度。
+
+fstab中存放了与分区有关的重要信息，其中每一行为一个分区记录，每一行又可分为六个部份，下面以/dev/hda7 / ext2 defaults 1 1为例逐个说明：
+1. 第一项是您想要mount的储存装置的实体位置，如hdb或如上例的/dev/hda7。
+2. 第二项就是您想要将其加入至哪个目录位置，如/home或如上例的/,这其实就是在安装时提示的挂入点。
+3. 第三项就是所谓的local filesystem，其包含了以下格式：如ext、ext2、msdos、iso9660、nfs、swap等，或如上例的ext2，可以参见/prco/filesystems说明。
+4. 第四项就是您mount时，所要设定的状态，如ro（只读）或如上例的defaults（包括了其它参数如rw、suid、exec、auto、nouser、async），可以参见「mount nfs」。
+5. 第五项是提供DUMP功能，在系统DUMP时是否需要BACKUP的标志位，其内定值是0。
+6. 第六项是设定此filesystem是否要在开机时做check的动作，除了root的filesystem其必要的check为1之外，其它皆可视需要设定，内定值是0。

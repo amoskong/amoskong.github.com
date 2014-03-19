@@ -1,0 +1,48 @@
+---
+author: amosk
+comments: true
+date: 2009-04-11 08:55:35+00:00
+layout: post
+slug: '%e7%bd%91%e9%a1%b5email%e5%9c%b0%e5%9d%80%e6%8a%93%e5%8f%96%e8%84%9a%e6%9c%ac'
+title: 网页Email地址抓取脚本
+wordpress_id: 333
+categories:
+- Programming
+- Web
+---
+
+今天帮你同学写了个shell脚本，抓取指定url地址的网页中的email地址。 这里字符编码转换还有点问题，只是考虑了gb2312一种情况。最好是从html源码截取字符编码，进行转换。
+
+
+    
+    #!/bin/bash
+    # test page: http://zhidao.baidu.com/question/21631338.html
+    
+    f=".tmp.txt"
+    f2=".tmp2.txt"
+    
+    wget $1 -O $f2 >/dev/null 2>/dev/null
+    iconv -f gb2312 -t utf-8 $f2 > $f 2>/dev/null
+    
+    sed -i -e 's/]*>//g;/<!--/d' $f
+    sed -i -e 's/ //g;s/°C//g;s/^\s*//g;/^$/d' $f
+    
+    sed -e "s/[^\-\.+_a-zA-Z0-9@]/\n/g" $f |grep @|grep ^[a-zA-Z0-9]|grep [a-zA-Z0-9]$ |sort -u | tee
+    rm -rf $f $f2
+
+
+
+运行效果：
+
+    
+    kongove@ubuntu:~$ ./a.sh http://zhidao.baidu.com/question/21631338.html
+    aizi66742112@hainan.net
+    alading512@sina.com
+    bingbing43@163.com
+    caoyingtj@163.com
+    chenq@chinabyte.com
+    dnzb@pub2.qz
+    duanxiaosong@ah163.com
+    gxlworld@163.com
+    halfmay2691@sina.com
+    hbx@wxjt.com.cn

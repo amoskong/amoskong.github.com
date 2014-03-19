@@ -1,0 +1,36 @@
+---
+author: amosk
+comments: true
+date: 2007-10-13 03:37:32+00:00
+layout: post
+slug: ubunt710%e5%8f%91%e5%b8%83%e5%80%92%e8%ae%a1%e6%97%b6
+title: ubunt7.10发布倒计时
+wordpress_id: 119
+categories:
+- Linux
+---
+
+![UBUNTU7.10](http://www.ubuntu.com/files/countdown/dist/710countdown_0days.png)
+
+
+
+
+
+> 
+
+>
+>> 
+
+>> 
+>> 期待中……
+>> 
+>> 
+
+> 
+> 
+
+
+
+
+
+到时候，从光盘升一下级

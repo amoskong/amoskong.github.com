@@ -1,0 +1,15 @@
+---
+author: amosk
+comments: true
+date: 2008-01-05 13:42:38+00:00
+layout: post
+slug: google%e7%99%be%e5%ba%a6
+title: 谷歌百度[SB]each other
+wordpress_id: 179
+categories:
+- Programming
+---
+
+今天无意中听人说谷歌（Google.cn）、百度（baidu.com）互相SB的事，当在Google.cn搜索“SB”，排在第一位的便是百度，当在百度搜索“SB”，排在第一位的便是Google。
+
+可笑可笑~~

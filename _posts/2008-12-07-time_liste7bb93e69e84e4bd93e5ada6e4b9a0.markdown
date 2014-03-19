@@ -1,0 +1,119 @@
+---
+author: amosk
+comments: true
+date: 2008-12-07 12:44:04+00:00
+layout: post
+slug: time_list%e7%bb%93%e6%9e%84%e4%bd%93%e5%ad%a6%e4%b9%a0
+title: time_list结构体学习
+wordpress_id: 304
+categories:
+- Linux
+---
+
+在用户态程序编程时，延时常常使用sleep()，我在windows下面写Bat脚本还用过"ping localhost"来延时1秒。再写驱动程序时，sleep就不能直接调用了。这里介绍的time_list结构体可以用户延时处理，不过它的功能远比sleep系统调用强大。
+
+time_list结构体位于内核文件include/linux/timer.h
+
+    
+    struct timer_list {
+            struct list_head entry; //timer_list结构体链表的头部
+            unsigned long expires; //用于存放延时结束时间
+    
+            void (*function)(unsigned long); //延时结束时执行的回调函数，注意这里传递一个无符号长整型数字
+            unsigned long data;  //常用于存储数据的指针
+    
+            struct tvec_base *base;
+    #ifdef CONFIG_TIMER_STATS
+            void *start_site;
+            char start_comm[16];
+            int start_pid;
+    #endif
+    };
+
+
+这里常用到三个函数init_timer()、add_timer()、del_timer()
+
+/**
+* init_timer - 初始化结构体timer.
+* @timer: 要被初始化的结构体指针
+*
+* init_timer() 必须在其他timer相关函数执行前调用，对结构体初始化
+*/
+void init_timer(struct timer_list *timer)
+
+/**
+* add_timer - 添加一个timer结构体
+* @timer: 要被添加的结构体的指针
+*
+* The kernel will do a ->function(->data) callback from the
+* timer interrupt at the ->expires point in the future. The
+* current time is 'jiffies'.
+*
+* The timer's ->expires, ->function (and if the handler uses it, ->data)
+* fields must be set prior calling this function.
+*
+* Timers with an ->expires field in the past will be executed in the next
+* timer tick.
+*/
+static inline void add_timer(struct timer_list *timer)
+
+/**
+* del_timer - 清除一个timer结构体
+* @timer: 要被清除的结构体的指针
+*
+* del_timer() 清除一个活跃/不活跃的timer结构体
+*
+*  清除一个不活跃的timer结构时返回0，清除一个活跃(延时结束)的timer结构体时返回1。
+*/
+int del_timer(struct timer_list *timer)
+
+下面是一个简单的测试模块程序，输出递增数字，时间间隔为一秒。
+
+    
+    /* include/linux/timer.c:struct timer_list */
+    /*
+     * 建议将模块插入后，使用xconsole查看程序结果
+     * print:
+     * 		1
+     * 		2
+     * 		3
+     * 		4
+     * 		...
+     */
+    #include
+    
+    #define T HZ/1 //T is 1s
+    
+    struct timer_list my_timer;
+    
+    static void my_timer_func(unsigned long p){
+    	int i=my_timer.data;
+    	printk("%d\n", i);
+    	my_timer.data = i+1;
+    	my_timer.expires = jiffies + T; // 延时1s
+    	add_timer(&my_timer);
+    }
+    
+    static int __init my_timer_init(void)
+    {
+    	init_timer(&my_timer); //初始化结构体
+    	my_timer.function = my_timer_func; //初始化回调函数
+    	my_timer.data = 0; //初始化data字段，这里也可以是一个结构体的指针，从而传递更多的数据
+    	my_timer.expires = jiffies + T; //延时1s
+    	add_timer(&my_timer);
+    	printk("Welcome!\n");
+    	return 0;
+    }
+    
+    static void __exit my_timer_cleanup(void)
+    {
+    	del_timer(&my_timer); //清除结构体
+    	printk("Bye!\n");
+    }
+    
+    module_init(my_timer_init);
+    module_exit(my_timer_cleanup);
+    
+    MODULE_LICENSE("GPLv3");
+    MODULE_AUTHOR("Jianjun Kong ");
+    MODULE_DESCRIPTION("This is a test program of struct timer_list.\n");

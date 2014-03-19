@@ -1,0 +1,35 @@
+---
+author: amosk
+comments: true
+date: 2008-03-11 12:57:11+00:00
+layout: post
+slug: test-2
+title: 初学QT编程
+wordpress_id: 199
+categories:
+- Linux
+- Web
+---
+
+/* File Name: hello.cpp
+* 编译运行命令：
+* qmake -project       ：生成hello.pro文件
+* qmake hello.pro      ：生成Makefile文件
+* make                 ：编译生成hello.o文件
+* chmod +x hello.o     ：添加可执行权限
+* ./hello              ：运行程序
+*
+* 运行结果：在桌面弹出一个小窗口，里边有个“Hello Qt!"。
+*/
+
+程序代码居然在Wordpress里贴不成，提示 Service Temporarily Unavailable
+The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later.
+试了好几个标签，结果都没能屏蔽。如果需要看源程序，请看网站：
+[http://blog.csdn.net/iamdbl/category/275004.aspx?PageNumber=6](http://blog.csdn.net/iamdbl/category/275004.aspx?PageNumber=6)
+
+Ubuntu QT4的安装：
+sudo apt-get install qt4-dev-tools qt4-designer qt3-assistant python-qt4 qt4-examples
+
+我安装的时候没有qt4-examples这个包，不过应该是一些例子，应该不会影响软件正常使用。注意通过apt安装程序如果没有安装包时，想要考虑源的配置和网速问题，还的注意程序名是否正确，是否需要具体的参数之类。可以用命令如：
+sudo apt-cache search qt4
+来查找正确的文件名。

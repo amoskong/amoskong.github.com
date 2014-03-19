@@ -1,0 +1,24 @@
+---
+author: amosk
+comments: true
+date: 2008-06-12 00:13:12+00:00
+layout: post
+slug: '%e8%a7%a3%e5%86%b3scim%e4%b8%8d%e6%8e%a5%e5%8f%97%e9%94%ae%e7%9b%98%e7%9b%b8%e5%ba%94'
+title: 解决scim不接受键盘响应
+wordpress_id: 247
+categories:
+- Linux
+---
+
+解决scim在以下情况下易促成应用程序不接受键盘响应：
+1. Java应用程序（仅测试过JRE 1.5）
+2. QT程序（典型：Opera）
+3. OpenOffice（不带gnome-integration的情况下）
+4. xlib应用程序（如urxvt）
+
+Gentoo下，可能用的 scim 是 gtkimm 和 qtimm 方式，只需要让 scim 改用 xim 方式即可。Gentoo 没统一的输入法管理，就手工改环境变量
+QT_IM_MODULE=XIM
+XMODIFIERS=@im=SCIM
+GTK_IM_MODULE=XIM
+
+在 Ubuntu 可以 im-switch -s scim-pinyin  来修改。

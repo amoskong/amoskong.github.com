@@ -1,0 +1,21 @@
+---
+author: amosk
+comments: true
+date: 2013-11-06 09:24:07+00:00
+layout: post
+slug: github%e7%94%a8%e6%88%b7%e9%a2%86%e5%8f%96%e8%b5%a0%e9%80%81%e6%af%94%e7%89%b9%e5%b8%81
+title: Github用户领取赠送比特币
+wordpress_id: 990
+categories:
+- Computer
+---
+
+ripple.com 为了吸引更多开源程序员关注和参与他们的开发，为github用户赠送比特比，github必须是2013年5月31日前注册的
+
+1，访问 [https://giveaway.ripple.com/](https://giveaway.ripple.com/)
+2，选择“使用 github 帐号登录，在 github 页面确认帐号关联[![p1](http://amosk.info/blog/wp-content/uploads/2013/11/p1-296x300.png)](http://amosk.info/blog/wp-content/uploads/2013/11/p1.png)
+
+3，页面如下图: 在红圈中 填入: ** rUwDhZzuucVeTh3AHMSELTYo5CWfaA9Fxr ** (比特比帐号地址)， 然后点击下方按钮,生成 code[![p2](http://amosk.info/blog/wp-content/uploads/2013/11/p2-282x300.png)](http://amosk.info/blog/wp-content/uploads/2013/11/p2.png)
+
+4. 在 https://giveaway.ripple.com/ 页面中验证 code 的合法性，如果 code 合法下面会生成合法 url
+5. 点击 url 发送 2020 个 XRP 到 ** rUwDhZzuucVeTh3AHMSELTYo5CWfaA9Fxr **

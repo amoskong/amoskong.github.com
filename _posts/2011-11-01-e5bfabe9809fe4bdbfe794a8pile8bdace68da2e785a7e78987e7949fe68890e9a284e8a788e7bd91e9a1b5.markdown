@@ -1,0 +1,45 @@
+---
+author: amosk
+comments: true
+date: 2011-11-01 07:25:02+00:00
+layout: post
+slug: '%e5%bf%ab%e9%80%9f%e4%bd%bf%e7%94%a8pil%e8%bd%ac%e6%8d%a2%e7%85%a7%e7%89%87%e7%94%9f%e6%88%90%e9%a2%84%e8%a7%88%e7%bd%91%e9%a1%b5'
+title: 快速使用PIL转换照片生成预览网页
+wordpress_id: 772
+categories:
+- Programming
+---
+
+我们常常用很多照片，需要快速通过http服务器分享，下面这个脚本，用PIL(python image library)转换固定大小的缩略图，并生成一个简易的html文件，附带的链接可以用于点击察看大图片。递归目录、其他格式什么懒的支持了，这个够用了 :-)
+
+$ cat resize.py
+
+    
+    import os, Image
+    # Resize jpg files in current directory, and generate an html file to 
+    # present pictures in a light way.
+    # $ cd picture-dir/
+    # $ python resize.py
+    # $ firefox index.html
+    
+    def resize(filename, width = 512):
+        img = Image.open(filename)
+        size = img.size
+        new = img.resize((width, width * size[1] / size[0]))
+        new.save(".%s" % filename)
+    
+    f = open("index.html", "w")
+    f.write("<center><big>Click to review big pictures</big></center>")
+    files = os.listdir(".")
+    files.sort()
+    for i in files:
+        if (i[-4:]==".JPG" or i[-4:]==".jpg") and i[0:1]!='.':
+            resize(i, 200)
+            f.write("<a href="%s"><img src=".%s"></a>\n" % (i, i))
+            f.flush()
+    f.close()
+
+
+
+![/blog/wp-content/uploads/resize-pic-script.png](/blog/wp-content/uploads/resize-pic-script.png)
+

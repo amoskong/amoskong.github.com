@@ -1,0 +1,69 @@
+---
+author: amosk
+comments: true
+date: 2007-11-18 15:05:29+00:00
+layout: post
+slug: '%e5%85%ab%e7%9a%87%e5%90%8e%e7%ae%97%e6%b3%95'
+title: 八皇后算法
+wordpress_id: 144
+categories:
+- Web
+---
+
+八皇后问题
+在一个8×8国际象棋盘上，有8个皇后，每个皇后占一格；要求皇后间不会出现相互“攻击”的现象，即不能有两个皇后处在同一行、同一列或同一对角线上。问共有多少种不同的方法。
+#include
+int line[8],answer=0;
+void show()
+{
+        int i,j;
+        for(i=0;i<8;i++)
+        {
+                for(j=0;j<8;j++)
+                {
+                        if(line[i]==j)
+                                printf("\tQ");
+                        else
+                                printf("\t*");
+                }
+
+                printf("\n\n");
+        }
+        answer++;
+        printf("\n\t%d -------------",answer);
+        getchar();
+}
+int Judge(int t)
+{
+        int i,n=0;
+        for(i=0;i<t;i++)
+        {
+                if(line[i]==line[t])
+                {n=1;break;}
+                if(line[i]+i==line[t]+t)
+                {n=1;break;}
+                if(line[i]-i==line[t]-t)
+                {n=1;break;}
+        }
+        return n;
+}
+void control(int n)
+{
+        int t=8;
+        for(line[n]=0;line[n]<t;line[n]++)
+        {
+                if(Judge(n))
+                        continue;
+                else
+                        if(n!=7)
+                                control(n+1);
+                        else
+                                show();
+        }
+}
+int main()
+{
+        control(0);
+        printf("%d\n",answer);
+        return 0;
+}

@@ -1,0 +1,63 @@
+---
+author: amosk
+comments: true
+date: 2008-05-24 08:56:21+00:00
+layout: post
+slug: '%e5%88%a9%e7%94%a8%e9%a2%84%e5%a4%84%e7%90%86%e4%bd%bfc%e7%9c%8b%e8%b5%b7%e6%9d%a5%e5%83%8falgol-68'
+title: 利用预处理使C看起来像Algol-68
+wordpress_id: 240
+categories:
+- Web
+---
+
+利用预处理使C看起来像Algol-68，C专家编程上说是为了便于调试，其实这样的代码在往往难以维护，可读性差。
+
+    
+    #include <stdio.h>
+    #define IF if(
+    #define THEN ){
+    #define ELSE }else(
+    #define FI ;}
+    #define WHILE while(
+    #define DO ){
+    #define OD ;}
+    #define INT int
+    #define STRING char*
+    #define	BEGIN {
+    #define END }
+    
+    INT compare(STRING s1, STRING s2)
+    /* K&R参数定义形式
+    INT compare(s1, s2)
+    STRING s1;
+    STRING s2;
+    */
+    BEGIN
+    	WHILE *s1++ == *s2
+    	DO IF *s2++ == 0
+    		THEN return (0);
+    		FI
+    	OD
+    		return (*--s1 - *s2);
+    END
+    
+    /* K&R参数定义形式
+    int compare2(s1, s2)
+    char * s1;
+    char * s2;
+    */
+    int compare2(char * s1, char * s2)
+    {
+    	while (*s1++ == *s2){
+    		if (*s2++ == 0)	return 0;
+    	}
+    	return (*--s1 - *s2);
+    }
+    
+    int main(void)
+    {
+    	printf("%d\n", compare("aca", "acA"));
+    	printf("%d\n", compare2("aca", "acA"));
+    	return 0;
+    }
+    

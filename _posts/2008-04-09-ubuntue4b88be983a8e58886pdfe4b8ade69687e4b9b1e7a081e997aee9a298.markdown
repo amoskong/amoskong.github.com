@@ -1,0 +1,31 @@
+---
+author: amosk
+comments: true
+date: 2008-04-09 10:20:07+00:00
+layout: post
+slug: ubuntu%e4%b8%8b%e9%83%a8%e5%88%86pdf%e4%b8%ad%e6%96%87%e4%b9%b1%e7%a0%81%e9%97%ae%e9%a2%98
+title: Ubuntu下部分PDF中文乱码问题
+wordpress_id: 217
+categories:
+- Linux
+---
+
+以前存在部分pdf乱码的问题，好像是那些在windows下生成的pdf吧。听别人说要装其他的阅读器，我试了kpdf也不行，我这里那种pdf很少（不到千分之一），所以没去管。昨天拷了些网络安全的pdf，准备好好看看，结果全是乱码~~
+
+于是上网查了查：
+
+sudo apt-get install xpdf-chinese-simplified 后，部分英文不再是乱码，但中文依旧。
+
+于是又查，得：
+wget http://poppler.freedesktop.org/poppler-data-0.1.tar.gz
+cd poppler-data-0.1/
+sudo make install datadir=/usr/share
+乱码问题解决。
+
+BTW：默认文件夹（包括桌面）的图片、pdf等文件是有缩略图预览的，由于文件大小不同，缩略图也大有小，感觉很乱~
+
+刚看了一下，在文件夹窗口 编辑->首选项->预览里，设置“其他可预览文件”为“从不”，就看起来整齐了。
+
+还有那个可爱的小鱼（wanda）刚被“添加到面板”，通过在终端下执行 fortune 和图形界面下点“再说一次”效果一样。
+
+fortune -f可以查看和输出内容相关的信息，自己也可以到 /usr/share/games/fortunes/下添加自己喜欢的语句。

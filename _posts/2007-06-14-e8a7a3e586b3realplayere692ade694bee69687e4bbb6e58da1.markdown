@@ -1,0 +1,16 @@
+---
+author: amosk
+comments: true
+date: 2007-06-14 09:43:19+00:00
+layout: post
+slug: '%e8%a7%a3%e5%86%b3realplayer%e6%92%ad%e6%94%be%e6%96%87%e4%bb%b6%e5%8d%a1'
+title: 解决realplayer播放文件卡
+wordpress_id: 40
+categories:
+- Linux
+---
+
+linux下刚装了realplayer，可是播放音频和视频文件很卡的情况，那是因 为内核默认的oss驱动对某些声卡支持的不好，而RealPlayer又默认使用oss 所以我们使用alsa模拟的oss就好了 即用aoss realplay启动RealPlayer。
+但是如果在终端直接使用命令aoss realplay的话，那么你所得到的一定是commend not found,所以我们必须要下载一个alsa-oss。（Ubuntu用户直接用sudo apt-get install alsa-oss就可以完成安装）
+
+为了方便以后不用命令行，可在/usr/share/applications目录下的realplay.desktop文件中将Exec改成aoss realplay就可以了，然后在你要播放的.rmvb文件中使用自定义命令aoss realplay即可。

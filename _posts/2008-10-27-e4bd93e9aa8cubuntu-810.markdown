@@ -1,0 +1,66 @@
+---
+author: amosk
+comments: true
+date: 2008-10-27 12:46:09+00:00
+layout: post
+slug: '%e4%bd%93%e9%aa%8cubuntu-810'
+title: 体验UBUNTU 8.10-Intrepid Ibex（无畏的山羊）
+wordpress_id: 286
+categories:
+- Linux
+---
+
+![](http://kongove.whostas.com/blog/download/Intrepid-Ibex.png)
+
+
+上周五晚上在实验室，边疆和刘周平的Ubuntu系统都升级出问题了，好像都是显卡驱动问题。正好提醒了我，有好些时间没有升级软件了，我现在的系统是7.04出来就装的，上次升到7.10，后面只是偶尔升级一下软件。后面好多东西配置都好着，也懒的去装更新的版本。心里想着，用ssh登上自己机子apt-get upgrade了一下，结果第二天发现，我的机子也挂了。貌似几周前我为了在控制台下调整分辨率、显示汉字，改过显卡驱动的模块一些东西。整了半天发现不顶用，索性重装一下系统，反正原来的系统也升级的结构比较乱了，新系统、新心情～～没办法，大四的生活就是有点枯燥无味～～
+
+前几周，听了一下批判 Ubuntu 的文章，心里知道太过偏激，但觉得也不是都错。想装Fedora，手头的LiveCD别人装了好像有点小问题，又想象刘老大，还是装Ubuntu吧。于是把多余的分区卸载掉，直接把整个系统备份到实验室另一台机子上。8.10稳定版还没出来，不过下的镜像已经足够接近了。装上后发现改进真的很多，就连很多软件（如主题、安装程序、Akregator）都变的更漂亮了。Scim装上中文支持也没问题，Stardict从源装上就有字典，不错，看来都在改进。JAVA、GCC、Python 都直接能用。这次没装mplayer、xmms，现直接用“添加删除软件”把能装的解码器全装上，发现基本都能播放了，后面有装了一下win32code（URL：[ftp://211.86.156.210/debian-multimedia/pool/main/w/w32codecs/w32codecs_20071007-0.1_i386.deb](ftp://211.86.156.210/debian-multimedia/pool/main/w/w32codecs/w32codecs_20071007-0.1_i386.deb)）。Compiz和Firefox的CPU利用率也很稳定。系统的基本配置和软件安装不到一个小时就搞的差不错了。源用的是李磊推荐的(非常快)：
+
+##############----------------------------------------------------------------
+
+deb http://ubuntu.dormforce.net/ubuntu/ intrepid main multiverse restricted universe
+deb http://ubuntu.dormforce.net/ubuntu/ intrepid-backports main multiverse restricted universe
+deb http://ubuntu.dormforce.net/ubuntu/ intrepid-proposed main multiverse restricted universe
+deb http://ubuntu.dormforce.net/ubuntu/ intrepid-security main multiverse restricted universe
+deb http://ubuntu.dormforce.net/ubuntu/ intrepid-updates main multiverse restricted universe
+deb-src http://ubuntu.dormforce.net/ubuntu/ intrepid main multiverse restricted universe
+deb-src http://ubuntu.dormforce.net/ubuntu/ intrepid-backports main multiverse restricted universe
+deb-src http://ubuntu.dormforce.net/ubuntu/ intrepid-proposed main multiverse restricted universe
+deb-src http://ubuntu.dormforce.net/ubuntu/ intrepid-security main multiverse restricted universe
+deb-src http://ubuntu.dormforce.net/ubuntu/ intrepid-updates main multiverse restricted universe
+
+############----------------------------------------------------------------
+由于把整个系统备份到另一个机子了，数据恢复也很方便，scp和ssh结合起来很快。
+
+Firefox的书签 ~/.mozilla/firefox/a3x49fo2.default/bookmark*
+
+Akregator的数据   .kde/share/apps/akregator
+
+还有一大堆配置文件：mutt+procmail+getmail+msmtp、git、vim、、、、、
+
+Mutt的邮件就简单了，直接scp，其实我需要恢复的数据不是很多，好多东西都放在其他分区，只是在主分区做得软链接。
+
+mysql、apache、vsftp ……等用的时候再装、再配。
+
+装完中文支持，系统一些目录名字都变成汉字了，命令行很不方便，建软链接也不是办法。最后，把整个系统默认语言设置成英文，在/etc/profile里添加
+
+export LANG=en_US.UTF-8
+export XMODIFIERS="@im=SCIM"
+#export GTK_IM_MODULE=xim
+export GTK_IM_MODULE=scim
+export QT_IM_MODULE=scim
+export XIM_PROGRAM=SCIM
+export XIM=SCIM
+export LC_CTYPE="zh_CN.UTF-8"
+export LANGUAGE=en_US:en
+
+su:scsioffice ~ # export |grep -i scim
+declare -x GTK_IM_MODULE="scim"
+declare -x QT_IM_MODULE="scim"
+declare -x XIM="SCIM"
+declare -x XIM_PROGRAM="SCIM"
+
+重启是提示是否将中文目录名转换为英文，确定即可。输入法也正常，发现系统英文字体显示更加漂亮了～欣喜～～
+
+刚刚发现Totem(电影播放器)，不知道什么时候改进的，右边框上方有个选择菜单，里边有YouTuBe、BBC两个选项，而且可以直接在这个小面板搜索。依旧不错～～

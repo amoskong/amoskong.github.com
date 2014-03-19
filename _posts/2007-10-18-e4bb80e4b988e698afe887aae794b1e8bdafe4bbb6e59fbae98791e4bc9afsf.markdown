@@ -1,0 +1,56 @@
+---
+author: amosk
+comments: true
+date: 2007-10-18 06:42:49+00:00
+layout: post
+slug: '%e4%bb%80%e4%b9%88%e6%98%af%e8%87%aa%e7%94%b1%e8%bd%af%e4%bb%b6%e5%9f%ba%e9%87%91%e4%bc%9afsf'
+title: 一些收集
+wordpress_id: 124
+categories:
+- Linux
+---
+
+自由软件基金会(Free Software Foundation,Inc.)
+
+GNU计划，是由Richard Stallman在1983年9月27日公开发起的。GNU 是由“GNU's Not Unix”所递回定义出的首字母缩写语；它的发音为“guh-NEW”。
+
+GPL（General Public License）GNU通用公共许可证。
+
+三天后的下午 5 点锺执行 /bin/ls :<!-- more -->
+at 5pm + 3 days /bin/ls
+三个星期后的下午 5 点锺执行 /bin/ls :
+at 5pm + 2 weeks /bin/ls
+明天的 17:20 执行 /bin/date :
+at 17:20 tomorrow /bin/date
+1999 年的最后一天的最后一分钟印出 the end of world !
+at 23:59  12/31/1999 echo the end of world !
+Ctrl+Z
+48 Ctrl+W
+49 Ctrl+d
+50 Ctrl+V
+RAID 0是将两块硬盘当作一块硬盘使用，两块硬盘是并行的关系，就相当于双通道的内存，速度理论上可以翻番，但可靠性较差，如果任意一块硬盘出现问题，将导致所 有数据丢失。RAID 1实际上是一个备份的镜像，两块硬盘中数据是完全一样的，第二块硬盘是第一块硬盘的镜像，因此只要有一块硬盘是好的，数据的完好性就可以得到保证，这种方 式的缺点是磁盘的利用率太低。RAID 5支持三块以上的硬盘，并带有奇偶校验机制，有一定的容错能力，可以允许有一块硬盘损坏。RAID 5E相当于在RAID 5的基础上增加了备份盘，能够同时支持4块以上的硬盘，数据可靠性更高。
+1.安装一个包
+# rpm -ivh
+2.升级一个包
+# rpm -Uvh
+3.移走一个包
+# rpm -e
+4.安装参数
+--force 即使覆盖属于其它包的文件也强迫安装
+--nodeps 如果该RPM包的安装依赖其它包，即使其它包没装，也强迫安装。
+5.查询一个包是否被安装
+# rpm -q
+6.得到被安装的包的信息
+# rpm -qi
+7.列出该包中有哪些文件
+# rpm -ql
+8.列出服务器上的一个文件属于哪一个RPM包
+#rpm -qf
+9.可综合好几个参数一起用
+# rpm -qil
+10.列出所有被安装的rpm package
+# rpm -qa
+11.列出一个未被安装进系统的RPM包文件中包含有哪些文件？
+# rpm -qilp
+
+后边继续添加……

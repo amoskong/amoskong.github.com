@@ -1,0 +1,78 @@
+---
+author: amosk
+comments: true
+date: 2011-04-09 05:36:18+00:00
+layout: post
+slug: '%e5%85%b3%e4%ba%8e-erlang'
+title: 关于 Erlang
+wordpress_id: 597
+categories:
+- Programming
+---
+
+
+
+
+erlang 是一门内建支持并发的编程语言，起初是为开发通讯系统设计的，1998年开放源码，适合于构建分布式、实时软并行计算系统。erlang的分布式机制是透明的，程序并不知道
+
+
+
+
+自己是分布式运行，所以编写分布式应用更简单些。
+
+
+
+
+有人称erlang是OS中的OS，并且是自举的，少量核心代码是C实现的。
+
+
+
+
+erlang运行是启动许多轻量级进程，进程间通过消息机制进行通信，不共享内存/变量，所以不存在同步问题。erlang进程可被映射到主机进程或线程，甚至是多台几期的多个进程/>线程。erlang调度不同机器上的进程是在传输层之上，考虑到安全问题，需要对通信进行加密(如ssl)。这里的网络也是依靠OTP(Open Telecom Platform)提供，所以损耗系统资源较小。OPT是一个基于erlang的高并发开发环境。
+
+
+
+
+在云计算中，每个虚拟机就是一个具备执行能力的结点，可以利用erlang的并发机制，将执行任务分布到不同的虚拟机上，使用消息机制进行通信。
+
+
+
+
+erlang语法很怪异，不管是变量赋值、循环实现、函数执行流程等。
+
+
+
+
+
+
+    
+    
+    -- hello.erl ----------------------------
+    -module(hello).
+    -export([hello/0]).
+    
+    hello() ->
+        io:fwrite("Hello, World!∼n", []).
+    -- compile, execute  --------------------
+    ekmac:~ ek$ erl
+    1> c("hello.erl").
+    {ok,hello}
+    2> hello:hello().
+    Hello, World!
+    ok
+    3> init:stop().
+    ok
+    4> ekmac:~ ek$
+    
+
+
+
+推荐基本书、链接：
+
+    
+    erlang.org
+    erlang-china.org
+    docs.huihoo.com/erlang/
+    Thinking in erlang
+    Programming erlang (详读）
+    erlang程序学习笔记

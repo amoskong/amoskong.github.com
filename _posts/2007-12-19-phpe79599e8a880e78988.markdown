@@ -1,0 +1,15 @@
+---
+author: amosk
+comments: true
+date: 2007-12-19 06:09:31+00:00
+layout: post
+slug: php%e7%95%99%e8%a8%80%e7%89%88
+title: php留言版
+wordpress_id: 164
+categories:
+- Programming
+---
+
+做了一个简单的留言版，欢迎大家测试！
+
+[http://kongove.whostas.com/gfs/message.php](http://kongove.whostas.com/gfs/message.php)

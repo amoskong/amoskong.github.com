@@ -1,0 +1,22 @@
+---
+author: amosk
+comments: true
+date: 2007-11-03 00:51:31+00:00
+layout: post
+slug: '%e5%85%b3%e4%ba%8ekongove%e5%8f%91%e9%9f%b3'
+title: 关于KONGOVE发音
+wordpress_id: 134
+categories:
+- Life
+- Programming
+---
+
+KONGOVE来源于我的姓-孔(kong)与爱(love)的组合，去掉中间的L使其浑然一体。
+
+不过对于它的发音到现在还未定论，江湖传言众多，千奇百怪。小林子居然能联想到坟墓(grave)，有爱有坟墓，于思我又联想到“婚姻是爱情的坟墓”，有点累人～～
+
+为安抚人心、平天下之风波，特此正是发布KONGOVE的官方发音！
+
+![kongove](http://kongove.whostas.com/web/kongove.png)
+
+此发音音译回来就是 “肯高为”，“肯”有“愿意”和“肯定”双重意思，内涵丰富。

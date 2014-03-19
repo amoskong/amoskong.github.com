@@ -1,0 +1,13 @@
+---
+author: amosk
+comments: true
+date: 2007-07-31 06:20:19+00:00
+layout: post
+slug: '%e5%9b%9e%e6%9d%a5%e4%ba%86'
+title: 回来了
+wordpress_id: 67
+categories:
+- Life
+---
+
+终于回来了，现在很累，只想休息，不写了。

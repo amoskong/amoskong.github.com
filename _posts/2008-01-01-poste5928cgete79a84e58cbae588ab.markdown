@@ -1,0 +1,23 @@
+---
+author: amosk
+comments: true
+date: 2008-01-01 14:03:16+00:00
+layout: post
+slug: post%e5%92%8cget%e7%9a%84%e5%8c%ba%e5%88%ab
+title: post和get的区别
+wordpress_id: 174
+categories:
+- Programming
+---
+
+前些天看了些php&mysql的书，这两天复习功课头晕目眩之余，读了些php代码，其中对cocobear的留言板做了深入研究。放假准备在好好看些这方面的书，越来越喜欢php编程了，语法和C很像。下面把post和get的区别总结一下。
+
+post和get是传递表单数据两种不同方式，如果使用get方式，Url后边会包含"？name1=value1&name2=value2……"，而post则没有。
+
+1、Get 方法通过 URL 请求来传递用户的数据，将表单内各字段名称与其内容，以成对的字符串连接，置于 action 属性所指程序的 url 后，如[http://kongove.whostas.com?name=kongove&password=linux](http://www.mdm.com/test.asp?name=asd&password=sad)， 数据都会直接显示在 url 上；Post 方法通过 HTTP post 机制，将表单内各字段名称与其内容放置在 HTML 表头(header)内一起传送给服务器端交由 action 属性能所指的程序处理，该程序会通过标准输入(stdin)方式，将表单的数据读出并加以处理。
+
+2、 Get 方式需要使用 Request.QueryString 来取得变量的值（ $user = $_GET['user']; ）；而 Post 方式通过Request.Form 来访问提交的内容（ $user = $_POST['user']; ）。
+
+3、Get 方式传输的数据量非常小，一般限制在 2 KB 左右，但是执行效率却比 Post 方法好；而 Post 方式传递的数据量相对较大，它是等待服务器来读取数据。不过也有字节限制，这是为了避免对服务器用大量数据进行恶意攻击，微软对用 Request.Form() 可接收的最大数据有限制，IIS 4 中为 80 KB 字节，IIS 5 中为 100 KB 字节。除非你肯定你提交的数据可以一次性提交，否则请尽量用 Post 方法。
+
+4、Get 方式提交数据，会带来安全问题，比如一个登陆页面，通过 Get 方式提交数据时，用户名和密码将出现在 URL 上，如果页面可以被缓存或者其他人可以访问客户这台机器，就可以从历史记录获得该用户的帐号和密码，所以出于安全性考虑表单提交建议使用 Post 方法。

@@ -1,0 +1,21 @@
+---
+author: amosk
+comments: true
+date: 2007-08-26 02:42:12+00:00
+layout: post
+slug: '%e4%b8%80%e5%9c%ba%e8%ae%ba%e6%88%98'
+title: 一场论战
+wordpress_id: 74
+categories:
+- Linux
+---
+
+周围好几个同学看到我在用linux，然后发问linux到底有什么好处，我的回答自然不是很全面了，而且没有说服力。下面这场论战反映了许多人不能接受linux的一些问题。
+
+[http://wangcong.org/articles/debate.html](http://wangcong.org/articles/debate.html)
+
+在linux学习方面，塌实是很重要的，在我的带动下我周围也有好多人装了linux，有些人纯粹是为了当摆设，要么作为“炫耀”的资本，寒心呀！
+
+并不是说用linux就高人一等，记得陈老师去年给我们做讲座时，就提到不要以加入小组而感到了不起，做出点成就来才有骄傲的资本，没有谦虚的学习态度是肯定不会有大的进步的。不要企图用一个结论（“linux比windows好”）说服任何一个人，强加给别人的东西很难让人信服。喜欢一个人是不需要理由的，那么有些人抵触linux也是不需要理由的。上面的这场“论战”是个不错的方式，用事实说话，即便是最终的结果不是你所预料的。
+
+有些人说linux也只是听别人说，只有自己平时多去尝试，真正感受到linux优越性，那才有资格去参与类似的论战。

@@ -1,0 +1,18 @@
+---
+author: amosk
+comments: true
+date: 2007-09-20 06:42:32+00:00
+layout: post
+slug: '%e8%87%aa%e5%b7%b1%e7%9a%84logo'
+title: 自己的logo
+wordpress_id: 99
+categories:
+- Programming
+---
+
+![](http://kongove.whostas.com/web/images/logo.png)
+
+给自己主页做了一个png格式的logo，用ftp往空间里传，结果网页上不能正常显示。
+最后发现原来是传输模式的问题，用binary传才能正常显示，ascii不行。
+
+BTW：昨晚收到了网站备案的确认回信，把一个bazs.cert的文件放在/cert文件夹下，在首页添加“陕ICP备07013284号”就ok了。

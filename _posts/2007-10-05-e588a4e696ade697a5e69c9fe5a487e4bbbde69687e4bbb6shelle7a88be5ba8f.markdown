@@ -1,0 +1,82 @@
+---
+author: amosk
+comments: true
+date: 2007-10-05 05:16:42+00:00
+layout: post
+slug: '%e5%88%a4%e6%96%ad%e6%97%a5%e6%9c%9f%e5%a4%87%e4%bb%bd%e6%96%87%e4%bb%b6shell%e7%a8%8b%e5%ba%8f'
+title: 判断日期备份文件shell程序
+wordpress_id: 112
+categories:
+- Web
+---
+
+将当前用户目录下~/backup/打包成tar.gz格式，存放在当前用户目录backup（判
+断目录是否存在，不存在时要自己创建）目录下。程序运行时先判断是否在backup
+目录有过备份，如果备份时间小于4天则不备份。别感谢wangcong同学的帮助 ！
+
+重点：查找指定更新时间内的文件                            （本文重新编辑于10.6）
+
+    
+    #!/bin/bash
+    Dir()
+    {
+    	if  [[ -e ~/backup ]]
+    	then<!-- more -->
+    		echo -n ""
+    	else
+    		mkdir ~/backup
+    		return 1
+    	fi
+    	if [[ -e ~/backup.tar.gz ]]
+    	then
+    		return 1
+    	else
+    		return 0
+    	fi
+    }
+    
+    Time()
+    {
+    	i=0
+    	while (( i < 4 ))
+    	do
+    		echo i=$i
+    		find ~/backup/ -mtime $i | grep "backup.tar.gz"
+    	 	if (( $?==0 ))
+    		then
+    			echo "No backup"
+    			return 1
+    		fi
+    	done
+    
+    	echo "begin backup"
+    	return 0
+    }
+    
+    backup()
+    {
+    	cd ~/Desktop
+    	tar -zcf ~/backup/backup.tar.gz backup
+    	cd -
+    }
+    
+    #main
+    Dir
+    if (( $? == 1 ))
+    then
+    	backup
+    else
+    	if [[ -e ~/backup/backup.tar.gz ]]
+    	then
+    		ls -l ~/backup/backup.tar.gz |Time
+    		if (( $? == 0 ))
+    		then
+    			backup
+    		fi
+    	else
+    		echo "You had not backup"
+    		backup
+    	fi
+    
+    fi
+    exit 0

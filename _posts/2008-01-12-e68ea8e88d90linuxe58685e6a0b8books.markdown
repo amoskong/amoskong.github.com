@@ -1,0 +1,36 @@
+---
+author: amosk
+comments: true
+date: 2008-01-12 13:03:10+00:00
+layout: post
+slug: '%e6%8e%a8%e8%8d%90linux%e5%86%85%e6%a0%b8books'
+title: 推荐Linux内核Books
+wordpress_id: 184
+categories:
+- Linux
+---
+
+![](http://images.china-pub.com/ebook/8632/zcover.jpg)如果你想对内核有个整体的理解，看
+"linux kernel development"
+如果你觉得上面那本书太薄了，就看
+"understanding the linux kernel"
+如果你想写驱动，练习一下，看
+"linux device drivers"
+如果觉得上面书的版本太高了，
+国产的"linux 内核完全剖析"
+上面的书不够深入，那看
+也是国产的"内核代码情景分析"
+
+觉得操作系统理论还要补一下
+"operating system concepts"
+
+靠，linux的内核都玩腻了，那推荐
+"The.Design.and.Implementation.of.the.FreeBSD.Operating.System"
+"Solaris Internals Solaris 10 And Opensolaris Kernel Architecture"
+
+好书太多了..
+
+BTW：
+上面是 Zh-kernel.org 上的一个回复，马上放假了身边好多人（我就是一个典型），借了N本书准备好好补充补充知识。不过一大堆没有关联，没有轻重特色的Books很容易让人不知从和入手。以内核学习为例，可以看一本理论性的知道书（如操作系统设计与实现），然后可以看两三本来争抢实弹的（如Linux内核源代码分析、Linux设备驱动程序、深入理解Linux内核），后边这三本书得结合着看，有一定的偏重点，如果贪多反而事倍功半。他方面的学习其实和这差不多。
+
+PS.昨天舍友买了个神州笔记本，回来给他拷软件时惊奇发现，自己机上居然有个“模拟器 ”。舍友拷过去玩拳皇，我也手痒了，于是在Ubuntu上装了xmame，把rom包拷过来玩起了恐龙快打。N久没玩了~~

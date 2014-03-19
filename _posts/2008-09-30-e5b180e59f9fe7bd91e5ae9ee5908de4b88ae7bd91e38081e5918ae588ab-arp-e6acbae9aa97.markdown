@@ -1,0 +1,176 @@
+---
+author: amosk
+comments: true
+date: 2008-09-30 05:31:43+00:00
+layout: post
+slug: '%e5%b1%80%e5%9f%9f%e7%bd%91%e5%ae%9e%e5%90%8d%e4%b8%8a%e7%bd%91%e3%80%81%e5%91%8a%e5%88%ab-arp-%e6%ac%ba%e9%aa%97'
+title: 局域网实名上网、告别 ARP 欺骗
+wordpress_id: 280
+categories:
+- Linux
+- Web
+---
+
+1、工具名称:
+Python 局域网实名上网、告别 ARP 欺骗工具
+2、开发环境:
+Python 2.5.1、Karrigell web框架、GNU/Linux 操作系统
+3、作者版权
+作者:孔建军 (kongjianjun@gmail.com)
+软件许可证:GPLv3
+4、功能:
+1)利用 web 浏览器,进行用户注册相关信息(MAC 地址、用户名)登记
+2)用户可在 creat.py 中配置网段和 DNS 等信息,使软件功能灵活
+3)根据用户提交信息和用户配置,自动分配 IP 地址,自动生成 shell 脚本
+4)网关服务器开机运行 shell 脚本即可实现实名上网和防 ARP 欺骗功能
+5)用户可通过 web 浏览器对分配 IP 等信息进行查询
+目录、文件结构:
+.
+|-- Karrigell_QuickForm.py     #浏览器界面 API 脚本
+|-- Karrigell_QuickForm.pyc
+|-- arp.sh          #生成的 shell 脚本,开机时运行此脚本即可实现实名上网
+|-- creat.py        #自动创建配置文件 arp.sh
+|-- creat.pyc
+|-- doc.pdf		#帮助说明文档
+|-- get_mac.py      #从arp.sh中提取mac地址等信息
+|-- index.ks        #显示浏览器界面,用户提交数据时检验并将 mac 等信息记录到文本
+|-- install.sh      #安装 arp.sh 脚本,每次开机自动执行
+`-- mac.txt         #记录 mac 地址,及用户名。格式为:00:15:58:65:3B:FC #username
+4、使用说明:
+1)在网关服务器,配置相关环境,执行 sudo python Karrigell.py,开启 web 服务
+器
+2)配置 creat.py 中的 IP 网段和 DNS 等信息
+3)用户在网内任意一台主机登陆网关服务器(注意:如果网络条件不允许,如 ARP
+欺骗严重时,可直接通过网关服务器本地登陆)
+通过浏览器登陆网关服务器
+4)用户填写 MAC 地址信息和用户名,并提交到网关服务器
+5)提交后在服务器自动生成 arp.sh 脚本,并可在浏览器下方显示脚本。其中包括为
+对应 MAC 和用户分配的 IP 地址,用户配置对应主机的 IP 等信息。
+6)其他用户提交 MAC 地址和用户名信息,生成最终的 arp.sh 脚本     7)实用超级用户权限,执行目录下的 install.sh 脚本。拷贝 arp.sh 到/usr/bin/,并
+在/etc/rc.local 每次开机自动运行。
+5、其他
+程序正在完善当中，欢迎反馈意见。
+下载地址：[http://kongove.whostas.com/down/prog/i-arp.tar.gz](http://kongove.whostas.com/down/prog/i-arp.tar.gz)
+Email: kongjianjun@gmail.com
+HomePage: kongove.whostas.com
+<!-- more -->
+
+#coding: utf-8
+#filename:creat.py
+IP_NET='192.168.200'
+IP_DNS='202.117.128.2'
+def creat():
+    f=open('mac.txt','r')
+
+    f2=open('arp.sh','w')
+    str1='#!/bin/bash\n\nifup eth1\necho "1" >/proc/sys/net/ipv4/ip_forward\n\niptables -t nat -F\niptables -t filter -F\niptables -t mangle -F\n\n'
+    str2='#智能DNS\niptables -t nat -I PREROUTING -i eth0 -p udp --dport 53 -j DNAT --to-destination %s:53\niptables -t nat -I PREROUTING -i eth0 -p tcp --dport 53 -j DNAT --to-destination %s:53\n\n' %(IP_DNS,IP_DNS)
+    str3='iptables -t nat -A POSTROUTING -o eth1 -s %s.0/24 -j MASQUERADE\n\n' %IP_NET
+
+    f2.write(str1+str2+str3)
+    f2.close()
+    f2=open('arp.sh','a')
+    i=1
+    for item in f.readlines():
+        if i>255:
+            break
+        item=item.split('\n')[0]
+        if item=='':
+            continue
+        str='arp -s %s.%d %s\n' %(IP_NET,i,item)
+
+        f2.write(str)
+        i+=1
+
+    f.close()
+    f2.close()
+
+# -*- coding: utf-8 -*-
+#filename:index.ks
+import os,sys,fnmatch,time
+#import pickle   # 神奇的序列化模块
+from HTMLTags import * # Karrigell 提供页面输出支持模块
+from Karrigell_QuickForm import Karrigell_QuickForm as KQF
+from creat import creat
+
+def _htmhead(title):
+    htm = """
+
+%s
+"""%title
+    return htm
+## 默认页面尾声明
+htmfoot="""
+
+
+* * *
+
+
+"""
+def look():
+    f2=open('arp.sh','r')
+    str2=f2.readlines()
+    for i in str2:
+        print i
+        print "  
+"
+    f2.close()
+
+def index(**args):
+    RESPONSE['Content-Type'] = "text/html; charset=utf-8"
+    print _htmhead("西邮Linux兴趣小组实名上网登记表")
+    p = KQF('fm_cdwalk','POST',"index","西邮Linux兴趣小组实名上网MAC地址登记表")
+    #p.addHtmNode('text',"ip","IP",{'size':20,'maxlength':50})
+    p.addHtmNode('text',"mactext","MAC",{'size':20,'maxlength':50})
+    p.addHtmNode('text',"nametext","NAME",{'size':20,'maxlength':50})
+    p.addGroup(["submit","btn_submit","submit","btn"])
+    p.display()
+
+    if 0 == len(QUERY):
+        pass
+    else:
+        if "submit" in QUERY['btn_submit'] and QUERY['mactext']'':
+            str=QUERY['mactext']
+            name=QUERY['nametext']
+            f=open('mac.txt','a')
+            f.write(str+' #'+name+'\n')
+            f.close()
+#           f=open('mac.txt','r')
+#           str2=f.readlines()
+#           for i in str2:
+#               print i
+#               print "  
+"
+#           f.close()
+            creat()
+
+        else:
+            pass
+    look()
+    print htmfoot
+
+#coding: utf-8
+#filename:get_mac.py
+f=open('arp.sh','r')
+f2=open('mac2.txt','w')
+for item in f.readlines():
+    if item.split(' ')[0]=='arp':
+        mac=item.split(' ')[-2:]
+        #mac=mac.split('\n')[0]
+        f2.write('%s %s' %(mac[0],mac[1]))
+f.close()
+f2.close()
+
+#!/bin/bash
+
+ifup eth1
+echo "1" >/proc/sys/net/ipv4/ip_forward
+
+iptables -t nat -F
+iptables -t filter -F
+iptables -t mangle -F
+
+iptables -t nat -A POSTROUTING -o eth1 -s 192.168.200.0/27 -j MASQUERADE
+
+#arp -d
+arp -s 192.168.200.1  00:15:58:65:3B:FC #kongove

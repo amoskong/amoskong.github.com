@@ -1,0 +1,197 @@
+---
+author: amosk
+comments: true
+date: 2008-01-06 10:03:01+00:00
+layout: post
+slug: grub%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%b3%95
+title: GRUB常见问题的解决方法
+wordpress_id: 181
+categories:
+- Linux
+---
+
+周围经常有人Grub出问题，对于刚开始用linux或者装了没有用过几回的人，给说用liveCD启动-挂载文件系统-打开终端-grub，会使他们很茫然，我也没办法谁让你不用呢~~
+
+下面是一些比较常见的问题和解决方法，积累一下。
+
+1. Grub loading， please wait...
+出现症状:
+GRUB loading stage 1.5
+GRUB loading， please wait...
+
+屏幕出现这段文字之后， 系统停止， 如果尝试使用一张linux启动软盘(也就是有安装在软盘上的grub)可以引导系统。 解决方法:
+设置本机的bios， 不要使用floopy作为第一启动设备， 改用hard drive作为第一启动。
+对于gentoo的用户来说， 错误的CFLAGS也会导致该错误的发生， 虽然现在的grub ebuild文件已经过滤掉了-fstack-protector， 但是当问题还是无法解决的时候用干净的CFLAGS重新编译一下grub也不失是一个好办法。
+# CFLAGS="-O2 -march=i686 -fomit-frame-pointer -pipe" emerge grub
+
+2. Grub Error 12
+出现症状:
+12 : Invalid device requested.
+该症状是当设备描述符正确但是随后出现没定义过的某个错误时出现。
+解决方法:
+该错误一般出现在使用交互式的Grub安装方式(也就是Grub>下的安装方法)时没有输入以下两行。
+grub> root (hd0，0)
+grub> setup (hd0)
+(hd0，0) 必须用你自己的引导扇区代替， (hd0)也必须同时用你选择的hard drive代替， 因为上述两条命令的实质就是在把bootloader安装到第一个硬盘(The primary master)的 Master Boot Record上。
+
+3. Grub Error 15<!-- more -->
+出现症状:
+该错误可能出现在Grub配置的两个不同的阶段， 一种可能是出现在Grub的安装配置阶段(也就是在MBR上安装Grub的时候)， 屏幕显示如下:
+grub> root (hd0，0)
+Filesystem type is xfs， partition type 0x83grub> setup (hd0)
+Checking if "/boot/grub/stage1" exists... no
+Checking if "/grub/stage1" exists... no
+Error 15: File not found
+还有一种情况就是启动电脑后选择启动linux或其他在Grub启动列表中列出的系统时， 屏幕显示如下:
+Booting 'gentoo Linux'root (hd0，0)
+Filesystem type is ext2fs， partition type 0x83
+kernel (hd0，0)/boot/kernel-2.4.20 root=/dev/hda3 vga=792
+Error 15: File not found
+Press any key to continue...
+解决方法 (第一种情况) :
+该错误在找不到指定的文件时出现， 但是此时像磁盘或分区信息这样的其他配置都没问题(只是找得到相应的分区或磁盘， 至于对不对它可不管)。 一般来说没找到的文件以kernel居多。 首先需要确认一下在你的/boot里的那个kernel， 如果需要存在于你/boot里那个kenel的完整的文件名， 使用livecd， rescue盘或其他安装在硬盘上的linux系统引导成功后挂载那时在配置Grub时候指定的/分区和/boot(需要的话)， 然后使用chroot进入那时的根分区， 使用下面的命令进行查找。
+# cd /boot
+# ls
+如果发现kernel文件丢失， 进入/usr/src/linux(再此之前确认一下该目录下放置了kernel的source code)重新compile一个， 命令如下:
+# cd /usr/src/linux/
+# make menuconfig
+# make
+完成之后拷贝进/boot:
+# cp /usr/src/linux/arch/i386/boot/bzImage /boot
+重命名一下kernel， 和你在grub.conf中指定的一样就可以了。 顺便再检查一下grub.conf中kernel那行引用的分区是否正确。
+除了kernel的丢失或损坏， BIOS无法识别存放Grub的stages和kernel的硬盘分区也会出现相同的Missing 错误。同时存放Grub的stages和kernel的分区不应该是使用software RAID-5(或者是使用其他优化存储技术的分区， 比如LVM或LVM2)的。
+解决方法 (第二种情况) :
+第一， 检查grub.conf的root行和setup行配置正确。如果你确认你使用的方法是正确的， 那可能你使用的Grub版本存在bug(比如0.93.20031222这个版本)， 使用你所用发行版的软件工具新安装一个或是升级你原来所用的Grub)。
+Gentoo用户可以使用下面的命令:
+(在chroot环境下执行该命令)
+# echo "=sys-boot/grub-0.93.20031222" >> /etc/portage/package.mask
+# emerge grub -p
+然后你也可以使用Grub开发人员建议使用的 grub-install脚本进行Grub的在MBR中的安装:
+(--root-directory 在你使用单独的/boot分区时是必选项)
+# grub-install --root-directory=/boot /dev/hda
+如果上面的方法你都试过， 但是还是没法解决问题的话， 请检查一下你的/boot分区， 可能是你的/boot分区存在问题:
+(确认一下你将要进行fsck的分区是处于unmount状态下的， 在给出的例子中使用的是/dev/hda1。)
+# fsck -y /dev/hda1
+
+4. Grub error 16
+出现症状:
+Error 16: Inconsistent filesystem structure
+
+翻成中文的意思是不兼容的文件系统， 也就是说你的/boot无法被Grub识别(可能是使用了Grub没法识别但linux可以识别的文件系统)， 如果你的/boot不是单独分区的话， 那代表着你的根分区也就是/无法被Grub识别。
+
+解决方法:
+
+同样使用rescue盘或livecd或第二个可以使用的linux系统， 启动完成后不要挂载原系统的/或/boot， 可以先使用fdisk查看一下所使用的文件系统再使用fsck -y检查。
+
+5. Grub Error 17
+出现症状:
+root (hd0，0)
+filesystem type unknown partition type 0x7 Error 17 : Cannot mount selected partition
+解决方法:
+中文意思为无法挂载分区， 也就是Grub可以确认所使用的分区存在但是该分区上使用的文件系统无法被Grub识别。
+
+确认一下再grub.conf中的root(x，y)设置是否正确。
+
+如果在选择启动Windows时出现上述错误， 请检查一下grub.conf关于Win的配置中是否有 root (hdX，Y) (或 rootnoverify (hdX，Y)) 和 chainloader (hdX，Y)+1。
+
+6. Grub error 18
+kernel (hd1，4)/bzImage root=/dev/hdb7Error 18: Selected cylinder exceeds max supported by BIOS
+解决方法:
+该错误经常发生在古老的硬件和新的硬盘连接的时候， 当试图访问一个BIOS无法转换的地址时(换句话说就是Grub试图读取的地址已经超过了BIOS可以访问的极限)。 尝试升级一下BIOS或把/boot分区尽量移动到可使用硬盘空间的前面。 估计没有谁还在用8G以下的硬盘了吧。
+
+7. GRUB GRUB GRUB GRUB GRUB ...
+出现症状:
+GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB
+GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB
+...
+解决方法:
+
+一种可能的情况是你在BIOS里设定了AUTO 检测HDD， 可以尝试把BIOS的相关条目改成 User Type HDD看看。
+
+另一种可能的情况是当你在已经在MBR中安装了Grub， 但是为了修改分区或增加硬盘而重新安装了Grub， 但是在再次安装的时候却犯了某些错误。 对这种情况来说重新安装一遍Grub比查出哪里犯了错更迅速也更解决问题。
+
+8. Probing Devices to Guess BIOS Drives. This May Take a Long Time.
+出现症状:
+在安装Grub时候屏幕显示下述文字后系统挂起:
+# grubProbing devices to guess BIOS drives. This may take a long time.
+解决方法:
+检查一下你的硬件配置， 可能在同一根IDE连接线上既连接了Ultra DMA的设备也连接了不支持Ultra DMA的设备。
+
+9. 安装Grub时， 系统挂起
+出现症状:
+运行grub命令后， 屏幕无任何其他显示后系统挂起。
+# grub (这个时候， 系统挂起)
+解决方法:
+grub命令会优先检查floopy， 如果没有软驱， 请使用下面的附加参数跳过floopy检查。
+# grub --no-floppy
+
+10. Uncompressing Linux... Ok， booting the kernel.
+出现症状:
+系统在显示完下面的内容后挂起。
+Uncompressing Linux... Ok， booting the kernel.
+
+解决方法:
+确切来说， 这个error并不是Grub的错误， 可能的原因是你使用的内核或你编译的内核其用了ACPI， 但是实际ACPI并没有工作正常。 可以在BIOS里disable掉ACPI或在启动该 kernel 时加入 no acpi 参数。
+
+11. Grub只显示了一个Grub提示符
+出现症状:
+在引导计算机时本来应该出现的各个启动条目被一个Grub提示符取代。
+解决方法:
+用livecd或rescue 盘启动并挂载/boot分区， 检查一下其中的grub.conf是否丢失。
+# mount /dev/hda1 /mnt/someplace/boot# cat /mnt/someplace/boot/grub/grub.conf
+另外也检查一下其中menu.lst的符号连接是否存在。
+# ls -l /mnt/gentoo/boot/grub/menu.lst
+lrwxrwxrwx 1 root root 9 Mar 7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.conf
+如果没有找到这个符号连接，就创建它。
+# cd /mnt/gentoo/boot/grub
+# ln -snf grub.conf menu.lst
+然后重新安装一遍Grub
+(在chroot环境中运行如下命令)
+# grub-install --root-directory=/boot /dev/hda
+
+12. Could Not Find Device For /boot/boot: Not Found Or Not a Block Device
+出现症状:
+当你在Grub安装过程中使用grub-install脚本时出现以下错误:
+# grub-install --root-directory=/boot /dev/hda Could not find device for /boot/boot: not found or not a block device
+
+解决方法:
+检查一下下面这个步骤有没有做过。
+# cp /proc/mounts /etc/mtab
+
+13. 在Grub Menu中单击回车后系统重启.
+出现症状:
+在Grub Menu中单击回车后系统重启。
+解决方法:
+尝试在kenel中disable 掉 framebuffer 或者直接在启动的kernel后添加参数。如果无效的话再disable掉APM或ACPI试试。
+
+14. 在Grub Menu中单击回车后， 屏幕黑屏.
+出现症状:
+在Grub Menu中单击回车后， 屏幕黑屏， 但是这个时候系统并没有挂起，NumLock (soon)键依然有效。
+解决方法:
+关闭grub.conf 中的 framebuffer 支持(也就是移除 vga=XYZ 行) 顺便再检查一下kernel的config中关于arch的选择是否符和你的硬件要求。
+
+15. Grub 启动时背景图片缺失
+出现症状:
+启动系统时无法看到默认的图片背景。
+解决方法:
+检查一下你在grub.conf中相关的splash那行有没有被注释掉或者指定的splash文件是否存在或者文件名是否相符。
+
+16. 在试图启动第二个硬盘上的Windows时失败
+出现症状:
+选择了对应的Windows条目， 但是系统拒绝启动， 提示信息也没有很清楚的给出错误的所在。
+解决方法:
+很多情况下都是因为没有在grub.conf中正确使用map命令所致。
+title Windows XP
+map (hd0) (hd1)
+map (hd1) (hd0)
+chainloader (hd1，0)+1
+
+17. Grub 安装时候出现段错误
+出现症状:
+该情况很多都是出现在grub-0.95.x的安装过程中， 屏幕显示如下:
+grub> root (hd0，0)grub> setup (hd0)
+Segmentation fault
+解决方法:
+该错误是一个已知的0.95版本Grub的bug， 在0.96版本中已经修复， 同时0.94 r1 和 0.94 r2没有这个bug， 如果这些也都出现段错误， 尝试emerge grub-static 。 该软件包在amd64平台下属于stable， 在~x86平台上属于 unstable。
+
+转自某个不让人CP的网站，害的我下了html~

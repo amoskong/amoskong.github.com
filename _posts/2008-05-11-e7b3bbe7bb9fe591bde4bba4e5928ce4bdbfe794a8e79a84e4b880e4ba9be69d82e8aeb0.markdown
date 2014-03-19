@@ -1,0 +1,165 @@
+---
+author: amosk
+comments: true
+date: 2008-05-11 07:04:43+00:00
+layout: post
+slug: '%e7%b3%bb%e7%bb%9f%e5%91%bd%e4%bb%a4%e5%92%8c%e4%bd%bf%e7%94%a8%e7%9a%84%e4%b8%80%e4%ba%9b%e6%9d%82%e8%ae%b0'
+title: ubuntu使用的一些杂记
+wordpress_id: 232
+categories:
+- Linux
+---
+
+一、远程主机元素定位：username hostname ip port directory filename
+ftp [localhost [port]]
+ssh -p 22 kongove@localhost
+w3m http://kongove.whostas.com/index.html
+
+二、命令选项的一些总结
+1. -h help ? 帮助
+-a all 所有
+-v --version 版本
+-v --verbose 多余信息 tar chown wget
+--usage 用法
+
+2. + -
+find -mtime +1 以前天修改过的
+shutdown -h +20
+
+3. 1)-p preserve 维持、保持
+cp -p
+scp -p --preserve[]
+2)-p password 密码
+mysqldump -u kongove -h mysql.kongove.whostas.com -p
+xylftp -u kongove -h kongove.whostas.com -p 123456
+-P prot 端口
+scp -P 22
+ssh -p 22
+
+4. -R recursive 递归
+cp -r -R --recursive
+chmod -R --recursive
+chown -R --recursive
+ls -R --recursive
+
+5. -f force 强制
+mv -f --force
+cp -f --force
+
+6. -q quiet silent 安静
+chown -f --quiet --slient
+chgrp -f --quiet --slient
+chmod -f --quiet --slient
+sed -f --quiet --slient
+wget -q --quite
+passwd -q
+ftp命令：quiet
+
+7. -i interactive 交互
+rm -i --interactive 打开交互
+mv -i  --interactive
+ftp -i 关闭交互
+
+<!-- more -->
+
+8. -c create 创建
+tar\rar\zip\unzip -c
+touch -c --no-create 不创建任何文件
+
+9. -x extract 吸取（解压）
+tar\rar\zip\unzip -x
+
+10.1) -e edit 编辑
+crontab -e
+2)-e execute 执行
+find -exec
+wget -e
+-c command 执行命令
+vim -c
+
+11. -t type 类型
+mount\umount
+ls --file-type
+
+12. -d directory 目录
+ls -d --directory
+
+13. -g group 组
+useradd -g root
+ls -g
+chown user:group filename
+
+14. -u user 用户
+xylftp -u konove
+mysqldump -u kongove -h mysql.kongove.whostas.com
+mysql -u kongove -h localhost
+
+15. -o out 输出
+gcc -o p p.c
+g++ -o p p.cpp
+wget -o log
+
+16. -n number
+cat -n --number 显示行号
+vim中 :set nu  :set nonu
+
+三、一些默认值:
+hostname: localhost/自定义的主机名
+port: （具体服务有相依默认值）21 22 23 80
+ip: 127.0.0.1
+directory: "./" "~" "未命名文件夹"
+username: root/当前用户/nobody
+group: 当前用户所在组/nogroup
+filename: a.out/新文件
+
+四、一些命令：
+
+iconv -f gbk -t utf-8 >a.txt 字符编码转换
+su  -贴换到root用户，并使用root的环境变量
+oowrite 文档
+ooimpress 演示文稿
+oocalc 电子表格
+firefox 火狐浏览器
+gnome-terminal 终端
+nautilus 文件浏览器
+synaptic 新立得
+gnome-app-install Ubuntu里的"添加删除软件"
+(启动程序，用 ps -A 就可查看)
+
+五、一些快捷键
+Alt+tab 贴换任务
+Alt+F1 打开菜单
+Alt+F2 运行应用程序
+Alt+F4 关闭窗口
+Alt+空格 打开窗口控制下拉菜单
+Alt+F9 最小化
+Alt+F10 最大化
+在firefox里：
+ctrl+t    新建标签
+Alt+1/2/3/4/…… 贴换标签
+ctrl+w关闭标签
+在终端下：
+shift+ctrl+t 新建标签
+Alt+1/2/3/4/…… 贴换标签
+
+六、解决根分区不够用问题
+1.为 /usr /home /var中的一个或多个挂载新的分区。
+以/usr挂到新分区上为例：
+mv /usr /usrbak
+mkdir /usr
+mount /dev/sda8 /usr
+cp -Rp /usrbak/* /usr/
+修改/etc/fstab，自动挂载新分区到/usr/。
+由于我把原来的两个分区合并了，用grub命令刷新了mbr里的内容，再修改/boot/grub/menu.lst。重启，搞定了！
+系统没问题时，清理文件。
+
+不过后来发现系统时间每次启动都要快八小时，原来系统在启动时，未挂载/usr分区前要从/etc/localtime(这个软链接指向/usr/share/zoneinfo/Asia/Hong_Kong)读取时区信息，读取失败则默认为UTC时间，所以会在cmos时间基础上+8
+解决方法：
+sudo rm /etc/localtime
+sudo cp -p /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
+就ok了。
+
+2.用tar先把根分区下的所有文件打包，然后调整根分区大小，最后还原就行了。
+tar cvfz /media/sda1/system.tar.gz /media/sda7/*
+用分区工具调整/大小，并格式化。
+tar xvfz /media/sda1/system.tar.gz /media/sda7

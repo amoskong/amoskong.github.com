@@ -1,0 +1,103 @@
+---
+author: amosk
+comments: true
+date: 2011-08-23 22:45:01+00:00
+layout: post
+slug: kvm-forum-2011
+title: KVM Forum 2011
+wordpress_id: 643
+categories:
+- Virtualization
+---
+
+
+
+
+
+
+
+### From: [http://log.amitshah.net/2011/08/kvm-forum-2011.html](http://log.amitshah.net/2011/08/kvm-forum-2011.html) by [Amit Shah](http://www.blogger.com/profile/10926476078134010150)
+
+
+
+
+### KVM Forum 2011
+
+
+
+
+This year's KVM Forum, like last year's, was co-located with LinuxCon NA.  Vancouver city played the host this year.
+
+The interest in KVM has been rising over the years; from the first Forum in 2008, when we were just about 30 developers in a single room presenting work done and chatting about directions to take (the virtio design was hashed out during this conference), this year there were about 150 attendees, discussing optimising KVM instances and tracing the guests.  That's a really big leap in three years.
+
+Due to lots and lots of good talk submissions, not all of which could be rejected, the talk slots were reduced to 30 minutes per talk and there were parallel tracks in the afternoon sessions.  This allowed for more talks, but small Q&A sessions, and obviously, having to miss out on some talks due to another talk happening at the same time. All the talks have been video-recorded, though, and they should appear soon on the [Forum page](http://www.linux-kvm.org/page/KVM_Forum_2011).
+<!-- more -->
+Some brief notes on the talks I attended:
+
+[Avi's keynote](http://www.linux-kvm.org/wiki/images/a/aa/2011-forum-keynote.pdf) started off the Forum. One of the main points was the lack of marketing in KVM, and how the formation of the [Open Virtualization Alliance](http://www.openvirtualizationalliance.org/index.html)to bridge the gap.  He also talked about an ARM port finally getting some development (on his 2008 prediction of an ARM port coming soon not materialising, he said in his 2010 keynote: "this is a case of reality not catching up with predictions").
+
+Paul Mackerras then talked about [KVM on the POWER7](http://www.linux-kvm.org/wiki/images/5/5d/2011-forum-KVM_on_the_IBM_POWER7_Processor.pdf) processor, another processor to get virt extensions. He talked of replacing pHype with KVM and the challenges to run custom firmware and Linux directly on the machines, as opposed to the default firmware which can only run pHype.
+
+Alex Williamson talked about [VFIO-based PCI device assignment](http://www.linux-kvm.org/wiki/images/d/d1/2011-forum-VFIO.pdf).  The current device assignment code makes the kvm.ko module a device driver for the device to be assigned to the guest (I'm to blame for that, I wrote that code). The idea with VFIO is to move the complexity of device assignment into userspace.  VFIO is a device driver which exposes devices in /dev/vfio*, via which the device can be configured and controlled.  This is a much more cleaner and secure way of doing device assignment.
+
+Kevin Wolf talked on the current state of block file formats, and the [next-gen block file format](http://www.linux-kvm.org/wiki/images/6/63/2011-forum-qcow2.pdf).  He criticised the NIH syndrome of people developing new formats in isolation instead of enhancing the current ones.  He's working on collecting the best ideas from QED and FVD, the newest formats, and putting them into QCOW3 while retaining the features from QCOW2, which the other formats dropped.
+
+Stefan Hajnoczi and Paolo Bonzini then talked of a new [virtio-scsi transport](http://www.linux-kvm.org/wiki/images/f/f5/2011-forum-virtio-scsi.pdf), Stefan is working on the new in-kernel SCSI target and using vhost to accelerate communication.  Paolo has already written the virtio-scsi spec.
+
+Asias He presented the [Native Linux KVM tool](http://www.linux-kvm.org/wiki/images/c/c5/2011-forum-native-linux-kvm-tool.pdf). My reaction on the presentation was that they started out as a toy project to run Linux guests, but their planned feature set sounds like they are going to replicate qemu.  That's not a bad thing, though, KVM (the kernel module) was designed to be able to drive multiple userspace hypervisors, and this is the first one that's making some news.
+
+That ended the first day's morning session.  The afternoon session had parallel tracks, I attended the following:
+
+Andrea Arcangeli's talk on the [future of Memory Management in KVM](http://www.linux-kvm.org/wiki/images/a/a6/2011-forum-aa-numa.pdf) had quite a lot of TODO items.  He particularly talked on NUMA management and his ongoing work on it. Current NUMA policies are static; he wants to make them dynamic, with the guest moving to the node where RAM is allocated, and vice-versa.
+
+Rik van Riel then talked about [some more MM work](http://www.linux-kvm.org/wiki/images/f/ff/2011-forum-memory-overcommit.pdf): free page hinting, which can improve the memory utilisation both in the host and guest, and automatic memory resizing.  There might be some drawbacks to this as free page hinting may not consider THP and end up breaking huge pages.
+
+Next was "[experiences porting KVM to SmartOS](http://www.linux-kvm.org/wiki/images/7/71/2011-forum-porting-to-smartos.pdf)", a lively and animated talk by Bryan Cantrill. This talked about porting the kvm module and qemu-kvm to Illumos, a Solaris clone.  They primarily want the benefits of ZFS, DTrace, Zones and KVM. No matter how much interesting it sounds, the question on licensing was addressed vaguely (if at all) during the talk.  In a private chat later, Bryan mentioned there's no violation at all.  There's some talk at [lwn.net](https://lwn.net/Articles/455008/)on licensing as well.
+
+Michael Tsirkin talked on [new virtio networking features](http://www.linux-kvm.org/wiki/images/4/4f/2011-forum-virtio_net_whatsnew.odp). Main was the event indexing feature which reduces the exit interrupts to host if there are pending exits and a new buffer is queued in the vring.  Sort of like NAPI for virtio. He also talked about zero-copy TX and filtering, and the security pitfalls of doing so.
+
+Ryan Harper then talked of [IO throttling in QEMU](http://www.linux-kvm.org/wiki/images/7/72/2011-forum-keep-a-limit-on-it-io-throttling-in-qemu.pdf), a feature that uses cgroups to ensure guests don't go over their allocated quota of IO activity.
+
+A couple of lightning talks were held, where Dan Magenheimer talked of Transcendent memory, and how that can help with the work that Rik is doing.
+
+A few BOF sessions were lined up, people gathered in groups to discuss.  I caught hold of Hans de Goede, Alon Levy, Anthony Liguori and Gerd Hoffmann to discuss the state of chardevs in QEMU.  Hans had initiated a discussion just prior to the Forum on the non-upstream RHEL and Fedora patches that we carry for chardev flow control.  Anthony mentioned some races in the existing implementation and came up with his own.  He promised to merge the cleanup patchset soon and float the flow control patches to the mailing list.
+
+My other topic, on guest - host communication, got fizzled out, partly due to my jet lag not allowing me to concentrate much, and the other interesting topic, moving qemu away from C.  I used that time to talk with other people.
+
+That ended day 1 of talks. All the attendees then headed out to a pub nearby to exchange stories over beer.
+
+The second day started with Anthony Liguori presenting the [keynote](http://www.linux-kvm.org/wiki/images/5/57/2011-forum-qemu-keynote-liguori.pdf) on QEMU development. He mentioned how the project has been doing very well with sub-maintainers doing pull requests. A lot of patches have been committed since the last year. Things indeed have improved since the last year, when many people were complaining of patches bit-rotting on the mailing list for ages.
+
+Avi then took stage again to talk of [performance monitoring in KVM guests](http://www.linux-kvm.org/wiki/images/6/6d/Kvm-forum-2011-performance-monitoring.pdf). He talked of providing a Performance Monitoring Unit to the guest via several ways: pass-through, emulating a virtual PMU and emulating a real-life PMU. He also talked of some new PMU features which are not model-specific which can be safely exposed to all guests.
+
+Alex Graf then presented on [AHCI](http://www.linux-kvm.org/wiki/images/7/73/2011-forum-ahci.pdf).  This was a very cool presentation with nice animation effects (too sad it used non-free software to do that -- I don't know if free software can match those effects, though). He showed how AHCI performed much better than the default IDE storage type.  Performance is half-way between virtio-blk and IDE, but since most OSes support AHCI out of the box (notable exception being Windows XP), he made a case for making AHCI the default.  There is some work to be done before we can do that, though.
+
+Anthony Liguori next talked about [QAPI and QOM](http://www.linux-kvm.org/wiki/images/e/e6/2011-forum-qapi-liguori.pdf), the QEMU Object Model.  These refactorings will make QEMU machines much easier to generate, and present a much saner interface to higher-level management tools like libvirt.  The plan is to get as much work done for the impending 1.0 release.  It was refreshing to hear Anthony not talk of replacing code in one big patch (or one big series), and rather work in incremental steps in-tree.  His last year's main point of developing code in separate trees and doing merges had not gone down well with many developers.
+
+Markus Armbruster then talked on [qdev](http://www.linux-kvm.org/wiki/images/b/bc/2011-forum-armbru-qdev.pdf), on where we are, what's left, and what are the major pain points.  qdev conversion still remains one of the TODO items from last year, and the more it gets delayed, the more everything else gets delayed in QEMU (including QOM conversion, which could be an incremental step from qdev).
+
+Alon Levy then presented on [SPICE](http://www.linux-kvm.org/wiki/images/f/f1/Spice_Roadmap_KVM_forum_2011.pdf), the current status as well as the future. The SPICE protocol is an alternative to VNC with a much better focus on high-latency links and more than just video over network.
+
+Gerd Hoffmann described his work on the [USB subsystem](http://www.linux-kvm.org/wiki/images/1/1f/2011-forum-usb.pdf). QEMU could go from the last project to support USB 2 to the first one to support USB 3. He also highlighted the work done on bringing down the CPU usage with USB tablet devices to minimal, a common complaint that was heard from users.
+
+That ended the first session; the talks I attended in the parallel tracks were:
+
+[KVM Graphics Device Assignment](http://www.linux-kvm.org/wiki/images/b/be/2011-forum-%24graphics-direct-assignment.pdf) by Allen Kay. We had worked together on PCI device assignment a few years back, and now Allen Kay talked of some roadblocks and ideas in implementing graphics device assignment and experiences from doing so in Xen.
+
+[Live block copy in QEMU](http://www.linux-kvm.org/wiki/images/c/cf/2011-forum-qemu_live_block_copy_submit.pdf) is being worked on by a few people, Marcelo Tosatti presented the work done so far and the direction in the future. He talked of how the two seemingly independent features of live block copy and snapshot merges can share code.
+
+Joerg Roedel then talked of[ AMD IOMMU v2 support in KVM](http://www.linux-kvm.org/wiki/images/b/b1/2011-forum-amd-iommuv2-kvm.pdf): the new feature set makes it possible to not pin all the guest memory pages on the host.  This alone is a very important feature for the future of device assignment.
+
+Next up was Juan Quintela's session on [Live Migration](http://www.linux-kvm.org/wiki/images/1/1e/2011-forum-migration.pp.pdf).  It was an entertaining ride on the challenges faced and the new directions to take.  One of them was post-copy migration, where the guest memory is faulted over the network after the guest is running on the destination host, since the amount of guest RAM has been increasing over time.
+
+I missed out on the next two sesions, talking to people.
+
+I rejoined for [postcopy live migration](http://www.linux-kvm.org/wiki/images/e/ed/2011-forum-yabusame-postcopy-migration.pdf) by Takahiro Hirofuchi. As promising as it may sound, Anthony wanted to ensure we have eked out maximum performance from the current pre-copy implementation and then look at post-copy.  He also asked for benchmarking results for post-copy migration.  An interesting case here may be to guess the working set of a guest, perform a pre-copy using this set of pages, and then switch to post-copy.  The guessing of working set could be done via a guest agent or using MMU notifiers in the host.
+
+That ended a very very long two days of the KVM Forum. We Red Hat folks had a dinner hosted by CTO Brian Stevens, so we headed out to the nearby brewery and enjoyed the fresh lager there.
+
+
+
+
+
+

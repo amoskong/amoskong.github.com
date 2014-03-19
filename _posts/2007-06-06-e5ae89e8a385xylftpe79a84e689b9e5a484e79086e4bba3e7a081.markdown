@@ -1,0 +1,47 @@
+---
+author: amosk
+comments: true
+date: 2007-06-06 12:42:35+00:00
+layout: post
+slug: '%e5%ae%89%e8%a3%85xylftp%e7%9a%84%e6%89%b9%e5%a4%84%e7%90%86%e4%bb%a3%e7%a0%81'
+title: 安装xylftp的批处理代码
+wordpress_id: 27
+categories:
+- Web
+---
+
+xylftp的客户端基本上完成了，准备做一个发行版,于是牵扯到安装的问题，王聪写的是Linux里的Makefile，我写的是win下的批处理。在此谢谢刘洋、王聪等的帮助。
+
+安装批处理代码： 
+
+::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
+::2007.6.5
+
+@echo off
+echo Welcome to use Xylftp for Windows!And you must have a JVM environment.
+echo Your Working Directory is:
+cd
+echo And the software will be install C:\"Program Files"\xylftp\
+
+javac XylFTPMain.java
+jar cfm xylftp.jar manifest.mf *.class
+if not exist C:\"Program Files"\xylftp mkdir C:\"Program Files"\xylftp 
+move xylftp.jar C:\"Program Files"\xylftp\xylftp.jar
+cd ../doc/
+copy User_Manual_Client.pdf C:\"Program Files"\xylftp\User_Manual_Client.pdf
+echo Creat link!
+
+echo @echo off >C:\WINDOWS\system32\xylftp.bat
+echo java -jar "C:\Program Files\xylftp\xylftp.jar" %%1 %%2 %%3 %%4 %%5 %%6 %%7 %%8 %%9 >>C:\WINDOWS\system32\xylftp.bat
+echo You have successly install the software!
+
+卸载批处理代码：
+
+::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
+::2007.6.5
+@echo off
+del *.class
+del C:\WINDOWS\system32\xylftp.bat
+del C:\"Program Files"\xylftp\xylftp.jar
+del C:\"Program Files"\xylftp\User_Manual_Client.pdf
+rmdir C:\"Program Files"\xylftp

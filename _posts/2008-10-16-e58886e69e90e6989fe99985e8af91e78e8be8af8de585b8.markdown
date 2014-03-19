@@ -1,0 +1,48 @@
+---
+author: amosk
+comments: true
+date: 2008-10-16 02:09:27+00:00
+layout: post
+slug: '%e5%88%86%e6%9e%90%e6%98%9f%e9%99%85%e8%af%91%e7%8e%8b%e8%af%8d%e5%85%b8'
+title: 分析星际译王词典
+wordpress_id: 284
+categories:
+- Web
+---
+
+先说一下，星际译王词典的安装。在网上下载词典，解压到 /usr/share/stardict/dic 即可！
+
+下载地址：[http://stardict.sourceforge.net/Dictionaries_zh_CN.php](http://stardict.sourceforge.net/Dictionaries_zh_CN.php) 我用的是：朗道英汉字典＋朗道汉英字典
+
+进入解压的词典目录，会发现有三个文件。后缀分别为 ifo idx dic，文件可能是压缩文件(后缀为info.gz idx.gz dic.gz)，这时因为stardict是支持压缩文件的。
+
+ifo文件存放的是关于 放這本词典的相关信息(information)
+idx文件存放的是单词列表(wordlist)的索引
+dict文件存放的是单词列表对应的详细数据
+
+.ifo 文件里的信息如下：
+StarDict's dict ifo file
+version=2.4.2
+wordcount=51214
+idxfilesize=899574
+bookname=stardict1.3英汉辞典
+author=马苏安
+email=msa@wri.com.cn
+description=胡正将其转换到stardict2。
+date=2003.05.13
+sametypesequence=tm
+
+2.4.2 的 stardict 会测试词典是不是 for 2.4.2 的版本，如果不是就会拒绝存取。wordcount 是所有 word 记录的总数，必须是正确的，不然会出错。
+
+sametypesequence=tm
+这样每个单词的处理就会忽略掉 't' 和 'm' 字元，此外，以 '' 和 'm' 结尾的输入也会被当作结尾。
+
+.idx 是生字清单
+
+它会按照顺序存放，每条记录格式如下：
+
+word_str; (utf8 charset 并且以 '' 结尾。)
+word_data_offset;
+word_data_size;
+
+下面得思考一下，如何利用这个字典，做出有意义的程序来。

@@ -1,0 +1,19 @@
+---
+author: amosk
+comments: true
+date: 2007-07-07 18:15:45+00:00
+layout: post
+published: false
+slug: test
+title: test
+wordpress_id: 58
+categories:
+- Life
+---
+
+[Text Link Ads](http://www.text-link-ads.com/?ref=95100)
+[Text Link ads](http://www.text-link-ads.com/)
+
+[bloggerwave](http://www.bloggerwave.com)
+
+[google](http://www.google.com)

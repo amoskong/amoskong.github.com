@@ -1,0 +1,236 @@
+---
+author: amosk
+comments: true
+date: 2007-09-09 08:48:42+00:00
+layout: post
+slug: ubuntu704%e6%96%b0%e6%89%8b%e6%8c%87%e5%8d%97
+title: ubuntu7.04新手指南
+wordpress_id: 88
+categories:
+- Linux
+---
+
+文章来源：http://www.osxcn.com/ubuntu/ubuntu-configuration-guide.html
+
+![](http://www.osxcn.com/wp-content/uploads/2006/05/ubuntu.png)
+**07/05/08 更新**：上海、杭州、常州电信更新 ubuntu-cn 源，可以直接安装 w32codecs 这些软件了。
+**07/04/25 更新**：曾一直试图寻找 Rhythmbox 播放 APE 的解决方案，至今未果，播放 APE 还是使用 audacious+mac 最简单。如果对 APE 没有需求，推荐 Banshee 播放器，拥有漂亮的外观、强大的乐库管理功能、播放列表支持、自动抓取封面、最小化到通知区域。
+
+**一、基本设置**
+
+**1、配置 ADSL 拨号上网** (不需拨号的用户就跳过)
+
+`sudo pppoeconf`
+然后按照提示一步一步操作即可。
+注意它会提示你是不是开机自动连接上网，选择是，每次开机就会自动拨号。
+
+也可以安装图形拨号程序
+`sudo apt-get install gnome-ppp`
+
+**2、修改源**
+
+根据自己实际情况选择最快的源
+
+`sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+sudo gedit /etc/apt/sources.list`
+<!-- more -->
+**Ubuntu 官方源** 推荐北方网通用户使用
+`deb http://archive.ubuntu.com/ubuntu/ feisty main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ feisty-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ feisty-updates main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ feisty-proposed main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu/ feisty-backports main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ feisty main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ feisty-security main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ feisty-updates main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ feisty-proposed main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ feisty-backports main restricted universe multiverse`
+
+**上海电信**
+`deb http://mirror.rootguide.org/ubuntu/ feisty main restricted universe multiverse
+deb-src http://mirror.rootguide.org/ubuntu/ feisty main restricted universe multiverse
+deb http://mirror.rootguide.org/ubuntu/ feisty-updates main restricted universe multiverse
+deb-src http://mirror.rootguide.org/ubuntu/ feisty-updates main restricted universe multiverse
+deb http://mirror.rootguide.org/ubuntu/ feisty-backports main restricted universe multiverse
+deb-src http://mirror.rootguide.org/ubuntu/ feisty-backports main restricted universe multiverse
+deb http://mirror.rootguide.org/ubuntu/ feisty-security main restricted universe multiverse
+deb-src http://mirror.rootguide.org/ubuntu/ feisty-security main restricted universe multiverse
+deb http://mirror.rootguide.org/ubuntu/ feisty-proposed main multiverse restricted universe
+deb-src http://mirror.rootguide.org/ubuntu/ feisty-proposed main restricted universe multiverse
+deb http://mirror.rootguide.org/ubuntu-cn/ feisty main multiverse restricted universe`
+
+**浙江杭州电信**
+`deb http://mirror.lupaworld.com/ubuntu feisty main restricted universe multiverse
+deb http://mirror.lupaworld.com/ubuntu feisty-security main restricted universe multiverse
+deb http://mirror.lupaworld.com/ubuntu feisty-updates main restricted universe multiverse
+deb http://mirror.lupaworld.com/ubuntu feisty-backports main restricted universe multiverse
+deb-src http://mirror.lupaworld.com/ubuntu feisty main restricted universe multiverse
+deb-src http://mirror.lupaworld.com/ubuntu feisty-security main restricted universe multiverse
+deb-src http://mirror.lupaworld.com/ubuntu feisty-updates main restricted universe multiverse
+deb-src http://mirror.lupaworld.com/ubuntu feisty-backports main restricted universe multiverse
+deb http://mirror.lupaworld.com/ubuntu/ubuntu-cn/ feisty main multiverse restricted universe`
+
+**江苏常州电信**
+`deb http://ubuntu.cn99.com/ubuntu/ feisty main restricted universe multiverse
+deb http://ubuntu.cn99.com/ubuntu/ feisty-security main restricted universe multiverse
+deb http://ubuntu.cn99.com/ubuntu/ feisty-updates main restricted universe multiverse
+deb http://ubuntu.cn99.com/ubuntu/ feisty-proposed main restricted universe multiverse
+deb http://ubuntu.cn99.com/ubuntu/ feisty-backports main restricted universe multiverse
+deb-src http://ubuntu.cn99.com/ubuntu/ feisty main restricted universe multiverse
+deb-src http://ubuntu.cn99.com/ubuntu/ feisty-security main restricted universe multiverse
+deb-src http://ubuntu.cn99.com/ubuntu/ feisty-updates main restricted universe multiverse
+deb-src http://ubuntu.cn99.com/ubuntu/ feisty-proposed main restricted universe multiverse
+deb-src http://ubuntu.cn99.com/ubuntu/ feisty-backports main restricted universe multiverse
+deb http://ubuntu.cn99.com/ubuntu-cn/ feisty main multiverse restricted universe`
+
+**中国台湾大学** 推荐北方网通用户使用
+`deb http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty main restricted universe multiverse
+deb-src http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty main restricted universe multiverse
+deb http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-updates main restricted universe multiverse
+deb-src http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-updates main restricted universe multiverse
+deb http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-backports main restricted universe multiverse
+deb-src http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-backports main restricted universe multiverse
+deb http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-security main restricted universe multiverse
+deb-src http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-security main restricted universe multiverse
+deb http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-proposed main multiverse restricted universe
+deb-src http://ubuntu.csie.ntu.edu.tw/ubuntu/ feisty-proposed main restricted universe multiverse`
+
+然后
+
+`sudo apt-get update
+sudo apt-get dist-upgrade`
+
+**3、安装中文支持**
+
+在 “系统－系统管理－语言支持” 里面把 “Chinese” 勾选上。
+
+如需要使用黑体或其他字体，可以参考 [Ubuntu 黑体解决方案](http://www.osxcn.com/ubuntu/edgy-stheiti.html)。
+
+**二、媒体解决方案**
+
+在 Linux 上用得最多也最受好评的视频播放器应该是 Mplayer ，但是在 gnome 2.18 中随之升级的 Totem 播放器已经很不错了，除了自定义不是很强外，可操作性很好，修复了很多 Bug ，还增加了一些功能，好像以前不能双击画面进入全屏。Totem 从 2.17.5 开始默认使用 Gstreamer 作为后端解码方案，但我还是推荐使用 xine。
+
+所以我的多媒体解决方案是：一般普通的播放任务使用 Totem 电影播放机，如果遇到不能播放的情况或者看大碟时就选用 Mplayer ，播放音乐使用 audacious。
+
+**1、安装软件和相应解码器**
+
+`sudo apt-get install mplayer mozilla-mplayer totem-xine libxine-extracodecs w32codecs audacious`
+
+安装后 audacious 能播放 ogg*, flac*, mp3, wma, wav, 3gp 这些格式。
+安装后 mplayer 和 totem 能播放 xvid/divx 编码的 avi 格式视频, rm/rmvb/asf/wmv 等流媒体视频，外加  vcd/dvd 和其他 mpeg2/mpeg4 视频。
+
+1) 如果要让 Rhythmbox 和 Banshee 这些使用 gstreamer 为后端的播放器，能播放 mp3, wma, ra, ram, wav 等格式音乐，就装上：
+`sudo apt-get install gstreamer0.10-plugins-ugly gstreamer0.10-pitfdll gstreamer0.10-ffmpeg`
+
+2) 如果要让 audacious 播放 APE 格式的音乐：
+
+`sudo apt-get install audacious-mac`
+
+3) 如果需要把 APE 转换为 FLAC：
+
+`sudo apt-get install mac flac cuetools shntool
+cuebreakpoints xx.cue |shnsplit -o flac -n xx xx.ape`
+
+**2、Mplayer 的中文字幕设置方法**
+
+1) 在 Preferences-Font 里面点击 ”Browse” 选择一个中文字体，Encodeing 选择 Unicode。
+2) 在 Preferences-Subtitle&OSD 里面的 Encoding 选择：
+Simplified Chinese Charset(cp936)
+3) 在 Preferences-Font “Text scale” 这里调整字幕大小(我调整为 3.8 )。
+
+如果播放时提示错误，设置一下：
+
+Preferences-Video 选择 “xv X11/Xv”
+Preferences-Codecs&demuxer 选择 “FFmpeg/libavcodec audio decoders”
+
+**3、使用 Firefox 在线播放解决办法**
+
+1) 内嵌播放，可以安装 [MediaWrap](http://addons.mozine.cn/firefox/116/) 这个扩展。
+2) 如果喜欢调用外部播放器播放，安装 [MediaPlayerConnectivity](http://addons.mozine.cn/firefox/23/) 。
+
+**4、Totem 播放 rmvb 没有声音**，[这里](http://forum.ubuntu.org.cn/about38854.html#228045)给出了解决方法：
+编辑 ~/.xine/catalog.cache 文件：
+`gedit ~/.xine/catalog.cache`
+找到
+[/usr/lib/xine/plugins/1.1.4/xineplug_decode_real_audio.so]
+把 decoder_priority 后面的数字修改为 10
+
+**三、常用软件安装**
+
+**1、安装aMule**
+
+`sudo apt-get install amule amule-utils`
+
+然后在Firefox里面关联ed2k链接
+
+在地址栏输入about:config
+
+新建“布尔”
+名称为：network.protocol-handler.external.ed2k
+值为：true
+
+新建“字符串”
+名称为：network.protocol-handler.app.ed2k
+值为：/usr/bin/ed2k
+
+ED2K服务器列表
+http://www.emule.org.cn/server.met（VeryCD eMule）
+
+KAD nodes.dat
+http://renololo1.free.fr/e/nodes.dat
+
+**2、安装编译工具**
+
+如果你有编译源码的需要建议安装上 gcc,g++,make 等。
+
+`sudo apt-get install build-essential`
+
+**3、安装IE for Linux**
+
+[下载](http://www.tatanka.com.br/ies4linux/downloads/)后直接./ies4linux，然后回答几个简单的问题就搞定。
+
+**4、也可以通过 wine 来安装 QQ 这些东西。**
+
+**5、Web 服务器安装**
+
+[Ubuntu 7.04 桌面服务器配置](http://www.osxcn.com/ubuntu/ubuntu-feisty-fawn-server.html)
+
+**6、安装 Compiz 管理器**
+
+如果你在首选项里开启了 “桌面效果”，建议安装 Compiz 图形管理器。
+`sudo apt-get install gnome-compiz-manager`
+然后在 “系统  –> 首选项  –> GL Desktop” 这里打开。
+
+有经验者可以在 gconf-editor –> apps –> compiz 这里设置。
+[更多设置说明参考 SUSE - Compiz 官方中文介绍。](http://www.opensuse.org.cn/index.php/Compiz#.E9.BB.98.E8.AE.A4.E6.8F.92.E4.BB.B6.E5.BF.AB.E6.8D.B7.E9.94.AE)
+
+**7、安装 Pidgin**
+
+[Gaim 已经改名为 Pidgin](http://www.google.cn/search?complete=1&hl=zh-CN&newwindow=1&client=firefox&rls=com.ubuntu%3Aen-US%3Aofficial&hs=AAq&q=Gaim+%E6%94%B9%E5%90%8D+Pidgin&meta=)。
+经过一年多的 beta 后 Pidgin 2.0.0 正式版终于发布了，[下载 Pidgin 2.0.0 for Ubuntu](http://www.getdeb.net/release.php?id=817)。
+
+**四、我的 Ubuntu 7.04 软件列表：**
+
+电影播放 － Mplayer + w32codecs / Totem (系统自带) + xine
+音乐播放 － Banshee
+IM聊天 － Pidgin 2.0.0
+浏览器 － Firefox 2 (系统自带)  / Konqueror / Opera 9.2 / IE6.0(wine)
+图形编辑 － GIMP (系统自带)
+网页制作 － gedit (系统自带)
+FTP工具 － gFTP / FileZilla
+下载工具 － d4x
+P2P工具 － aMule
+办公软件 － OpenOffice 2.2 (系统自带)
+刻录软件 － GnomeBaker
+WIN模拟 － wine
+输入法 － SCIM (系统自带)
+解压工具 － 文件打包器 (系统自带) + unrar
+
+**五、相关推荐文章：**
+
+[Ubuntu 黑体解决方案](http://www.osxcn.com/ubuntu/edgy-stheiti.html)
+[Ati＋Xgl＋Beryl for Ubuntu 6.10](http://www.osxcn.com/ubuntu/ati-xgl-beryl.html)
+[Ubuntu 7.04 桌面服务器配置](http://www.osxcn.com/ubuntu/ubuntu-feisty-fawn-server.html)
+[Ubuntu 7.04 初体验](http://www.osxcn.com/ubuntu/feisty-fawn-experience.html)
+[Ubuntu 7.04 带来了什么](http://www.osxcn.com/ubuntu/what-has-ubuntu-704-brought-to-us.html)
+[Ubuntu 7.04 新手指南 (1) [ 安装篇 ]](http://www.osxcn.com/ubuntu/ubuntu-installation-manual.html)

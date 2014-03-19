@@ -1,0 +1,33 @@
+---
+author: amosk
+comments: true
+date: 2008-06-24 12:31:40+00:00
+layout: post
+slug: '%e7%94%a8python%e7%94%bb%e4%b8%80%e4%b8%aa%e5%ae%9d%e9%a9%ac%e6%a0%87%e5%bf%97'
+title: 用python画一个宝马标志
+wordpress_id: 254
+categories:
+- Web
+---
+
+用python画一个宝马标志，不过字母BMW没画上去。执行下面程序就能在当前目录下生成一个foo.bpm的图片。
+ [点击下载.pbm图片](http://kongove.whostas.com/web/images/python.pbm)
+
+#!/usr/bin/env python
+import sys
+import random
+m=[[0 for x in range(512)] for y in range(512)]
+
+for i in range(512):
+        for j in range(512):
+                p=(256-i)*(256-i)+(256-j)*(256-j)-10000
+                if ((i==256 or j==256) and p<0) or (p0)) or (p>0 and p<10000):
+                        m[i][j]=1
+f=file('foo.pbm','w')
+sys.stdout=f
+print"P1\n512 512"
+for i in range(512):
+        for j in range(512):
+                print m[i][j],
+        print
+f.close()

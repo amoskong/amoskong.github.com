@@ -1,0 +1,217 @@
+---
+author: amosk
+comments: true
+date: 2013-06-27 02:10:45+00:00
+layout: post
+slug: '955'
+title: 论语 and compute language
+wordpress_id: 955
+categories:
+- Computer
+- Programming
+---
+
+2013/6/27 Akira Urushibata <[afu](mailto:afu@wta.att.ne.jp)>
+
+
+> 电脑技术有两个侧面.
+
+
+
+
+
+
+
+%s/侧面/层面/   lay
+
+
+
+
+
+
+
+
+
+
+> 其一是机器的侧面,其二是言语的侧面.
+前者是硬件,后者是软件.
+
+论语曰: 不知言,无以知人也. (尧曰编)
+
+
+
+
+
+
+
+
+
+
+It's impossible to know / apperceive someone without understanding their words
+
+
+
+
+
+
+
+> 我考,电脑言语是不是孔子说的言语之一?
+
+
+
+
+
+
+
+%s/我考/我想/
+
+
+
+
+
+
+
+It's not similar.
+
+
+
+
+
+
+
+People's words is outputted by human themselves, it used to communicate between human individual.
+
+
+
+
+You can image what they had done, what they are doing(thinking), what they will do in future by referencing his old/current words.
+
+
+
+
+
+
+
+
+
+
+ "电脑言语" has many representation.
+
+
+
+
+1) program language  (narrow sense)
+
+
+
+
+2) the compute input/output (audio broadcast/video screen/flag light/interactive devices/gdb debugger/kernel dmesg/etc)
+
+
+
+
+
+
+
+
+
+
+"知人" -> "知电脑"
+
+
+
+
+
+
+
+
+
+
+So I think representation 2 is the similar "言". Normal use know the compute state by representation 2.
+
+
+
+
+
+
+
+We don't use program language to know compute, we use it to control the compute.
+
+
+
+
+
+
+
+
+
+
+Representation 1 is a port of representation 2, it's only be used by specialist.
+
+
+
+
+We can know compute internal by program language (eg: system call), we have many commands to check computer internal state.
+
+
+
+
+
+
+
+If you want to know someone's thought, you can't just stay to listen. You need to talk with him, and analyze the feedback. Program language has both input and output. In this case, the program language is same as human language.
+
+
+
+
+
+
+
+Representation 2 is actually the emulated human language by program language. It's based on program language in nature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+> 请容许我的拙劣的中语.
+
+
+
+
+Your Chinese is good.
+
+
+
+
+
+
+
+> 
+Akira Urushibata
+Tokyo Japan
+
+
+
+
+さようなら
+
+
+
+
+
+
+
+Amos Kong
+
+
+
+
+Beijing China

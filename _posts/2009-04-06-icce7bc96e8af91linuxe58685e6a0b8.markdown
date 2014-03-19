@@ -1,0 +1,99 @@
+---
+author: amosk
+comments: true
+date: 2009-04-06 09:25:35+00:00
+layout: post
+slug: icc%e7%bc%96%e8%af%91linux%e5%86%85%e6%a0%b8
+title: ICC编译Linux内核
+wordpress_id: 331
+categories:
+- Linux
+---
+
+听说使用ICC编译Linux内核，性能可以提升40%，我的第一感觉是，应该有提升，也没这么夸张吧，应该是有人估计夸大，玩数字游戏。  从4月1日起，开始尝试编译。从Intel官网下载ICC 10.0.022，在虚拟机的Fedora10上安装(安装需要licence)。然后从LinuxDNA.com下载2.6.22内核代码，下载最新的封装脚本([http://linuxdna.com/wrapper.html](http://linuxdna.com/wrapper.html))，使用POE提供给我的一个补丁(针对2.6.18)，下载linuxdna配置文件([http://www.linuxdna.com/configdna](http://www.linuxdna.com/configdna))放到内核根目录 手工对内核代码进行了修改，按照LinuxDNA网页的简单说明编译内核。  刚刚把内核安装成功，发现启动速度比原来(2.6.22)快了一半，我都怀疑是不是有其他问题，但目前的使用都正常，特别是响应速度明显提升，也不知道是不是心理作用。下面需要一些具体的测试，才能说明问题。  不过进入系统发现lsmod的结果为空，没有加载任何驱动，网络也不能用，这可能是快的原因吧，到底性能有没有提升，还是得测试。  备注：LinuxDNA是一个使用ICC编译Linux内核的项目，旨在提高内核性能。
+
+
+1. First get icc from Intel.com and install it.
+2. Download the source code of kernel.  You may need to fix a patch. Or change the source code refer to some patch. You can find them on the LinuxDNA's GoogleGroup.
+3. Get the config file from (http://www.linuxdna.com/configdna) and copy it to the root directory of kernel source code.
+4. Next get the shell script file from (http://linuxdna.com/wrapper.html) and copy it to /usr/bin, set the filename as intelwrapper.
+5. Next run make menuconfig / oldconfig to configure your kernel again
+6. Compile kernel with "make HOSTCC=intelwrapper CC=intelwrapper Ar=xiar LD=xild"
+
+(note:This is the patch for 2.6.22. My icc version is 10.0.022, So please change the icc version number in this patch when you use it )
+
+
+    
+    diff -ur linux-2.6.22.old/arch/i386/boot/compressed/relocs.c linux-2.6.22/arch/i386/boot/compressed/relocs.c
+    --- linux-2.6.22.old/arch/i386/boot/compressed/relocs.c	2009-04-06 19:04:22.000000000 +0800
+    +++ linux-2.6.22/arch/i386/boot/compressed/relocs.c	2009-04-06 19:10:28.000000000 +0800
+    @@ -10,7 +10,7 @@
+    #define USE_BSD
+    #include
+    
+    -#define MAX_SHDRS 100
+    +#define MAX_SHDRS 1000
+    #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+    static Elf32_Ehdr ehdr;
+    static Elf32_Shdr shdr[MAX_SHDRS];
+    diff -ur linux-2.6.22.old/Makefile linux-2.6.22/Makefile
+    --- linux-2.6.22.old/Makefile	2009-04-06 19:04:03.000000000 +0800
+    +++ linux-2.6.22/Makefile	2009-04-06 19:11:51.000000000 +0800
+    @@ -610,7 +610,7 @@
+    quiet_cmd_vmlinux__ ?= LD      $@
+    cmd_vmlinux__ ?= $(LD) $(LDFLAGS) $(LDFLAGS_vmlinux) -o $@ \
+    -T $(vmlinux-lds) $(vmlinux-init)                          \
+    -      --start-group $(vmlinux-main) /opt/intel/cc/10.1.018/lib/libirc_s.a --end-group                  \
+    +      --start-group $(vmlinux-main) /opt/intel/cc/10.1.022/lib/libirc_s.a --end-group                  \
+    $(filter-out $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) FORCE ,$^)
+    
+    # Generate new vmlinux version
+    diff -ur linux-2.6.22.old/mm/slab.c linux-2.6.22/mm/slab.c
+    --- linux-2.6.22.old/mm/slab.c	2009-04-06 19:04:03.000000000 +0800
+    +++ linux-2.6.22/mm/slab.c	2009-04-06 19:12:04.000000000 +0800
+    @@ -326,7 +326,7 @@
+    {
+    extern void __bad_size(void);
+    
+    -	if (__builtin_constant_p(size)) {
+    +//	if (__builtin_constant_p(size)) {
+    int i = 0;
+    
+    #define CACHE(x) \
+    @@ -336,9 +336,9 @@
+    i++;
+    #include "linux/kmalloc_sizes.h"
+    #undef CACHE
+    -		__bad_size();
+    -	} else
+    -		__bad_size();
+    +//		__bad_size();
+    +//	} else
+    +//		__bad_size();
+    return 0;
+    }
+    
+    diff -ur linux-2.6.22.old/scripts/Makefile.build linux-2.6.22/scripts/Makefile.build
+    --- linux-2.6.22.old/scripts/Makefile.build	2009-04-06 19:04:02.000000000 +0800
+    +++ linux-2.6.22/scripts/Makefile.build	2009-04-06 19:12:58.000000000 +0800
+    @@ -299,7 +299,7 @@
+    cmd_link_multi-y = $(LD) $(ld_flags) -r -o $@ $(link_multi_deps)
+    
+    quiet_cmd_link_multi-m = LD [M]  $@
+    -cmd_link_multi-m = $(LD) $(ld_flags) $(LDFLAGS_MODULE) -o $@ $(link_multi_deps)
+    +cmd_link_multi-m = $(LD) $(ld_flags) $(LDFLAGS_MODULE) -o $@ $(link_multi_deps) /opt/intel/cc/10.1.022/lib/libirc_s.a
+    
+    # We would rather have a list of rules like
+    # 	foo.o: $(foo-objs)
+    diff -ur linux-2.6.22.old/scripts/Makefile.modpost linux-2.6.22/scripts/Makefile.modpost
+    --- linux-2.6.22.old/scripts/Makefile.modpost	2009-04-06 19:04:02.000000000 +0800
+    +++ linux-2.6.22/scripts/Makefile.modpost	2009-04-06 19:13:10.000000000 +0800
+    @@ -98,7 +98,7 @@
+    # Step 6), final link of the modules
+    quiet_cmd_ld_ko_o = LD [M]  $@
+    cmd_ld_ko_o = $(LD) $(LDFLAGS) $(LDFLAGS_MODULE) -o $@		\
+    -			  $(filter-out FORCE,$^)
+    +			  $(filter-out FORCE,$^) /opt/intel/cc/10.1.022/lib/libirc_s.a
+    
+    $(modules): %.ko :%.o %.mod.o FORCE
+    $(call if_changed,ld_ko_o)

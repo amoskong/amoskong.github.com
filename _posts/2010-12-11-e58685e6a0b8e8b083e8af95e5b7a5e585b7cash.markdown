@@ -1,0 +1,23 @@
+---
+author: amosk
+comments: true
+date: 2010-12-11 10:40:22+00:00
+layout: post
+slug: '%e5%86%85%e6%a0%b8%e8%b0%83%e8%af%95%e5%b7%a5%e5%85%b7cash'
+title: 内核调试工具Cash
+wordpress_id: 522
+categories:
+- Other
+---
+
+# 1. White Paper: Red Hat Crash Utility
+
+
+[http://people.redhat.com/anderson/crash_whitepaper/](http://people.redhat.com/anderson/crash_whitepaper/)
+
+
+
+# 2. 使用 Crash 工具分析 Linux dump 文件
+
+
+[http://www.ibm.com/developerworks/cn/linux/l-cn-dumpanalyse/](http://www.ibm.com/developerworks/cn/linux/l-cn-dumpanalyse/)

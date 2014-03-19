@@ -1,0 +1,43 @@
+---
+author: amosk
+comments: true
+date: 2008-05-16 12:54:03+00:00
+layout: post
+slug: pigeons-01-%e6%ad%a3%e5%bc%8f%e5%8f%91%e5%b8%83
+title: Pigeons 0.1 正式发布
+wordpress_id: 234
+categories:
+- Linux
+- Web
+---
+
+
+
+实现功能：与遵循IPmsg协议的客户端（如：windows飞鸽传书）能共进行消息通信。
+待实现功能：文件传输、穿透NAT
+项目采用git控制版本，git树地址： [http://repo.or.cz/w/pigeons.git](http://repo.or.cz/w/pigeons.git)
+开发平台：QT4+linux
+
+0.1版下载地址：[http://kongove.whostas.com/pigeons.0.1.tar.gz](http://kongove.whostas.com/pigeons.0.1.tar.gz)
+
+已实现功能可能还存在许多bug，欢迎您参与测试，有任何问题，请联系我们，谢谢！
+(xiyoulinux@googlegroup.com) or (kongjianjun@gmail.com)
+
+—友情提示
+1. 下载源码包：
+wget http://kongove.whostas.com/pigeons.0.1.tar.gz
+2. 解压文件：
+tar xvfz pigeons.0.1.tar.gz
+3. 进入源码目录：
+cd pigeons.0.1/src
+4. 编译：
+qmake
+qmake QT+=network
+make
+5. 运行：
+./src
+
+在pigeons.0.1/src/里有个脚本 install.sh 可以完成4、5步
+如果要编译，您必须安装QT4，G++等环境，不过一般下载源码解压后就能直接运行我编译的可执行文件 ./src
+
+

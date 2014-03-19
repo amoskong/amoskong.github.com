@@ -1,0 +1,37 @@
+---
+author: amosk
+comments: true
+date: 2008-04-12 02:42:23+00:00
+layout: post
+slug: '%e6%8a%8ausr%e6%8c%82%e5%88%b0%e6%96%b0%e5%88%86%e5%8c%ba%e4%b8%8a'
+title: 把/usr挂到新分区上
+wordpress_id: 223
+categories:
+- Linux
+---
+
+昨天又对系统动了大手术，到今早才搞好。
+
+首先从整个硬盘腾出一个十五G空间格式化成ext3，用了几个windows XP安装盘上的PQ试了几次都不行，提示不支持什么当前档案库，kao！到ubuntu下安装了gpartd也不行，提示不能以读写方式打开设备……
+
+最后先用PQ把两个分区格式化成fat32，然后进XP系统的“磁盘管理”将两个空间合并，再用PQ格式化成ext3。不过万里长城只走完一步~~
+
+下来到Ubuntu下把新建的分区挂到/usr2，再把/usr/里的文件全部拷贝到/usr2/下，为了保留时间、权限、用户等文件属性，我用的是cp -Rp /usr/* /usr2/，然后把原来的/usr/改为/usr_bak，把新分区卸载掉，在/etc/fstab里修改，新分区自动挂载到/usr/。由于我把原来的两个分区合并了，用grub命令刷新了mbr里的内容，再修改/boot/grub/menu.lst。重启，搞定了！
+
+在把重复的文件清理了一下，现在
+
+kongove@ubuntu:~/git/chinese$ df
+文件系统           1K-块        已用     可用 已用% 挂载点
+/dev/sda9             10062864   1489812   8061788  16% /
+varrun                  745396        96    745300   1% /var/run
+varlock                 745396         0    745396   0% /var/lock
+udev                    745396        72    745324   1% /dev
+devshm                  745396         0    745396   0% /dev/shm
+lrm                     745396     34696    710700   5% /lib/modules/2.6.22-14-generic/volatile
+/dev/sda1             10231392   6192928   4038464  61% /media/sda1
+/dev/sda5             20462832  13092024   7370808  64% /media/sda5
+/dev/sda6             20454816  16398896   4055920  81% /media/sda6
+/dev/sda7             15693120   8915008   5968036  60% /usr
+这些爽了根分区只占到16%，这个系统用了一年了，不舍的格呀。
+
+刚看到刘老大的邮件，用tar先把根分区下的所有文件打包，然后调整根分区大小，最后还原就行了。

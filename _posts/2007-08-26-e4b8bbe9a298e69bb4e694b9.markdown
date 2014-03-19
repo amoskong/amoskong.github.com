@@ -1,0 +1,15 @@
+---
+author: amosk
+comments: true
+date: 2007-08-26 10:16:25+00:00
+layout: post
+slug: '%e4%b8%bb%e9%a2%98%e6%9b%b4%e6%94%b9'
+title: 主题更改
+wordpress_id: 75
+categories:
+- Programming
+---
+
+由于前一个主题对firefox支持不是很好，所以将主题更改。
+
+有任何问题请留言，谢谢！

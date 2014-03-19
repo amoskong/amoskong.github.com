@@ -1,0 +1,63 @@
+---
+author: amosk
+comments: true
+date: 2007-08-24 03:59:47+00:00
+layout: post
+slug: makefile
+title: Makefile
+wordpress_id: 73
+categories:
+- Web
+---
+
+1.Makefile书写格式：
+target: components TAB rule （这里TAB是TAB键，一般写成两行就可以了）
+第一行表示的是依赖关系，第二行是规则。
+
+如：（->表示依赖关系）
+a.c->a.o
+b.c->b.o
+main.c->main.o
+a.o b.o main.o->main
+
+Makefile内容：
+*******************
+main:a.o b.o main.o
+gcc -o main a.o b.o main.o
+a.o:a.c
+gcc -o a.o a.c
+b.o:b.c
+gcc -o b.o b.c
+main.o:main.c
+gcc -o main.o main.c
+*******************
+
+2.有用的变量：$@--目标文件,$^--所有的依赖文件,$<--第一个依赖文件
+
+简化后的Makefile内容：
+*********************
+main:a.o b.o main.o
+gcc -o $@ $^
+a.o:a.c
+gcc -c $<
+b.o:b.c
+gcc -c $<
+main.o:main.c
+gcc -c $<
+********************
+
+3.   
+.c.o:
+gcc -c $<
+
+这个规则表示所有的 .o文件都是依赖与相应的.c文件的
+
+简化后的Makefile内容：
+**********************
+main:a.o b.o main.o
+gcc -o $@ $^
+.c.o:
+gcc -c $<
+**********************
+
+ BTW:最近看小组的[wiki](http://www.xiyoulinux.cn/wiki)，里边总结的东西都很精练。自己也试着在里边添加了一些内容，把一些细节问题能搞明白。欢迎大家都去编辑！

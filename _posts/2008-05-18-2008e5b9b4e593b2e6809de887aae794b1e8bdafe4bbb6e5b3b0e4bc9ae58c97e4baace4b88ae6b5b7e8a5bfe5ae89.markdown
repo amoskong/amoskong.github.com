@@ -1,0 +1,107 @@
+---
+author: amosk
+comments: true
+date: 2008-05-18 02:11:02+00:00
+layout: post
+slug: 2008%e5%b9%b4%e5%93%b2%e6%80%9d%e8%87%aa%e7%94%b1%e8%bd%af%e4%bb%b6%e5%b3%b0%e4%bc%9a%e5%8c%97%e4%ba%ac%e4%b8%8a%e6%b5%b7%e8%a5%bf%e5%ae%89
+title: 2008年哲思自由软件峰会(北京|上海|西安)
+wordpress_id: 235
+categories:
+- Linux
+---
+
+
+
+2008年5月24日－5月31日 中国 北京－上海－西安
+
+
+![](http://www.zeuux.org/image/zeuux-freedom-summit-2008-small.cn.jpg)
+
+
+关于哲思自由软件峰会
+哲思自由软件峰会的主要目的是普及自由软件思想，通常邀请国际顶极大师来中国就自由软件、开源软件、互联网等领域发表演讲，话题涵盖思想、法律、技 术、教 育、学术、企业、投资等。峰会的形式是开放式的，鼓励中国的自由软件爱好者和支持者踊跃参加，让中国自由软件社区能够近距离接触国际顶极大师，一起探讨、 交流。
+嘉宾介绍
+![](http://www.zeuux.org/image/rms_small.jpg)
+Richard Stallman
+自由软件基金会创始人及主席、GNU工程创始人，美国工程院院士
+
+自由软件黑客和活动家，GNU工程的创始人，GNU General Public License作者。他是GNU Compiler Collection的主要作者，同时还开发了GNU Symbolic Debugger，GNU Emacs和很多其他GNU软件。他获奖众多，包括美国计算机学会Grace Murray Hopper奖，MacArthur Foundation fellowship，电子边疆基金会先锋奖，[Takeda Award for Social/Economic Betterment](http://en.wikipedia.org/wiki/Takeda_Awards)和数个荣誉博士头衔。
+
+![](http://www.zeuux.org/image/niguangnan-small.jpg)
+倪光南
+中国中文信息学会理事长 中国工程院院士 中科院计算机所研究员
+
+倪光南，汉族，1939年生，浙江镇海人。1961年毕业于南京工学院（现东南大学）, 首创在汉字输入中应用联想功能，中科院计算所公司（联想前身）和联想集团首任总工程师。主持开发了联想式汉字系统、联想系列微型机，分别于1988和 1992年获得国家科技进步一等奖，联想集团即以联想式汉字系统起家并由此而得名。1994年被遴选为首批中国工程院院士，现为中国中文信息学会理事长， 中科院计算所研究员，北京市人民政府参事。
+![](http://www.xiyoulinux.cn/image/gongmin-small.jpg)
+宫敏
+技术科学博士 北京凝思科技总裁毕业于北京大学无线电系。之后在芬兰赫尔辛基理工大学潜心研究深感兴趣的“并行处理”项目（后发展为“分布式处理”）。正是在芬兰，宫敏 博士参与了Linux操作系统的开发与研究，也正是他把Linux引入了中国。宫敏博士还是中国自由软件库的创始人之一，被誉为为中国自由软件界元老。
+
+2000年宫敏博士回国开始创建北京凝思科技有限公司。
+
+![](http://www.zeuux.org/image/akira-urushibata-small.jpg)
+Akira Urushibata
+生 于1966年，日本东京。1971年至1976年随父母到美国俄亥俄州生活。在日本高中，外语是非常重要的课程。当时他的英语已经很流利了，所以开始学习 中国古典文学。第一台个人计算机出现的时候，Akira Urushibata正在读高中，他在内存极小的计算机上（他的掌上电脑当时仅有1.4k的RAM）学习编写BASIC程序。
+
+参与的自由软件活动：
+1992年在东京与[Richard M. Stallman](http://www.zeuux.org/campaign/zeuux-freedom-summit-2008.cn.html#RMS)见面。
+2004至今参与Netpbm图像处理包的开发。
+喜欢的编程语言：x86汇编、c、awk、Bash Shell
+
+最喜欢的GNU/Linux发行版：LFS
+
+喜爱的中国诗人：王之涣、杜甫
+
+![](http://www.zeuux.org/image/wangxingyao-small.jpg)
+王星耀
+Sun公司副总裁 Sun中国工程研究院院长
+
+在成为Sun公司全球工程部门的副总裁之前，王星耀是负责Solaris网络与安全技术的高级总监，同时也是Solaris 10产品发布委员会的主席。在加入Sun公司之前，王星耀曾经为Adaptec工作。
+
+![](http://www.zeuux.org/image/intel-lixin.jpg)
+李欣
+英特尔中国开源软件技术中心(OTC) 软件工程师
+
+李欣于2004年加入英特尔从事虚拟化技术的开发，致力于在IA-32平台上开发基于英特尔虚拟化技术的VMM，活跃于开源虚拟化项目Xen和KVM。
+
+![](http://www.zeuux.org/image/billxu-small.jpg)
+徐继哲
+哲思自由软件社区创始人
+日程安排
+哲思自由软件峰会－上海站－复旦大学
+
+* 时间：2008年5月24日 星期六 14：00～16：00
+* 地点：上海市杨浦区邯郸路440号 复旦大学（邯郸校区）新闻学院 蔡冠深报告厅
+* 地图：去参加哲思自由软件峰会－上海站
+
+哲思自由软件峰会－西安站－西安交通大学
+
+* 时间：2008年5月28日 星期三 14：00～18：00
+* 地点：西安市咸宁西路28号 西安交通大学 科学馆101
+* 地图：去参加哲思自由软件峰会－西安站
+
+哲思自由软件峰会－北京站－清华科技园
+
+* 时间：2008年5月30日 星期五 14：00～18：00
+* 地点：北京市 清华科技园科技大厦A座2层，启迪国际会议中心报告厅
+* 地图：去参加哲思自由软件峰会－北京清华科技园站
+
+哲思自由软件峰会－北京站－清华大学
+
+* 时间：2008年5月31日 星期六 14：00～18：00
+* 地点：清华大学 主楼后厅
+* 地图：去参加哲思自由软件峰会－北京清华大学站
+
+峰会说明
+
+* 哲思自由软件社区是哲思自由软件峰会的主办单位，官方网站是：http://www.zeuux.org。
+* 哲思自由软件峰会是开放式的活动，参会者不需提前报名，免费参加。
+* 峰会的一些细节信息可能会发生变更，建议你加入哲思zeuux-announce邮件列表，随时获得最新消息；加入zeuux-universe邮件列表，一起参与讨论。
+* 购买哲思自由软件T恤，支持中国自由软件社区；购买哲思GNU GPL v3 T恤，到活动现场有机会获得Richard Stallman亲笔签名。
+* 参加哲思自由软件峰会，参会者每人可获得一本《哲思自由软件手册》。
+* 如果你想成为此次活动的赞助商或合作伙伴，请联系assistant@zeuux.org。
+
+**主办单位**
+
+![](http://www.zeuux.org/image/zeuux_0409_001.jpg)
+
+

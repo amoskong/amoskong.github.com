@@ -1,0 +1,21 @@
+---
+author: amosk
+comments: true
+date: 2007-07-14 09:07:08+00:00
+layout: post
+slug: '%e9%9c%80%e8%a6%81%e9%80%80%e9%9a%90%e6%b1%9f%e6%b9%96%e6%95%b0%e6%97%a5'
+title: 需要退隐江湖数日
+wordpress_id: 65
+categories:
+- Programming
+---
+
+最近得退隐江湖数日，在这期间博客也不能更新了。其实最最遗憾的是不能参加wangcong列的几个课题，特别是移植kerneltravel（[http://www.kerneltravel.net/](http://www.kerneltravel.net/)）上的代码和新的内核调度器。
+
+等我二十天回来恐怕就严重落后了，没办法呀。
+
+BTW：那个调客网的事再在这里向各位汇报一下：
+
+昨日访问量竟达612IP，而我的总访问量到现在共865IP，太夸张了！不过最近也没时间再去“宣传”了，就等着money慢慢增加吧。今天共增加了5rmb。
+
+…………

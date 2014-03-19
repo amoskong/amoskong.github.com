@@ -1,0 +1,66 @@
+---
+author: amosk
+comments: true
+date: 2014-03-06 05:59:43+00:00
+layout: post
+slug: '%e5%b0%81%e8%a3%85%e4%b8%80%e4%b8%aasendkey%e5%87%bd%e6%95%b0%e5%90%91%e8%99%9a%e6%8b%9f%e6%9c%ba%e4%b8%80%e6%ac%a1%e6%80%a7%e5%8f%91%e9%80%81%e5%ad%97%e7%ac%a6%e4%b8%b2'
+title: 封装一个sendkey函数向虚拟机一次性发送字符串
+wordpress_id: 1048
+categories:
+- Virtualization
+---
+
+QEMU 提供一个 sendkey的 Monitor 命令，用来向虚拟机发送单个字符，或者组合键。之所以只支持单个字符，是因为这里需要对空格、ctrl，回车等进行转换，也需要支持keycode的输入。
+libvir的virsh调用QEMU的sendkey命令为上层提供类似的功能。但有一个新的需求就是一次输入连续的字符串。我们可以从三个不同层面来实现这个需求，分别是QEMU、libvirt，还有用户自己的脚本、程序里。
+
+这里我跟倾向从用户程序封装出一个转换函数，实现一次连续输入，这样也更加灵活一些，方便扩展。因为QEMU、libvirt接受的多种类型的KEY，如果再把字符转换加进去，会导致接口复杂，语义表达带来冲突。
+
+
+    
+    [amos@amosk qemu]$ cat sendkey.sh 
+    DOM=rhel6u5_x64
+    
+    # 封装一下sendkey()函数，调用virsh send-key 命令想虚拟机发送字符串
+    function sendkey() {
+        str=$@
+        length=`expr length "$str"`
+        for ((i=1; i<=$length; i++)); do
+            char=`expr substr "$str" $i 1`
+            if [ "$char" = " " ];then
+                char="spc"
+            fi
+            echo virsh send-key $DOM "$char"
+        done
+    }
+    
+    sendkey "root"
+    echo virsh send-key $DOM kp_enter
+    sendkey "shutdown -h now"
+    echo virsh send-key $DOM kp_enter
+    
+
+
+
+    
+    [amos@amosk qemu]$ bash sendkey.sh 
+    virsh send-key rhel6u5_x64 r
+    virsh send-key rhel6u5_x64 o
+    virsh send-key rhel6u5_x64 o
+    virsh send-key rhel6u5_x64 t
+    virsh send-key rhel6u5_x64 kp_enter
+    virsh send-key rhel6u5_x64 s
+    virsh send-key rhel6u5_x64 h
+    virsh send-key rhel6u5_x64 u
+    virsh send-key rhel6u5_x64 t
+    virsh send-key rhel6u5_x64 d
+    virsh send-key rhel6u5_x64 o
+    virsh send-key rhel6u5_x64 w
+    virsh send-key rhel6u5_x64 n
+    virsh send-key rhel6u5_x64 spc
+    virsh send-key rhel6u5_x64 -
+    virsh send-key rhel6u5_x64 h
+    virsh send-key rhel6u5_x64 spc
+    virsh send-key rhel6u5_x64 n
+    virsh send-key rhel6u5_x64 o
+    virsh send-key rhel6u5_x64 w
+    virsh send-key rhel6u5_x64 kp_enter

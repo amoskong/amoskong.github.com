@@ -1,0 +1,133 @@
+---
+author: amosk
+comments: true
+date: 2008-12-20 11:15:31+00:00
+layout: post
+slug: python%e6%93%8d%e4%bd%9c%e6%95%b0%e6%8d%ae%e5%ba%93
+title: python操作数据库
+wordpress_id: 308
+categories:
+- Web
+---
+
+下面是一个用Python写的电话簿，用来演示用Python连接、操作数据库。这里只是简单的添加、删除、显示、修改功能。
+
+运行效果和代码如下：
+
+    
+    kongove@ubuntu:~$ ./b.py
+    mytel> help
+    show : list all the items.
+    delete $id : delete the item which id=$id.
+    insert $id $name $tel : insert this item.
+    update $id $tel : update the telephone number of $id.
+    exit : quit this program.
+    help : get help.
+    mytel> show
+    id	name	tel
+    0	kong	02988176065
+    1	bob	13256457845
+    mytel> insert 2 peter 110
+    mytel> show
+    id	name	tel
+    0	kong	02988176065
+    1	bob	13256457845
+    2	peter	110
+    mytel> update 2 112
+    mytel> show
+    id	name	tel
+    0	kong	02988176065
+    1	bob	13256457845
+    2	peter	112
+    mytel> delete 2
+    mytel> show
+    id	name	tel
+    0	kong	02988176065
+    1	bob	13256457845
+    mytel> exit
+    kongove@ubuntu:~$
+
+
+
+代码如下：
+
+    
+    #!/usr/bin/env python
+    #encoding=utf-8
+    #Copyright @ 2008 Jianjun Kong
+    import string
+    import MySQLdb as mydb
+    
+    def exec_cmd(cur, sql):
+        cur.execute(sql)
+        ret = cur.fetchall()
+        return ret
+    
+    def printf(ret):
+        if len(ret)<=0: return
+        print 'id\tname\ttel'
+        for i in ret:
+        	for j in i:
+        		print '%s\t' %(j),
+        	print
+    
+    def print_html(ret):
+        if len(ret)<=0: return
+        print '<table border="1">'
+        for i in ret:
+        	print '<tr>'
+        	for j in i:
+        		print '<td>%s</td>' %(j),
+        	print '</tr>'
+        print '</table>'
+    
+    def select_all():
+        sql = unicode("select * from %s" % (tab),"utf-8")
+        return sql
+    
+    def del_id(i):
+        sql = unicode("delete from %s where id=%s" % (tab,i),"utf-8")
+        return sql
+    
+    def insert(i):
+        sql = unicode("insert into %s(id,name,tel) values(%s,'%s','%s')" % (tab,i[1],i[2],i[3]),"utf-8")
+        return sql
+    
+    def update_tel(i):
+        sql = unicode("update %s set tel='%s' where id=%s" % (tab,i[2],i[1]),"utf-8")
+        return sql
+    
+    def help():
+        print 'show : list all the items.\n'	\
+        	'delete $id : delete the item which id=$id.\n'\
+        	'insert $id $name $tel : insert this item.\n'\
+        	'update $id $tel : update the telephone number of $id.\n'\
+        	'exit : quit this program.\n'	\
+        	'help : get help.'
+    
+    #main
+    
+    db = mydb.connect(host='hostname',user='username',passwd='password',db='database')
+    cur = db.cursor()
+    tab='tab2'
+    
+    while 1:
+        input=inputt=raw_input('mytel> ')
+        input=string.split(input,' ')
+        if input[0]=='exit': break
+        if input[0]=='help':
+        	help()
+        	continue
+        if input[0]=='show': sql=select_all()
+        if input[0]=='delete': sql=del_id(input[-1])
+        if input[0]=='insert': sql=insert(input)
+        if input[0]=='update': sql=update_tel(input)
+        try:
+        	ret = exec_cmd(cur, sql)
+        	printf(ret)
+        except:
+        	pass
+        ret = ''
+    
+    cur.close()
+    db.close()

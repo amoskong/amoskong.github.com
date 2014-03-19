@@ -1,0 +1,129 @@
+---
+author: amosk
+comments: true
+date: 2008-08-16 09:02:06+00:00
+layout: post
+slug: exit%e5%92%8c_exit%e3%80%81exit%e5%92%8c_exit
+title: exit和_exit、exit()和_exit()
+wordpress_id: 269
+categories:
+- Web
+---
+
+作为系统调用而言，_exit和exit是一对孪生兄弟，它们究竟相似到什么程度，我们可以从Linux的源码中找到答案：
+
+#define __NR__exit __NR_exit		/* 摘自文件include/asm-i386/unistd.h第334行 */
+
+“__NR_”是在Linux的源码中为每个系统调用加上的前缀，请注意第一个exit前有2条下划线，第二个exit前只有1条下划线。
+
+随Linux核心还提供了一些C语言函数库，这些库对系统调用进行了一些包装和扩展，因为这些库函数与系统调用的关系非常紧密，所以习惯上把这些函数也称为系统调用。#define这句只能说明内核里的两个系统调用_exit和exit相同，但其封装后对应的C库函数_exit()和exit()是不同的。
+
+这时随便一个懂得C语言并且头脑清醒的人都会说，_exit和exit没有任何区别，但我们还要讲一下这两者之间的区别，这种区别主要体现在它们在函数库中的定义。_exit在Linux函数库中的原型是：
+
+
+
+
+
+
+
+
+
+
+    
+    	#include<unistd.h>
+    void _exit(int status);
+
+
+
+
+
+
+和exit比较一下，exit()函数定义在 stdlib.h中，而_exit()定义在unistd.h中，从名字上看，stdlib.h似乎比unistd.h高级一点，那么，它们之间到底有什 么区别呢？让我们先来看流程图，通过下图，我们会对这两个系统调用的执行过程产生一个较为直观的认识。
+![](http://www-128.ibm.com/developerworks/cn/linux/kernel/syscall/part2/1_1.JPG)
+
+从 图中可以看出，_exit()函数的作用最为简单：直接使进程停止运行，清除其使用的内存空间，并销毁其在内核中的各种数据结构；exit()函数则在这 些基础上作了一些包装，在执行退出之前加了若干道工序，也是因为这个原因，有些人认为exit已经不能算是纯粹的系统调用。
+
+exit()函数与_exit()函数最大的区别就在于exit()函数在调用exit系统调用之前要检查文件的打开情况，把文件缓冲区中的内容写回文件，就是图中的“清理I/O缓冲”一项。
+
+在Linux 的标准函数库中，有一套称作“高级I/O”的函数，我们熟知的printf()、fopen()、fread()、fwrite()都在此列，它们也被称 作“缓冲I/O（buffered I/O）”，其特征是对应每一个打开的文件，在内存中都有一片缓冲区，每次读文件时，会多读出若干条记录，这样下次读文件时就可以直接从内存的缓冲区中读 取，每次写文件的时候，也仅仅是写入内存中的缓冲区，等满足了一定的条件（达到一定数量，或遇到特定字符，如换行符\n和文件结束符EOF），再将缓冲区 中的内容一次性写入文件，这样就大大增加了文件读写的速度，但也为我们编程带来了一点点麻烦。如果有一些数据，我们认为已经写入了文件，实际上因为没有满 足特定的条件，它们还只是保存在缓冲区内，这时我们用_exit()函数直接将进程关闭，缓冲区中的数据就会丢失，反之，如果想保证数据的完整性，就一定 要使用exit()函数。
+
+请看以下例程：
+
+
+
+
+
+
+
+
+
+
+    
+    /* exit2.c */
+    #include<stdlib.h>
+    main()
+    {
+    printf("output begin\n");
+    printf("content in buffer");
+    exit(0);
+    }
+
+
+
+
+
+
+编译并运行：
+
+
+
+
+
+
+
+
+
+
+    
+    $gcc exit2.c -o exit2
+    $./exit2
+    output begin
+    content in buffer
+    /* _exit1.c */
+    #include<unistd.h>
+    main()
+    {
+    printf("output begin\n");
+    printf("content in buffer");
+    _exit(0);
+    }
+
+
+
+
+
+
+编译并运行：
+
+
+
+
+
+
+
+
+
+
+    
+    $gcc _exit1.c -o _exit1
+    $./_exit1
+    output begin
+
+
+
+
+
+
+在Linux中，标准输入和标准输出都是作为文件处理的，虽然是一类特殊的文件，但从程序员的角度来看，它们和硬盘上存储数据的普通文件并没有任何区别。与所有其他文件一样，它们在打开后也有自己的缓冲区。
+
+From: ibm.com

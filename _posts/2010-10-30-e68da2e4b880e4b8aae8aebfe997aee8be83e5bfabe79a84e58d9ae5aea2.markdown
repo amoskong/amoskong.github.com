@@ -1,0 +1,18 @@
+---
+author: amosk
+comments: true
+date: 2010-10-30 19:56:23+00:00
+layout: post
+slug: '%e6%8d%a2%e4%b8%80%e4%b8%aa%e8%ae%bf%e9%97%ae%e8%be%83%e5%bf%ab%e7%9a%84%e5%8d%9a%e5%ae%a2'
+title: 换一个访问较快的博客
+wordpress_id: 491
+categories:
+- Life
+- Web
+---
+
+发现好久没写博客了，除了自己懒惰之外，原来这个博客(http://kongove.whostas.com/blog/)速度慢也是个因素。
+
+还是保持这个地址不变，添加了一个跳转页面，新博客用的是(http://amos.72pines.com)。博客系统是wordpress，方便数据导入导出，速度也快了很多。
+
+刚才想买个info的域名，支付老出问题，不管了，先这样凑合着吧 ;-)

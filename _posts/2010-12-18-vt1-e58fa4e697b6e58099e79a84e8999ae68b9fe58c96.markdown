@@ -1,0 +1,29 @@
+---
+author: amosk
+comments: true
+date: 2010-12-18 19:08:05+00:00
+layout: post
+slug: vt1-%e5%8f%a4%e6%97%b6%e5%80%99%e7%9a%84%e8%99%9a%e6%8b%9f%e5%8c%96
+title: VT[1] - 古时候的虚拟化
+wordpress_id: 548
+categories:
+- Other
+---
+
+. Architechture of virtual machines - 1973
+http://www.cse.psu.edu/~bhuvan/teaching/spring06/papers/goldberg.pdf
+. Survey of Virtual Machine Research -- R. P. Goldberg, 1974
+http://www-cs-students.stanford.edu/~dbfaria/quals/summaries/Goldberg-1974.txt
+
+一次和宫敏博士[1] 吃饭时，他说虚拟化技术是古时候的，计算机领域好多技术都是周期性的被人翻出来，火热一段时间。
+提起虚拟化，很多人会立马联想到云计算，虚拟化是云计算的基础架构，跟应用程序于内核的关系一样，两者完全分离的两套东西。现在虚拟化‘新技术’较多的一个原因是，随着PC>性能的提升，x84体系结构开始 移植/翻新/改进 那些‘古时候‘IBM大型机上成熟的虚拟化技术,再加上基于虚拟化特性的新型应用不断增多，比如利用虚拟机迁移功能，实现数据中心
+故障机自动恢复、数据整合、降低IT成本，还有一些正对虚拟化的新硬件，比如SRIOV[2] 技术等。
+上面给出的第一个paper，为计算机虚拟化技术鉴定了基础，定义了虚拟机的概念、最初目标、进程在虚拟机上执行的模型、硬件虚拟化设计，用嵌套虚拟更加清楚的阐述了虚拟化技
+术的原理性。
+VMM (virtual machine monitor, 虚拟机监视器) 是一种运行在宿主物理设备和操作系统之间的软件层，允许多个操作系统和应用共享硬件。她是虚拟环境中的元操作系统，可以访>问所有物理设备。VM Monito负责建立虚拟资源与宿主机资源、执行进程与系统资源的映射关系，同时对各个虚拟机之间施加防护，并控制进程在虚拟机上运行。并且paper中提到的>几个较新的软硬件八特性，都已经在其商用机Goldberg HV19中实现。比如嵌套虚拟化，现在x86上也只有amd64实现，而且还是在KVM upstream的实验版本里。
+在KVM里面，VM Monitor由kmod结合硬件实现，这样Linux操作系统就成了虚拟化中的Hypervisor[3]，是虚拟化技术的核心部分。
+
+[1] http://www.linux-cn.com/html/test/20070412/1341.shtml
+[2] http://www.pciexpressdevnet.org/sriov/
+[3] http://en.wikipedia.org/wiki/Hypervisor
+

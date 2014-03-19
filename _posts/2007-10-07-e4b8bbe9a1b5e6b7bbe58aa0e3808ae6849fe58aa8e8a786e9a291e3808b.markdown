@@ -1,0 +1,13 @@
+---
+author: amosk
+comments: true
+date: 2007-10-07 09:58:57+00:00
+layout: post
+slug: '%e4%b8%bb%e9%a1%b5%e6%b7%bb%e5%8a%a0%e3%80%8a%e6%84%9f%e5%8a%a8%e8%a7%86%e9%a2%91%e3%80%8b'
+title: 主页添加《感动视频》
+wordpress_id: 116
+categories:
+- Life
+---
+
+今天浏览网页是碰到了关于篮球女孩的视频，记得那是高中是看的一个交通警示片。于是决定把以前看过的比较感人的视频，收集一下。主页添加了shipin.php模块，现在里边只有两个视频，以后碰到或想到了在添加。
