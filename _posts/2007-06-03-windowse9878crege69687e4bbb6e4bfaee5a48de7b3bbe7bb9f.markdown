@@ -24,60 +24,60 @@ Windows Registry Editor Version 5.00
 
 <!-- more -->
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL]
-
-"CheckedValue"=dword:00000001
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL]
+    
+    "CheckedValue"=dword:00000001
 
 恢复主页 :
 
-REGEDIT4
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main]
-"Default_Page_URL"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&pver=6&ar=msnhome](http://www.microsoft.com/isapi/redir.dll?prd=ie&pver=6&ar=msnhome)"
-"Default_Search_URL"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch](http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch)"
-"Start Page"="about:blank"
-
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Control Panel]
-"homepage"=dword:00000000
-
-[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
-"Start Page"="about:blank"
-"Local Page"="C:\\WINDOWS\\System32\\blank.htm"
-"Search Page"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch](http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch)"
+    REGEDIT4
+    
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Main]
+    "Default_Page_URL"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&pver=6&ar=msnhome](http://www.microsoft.com/isapi/redir.dll?prd=ie&pver=6&ar=msnhome)"
+    "Default_Search_URL"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch](http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch)"
+    "Start Page"="about:blank"
+    
+    [HKEY_CURRENT_USER\Software\Policies\Microsoft\Internet Explorer\Control Panel]
+    "homepage"=dword:00000000
+    
+    [HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+    "Start Page"="about:blank"
+    "Local Page"="C:\\WINDOWS\\System32\\blank.htm"
+    "Search Page"="[http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch](http://www.microsoft.com/isapi/redir.dll?prd=ie&ar=iesearch)"
 
 清理系统多余文件:
 
-@echo off
-echo It is clearing the rubblish files of system  Wait a minute......
-del /f /s /q %systemdrive%\*.tmp
-del /f /s /q %systemdrive%\*._mp
-del /f /s /q %systemdrive%\*.log
-del /f /s /q %systemdrive%\*.gid
-del /f /s /q %systemdrive%\*.chk
-del /f /s /q %systemdrive%\*.old
-del /f /s /q %systemdrive%\recycled\*.*
-del /f /s /q %windir%\*.bak
-del /f /s /q %windir%\prefetch\*.*
-rd /s /q %windir%\temp & md %windir%\temp
-del /f /q %userprofile%\cookies\*.*
-del /f /q %userprofile%\recent\*.*
-del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
-del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
-del /f /s /q "%userprofile%\recent\*.*"
-echo the End！
-echo. & pause
+    @echo off
+    echo It is clearing the rubblish files of system  Wait a minute......
+    del /f /s /q %systemdrive%\*.tmp
+    del /f /s /q %systemdrive%\*._mp
+    del /f /s /q %systemdrive%\*.log
+    del /f /s /q %systemdrive%\*.gid
+    del /f /s /q %systemdrive%\*.chk
+    del /f /s /q %systemdrive%\*.old
+    del /f /s /q %systemdrive%\recycled\*.*
+    del /f /s /q %windir%\*.bak
+    del /f /s /q %windir%\prefetch\*.*
+    rd /s /q %windir%\temp & md %windir%\temp
+    del /f /q %userprofile%\cookies\*.*
+    del /f /q %userprofile%\recent\*.*
+    del /f /s /q "%userprofile%\Local Settings\Temporary Internet Files\*.*"
+    del /f /s /q "%userprofile%\Local Settings\Temp\*.*"
+    del /f /s /q "%userprofile%\recent\*.*"
+    echo the End！
+    echo. & pause
 
 打开任务管理器:
 
-REGEDIT4
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System]
-"disabletaskmgr"=dword:00000000
-
+    REGEDIT4
+    
+    [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System]
+    "disabletaskmgr"=dword:00000000
+    
 关闭本机共享文件夹:
 
-REGEDIT4
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters]
-"autoshareserver"=dword:00000000
-"autosharewks"=dword:00000000
+    REGEDIT4
+    
+    [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters]
+    "autoshareserver"=dword:00000000
+    "autosharewks"=dword:00000000

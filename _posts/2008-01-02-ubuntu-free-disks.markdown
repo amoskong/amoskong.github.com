@@ -11,13 +11,9 @@ categories:
 ---
 
 [
+![ubuntu disks](http://amosk.info/blog/download/2008/01/large_6524j172.jpg)
+](http://amosk.info/blog/download/2008/01/large_6524j172.jpg)
 
-
-![ubuntu disks](http://kongove.whostas.com/blog/download/2008/01/large_6524j172.jpg)
-
-
-
-](http://kongove.whostas.com/blog/download/2008/01/large_6524j172.jpg)
 今天看到校内上一校友相册里一些照片，让我想到了周围向我打听Ubuntu免费光盘申请方式的人。对他们我都是说现在不行了，因为我发现好多人简直素质太太太差了！听说邮寄这一张光盘的成本是5欧元，有的说是0.88欧元，想一下也是挺贵的。当我给哪些询问者提示，并建议自己刻录时，好多人尽然毫不掩饰地说反正不要自己掏，人不能无耻到这种地步呀！ 有些人一申请来了七八张、十几张 ，你真的是为了向更多的人推广吗？自己机上装的linux用过几次？知道什么叫开源与自由软件不？
 
 我自己也申请过，开始时感觉稀奇，但后来想想，自己下载刻录或者直接升级更方便些。而且我申请的光盘大都消失在实验室，为什么有这么多人对这个东西有这么大的个人占有欲？别说一个实验室，如果你真正好学，一个学校一张也够用了。成天想着Ubuntu、Kubuntu、Edubuntu挨个试着装，搞的很高深，tmd连个google、baidu都用不好，相当操蛋！上完第一节操作系统课有n多人嚷着装了linux，前些天些了一个简单socket程序想找人测试一下，跑了n个宿舍发现只有自己在用，无奈&&无语~~

@@ -19,26 +19,26 @@ man vi find命令总结：
 man [-acdfhkKtwW] [-m system] [-p string] [-C config_file] [-M path] [-P pager] [-S section_list] [section] name ...
 3.参数
 
--C config_file：指定设定文件man.conf，缺省值是/etc/man.conf。
--M path：指定了联机手册的搜寻路径, (环境变数MANPATH | /usr/lib/man.conf | 表示使用缺省值。<!-- more -->
--P pager：指定使用何种pager.man,会优先使用此选项设定，(环境变数MANPAGER | 环境变数PAGER man缺省使用/usr/bin/less -is。
--S section_list man：所搜寻的章节列表(以冒号分隔)， 此选项会覆盖环境变数MANSECT的设定。
--a man：缺省情况是在显示第一个找到的手册之后，就会停止搜寻，使用此选项会强迫man继续显示所有符合name的联机手册。
--c：对联机手册重新作排版，本选项在屏幕的行列数改变时或已排版的联机手册损坏时特别有意义。
--d：不要真的显示联机手册，只显示除错讯息。
--D：同时显示联机手册与除错讯息。
--h：显示求助讯息然后结束程式 。
--K：对所有的联机手册搜寻所指定的字串。请注意，本功能回应速度可能很慢，如果指定section（区域）会对速度有帮助。
--m system：依所指定的system名称而指定另一组的联机手册。
-man：是manual（手册）的缩写。如man ps得到帮助信息，此时会显示出ps的手册页（man page）。
-由于手册页man page是用less程序来看的(可以方便地使屏幕上翻和下翻), 所以在man page里可以使用less的所有选项。
-less中比较重要的功能键有:
-[q] 退出；
-[Enter] 一行行地下翻；
-[Space] 一页页地下翻；
-[b] 上翻一页；
-[/] 后跟一个字符串和[Enter]来查找字符串；
-[n] 发现上一次查找的下一个匹配。
+    -C config_file：指定设定文件man.conf，缺省值是/etc/man.conf。
+    -M path：指定了联机手册的搜寻路径, (环境变数MANPATH | /usr/lib/man.conf | 表示使用缺省值。<!-- more -->
+    -P pager：指定使用何种pager.man,会优先使用此选项设定，(环境变数MANPAGER | 环境变数PAGER man缺省使用/usr/bin/less -is。
+    -S section_list man：所搜寻的章节列表(以冒号分隔)， 此选项会覆盖环境变数MANSECT的设定。
+    -a man：缺省情况是在显示第一个找到的手册之后，就会停止搜寻，使用此选项会强迫man继续显示所有符合name的联机手册。
+    -c：对联机手册重新作排版，本选项在屏幕的行列数改变时或已排版的联机手册损坏时特别有意义。
+    -d：不要真的显示联机手册，只显示除错讯息。
+    -D：同时显示联机手册与除错讯息。
+    -h：显示求助讯息然后结束程式 。
+    -K：对所有的联机手册搜寻所指定的字串。请注意，本功能回应速度可能很慢，如果指定section（区域）会对速度有帮助。
+    -m system：依所指定的system名称而指定另一组的联机手册。
+    man：是manual（手册）的缩写。如man ps得到帮助信息，此时会显示出ps的手册页（man page）。
+    由于手册页man page是用less程序来看的(可以方便地使屏幕上翻和下翻), 所以在man page里可以使用less的所有选项。
+    less中比较重要的功能键有:
+    [q] 退出；
+    [Enter] 一行行地下翻；
+    [Space] 一页页地下翻；
+    [b] 上翻一页；
+    [/] 后跟一个字符串和[Enter]来查找字符串；
+    [n] 发现上一次查找的下一个匹配。
 4.阅读手册页
 Linux手册页主要有九个部分：用户指令、系统调用、程序库、设备说明、文件格式、游戏、杂项、系统指令、内核。
 
@@ -111,39 +111,39 @@ E) 离开vi 　「q」「q！」　「qw」
 
 一、find 命令格式
 1、find命令的一般形式为；
-find pathname -options [-print -exec -ok ...]
+    find pathname -options [-print -exec -ok ...]
 2、find命令的参数；
-pathname: 查找的目录路径
--print： 将匹配的文件输出到标准输出。
--exec 'command' { } \;
--ok： 和-exec的作用相同，更为安全的模式来执行命令，执行命令前，都会给出提示，让用户来确定是否执行。
+    pathname: 查找的目录路径
+    -print： 将匹配的文件输出到标准输出。
+    -exec 'command' { } \;
+    -ok： 和-exec的作用相同，更为安全的模式来执行命令，执行命令前，都会给出提示，让用户来确定是否执行。
 3、find命令选项
--name 按照文件名查找文件。
--perm 按照文件权限来查找文件。
--prune 使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。
--user 按照文件属主来查找文件。
--group 按照文件所属的组来查找文件。
--mtime -n +n 按文件的更改时间 ， - n文件更改时间距现在n天以内，+ n 更改时间距现在n天以前。
--nogroup 查找无有效所属组的文件，即该文件所属的组在 /etc/groups中不存在。
--nouser 查找无有效属主的文件，即该文件的属主在 /etc/passwd中不存在。
--newer file1 ! file2 查找更改时间比file1新但比file2旧的文件
--type 查找某一类型的文件，诸如：
-b - 块设备文件。
-d - 目录。
-c - 字符设备文件。
-p - 管道文件。
-l - 符号链接文件。
-f - 普通文件。
--size n：[c] 查找文件长度为n块的文件，c时表示文件长度以字节计。
--depth：先当前目录，后再在其子目录
--fstype：查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配置文件中包含了本系统中有关文件系统的信息。
--mount：在查找文件时不跨越文件系统mount点。
--follow：符号链接文件，跟踪至链接所指向的文件。
--cpio：对匹配的文件使用cpio命令，将这些文件备份到磁带设备中。
-另外,下面三个的区别:
--amin n　　查找系统中最后N分钟访问的文件
--atime n　　最后n*24小时访问
--cmin n　　最后N分钟被改变文件状态
--ctime n 　最后n*24小时被改变文件状态
--mmin n　　最后N分钟被改变文件数据
--mtime n 最后n*24小时被改变文件数据
+    -name 按照文件名查找文件。
+    -perm 按照文件权限来查找文件。
+    -prune 使用这一选项可以使find命令不在当前指定的目录中查找，如果同时使用-depth选项，那么-prune将被find命令忽略。
+    -user 按照文件属主来查找文件。
+    -group 按照文件所属的组来查找文件。
+    -mtime -n +n 按文件的更改时间 ， - n文件更改时间距现在n天以内，+ n 更改时间距现在n天以前。
+    -nogroup 查找无有效所属组的文件，即该文件所属的组在 /etc/groups中不存在。
+    -nouser 查找无有效属主的文件，即该文件的属主在 /etc/passwd中不存在。
+    -newer file1 ! file2 查找更改时间比file1新但比file2旧的文件
+    -type 查找某一类型的文件，诸如：
+    b - 块设备文件。
+    d - 目录。
+    c - 字符设备文件。
+    p - 管道文件。
+    l - 符号链接文件。
+    f - 普通文件。
+    -size n：[c] 查找文件长度为n块的文件，c时表示文件长度以字节计。
+    -depth：先当前目录，后再在其子目录
+    -fstype：查找位于某一类型文件系统中的文件，这些文件系统类型通常可以在配置文件/etc/fstab中找到，该配置文件中包含了本系统中有关文件系统的信息。
+    -mount：在查找文件时不跨越文件系统mount点。
+    -follow：符号链接文件，跟踪至链接所指向的文件。
+    -cpio：对匹配的文件使用cpio命令，将这些文件备份到磁带设备中。
+    另外,下面三个的区别:
+    -amin n　　查找系统中最后N分钟访问的文件
+    -atime n　　最后n x 24小时访问
+    -cmin n　　最后N分钟被改变文件状态
+    -ctime n 　最后n x 24小时被改变文件状态
+    -mmin n　　最后N分钟被改变文件数据
+    -mtime n 最后n x 24小时被改变文件数据

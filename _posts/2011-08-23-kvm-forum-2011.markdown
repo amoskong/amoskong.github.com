@@ -12,18 +12,10 @@ categories:
 
 
 
-
-
-
-
 ### From: [http://log.amitshah.net/2011/08/kvm-forum-2011.html](http://log.amitshah.net/2011/08/kvm-forum-2011.html) by [Amit Shah](http://www.blogger.com/profile/10926476078134010150)
 
 
-
-
 ### KVM Forum 2011
-
-
 
 
 This year's KVM Forum, like last year's, was co-located with LinuxCon NA.  Vancouver city played the host this year.
@@ -38,7 +30,7 @@ Some brief notes on the talks I attended:
 
 Paul Mackerras then talked about [KVM on the POWER7](http://www.linux-kvm.org/wiki/images/5/5d/2011-forum-KVM_on_the_IBM_POWER7_Processor.pdf) processor, another processor to get virt extensions. He talked of replacing pHype with KVM and the challenges to run custom firmware and Linux directly on the machines, as opposed to the default firmware which can only run pHype.
 
-Alex Williamson talked about [VFIO-based PCI device assignment](http://www.linux-kvm.org/wiki/images/d/d1/2011-forum-VFIO.pdf).  The current device assignment code makes the kvm.ko module a device driver for the device to be assigned to the guest (I'm to blame for that, I wrote that code). The idea with VFIO is to move the complexity of device assignment into userspace.  VFIO is a device driver which exposes devices in /dev/vfio*, via which the device can be configured and controlled.  This is a much more cleaner and secure way of doing device assignment.
+Alex Williamson talked about [VFIO-based PCI device assignment](http://www.linux-kvm.org/wiki/images/d/d1/2011-forum-VFIO.pdf).  The current device assignment code makes the kvm.ko module a device driver for the device to be assigned to the guest (I'm to blame for that, I wrote that code). The idea with VFIO is to move the complexity of device assignment into userspace.  VFIO is a device driver which exposes devices in /dev/vfio\*, via which the device can be configured and controlled.  This is a much more cleaner and secure way of doing device assignment.
 
 Kevin Wolf talked on the current state of block file formats, and the [next-gen block file format](http://www.linux-kvm.org/wiki/images/6/63/2011-forum-qcow2.pdf).  He criticised the NIH syndrome of people developing new formats in isolation instead of enhancing the current ones.  He's working on collecting the best ideas from QED and FVD, the newest formats, and putting them into QCOW3 while retaining the features from QCOW2, which the other formats dropped.
 

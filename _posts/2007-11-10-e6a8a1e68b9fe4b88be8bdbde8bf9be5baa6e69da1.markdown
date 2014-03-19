@@ -10,7 +10,10 @@ categories:
 - Web
 ---
 
-#include <stdio.h>#include <unistd.h>
+code:
+
+    #include <stdio.h>
+    #include <unistd.h>
     int main (){
             int i,j;
             for (j=0;j<23;j++){
@@ -39,4 +42,8 @@ categories:
     }
 
 
-存在问题：1、对不同大小终端识别2、加快更新频率3、输出百分比
+存在问题：
+
+- 对不同大小终端识别
+- 加快更新频率
+- 输出百分比

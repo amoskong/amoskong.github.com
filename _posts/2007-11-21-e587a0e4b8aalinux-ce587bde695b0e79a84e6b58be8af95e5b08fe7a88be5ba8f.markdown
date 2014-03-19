@@ -10,64 +10,64 @@ categories:
 - Web
 ---
 
-/*输出错误字符串
-#include
-#include
-int main(void){
-        int i;
-        for (i=0; i<10; i++)
-                printf("%d : %s\n",i,strerror (i));
-}
-*/
-/*创建字符链接
-#include
-#include
-
-int main(void){
-        symlink("/media/sda6/movie", "movie");
-        return 0;
-}
-*/
-/*改变当前目录
-#include
-#include
-#include
-#include
-#include
-
-int main(void){
-        int fd;
-        printf("current working directory : %s\n", getcwd (NULL,(int) NULL) );
-        fd = open ("/home/kongove",O_RDONLY);
-        fchdir (fd);
-
-        printf("current working directory : %s\n", getcwd (NULL,(int) NULL) );
-        close (fd);
-        return 0;
-}*/
-/*获取当前时间
-#include
-#include
-
-int main(void){
-        struct timeb tp;
-        ftime(&tp);
-        printf("time:%d\n", (int)tp.time);
-        printf("millitm:%d\n", tp.millitm);
-        printf("timezone:%d\n", tp.timezone);
-        printf("dstflag:%d\n", tp.dstflag);
-        return 0;
-}
-*/
-/*获取密码*/
-#include
-#include
-
-int main(void){
-        char *p;
-        p=getpass("Input the Password:");
-        if (!strcmp ("mypasswd",p))
-                printf("Passwd is :%s\n",p);
-
-        return 0;
-}
+    /*输出错误字符串
+    #include
+    #include
+    int main(void){
+            int i;
+            for (i=0; i<10; i++)
+                    printf("%d : %s\n",i,strerror (i));
+    }
+    */
+    /*创建字符链接
+    #include
+    #include
+    
+    int main(void){
+            symlink("/media/sda6/movie", "movie");
+            return 0;
+    }
+    */
+    /*改变当前目录
+    #include
+    #include
+    #include
+    #include
+    #include
+    
+    int main(void){
+            int fd;
+            printf("current working directory : %s\n", getcwd (NULL,(int) NULL) );
+            fd = open ("/home/kongove",O_RDONLY);
+            fchdir (fd);
+    
+            printf("current working directory : %s\n", getcwd (NULL,(int) NULL) );
+            close (fd);
+            return 0;
+    }*/
+    /*获取当前时间
+    #include
+    #include
+    
+    int main(void){
+            struct timeb tp;
+            ftime(&tp);
+            printf("time:%d\n", (int)tp.time);
+            printf("millitm:%d\n", tp.millitm);
+            printf("timezone:%d\n", tp.timezone);
+            printf("dstflag:%d\n", tp.dstflag);
+            return 0;
+    }
+    */
+    /*获取密码*/
+    #include
+    #include
+    
+    int main(void){
+            char *p;
+            p=getpass("Input the Password:");
+            if (!strcmp ("mypasswd",p))
+                    printf("Passwd is :%s\n",p);
+    
+            return 0;
+    }

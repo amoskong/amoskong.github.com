@@ -14,179 +14,179 @@ categories:
 
 linux下gcc调试通过代码： 
 
-#include<stdio.h>
-#define MAX_VERTEX_NUM 20
-#define INFINITY 32768
-     int visited[MAX_VERTEX_NUM];
-     typedef enum{DG,DN,UDG,UDN} GraphKind;
-     typedef char VertexData；
+    #include<stdio.h>
+    #define MAX_VERTEX_NUM 20
+    #define INFINITY 32768
+         int visited[MAX_VERTEX_NUM];
+         typedef enum{DG,DN,UDG,UDN} GraphKind;
+         typedef char VertexData；
+    
+    <!-- more -->
+    typedef struct ArcNode{
+        int adj;
+        int info;
+    }ArcNode;
+    typedef struct{
+        VertexData vertex[MAX_VERTEX_NUM];
+        ArcNode arcs[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
+        int vexnum,arcnum;
+        GraphKind kind;
+    }AdjMatrix;int LocateVertex(AdjMatrix *G,VertexData v){
+        int j=-1,k;
+        for(k=0;k<G->vexnum;k++){
+            if(G->vertex[k]==v){
+                j=k;
+                break;
+            }
+            return(j);
+        }
+    }int LocateVex_M(AdjMatrix *G,VertexData v1){
+    int i;
+    for(i=0;i<G->vexnum;i++)
+        if(G->vertex[i]==v1)
+            return i;
+        return -1;
+    }int CreateDN(AdjMatrix *G){
+        int i,j,k,weight;
+        VertexData v1,v2;
+        printf("Please input arcnum vexnum\n");
+        scanf("%d%d",&G->vexnum,&(G->arcnum));
+        for(i=0;i<G->arcnum;i++)
+            for(j=0;j<G->vexnum;j++)
+                G->arcs[i][j].adj=INFINITY;
+        printf("Please input %d vertex\n",G->vexnum);
+        for(i=0;i<G->vexnum;i++)
+            scanf("%*c%c",&G->vertex[i]);
+        printf("\nPlease input %d v1 v2 weight\n",G->arcnum);
+        for(k=0;k<G->arcnum;k++){
+            scanf("%*c%c%*c%c%d",&v1,&v2,&weight);
+            i=LocateVex_M(G,v1);
+            j=LocateVex_M(G,v2);
+           G->arcs[i][j].adj=weight;
+        }
+        return 0;
+    }
+    
+    void visit(AdjMatrix *G,int v0){
+        printf("Visit:%c\n",G->vertex[v0]);
+    }
+    
+    void DepthFirstSearch(AdjMatrix *G,int v0){
+        int vj;
+        visit(G,v0);
+        visited[v0]=1;
+        for(vj=0;vj<G->vexnum;vj++)
+            if(!visited[vj]&&G->arcs[v0][vj].adj==1)
+                DepthFirstSearch(G,vj);
+    }
+    
+    void TraverseGraph(AdjMatrix *G){
+        int vi;
+        for(vi=0;vi<G->vexnum;vi++)
+            visited[vi]=0;
+        for(vi=0;vi<G->vexnum;vi++)
+            if(!visited[vi])
+                DepthFirstSearch(G,vi);
+    
+    }
+    
+    int  main(void){
+        AdjMatrix G;
+        CreateDN(&G);
+        TraverseGraph(&G);
+        return 0;
+    }
 
-<!-- more -->
-typedef struct ArcNode{
-    int adj;
-    int info;
-}ArcNode;
-typedef struct{
-    VertexData vertex[MAX_VERTEX_NUM];
-    ArcNode arcs[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
-    int vexnum,arcnum;
-    GraphKind kind;
-}AdjMatrix;int LocateVertex(AdjMatrix *G,VertexData v){
-    int j=-1,k;
-    for(k=0;k<G->vexnum;k++){
-        if(G->vertex[k]==v){
-            j=k;
-            break;
-        }
-        return(j);
-    }
-}int LocateVex_M(AdjMatrix *G,VertexData v1){
-int i;
-for(i=0;i<G->vexnum;i++)
-    if(G->vertex[i]==v1)
-        return i;
-    return -1;
-}int CreateDN(AdjMatrix *G){
-    int i,j,k,weight;
-    VertexData v1,v2;
-    printf("Please input arcnum vexnum\n");
-    scanf("%d%d",&G->vexnum,&(G->arcnum));
-    for(i=0;i<G->arcnum;i++)
-        for(j=0;j<G->vexnum;j++)
-            G->arcs[i][j].adj=INFINITY;
-    printf("Please input %d vertex\n",G->vexnum);
-    for(i=0;i<G->vexnum;i++)
-        scanf("%*c%c",&G->vertex[i]);
-    printf("\nPlease input %d v1 v2 weight\n",G->arcnum);
-    for(k=0;k<G->arcnum;k++){
-        scanf("%*c%c%*c%c%d",&v1,&v2,&weight);
-        i=LocateVex_M(G,v1);
-        j=LocateVex_M(G,v2);
-       G->arcs[i][j].adj=weight;
-    }
-    return 0;
-}
-
-void visit(AdjMatrix *G,int v0){
-    printf("Visit:%c\n",G->vertex[v0]);
-}
-
-void DepthFirstSearch(AdjMatrix *G,int v0){
-    int vj;
-    visit(G,v0);
-    visited[v0]=1;
-    for(vj=0;vj<G->vexnum;vj++)
-        if(!visited[vj]&&G->arcs[v0][vj].adj==1)
-            DepthFirstSearch(G,vj);
-}
-
-void TraverseGraph(AdjMatrix *G){
-    int vi;
-    for(vi=0;vi<G->vexnum;vi++)
-        visited[vi]=0;
-    for(vi=0;vi<G->vexnum;vi++)
-        if(!visited[vi])
-            DepthFirstSearch(G,vi);
-
-}
-
-int  main(void){
-    AdjMatrix G;
-    CreateDN(&G);
-    TraverseGraph(&G);
-    return 0;
-}
-
-*************************************************************************** 
+----
 
 windows TC调试通过代码：
 
-#include<stdio.h>
-#define MAX_VERTEX_NUM 20
-#define INFINITY 32768
-     int visited[MAX_VERTEX_NUM];
-     typedef enum{DG,DN,UDG,UDN} GraphKind;
-     typedef char VertexData;
-typedef struct ArcNode{
-    int adj;
-    int info;
-}ArcNode;
-typedef struct{
-    VertexData vertex[MAX_VERTEX_NUM];
-    ArcNode arcs[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
-    int vexnum,arcnum;
-    GraphKind kind;
-}AdjMatrix;int LocateVertex(AdjMatrix *G,VertexData v){
-    int j=-1,k;
-    for(k=0;k<G->vexnum;k++){
-        if(G->vertex[k]==v){
-            j=k;
-            break;
-        }
-        return(j);
-    }
-}int LocateVex_M(AdjMatrix *G,VertexData v1){
-int i;
-for(i=0;i<G->vexnum;i++)
-    if(G->vertex[i]==v1)
-        return i;
-    return -1;
-}
-
-int CreateDN(AdjMatrix *G){
-    int i,j,k,weight;
-    VertexData v1,v2;
-    printf("Please input arcnum vexnum\n");
-    scanf("%d%d",&G->vexnum,&(G->arcnum));
-    for(i=0;i<G->arcnum;i++)
-        for(j=0;j<G->vexnum;j++)
-            G->arcs[i][j].adj=INFINITY;
-    printf("Please input %d vertex\n",G->vexnum);
-    for(i=0;i<G->vexnum;i++){
-        G->vertex[i]=getche();
-        printf("\t");
-    }
-    printf("\nPlease input %d v1 v2 weight\n",G->arcnum);
-    for(k=0;k<G->arcnum;k++){
-        v1=getche();
-        printf("\t");
-        v2=getche();
-        printf("\t");
-        scanf("%d",&weight);
-        i=LocateVex_M(G,v1);
-        j=LocateVex_M(G,v2);
-       G->arcs[i][j].adj=weight;
-    }
-    return 0;
-}
-
-void visit(AdjMatrix *G,int v0){
-    printf("Visit:%c\n",G->vertex[v0]);
-}
-
-void DepthFirstSearch(AdjMatrix *G,int v0){
-    int vj;
-    visit(G,v0);
-    visited[v0]=1;
-    for(vj=0;vj<G->vexnum;vj++)
-        if(!visited[vj]&&G->arcs[v0][vj].adj==1)
-            DepthFirstSearch(G,vj);
-}
-
-void TraverseGraph(AdjMatrix *G){
-    int vi;
-    for(vi=0;vi<G->vexnum;vi++)
-        visited[vi]=0;
-    for(vi=0;vi<G->vexnum;vi++)
-        if(!visited[vi])
-            DepthFirstSearch(G,vi);
-
-}
-
-void main(){
-    AdjMatrix G;
-    clrscr();
-    CreateDN(&G);
-    TraverseGraph(&G);
-    getch();
-}
+    #include<stdio.h>
+    #define MAX_VERTEX_NUM 20
+    #define INFINITY 32768
+         int visited[MAX_VERTEX_NUM];
+         typedef enum{DG,DN,UDG,UDN} GraphKind;
+         typedef char VertexData;
+    typedef struct ArcNode{
+        int adj;
+        int info;
+    }ArcNode;
+    typedef struct{
+        VertexData vertex[MAX_VERTEX_NUM];
+        ArcNode arcs[MAX_VERTEX_NUM][MAX_VERTEX_NUM];
+        int vexnum,arcnum;
+        GraphKind kind;
+    }AdjMatrix;int LocateVertex(AdjMatrix *G,VertexData v){
+        int j=-1,k;
+        for(k=0;k<G->vexnum;k++){
+            if(G->vertex[k]==v){
+                j=k;
+                break;
+            }
+            return(j);
+        }
+    }int LocateVex_M(AdjMatrix *G,VertexData v1){
+    int i;
+    for(i=0;i<G->vexnum;i++)
+        if(G->vertex[i]==v1)
+            return i;
+        return -1;
+    }
+    
+    int CreateDN(AdjMatrix *G){
+        int i,j,k,weight;
+        VertexData v1,v2;
+        printf("Please input arcnum vexnum\n");
+        scanf("%d%d",&G->vexnum,&(G->arcnum));
+        for(i=0;i<G->arcnum;i++)
+            for(j=0;j<G->vexnum;j++)
+                G->arcs[i][j].adj=INFINITY;
+        printf("Please input %d vertex\n",G->vexnum);
+        for(i=0;i<G->vexnum;i++){
+            G->vertex[i]=getche();
+            printf("\t");
+        }
+        printf("\nPlease input %d v1 v2 weight\n",G->arcnum);
+        for(k=0;k<G->arcnum;k++){
+            v1=getche();
+            printf("\t");
+            v2=getche();
+            printf("\t");
+            scanf("%d",&weight);
+            i=LocateVex_M(G,v1);
+            j=LocateVex_M(G,v2);
+           G->arcs[i][j].adj=weight;
+        }
+        return 0;
+    }
+    
+    void visit(AdjMatrix *G,int v0){
+        printf("Visit:%c\n",G->vertex[v0]);
+    }
+    
+    void DepthFirstSearch(AdjMatrix *G,int v0){
+        int vj;
+        visit(G,v0);
+        visited[v0]=1;
+        for(vj=0;vj<G->vexnum;vj++)
+            if(!visited[vj]&&G->arcs[v0][vj].adj==1)
+                DepthFirstSearch(G,vj);
+    }
+    
+    void TraverseGraph(AdjMatrix *G){
+        int vi;
+        for(vi=0;vi<G->vexnum;vi++)
+            visited[vi]=0;
+        for(vi=0;vi<G->vexnum;vi++)
+            if(!visited[vi])
+                DepthFirstSearch(G,vi);
+    
+    }
+    
+    void main(){
+        AdjMatrix G;
+        clrscr();
+        CreateDN(&G);
+        TraverseGraph(&G);
+        getch();
+    }

@@ -12,15 +12,15 @@ categories:
 
 昨天给别人装完系统，挂载了文件系统。刚才看到[赵崇日写的自动挂载](http://www.chongri.cn/blog/?p=6)方法，估计有些人看不懂，我就再自己总结一下。
 
-情况一：知道windows文件系统格式，和windows个盘对应/dev/下的sda* 文件时，只需要添加
+情况一：知道windows文件系统格式，和windows个盘对应/dev/下的sdaX文件时，只需要添加
 
-/dev/sda*   /media/“新建的文件夹名” “文件系统格式" defaults,utf8,umask=000    0   0
+/dev/sdaX   /media/“新建的文件夹名” “文件系统格式" defaults,utf8,umask=000    0   0
 
-情况二：在不知道windows文件系统格式，不知道windows各盘对应的硬盘文件sda*时：
+情况二：在不知道windows文件系统格式，不知道windows各盘对应的硬盘文件sdaX时：
 
 1.首先通过命令su进入超级用户权限
 
-2.执行命令ls /dev/sda*
+2.执行命令ls /dev/sdaX
 
 这时会列出硬盘文件,有的5、6个，有的更多，一般在10个以下。设硬盘文件数量为Numble_of_sda
 

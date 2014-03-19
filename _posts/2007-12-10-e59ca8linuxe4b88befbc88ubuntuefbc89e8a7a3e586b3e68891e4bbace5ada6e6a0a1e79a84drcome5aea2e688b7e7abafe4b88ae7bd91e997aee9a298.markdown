@@ -11,8 +11,8 @@ categories:
 ---
 
 1.安装编译环境：
-sudo apt-get install build-essential libssl-dev
 
+    sudo apt-get install build-essential libssl-dev
 
 2.安装linux-headers
 sudo apt-get install linux-headers-`uname -r`
@@ -30,13 +30,19 @@ uname -r是命令输出为：例如我的为2.6.15－28－686
 tar －zxvf drcom-1.3.2.tar.gz
 cd drcom-1.3.2/
 注意：
-修改安装程序中login.c,logout.c,passwd.c.watchport.c
-这4个文件最开始的include语句中有一句 #include <openssl/md5.h> 改成 #include <md5.h>
+
+    修改安装程序中login.c,logout.c,passwd.c.watchport.c
+    这4个文件最开始的include语句中有一句
+    #include <openssl/md5.h> 改成 #include <md5.h>
+
 否则的话你还需要安装一个libssl包，这个包安装盘里可是没有的-_.-+
-make
-sudo make install
+
+    make
+    sudo make install
+
 5.配置：
-sudo vi /etc/drcom.conf   （留空的不需要填写）
+
+    sudo vi /etc/drcom.conf   （留空的不需要填写）
 
 
 __________________________________begin

@@ -13,126 +13,128 @@ categories:
 尽管有n多人关于mutt配置写了文章，周未依旧有好多同学碰到好多问题，估计是参考了多个文章，或者使用的不是gmail。我答应他们把自己的mutt配置贴出来，用惯了mutt感觉很有意思。我用的是mutt+procmail+getmail+msmtp,分别把四个软件装上。
 
 执行
-mkdir ~/Mail
-cd ~/Mail
-touch index send .postponed default
+
+    mkdir ~/Mail
+    cd ~/Mail
+    touch index send .postponed default
+
 创建各种邮箱
 
 然后分别编辑下面的配置文件，文件书写规则[刘洋博客](http://amankwahly.cn/blog)和网上都可以查到。部分选项被我注释掉了，比如地址薄文件，这些大家可以自己慢慢完善。一些具体参数如邮箱地址、账户、密码等个人信息当然得换成自己的，其他的基本不需要改变。最后边的~/.mailcap可以解决html邮件乱码问题。
 
-_______________________ ~/.muttrc
-
-# 默认信箱目录
-set folder="~/Mail"
-# 已读的信箱
-set mbox="~/Mail/inbox"
-# 进入mutt后默认使用的信箱，可以考虑和$HOME/.procmailrc设置的默认信箱相同
-set spoolfile="~/Mail/inbox"
-# 不清楚
-#set postponed="~/Mail/postponed"
-# 已发送的信箱
-set record="~/Mail/sent"<!-- more -->
-
-set envelope_from = yes
-my_hdr Reply-To:Jianjun Kong<kongjianjun@gmail.com>
-set use_from=yes
-set from="kongjianjun@gmail.com"
-my_hdr From:Jianjun Kong<kongjianjun@gmail.com>
-set realname="Jianjun Kong"
-set editor=vim
-set sort=threads
-
-mailboxes = "inbox"
-
-set check_new = yes
-set timeout = 300
-
-# 终端的编码
-set charset="UTF-8"
-# 外发邮件使用的编码
-set send_charset="UTF-8"
-# 用中文格式显示日期
-set locale="zh_CN.UTF-8"
-# 解决没有设置字符编码的信件显示为乱码的问题
-charset-hook ^us-ascii$ gb2312
-# 解决主题为utf-8的信件标题显示为乱码的问题
-charset-hook !UTF-8 gb2312
-# 解决未经过MIME编码的信件显示为乱码的问题
-#set strict_mime=no
-set assumed_charset="gb2312"
-# 解决中文附件名为乱码的问题
-set rfc2047_parameters=yes
-#新闻组
-#subscribe zeuux-universe@zeuux.org xiyoulinux@googlegroups.com #xiyousource@googlegroups.com
-#地址薄：
-#source ~/.muttrc.a
-# 采用msmtp发送邮件
-set sendmail="/usr/bin/msmtp"
-# 让mutt可以更好的阅读html邮件
-auto_view text/html
-#set signature="~/.mutt_sig"
-#set sig_on_top=YES
-#设置接收邮件快捷键
-macro index G "!getmail\r" "Get E-mail"
-#设置在分屏阅读邮件时，邮件标题屏所占的行数。
-set pager_index_lines=4
-___________________~/.procmailrc
-PATH=/bin:/sbin:/usr/bin:/usr/sbin
-SHELL=/bin/bash
-MAILDIR=$HOME/Mail
-DEFAULT=$MAILDIR/inbox
-:0
-* ^From.*@gmail.com
-Gmail
-:0   #最后的这个配置就是指如果上面分类剩下的信件全扔到inbox里
-* .* inbox
-
-# 黑名单（垃圾邮件）
-:0:
-* ^From.*badguy
-/dev/null
-# 分拣日志保存的位置
-LOGFILE="/var/log/procmail.log"
-# 邮件转换程序
-#FORMAIL=/usr/bin/formail
-# 暂时未作任何分拣
-# 所有经过分拣后的邮件都存储在$MAILDIR/default信箱中
-#:0
-#* .*
-#default
-
-________________~/.getmail/getmailrc
-
-[retriever]
-type = SimplePOP3SSLRetriever
-server = 209.85.199.109
-#server = pop.gmail.com
-port = 995
-username = kongjianjun@gmail.com
-password = 这里填写自己的密码！！！！！！！！！！！！！！！！！！！！！
-[destination]
-type = Maildir
-path = ~/Mail/inbox
-
-[options]
-verbose = 0
-delete = true
-_______________~/.msmtprc
-
-# $HOME/.msmtprc
-defaults
-logfile /var/log/msmtp.log
-account kongjianjun
-host 209.85.199.111
-#host smtp.gmail.com
-from kongjianjun@gmail.com
-port 25
-user kongjianjun
-password 这里填写自己的密码！！！！！！！！！！！！！！！！！！！！！
-tls on
-auth on
-tls_certcheck off
-account default: kongjianjun
-______________________~/.mailcap
-
-text/html ; w3m -T text/html -I %{charset} -dump %s ; nametemplate=%s.html ; needsterminal; copiousoutput
+    _______________________ ~/.muttrc
+    
+    # 默认信箱目录
+    set folder="~/Mail"
+    # 已读的信箱
+    set mbox="~/Mail/inbox"
+    # 进入mutt后默认使用的信箱，可以考虑和$HOME/.procmailrc设置的默认信箱相同
+    set spoolfile="~/Mail/inbox"
+    # 不清楚
+    #set postponed="~/Mail/postponed"
+    # 已发送的信箱
+    set record="~/Mail/sent"<!-- more -->
+    
+    set envelope_from = yes
+    my_hdr Reply-To:Jianjun Kong<kongjianjun@gmail.com>
+    set use_from=yes
+    set from="kongjianjun@gmail.com"
+    my_hdr From:Jianjun Kong<kongjianjun@gmail.com>
+    set realname="Jianjun Kong"
+    set editor=vim
+    set sort=threads
+    
+    mailboxes = "inbox"
+    
+    set check_new = yes
+    set timeout = 300
+    
+    # 终端的编码
+    set charset="UTF-8"
+    # 外发邮件使用的编码
+    set send_charset="UTF-8"
+    # 用中文格式显示日期
+    set locale="zh_CN.UTF-8"
+    # 解决没有设置字符编码的信件显示为乱码的问题
+    charset-hook ^us-ascii$ gb2312
+    # 解决主题为utf-8的信件标题显示为乱码的问题
+    charset-hook !UTF-8 gb2312
+    # 解决未经过MIME编码的信件显示为乱码的问题
+    #set strict_mime=no
+    set assumed_charset="gb2312"
+    # 解决中文附件名为乱码的问题
+    set rfc2047_parameters=yes
+    #新闻组
+    #subscribe zeuux-universe@zeuux.org xiyoulinux@googlegroups.com #xiyousource@googlegroups.com
+    #地址薄：
+    #source ~/.muttrc.a
+    # 采用msmtp发送邮件
+    set sendmail="/usr/bin/msmtp"
+    # 让mutt可以更好的阅读html邮件
+    auto_view text/html
+    #set signature="~/.mutt_sig"
+    #set sig_on_top=YES
+    #设置接收邮件快捷键
+    macro index G "!getmail\r" "Get E-mail"
+    #设置在分屏阅读邮件时，邮件标题屏所占的行数。
+    set pager_index_lines=4
+    ___________________~/.procmailrc
+    PATH=/bin:/sbin:/usr/bin:/usr/sbin
+    SHELL=/bin/bash
+    MAILDIR=$HOME/Mail
+    DEFAULT=$MAILDIR/inbox
+    :0
+    * ^From.*@gmail.com
+    Gmail
+    :0   #最后的这个配置就是指如果上面分类剩下的信件全扔到inbox里
+    * .* inbox
+    
+    # 黑名单（垃圾邮件）
+    :0:
+    * ^From.*badguy
+    /dev/null
+    # 分拣日志保存的位置
+    LOGFILE="/var/log/procmail.log"
+    # 邮件转换程序
+    #FORMAIL=/usr/bin/formail
+    # 暂时未作任何分拣
+    # 所有经过分拣后的邮件都存储在$MAILDIR/default信箱中
+    #:0
+    #* .*
+    #default
+    
+    ________________~/.getmail/getmailrc
+    
+    [retriever]
+    type = SimplePOP3SSLRetriever
+    server = 209.85.199.109
+    #server = pop.gmail.com
+    port = 995
+    username = kongjianjun@gmail.com
+    password = 这里填写自己的密码！！！！！！！！！！！！！！！！！！！！！
+    [destination]
+    type = Maildir
+    path = ~/Mail/inbox
+    
+    [options]
+    verbose = 0
+    delete = true
+    _______________~/.msmtprc
+    
+    # $HOME/.msmtprc
+    defaults
+    logfile /var/log/msmtp.log
+    account kongjianjun
+    host 209.85.199.111
+    #host smtp.gmail.com
+    from kongjianjun@gmail.com
+    port 25
+    user kongjianjun
+    password 这里填写自己的密码！！！！！！！！！！！！！！！！！！！！！
+    tls on
+    auth on
+    tls_certcheck off
+    account default: kongjianjun
+    ______________________~/.mailcap
+    
+    text/html ; w3m -T text/html -I %{charset} -dump %s ; nametemplate=%s.html ; needsterminal; copiousoutput

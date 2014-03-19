@@ -14,34 +14,34 @@ xylftp的客户端基本上完成了，准备做一个发行版,于是牵扯到�
 
 安装批处理代码： 
 
-::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
-::2007.6.5
-
-@echo off
-echo Welcome to use Xylftp for Windows!And you must have a JVM environment.
-echo Your Working Directory is:
-cd
-echo And the software will be install C:\"Program Files"\xylftp\
-
-javac XylFTPMain.java
-jar cfm xylftp.jar manifest.mf *.class
-if not exist C:\"Program Files"\xylftp mkdir C:\"Program Files"\xylftp 
-move xylftp.jar C:\"Program Files"\xylftp\xylftp.jar
-cd ../doc/
-copy User_Manual_Client.pdf C:\"Program Files"\xylftp\User_Manual_Client.pdf
-echo Creat link!
-
-echo @echo off >C:\WINDOWS\system32\xylftp.bat
-echo java -jar "C:\Program Files\xylftp\xylftp.jar" %%1 %%2 %%3 %%4 %%5 %%6 %%7 %%8 %%9 >>C:\WINDOWS\system32\xylftp.bat
-echo You have successly install the software!
-
-卸载批处理代码：
-
-::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
-::2007.6.5
-@echo off
-del *.class
-del C:\WINDOWS\system32\xylftp.bat
-del C:\"Program Files"\xylftp\xylftp.jar
-del C:\"Program Files"\xylftp\User_Manual_Client.pdf
-rmdir C:\"Program Files"\xylftp
+    ::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
+    ::2007.6.5
+    
+    @echo off
+    echo Welcome to use Xylftp for Windows!And you must have a JVM environment.
+    echo Your Working Directory is:
+    cd
+    echo And the software will be install C:\"Program Files"\xylftp\
+    
+    javac XylFTPMain.java
+    jar cfm xylftp.jar manifest.mf *.class
+    if not exist C:\"Program Files"\xylftp mkdir C:\"Program Files"\xylftp 
+    move xylftp.jar C:\"Program Files"\xylftp\xylftp.jar
+    cd ../doc/
+    copy User_Manual_Client.pdf C:\"Program Files"\xylftp\User_Manual_Client.pdf
+    echo Creat link!
+    
+    echo @echo off >C:\WINDOWS\system32\xylftp.bat
+    echo java -jar "C:\Program Files\xylftp\xylftp.jar" %%1 %%2 %%3 %%4 %%5 %%6 %%7 %%8 %%9 >>C:\WINDOWS\system32\xylftp.bat
+    echo You have successly install the software!
+    
+    卸载批处理代码：
+    
+    ::Copyright @ [kongjianjun@gmail.com](mailto:kongjianjun@gmail.com)
+    ::2007.6.5
+    @echo off
+    del *.class
+    del C:\WINDOWS\system32\xylftp.bat
+    del C:\"Program Files"\xylftp\xylftp.jar
+    del C:\"Program Files"\xylftp\User_Manual_Client.pdf
+    rmdir C:\"Program Files"\xylftp
