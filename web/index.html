@@ -68,6 +68,112 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
+                <h2><a href="../web/moving-blog-to-wordpress-com.html">Moving blog to wordpress.com</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2015-01-31 03:33
+    </span>
+    <hr>
+                <div class="summary"><p><a href="https://amoskong.wordpress.com/">https://amoskong.wordpress.com/</a> (outside GFW!)</p>
+                    <a class="btn btn-default btn-xs" href="../web/moving-blog-to-wordpress-com.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../web/e4bdbfe794a8nginxe8999ae68b9fe4b8bbe69cbae9858de7bdae.html">使用nginx虚拟主机配置</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-06-13 13:53
+    </span>
+    <hr>
+                <div class="summary"><p>在linux虚拟机启动一个web服务器, 开发部署想都通过普通用户. 普通用户没有权限监听80端口.</p>
+<p>这里可以使用nginx配置虚拟主机, 把 vm.amosk.info的80端口映射到普通端口8000.</p>
+<ol>
+<li>安装nginx服务, 并设置开机启动</li>
+<li>
+<p>添加nginx虚拟主机配置文件 /etc/nginx/conf.d/amos.conf</p>
+<p>upstream vm.amosk.info {
+  server 127.0.0.1:8000;
+}</p>
+<p>server {
+  listen          80;
+  server_name     vm.amosk.info;</p>
+<p>location /media/  {
+    alias /home/amos/public/media/;
+  }</p>
+<p>location / {
+    proxy_pass    http://vm.amosk.info;
+  }
+}</p>
+</li>
+</ol>
+                    <a class="btn btn-default btn-xs" href="../web/e4bdbfe794a8nginxe8999ae68b9fe4b8bbe69cbae9858de7bdae.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../web/e58d87e7baa7openssl-e4bfaee5a48dheartbleede5ae89e585a8bugcve-2014-0160.html">升级OpenSSL 修复Heartbleed安全bug(CVE-2014-0160)</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-04-16 09:40
+    </span>
+    <hr>
+                <div class="summary"><p><a href="http://amosk.info/blog/wp-content/uploads/2014/04/heartbleed.png"><img alt="heartbleed" src="http://amosk.info/blog/wp-content/uploads/2014/04/heartbleed-150x150.png" /></a></p>
+<p>CVE site: <a href="http://cve.mitre.org/">http://cve.mitre.org/</a></p>
+<p>CVE detail: <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0160</a></p>
+<p>CVE detail: <a href="http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0160">http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2014-0160</a></p>
+<p>More: <a href="http://heartbleed.com/">http://heartbleed.com/</a></p>
+<p>～</p>
+<p>问题描述：OpenSSL处理TLS和DTLS心跳扩展包时有信息泄漏缺陷。TLS或DTLS客户端或服务器，可以通过发送特殊制造的TLS或DTLS心跳包，来透视连接的客户端或服务器限制访问的可能包含敏感信息的内存。</p>
+<p>～</p>
+<p>Bug引入：<a href="http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=4817504">http://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../web/e58d87e7baa7openssl-e4bfaee5a48dheartbleede5ae89e585a8bugcve-2014-0160.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../web/e9809ae8bf87-httpkej-twflvretriever-e59ca8e7babfe4b88be8bdbdyoutubee8a786e9a291.html">通过 http://kej.tw/flvretriever 在线下载YouTube视频</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-24 02:18
+    </span>
+    <hr>
+                <div class="summary"><p>为了强奸自己的耳朵，我想从下载 colleague 的讲座视频，这样就可以随时随地，反复加强对这种口音的适应。 豆瓣上（<a href="http://www.douban.com/group/topic/24048538/">http://www.douban.com/group/topic/24048538/</a>）推荐了几个，多数都需要安装EXE的客户端 :-(</p>
+<ul>
+<li><a href="http://kej.tw/flvretriever">http://kej.tw/flvretriever</a> 可以直接通过网页提供的连接下载多种质量、格式的文件 :-)</li>
+</ul>
+<p><a href="http://kej.tw/flvretriever"><img alt="Screenshot from 2014-03-24 10:17:46" src="http://amoskong.files.wordpress.com/2014/03/screenshot-from-2014-03-24-101746.png" /></a></p>
+                    <a class="btn btn-default btn-xs" href="../web/e9809ae8bf87-httpkej-twflvretriever-e59ca8e7babfe4b88be8bdbdyoutubee8a786e9a291.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../web/javascript-e5b08fe6b8b8e6888f-efbc9a2048.html">好玩的 JavaScript 小游戏 ：2048</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-20 03:21
+    </span>
+    <hr>
+                <div class="summary"><ul>
+<li>
+<p>游戏地址：  <a href="https://i-kvm.rhcloud.com/static/2048/">https://i-kvm.rhcloud.com/static/2048/</a></p>
+</li>
+<li>
+<p>代码地址：  <a href="https://github.com/gabrielecirulli/2048/">https://github.com/gabrielecirulli/2048/</a></p>
+</li>
+<li>
+<p><strong>HOW TO PLAY:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong></p>
+</li>
+<li>
+<p>知乎（为什么一玩2048就停不下来？） <a href="http://www.zhihu.com/question/23062120">http://www.zhihu.com/question/23062120</a></p>
+</li>
+<li>
+<p>另外一个中国朝代版本：http://oprilzeng.github.io/2048 ...</p></li></ul>
+                    <a class="btn btn-default btn-xs" href="../web/javascript-e5b08fe6b8b8e6888f-efbc9a2048.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../web/the-3n1-problem2.html">The 3n+1 Problem</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">

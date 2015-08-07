@@ -1,5 +1,603 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title></title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/linux.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2013-12-23T10:52:36+08:00</updated><entry><title>Fedora 20 Skype @ x86_64</title><link href="http://localhost:8000/linux/fedora-20-skype-x86_64.html" rel="alternate"></link><updated>2013-12-23T10:52:36+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2013-12-23:linux/fedora-20-skype-x86_64.html</id><summary type="html">&lt;p&gt;&lt;a href="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png"&gt;&lt;img alt="Screenshot from 2013-12-23 18:49:37" src="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title></title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/linux.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2014-11-06T14:09:50+08:00</updated><entry><title>使用BIP代理长期挂IRC</title><link href="http://localhost:8000/linux/e4bdbfe794a8bipe4bba3e79086e995bfe69c9fe68c82irc.html" rel="alternate"></link><updated>2014-11-06T14:09:50+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-11-06:linux/e4bdbfe794a8bipe4bba3e79086e995bfe69c9fe68c82irc.html</id><summary type="html">&lt;p&gt;使用BIP [1] 代理挂IRC和以前在远端服务器挂QQ升级是一个模式, 不过不是为了升级, 而是为了保存日志, 特别是在一些全球的频道, 晚上关了IRC可能错过一些有趣的讨论.&lt;/p&gt;
+&lt;p&gt;以前听说过这个功能, 但是自己没有去配置, 我想着不安全. 而且一致用命令行的irssi, 或者 emacs里的erc, 都很轻便. 今天Fam告诉我, 我们组有一个公用的服务器, 有kerbose个人账号保证安全, 于是配置了一下, 确实很实用又方便.&lt;/p&gt;
+&lt;p&gt;需要在一台长期运转的服务器上配置BIP服务, 可以参考这里详细的步骤 [2] 或 3. 然后简单配置客户端就可以.&lt;/p&gt;
+&lt;p&gt;这里说一下我觉得特别的地方:
+1) 我们的服务器是公用, 所以不能使用默认7778端口, 可以先用 nc -l xxxx 来做个监听测试, 确保其他人没有使用.
+2) on_connect_send 定义的命令是用来验证IRC服务器上的账号, 不同服务器的命令不一样.  "PRIVMSG UserServ login user password", 也可以是 "PRIVMSG NickServ :IDENTIFY user password". 这个不同在注册用户的时候就能知道.
+3) channel的定义有多种形式
+.1 channel { name = "#linaro,#linaro-meeting"; };
+.2 channel { name = "#linaro";  name="#linaro-meeting"; }; 可以在每个name后边使用其他参数定制单个channel, 比如有个别channel需要密码验证, 也可以定制是否备份日志,等等.
+.3 也可以多个channel语句
+4) bipmkpw 的使用: 不带任何参数, 根据提示输入自己的密码, 产生一个hash字符串, 需要更新到bip.conf里.
+5) 客户端的密码项包含三部分:    username:password:network,  这个用户名是bip.conf顶部定义的用户名, 密码和bipmkpw输入的一致. network是IRC网络名字, 也是在bip.conf里定义的. 客户端还有一个密码是验证昵称的, 不要混淆.
+6) 时区问题, log里显示的是服务器的时区, 还没有解决&lt;/p&gt;
+&lt;p&gt;[1] &lt;a href="http://en.wikipedia.org/wiki/BIP"&gt;http://en.wikipedia.org/wiki/BIP&lt;/a&gt;
+[2] &lt;a href="https://wiki.mageia.org/en/QA_procedure:Bip"&gt;https://wiki.mageia.org/en/QA_procedure:Bip&lt;/a&gt;
+[3] &lt;a href="https://wiki.linaro.org/Resources/HowTo/BIP"&gt;https://wiki.linaro.org/Resources/HowTo/BIP&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>'Fedora 20: mutt/msmtp: 使用Gmail发送邮件'</title><link href="http://localhost:8000/linux/fedora-20-muttmsmtp-e4bdbfe794a8gmaile58f91e98081e982aee4bbb6.html" rel="alternate"></link><updated>2014-11-04T19:51:18+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-11-04:linux/fedora-20-muttmsmtp-e4bdbfe794a8gmaile58f91e98081e982aee4bbb6.html</id><summary type="html">&lt;p&gt;在mutt里使用fetchmail接受gmail很容易, ~/.fetchmailrc一句命令就能搞定. 今天记录一下, 使用msmtp发送Gmail, 重点在于必须使用tls, 需要的认证文件需要从ca-certificates包里获得, 路径为: /etc/pki/tls/certs/ca-bundle.crt, 这和ubuntu里不一样.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# cat ~/.msmtprc&lt;/span&gt;
+&lt;span class="cp"&gt;#Company&lt;/span&gt;
+&lt;span class="n"&gt;account&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt;
+&lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="n"&gt;smtp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;
+&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;akong&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;company&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;logfile&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Mail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;msmtp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+
+&lt;span class="cp"&gt;#Gmail&lt;/span&gt;
+&lt;span class="n"&gt;account&lt;/span&gt; &lt;span class="n"&gt;gmail&lt;/span&gt;
+&lt;span class="n"&gt;protocol&lt;/span&gt; &lt;span class="n"&gt;smtp&lt;/span&gt;
+&lt;span class="n"&gt;tls&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;
+&lt;span class="n"&gt;tls_starttls&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;
+&lt;span class="n"&gt;tls_trust_file&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pki&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tls&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certs&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ca&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bundle&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;crt&lt;/span&gt;
+&lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="n"&gt;smtp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="mi"&gt;587&lt;/span&gt;
+&lt;span class="n"&gt;auth&lt;/span&gt; &lt;span class="n"&gt;login&lt;/span&gt;
+&lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;kongjianjun&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;kongjianjun&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="n"&gt;xxxxxx&lt;/span&gt;
+&lt;span class="n"&gt;logfile&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="n"&gt;Mail&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;msmtp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改完msmtp可以使用下面的命令进行测试:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Subject: Test MailrnrnThis is a test mail&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;msmtp&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;kongjianjun&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;kongjianjun&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在~/.muttrc里添加两个宏用来选择发送账号, 这个设置完新建邮件使用最新设置的地址.在编辑邮件过程中使用 &lt;esc&gt;f 来编辑发送地址.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;macro&lt;/span&gt; &lt;span class="nx"&gt;generic&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;esc&amp;gt;1&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;:set from=akong@company.com&amp;quot;&lt;/span&gt;
+&lt;span class="nx"&gt;macro&lt;/span&gt; &lt;span class="nx"&gt;generic&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;esc&amp;gt;2&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;:set from=kongjianjun@gmail.com&amp;quot;&lt;/span&gt;
+
+&lt;span class="err"&gt;同时设置秘密抄送&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="nx"&gt;macro&lt;/span&gt; &lt;span class="nx"&gt;generic&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;esc&amp;gt;1&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;:set from=akong@company.com ; my_hdr BCC:Amos Kong &amp;lt;akong@company.com&amp;gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nx"&gt;macro&lt;/span&gt; &lt;span class="nx"&gt;generic&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;esc&amp;gt;2&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;:set from=kongjianjun@gmail.com ; unmy_hdr BCC&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>修改mutt里GPG 签名公钥附件名</title><link href="http://localhost:8000/linux/e4bfaee694b9mutte9878cgpg-e7adbee5908de585ace992a5e99984e4bbb6e5908d.html" rel="alternate"></link><updated>2014-11-04T18:22:15+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-11-04:linux/e4bfaee694b9mutte9878cgpg-e7adbee5908de585ace992a5e99984e4bbb6e5908d.html</id><summary type="html">&lt;p&gt;在mutt里配置好gpg后, 加密邮件会附带一个公钥文件, 这个文件名在Gmail里是 noname, 在QQ邮箱里是tcmime.1591.1634.2471.bin. 这些都会给人造成困惑, Thunderbird 里会把这个文件命名为 signature.asc&lt;/p&gt;
+&lt;p&gt;在archlinux 的github [1], 有一个patch为mutt添加了定义公钥文件名称和描述的功能. 于是从FedoraProject[2]下载mutt代码, 重新用rpmbuild编译rpm安装. 当然也可以使用Upstream[3]的代码, 记着configure时候打开需要的特性, 如 --enable-hcache 用于缓冲邮件头部改进加载速度.&lt;/p&gt;
+&lt;p&gt;安装完mutt, 只需要在~/.Muttrc里添加如下内容, 就可以修改公钥文件名了.&lt;/p&gt;
+&lt;p&gt;set pgp_mime_signature_filename="signature.asc"
+set pgp_mime_signature_description="Digital signature"&lt;/p&gt;
+&lt;p&gt;[1] &lt;a href="https://github.com/felix/archlinux/blob/master/mutt/pgp_verbose_mime.patch"&gt;https://github.com/felix/archlinux/blob/master/mutt/pgp_verbose_mime.patch
+&lt;/a&gt;[2] git://pkgs.fedoraproject.org/mutt.git
+[3] hg clone http://hg.code.sf.net/p/mutt/code mutt-upstream&lt;/p&gt;</summary></entry><entry><title>Looking for a SW Engineer to join the Avocado team (Power8)</title><link href="http://localhost:8000/linux/looking-for-a-sw-engineer-to-join-the-avocado-team-power8.html" rel="alternate"></link><updated>2014-09-30T03:41:56+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-09-30:linux/looking-for-a-sw-engineer-to-join-the-avocado-team-power8.html</id><summary type="html">&lt;p&gt;Hi folks. (from: https://www.redhat.com/archives/autotest-kernel/2014-September/msg00012.html)&lt;/p&gt;
+&lt;p&gt;We're looking for a SW Engineer to work on the KVM Test Automation team (currently working on Avocado), focusing on Power8.&lt;/p&gt;
+&lt;p&gt;The primary assignment of this person will be to work on the Power8 port of Avocado and to be the person responsible for anything related to power8 in our KMV test automation infrastructure in the long term.&lt;/p&gt;
+&lt;p&gt;If you know of somebody who would fit the description below and is willing to join our team, please point them to the Red Hat job site or contact me in private.&lt;/p&gt;
+&lt;p&gt;The position is public in this URL:
+&lt;a href="http://jobs.redhat.com/jobs/descriptions/software-engineer-automating-testing-brno-jihomoravsky-kraj-czech-republic-job-1-4786737"&gt;http://jobs.redhat.com/jobs/descriptions/software-engineer-automating-testing-brno-jihomoravsky-kraj-czech-republic-job-1-4786737&lt;/a&gt; (don't care about the work place)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Company&lt;/span&gt; &lt;span class="n"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;At&lt;/span&gt; &lt;span class="n"&gt;Red&lt;/span&gt; &lt;span class="n"&gt;Hat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;we&lt;/span&gt; &lt;span class="n"&gt;connect&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;innovative&lt;/span&gt; &lt;span class="n"&gt;community&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;customers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;partners&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;contributors&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;deliver&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;stack&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt;
+    &lt;span class="n"&gt;trusted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;high&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;performing&lt;/span&gt; &lt;span class="n"&gt;technologies&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;solve&lt;/span&gt; &lt;span class="n"&gt;business&lt;/span&gt;
+    &lt;span class="n"&gt;problems&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;We&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;billion&lt;/span&gt; &lt;span class="n"&gt;dollar&lt;/span&gt; &lt;span class="n"&gt;S&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;P&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt; &lt;span class="n"&gt;company&lt;/span&gt; &lt;span class="n"&gt;offering&lt;/span&gt;
+    &lt;span class="n"&gt;solutions&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;storage&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;together&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;award&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;winning&lt;/span&gt; &lt;span class="n"&gt;global&lt;/span&gt; &lt;span class="n"&gt;customer&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;consulting&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;implementation&lt;/span&gt; &lt;span class="n"&gt;services&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;Job&lt;/span&gt; &lt;span class="n"&gt;summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;Red&lt;/span&gt; &lt;span class="n"&gt;Hat&lt;/span&gt; &lt;span class="n"&gt;Engineering&lt;/span&gt; &lt;span class="n"&gt;team&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Brno&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;looking&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+    &lt;span class="n"&gt;Software&lt;/span&gt; &lt;span class="n"&gt;Engineer&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;join&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;team&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Brno&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Czech&lt;/span&gt;
+    &lt;span class="n"&gt;Republic&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Focusing&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Power8&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ppc64&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;work&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt;
+    &lt;span class="n"&gt;development&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;testing&lt;/span&gt; &lt;span class="n"&gt;frameworks&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;tools&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;automate&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt;
+    &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;coverage&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Red&lt;/span&gt; &lt;span class="n"&gt;Hat&lt;/span&gt; &lt;span class="n"&gt;virtualization&lt;/span&gt; &lt;span class="n"&gt;technologies&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt;
+    &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;IBM&lt;/span&gt; &lt;span class="n"&gt;Power8&lt;/span&gt; &lt;span class="n"&gt;architecture&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;As&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Software&lt;/span&gt; &lt;span class="n"&gt;Engineer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt; &lt;span class="n"&gt;work&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;globally&lt;/span&gt; &lt;span class="n"&gt;distributed&lt;/span&gt; &lt;span class="n"&gt;team&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;develop&lt;/span&gt;
+    &lt;span class="n"&gt;critical&lt;/span&gt; &lt;span class="n"&gt;technology&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;Red&lt;/span&gt; &lt;span class="n"&gt;Hat&lt;/span&gt; &lt;span class="n"&gt;products&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;collaborating&lt;/span&gt;
+    &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;community&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;many&lt;/span&gt; &lt;span class="n"&gt;projects&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;Primary&lt;/span&gt; &lt;span class="n"&gt;job&lt;/span&gt; &lt;span class="n"&gt;responsibilities&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Design&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;implement&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;features&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;testing&lt;/span&gt;
+      &lt;span class="n"&gt;frameworks&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Avocado&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Autotest&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Integrate&lt;/span&gt; &lt;span class="n"&gt;multiple&lt;/span&gt; &lt;span class="n"&gt;automation&lt;/span&gt; &lt;span class="n"&gt;tools&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Continuous&lt;/span&gt;
+      &lt;span class="n"&gt;Integration&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CI&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;system&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Power8&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Assist&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;Quality&lt;/span&gt; &lt;span class="n"&gt;Assurance&lt;/span&gt; &lt;span class="n"&gt;team&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;developing&lt;/span&gt; &lt;span class="n"&gt;complex&lt;/span&gt;
+      &lt;span class="n"&gt;tests&lt;/span&gt; &lt;span class="n"&gt;involving&lt;/span&gt; &lt;span class="n"&gt;virtualization&lt;/span&gt; &lt;span class="n"&gt;technologies&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Promote&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;culture&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;automation&lt;/span&gt; &lt;span class="n"&gt;internally&lt;/span&gt; &lt;span class="n"&gt;within&lt;/span&gt; &lt;span class="n"&gt;Red&lt;/span&gt;
+      &lt;span class="n"&gt;Hat&lt;/span&gt;
+
+&lt;span class="n"&gt;Required&lt;/span&gt; &lt;span class="n"&gt;skills&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;years&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;significant&lt;/span&gt; &lt;span class="n"&gt;software&lt;/span&gt; &lt;span class="n"&gt;development&lt;/span&gt; &lt;span class="n"&gt;experience&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;
+      &lt;span class="n"&gt;Linux&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Good&lt;/span&gt; &lt;span class="n"&gt;understanding&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;inner&lt;/span&gt; &lt;span class="n"&gt;workings&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt;
+      &lt;span class="n"&gt;distribution&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Experience&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="n"&gt;automation&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;continuous&lt;/span&gt; &lt;span class="n"&gt;integration&lt;/span&gt;
+      &lt;span class="n"&gt;systems&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Familiarity&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;development&lt;/span&gt; &lt;span class="n"&gt;languages&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;C&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Experience&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;projects&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;development&lt;/span&gt; &lt;span class="n"&gt;tools&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Familiarity&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;IBM&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;Power8&lt;/span&gt; &lt;span class="n"&gt;architecture&lt;/span&gt;
+    &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Bachelor&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;degree&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;computer&lt;/span&gt; &lt;span class="n"&gt;science&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;equivalent&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Thanks!&lt;/p&gt;</summary></entry><entry><title>'转: 使用 ffmpeg 缩放、裁剪、剪辑视频'</title><link href="http://localhost:8000/linux/e8bdac-e4bdbfe794a8-ffmpeg-e7bca9e694bee38081e8a381e589aae38081e589aae8be91e8a786e9a291.html" rel="alternate"></link><updated>2014-09-29T12:50:59+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-09-29:linux/e8bdac-e4bdbfe794a8-ffmpeg-e7bca9e694bee38081e8a381e589aae38081e589aae8be91e8a786e9a291.html</id><summary type="html">&lt;p&gt;以前系统里装了一个剪辑软件, 用起来很占资源. 刚才想简单剪辑一个视频, 搜到下面文章, 比图形界面方便多了 :-)&lt;/p&gt;
+&lt;p&gt;我们平时使用手机拍摄的视频一般都在1080p及以上，在实际应用中，比如共享给朋友等，可能需要处理一下会比较方便。下面列出几个 ffmpeg 常用的处理视频方法（如果只需要格式转换，可以参考我之前的一篇文章&lt;a href="http://archboy.org/2011/08/17/h264-encode-mpeg2-to-mp4/"&gt;《使用H264编码转换视频》&lt;/a&gt;）&lt;/p&gt;
+&lt;h2 id="_1"&gt;缩小视频&lt;/h2&gt;
+&lt;p&gt;假设原始视频尺寸是 1080p（即 1920×1080 px，16:9），使用下面命令可以缩小到 480p：&lt;/p&gt;
+&lt;table &gt;
+&lt;tbody &gt;
+&lt;tr &gt;
+
+&lt;td &gt;
+
+
+    $ ffmpeg -i a.mov -vf scale=853:480 -acodec aac -vcodec h264 out.mp4
+
+
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;各个参数的含义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;-i a.mov 指定待处理视频的文件名&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;-vf scale=853:480 vf 参数用于指定视频滤镜，其中 scale 表示缩放，后面的数字表示缩放至 853×480 px，其中的 853px 是计算而得，因为原始视频的宽高比为 16:9，所以为了让目标视频的高度为 480px，则宽度 = 480 x 9 / 16 = 853&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;-acodec aac 指定音频使用 aac 编码。注：因为 ffmpeg 的内置 aac 编码目前（写这篇文章时）还是试验阶段，故会提示添加参数 “-strict -2” 才能继续，尽管添加即可。又或者使用外部的 libfaac（需要重新编译 ffmpeg）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;-vcodec h264 指定视频使用 h264 编码。注：目前手机一般视频拍摄的格式（封装格式、文件格式）为 mov 或者 mp4，这两者的音频编码都是 aac，视频都是 h264。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;out.mp4 指定输出文件名&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;上面的参数 scale=853:480 当中的宽度和高度实际应用场景中通常只需指定一个，比如指定高度为 480 或者 720，至于宽度则可以传入 “-1” 表示由原始视频的宽高比自动计算而得。即参数可以写为：scale=-1:480，当然也可以 scale=480:-1 &lt;!-- more --&gt;&lt;/p&gt;
+&lt;h2 id="_2"&gt;裁剪视频&lt;/h2&gt;
+&lt;p&gt;有时可能只需要视频的正中一块，而两头的内容不需要，这时可以对视频进行裁剪（crop），比如有一个竖向的视频 1080 x 1920，如果指向保留中间 1080×1080 部分，可以使用下面的命令：&lt;/p&gt;
+&lt;table &gt;
+&lt;tbody &gt;
+&lt;tr &gt;
+
+&lt;td &gt;
+
+
+    $ ffmpeg -i a.mov -strict -2 -vf crop=1080:1080:0:420 out.mp4
+
+
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;其中的 crop=1080:1080:0:420 才裁剪参数，具体含义是 crop=width:height:x:y，其中 width 和 height 表示裁剪后的尺寸，x:y 表示裁剪区域的左上角坐标。比如当前这个示例，我们只需要保留竖向视频的中间部分，所以 x 不用偏移，故传入0，而 y 则需要向下偏移：(1920 – 1080) / 2 = 420&lt;/p&gt;
+&lt;p&gt;视频缩放和裁剪是可以同时进行的，如下命令则为将视频缩小至 853×480，然后裁剪保留横向中间部分：&lt;/p&gt;
+&lt;table &gt;
+&lt;tbody &gt;
+&lt;tr &gt;
+
+&lt;td &gt;
+
+
+    $ ffmpeg -i IMG_4940.MOV -strict -2 -vf scale=853:480,crop=480:480:186:0 out.mp4
+
+
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id="_3"&gt;剪辑视频&lt;/h2&gt;
+&lt;p&gt;如果有一段很长的视频只需保留其中的一段，可以使用下面命令对视频进行剪辑。&lt;/p&gt;
+&lt;table &gt;
+&lt;tbody &gt;
+&lt;tr &gt;
+
+&lt;td &gt;
+
+
+    $ ffmpeg -i a.mov -ss 00:00:21 -t 00:00:10 -acodec aac -vcodec h264 -strict -2 out.mp4
+
+
+
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;其中 -ss 00:00:21 表示开始剪辑的位置（时间点），-t 00:00:10 表示剪辑的长度，即 10 秒钟。&lt;/p&gt;
+&lt;p&gt;当然一段视频是可以在一个命令里同时进行剪辑、缩放、裁剪的，只需把相关的参数合在一起即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;From&lt;/strong&gt; &lt;a href="http://archboy.org/"&gt;ArchBoy&lt;/a&gt;, &lt;strong&gt;post&lt;/strong&gt; &lt;a href="http://archboy.org/2014/08/21/ffmpeg-scale-cut-crop-video/"&gt;使用 ffmpeg 缩放、裁剪、剪辑视频&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>Mutt：使用Fetchmail收邮件时在服务器上只保留部分文件夹内容</title><link href="http://localhost:8000/linux/muttefbc9ae4bdbfe794a8fetchmaile694b6e982aee4bbb6e697b6e59ca8e69c8de58aa1e599a8e4b88ae58faae4bf9de79599e983a8e58886e69687e4bbb6e5a4b9.html" rel="alternate"></link><updated>2014-09-23T09:48:52+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-09-23:linux/muttefbc9ae4bdbfe794a8fetchmaile694b6e982aee4bbb6e697b6e59ca8e69c8de58aa1e599a8e4b88ae58faae4bf9de79599e983a8e58886e69687e4bbb6e5a4b9.html</id><summary type="html">&lt;p&gt;公司邮箱空间只有４Ｇ，邮件太多，特别是社区里的邮件．现在是收到警告就上去删一次，太麻烦了．当然强大的Gmail不存在这个问题.&lt;/p&gt;
+&lt;p&gt;~/.fetchmailrc 里可以执行多次poll 命令, 针对不同的文件夹采用不同的选项参数.
+"no keep" 表示不在服务器保留接受过的邮件.
+mda命令是对poll回来的邮件做处理, 每个poll命令后面需要紧跟一个mda命令.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# Only keep important internal mails on mail server&lt;/span&gt;
+&lt;span class="n"&gt;poll&lt;/span&gt; &lt;span class="n"&gt;mailserver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="n"&gt;proto&lt;/span&gt; &lt;span class="n"&gt;imap&lt;/span&gt; &lt;span class="n"&gt;authenticate&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;akong&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="n"&gt;mypasswd&lt;/span&gt; &lt;span class="n"&gt;folder&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;inbox&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;rhvirt&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;rhkernel&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;fetchall&lt;/span&gt; &lt;span class="n"&gt;keep&lt;/span&gt; &lt;span class="n"&gt;ssl&lt;/span&gt;
+&lt;span class="n"&gt;mda&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/usr/bin/procmail -d %T&amp;quot;&lt;/span&gt;
+
+&lt;span class="cp"&gt;# Upstream maillists have archive, I also backup them in Gmail, so don&amp;#39;t keep them in company mail server.&lt;/span&gt;
+&lt;span class="n"&gt;poll&lt;/span&gt; &lt;span class="n"&gt;mailserver&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="n"&gt;proto&lt;/span&gt; &lt;span class="n"&gt;imap&lt;/span&gt; &lt;span class="n"&gt;authenticate&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;akong&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="n"&gt;mypasswd&lt;/span&gt; &lt;span class="n"&gt;folder&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;upstream&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;flood&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;seabios&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="n"&gt;autotest&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;fetchall&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;keep&lt;/span&gt; &lt;span class="n"&gt;ssl&lt;/span&gt;
+&lt;span class="n"&gt;mda&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/usr/bin/procmail -d %T&amp;quot;&lt;/span&gt;
+
+&lt;span class="cp"&gt;# set sleep time before next polling&lt;/span&gt;
+&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;daemon&lt;/span&gt; &lt;span class="mi"&gt;180&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>'转: 姚欣宇谈开源社区的创立和运作'</title><link href="http://localhost:8000/linux/e8bdac-e5a79ae6aca3e5ae87e8b088e5bc80e6ba90e7a4bee58cbae79a84e5889be7ab8be5928ce8bf90e4bd9c.html" rel="alternate"></link><updated>2014-09-21T04:33:13+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-09-21:linux/e8bdac-e5a79ae6aca3e5ae87e8b088e5bc80e6ba90e7a4bee58cbae79a84e5889be7ab8be5928ce8bf90e4bd9c.html</id><summary type="html">&lt;p&gt;姚欣宇，&lt;a href="http://gitcafe.com/"&gt;GitCafe&lt;/a&gt;创始人。自称Thomas，网络ID是ghosTM55。他自己这么介绍自己：&lt;/p&gt;
+&lt;blockquote&gt;我是在校学生，计算机系信息安全专业，大三。我个人比较喜欢计算机科学，哲学，运动，音乐与武术。我是Shanghai Linux User Group的组织者之一。我富有激情、理想、创新以及号召力。我不是牛人。&lt;/blockquote&gt;
+
+&lt;p&gt;本文选自&lt;a href="http://ghostunix.org/blog/"&gt;他的博客&lt;/a&gt;，是他自己整理自2010年在盛大创新院的演讲，为大家分享个人对社区文化的理解以及运作经验。&lt;/p&gt;
+&lt;h2 id="_1"&gt;为什么&lt;/h2&gt;
+&lt;p&gt;为什么要做这样的一个演讲？一，在国内，我看到有很多朋友都想创立各类社区，却找不到人和文献去学习以及借鉴经验。我今天的演讲稿会发布到我的BLOG中，有助于这些真正想将社区做好的朋友进行参考。二，社区的创立并不困难，但是社区的规模上升到一定程度后，其组织者、管理者需要考虑的问题非常多，由于其特殊性，有的时候问题的复杂度堪比商业项目中遇到的重重阻碍，我在举出各种事例的同时，在座的各位，也可以进行发散性的思考，帮助自己在生活中或者是从事的项目中遇到的问题提供新的解决方案与点子。&lt;/p&gt;
+&lt;h2 id="_2"&gt;开源社区的性质&lt;/h2&gt;
+&lt;p&gt;好了，各位，我们可以看到，在上海有许许多多的社区，计算机技术社区是其中的一个子集，在这样一个子集中，又有许多门派，有Python、Ruby、 Linux，等等。那么，首先我们要思考一点，为什么会有人需要成立各式各样的社区，参与者的心态和组织者的动机分别是怎样的。&lt;/p&gt;
+&lt;p&gt;开源社区有着自身的文化底蕴和哲学思想，所以这样的社区往往有着很多自身的特征，并且会因为人本身的因素，导致特征与特征之间产生矛盾。我将开源以及技术社区做了三个分类，分别为纯非盈利社区、半商业社区以及纯商业社区。&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;p&gt;首先说一下纯非盈利社区，我们Shanghai Linux User Group就是比较纯粹的非盈利社区，LUG算是一个约定俗成，全世界各个地方都会有LUG，属于区域性组织，在国内目前运营情况较为稳定的LUG有BJLUG，SHLUG以及SZLUG，HZLUG刚刚起步。其中SHLUG成立时间最早，为97年。国内成立LUG的地区都有一个鲜明的共性，那就是平均房价都超过了两万。&lt;/p&gt;
+&lt;p&gt;LUG一般都是纯粹的非盈利组织，没有任何商业目的，对于组织者来说，要做的就是创建一个好的交流平台，线上的或是线下的，来提供给有着共同兴趣和志向的参与者来交流自己的想法和问题。这样的社区需要组织者有极大的奉献精神及组织能力，一会儿我会为大家分享我的一些管理经验。&lt;/p&gt;
+&lt;p&gt;其次是半商业社区，我们知道ChinaUnix、ubuntu这样的社区其实是有商业公司作为正规的管理机构支撑在幕后进行运作。那么这样的社区一般以社区本身白手起家，扩大了影响力之后，以社区本身的人力、资源、影响力为核心竞争力来开展一系列与自身社区相关的商业活动并创造出盈利模式。这样的社区我称之为半商业社区，虽然牵扯到商业行为与盈利问题，但是相对来说社区整体还是非常独立的。&lt;/p&gt;
+&lt;p&gt;最后是纯商业社区，现在全世界哪个社区的开发者赚的钱最多，毫无疑问，苹果。像苹果、MeeGO、Android这样的社区我个人理解为纯商业社区。即组织者以及绝大多数参与者都是冲着商业目的参与到社区中来的。&lt;/p&gt;
+&lt;p&gt;不同性质的社区有着截然不同的管理与组织方法，细微的差别会导致管理与发展上的巨大差异。但是任何社区都有着相同的立足点，那就是参与者们抱有共同的兴趣爱好和价值观。&lt;/p&gt;
+&lt;p&gt;在理解了社区的大致分类之后，回到我之前所抛出的问题，为什么要组织与参与社区。我认为主要有以下几点，找到结交到志同道合的朋友、千里马或是伯乐，通过交流拓宽自己的视野，为自己或企业创造财富与一定的声望。以上这些，根据社区的性质的不同而占有的成分比例不同。&lt;/p&gt;
+&lt;h2 id="_3"&gt;社区的组成&lt;/h2&gt;
+&lt;p&gt;那么，作为一个开源社区，传统上来说，会有以下几个关键的组成因素：&lt;/p&gt;
+&lt;h3 id="_4"&gt;邮件列表&lt;/h3&gt;
+&lt;p&gt;作为一个开源项目也好，组织也好，邮件列表是必不可少的，社区内的参与者需要通过邮件列表来进行项目以及问题的交流和沟通，在早些时候我写过&lt;a href="http://www.ghostunix.org/?p=161"&gt;一篇文章&lt;/a&gt;来向新手普及和说明邮件列表的好处。总得来说，邮件列表能够给人们提供一个严肃交流的环境，促进沟通效率。&lt;/p&gt;
+&lt;p&gt;邮件列表自身的专业性也能为开源社区设立一定的门槛，保证参与者需要理解纯正的黑客文化才能融入到社区中，这点非常关键。&lt;/p&gt;
+&lt;h3 id="_5"&gt;网站&lt;/h3&gt;
+&lt;p&gt;当人们听说了你的社区，首先会去google，找到的就应当是你的网站，网站是社区的宣传平台，来提供访问者所需的资讯。&lt;/p&gt;
+&lt;h3 id="irc"&gt;IRC&lt;/h3&gt;
+&lt;p&gt;IRC是比较古老的一种互联网通讯手段，在一台IRC服务器上，有多个IRC频道可以让连接到该服务器的人加入聊天。它可以算是即时通讯工具。&lt;/p&gt;
+&lt;p&gt;在一个IRC频道中，人可以多至上千，其主要用途在于问题的即时交流与线上会议，和适当的闲聊。这三个要素是邮件列表无法实现或者不应该去实现的。&lt;/p&gt;
+&lt;h3 id="_6"&gt;线下活动&lt;/h3&gt;
+&lt;p&gt;线下活动并不是必须的，根据社区性质的不同，组织线下活动的频率与形式也会不同。线下活动更多的是促进社区内的朋友在现实生活中结识，找到商业伙伴或者是休闲伙伴，从而增进社区的凝聚力。也就是说，线下活动的关键因素是人，最终目的也是在人和人上。&lt;/p&gt;
+&lt;p&gt;就纯非盈利社区来说，线下活动的组织极为关键。一个非盈利社区要做好，最关键的是社区素质，也就是参与者的层次，接下来是人气，最后是交流的深度。线下活动的组织频率很大程度上标志着一个非盈利社区是否运作健康以及优秀。&lt;/p&gt;
+&lt;p&gt;就半商业社区以及纯商业社区来说，线下活动的组织的侧重点则应当在质量上，少而精是关键。需要有专业的组织者来对全局进行较好的掌控与策划，在非盈利社区的活动上，允许犯错，但是作为商业组织的活动来说，任何一点失败都会导致不可估量的商业损失。&lt;/p&gt;
+&lt;h3 id="_7"&gt;参与者与组织者&lt;/h3&gt;
+&lt;p&gt;在任何一个社区中，人永远是最关键的因素与核心。对于非盈利社区，&lt;strong&gt;组织者与参与者的界限划分的不应当太清楚&lt;/strong&gt;，我见过不少非盈利社区的组织者喜欢高调向别人介绍自己是某某组织的组织者。这样会给人感觉组织者有名或利的企图，作为非盈利社区的组织者应当极力避免这类情况的发生，并且做出正确的社区文化引导。那么，比如今天我站在这里，就可以以一个社区组织者的身份来进行相关问题的讨究与交流，可以代表SHLUG的一些观点，为SHLUG做一些正面的宣传。&lt;/p&gt;
+&lt;p&gt;在平时，我也只是SHLUG活动的参与者，享受活动和交流过程中带来的快乐和喜悦。这样的尺度要拿捏好，其实是比较难的。非盈利社区的运作对于其组织者的要求非常高，可以说是极其苛刻，可能很多朋友并没有意识到这一点，接下来我就为大家一一说明，作为一个组织者，你需要有…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;责任心&lt;/strong&gt; : 曾经我和chinalug.org的负责人同时也是BJLUG的前任主席Fred交流过，希望能够有一个wiki页面，来罗列出国内所有LUG组织以及其管 理者。Fred向我抱怨这样的列表并没有多大的意义，因为很多LUG没组织一会儿，就负责人不见了踪影，活动也再也不办了。当时就让我想到，作为一个社区组织者，首当其冲的是责任心，没有责任心，做什么事情都会半途而废。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;自身对于社区文化的理解&lt;/strong&gt;: 你们看到过有哪个篮球队队员是穿钉鞋打球的么? 我看到过不止一个人想通过QQ群来成立LUG的。如果连自己本身都还对开源社区和技术社区一知半解甚至完全不理解，怎么可能能够创建或组织好一个社区？&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;激情&lt;/strong&gt;: 作为一个社区，激情是其持续发展的最大源动力，组织者的激情是其做好一切社区工作的第一条件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;时间&lt;/strong&gt;: 光有激情远远不够，稳定的业余时间也是一大必要条件，时间其实代表了很多，恒心、执行力、效率等等。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;管理能力&lt;/strong&gt;: 非盈利社区组织者的管理能力会直接影响到社区能否更好的发展下去，我会在稍后的案例分析环节中为大家讲述社区的组织者一般会遇到的问题以及合理的解决方案。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;社交能力&lt;/strong&gt;: 社交能力对于技术从业者来说其实很重要，李开复曾经也着重提到过这一点，有交流有沟通才能开拓视野，向身边的人学习到东西。作为社区的组织者，社交能力为必要条件，其中很大程度的，需要一定社会经验，才能使社交变得有效。到这里，矛盾的地方出现了，我们知道，在国内学生往往没有任何社会经验，读死书是学生的天职，即使在学校里担任过一些职务哪怕是比较大的社团的社长，那也是小打小闹，真的要组织一个面向社会性质的社区，往往学生无法胜任。于是问题又来了，已经踏上社会的并且有一定社会经验的朋友即使有激情有管理能力，往往工作、家庭等因素导致无法较好的去承担这样的责任。所以对于任何一个社区来说，尤其是在国内，我鼓励团队管理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;协助团队&lt;/strong&gt;: 在创建社区的初期，一个人或许可以挑起很多担子，但是随着社区的发展，人多起来之后，需要有一个能够与你同舟共济的团队帮助参与到社区的管理和决策工作中来。这样的团队人数最好为奇数，并且不益有太多人，最佳方案为3人或5人。团队中每一位管理员的权利都应当平等，可以有一个总决策者，但是其权利也不是绝对的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;商业运作能力&lt;/strong&gt;: 即使是非盈利社区，也需要有一定的资金支持，赞助主要有三类，活动场地的赞助、活动经费的赞助以及其他。作为一个社区的组织者，需要寻找合适的商业赞助，其中的尺度要自己衡量。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接下来，我就开始进行一些案例分析，通过现实的例子，来进一步的说明以上提到的一些观点和问题。&lt;/p&gt;
+&lt;h2 id="_8"&gt;案例分析&lt;/h2&gt;
+&lt;h3 id="1"&gt;案例1: 邮件列表的管理与事例&lt;/h3&gt;
+&lt;p&gt;在刚才，我提到了邮件列表是作为一个开源社区最为主要的交流平台。在管理邮件列表的时候，需要避免以下情况的发生:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;人身攻击与辱骂&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;毫无意义的抱怨&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对政府的过多讽刺&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;脑残问题的交流与讨论&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上四点都要严格杜绝，管理员在这些问题上的放纵最后会直接导致不可估量的后果。在问题出现的初期需要进行控制和引导，问题严重后需要有强制措施。&lt;/p&gt;
+&lt;p&gt;我亲身经历的两个失败案例，一个是气走了管理员，流失大量愿意好好交流技术的参与者。另一个是引起大规模争论，导致邮件列表暂时停止提供服务。&lt;/p&gt;
+&lt;h3 id="2"&gt;案例2: 线下活动的管理与事例&lt;/h3&gt;
+&lt;p&gt;线下活动要组织的好，事先的准备工作必不可少。交通便利的聚会地点是第一要素，活动的流程也需要提早确定并告知参与者。我们SHLUG的惯例是每个月的第一天由我发thread来组织当月技术聚会的演讲主题征募工作，大家针对自己想听或者想讲的话题参与讨论。像这样规律的活动流程安排可以让每个人都心理有数。在演讲主题与演讲者确定之后，需要有一定的审核工作，具体为什么，不能说的太细。最后是聚餐地点的把握，当一次成功的聚会活动办好后，总会有很多参与者意犹未尽，希望能够一起聚餐。实现做好相关的工作不会让管理者到时候捉襟见肘。&lt;/p&gt;
+&lt;p&gt;以上四点非常重要，需要每一位活动组织者去进行周到的考虑。在活动过程中，帮助演讲者和整个活动控制节奏也是一个关键要素，太早结束活动或超时都会引起不必要的麻烦。活动结束后，主动帮助场地赞助商清理场地，并与场地赞助商维持良好的合作关系。&lt;/p&gt;
+&lt;p&gt;线下活动的失败案例并不是太多，有些活动组织过程中的问题只可意会，并没有绝对错误的说法。就我个人经历过的失败的活动有几次印象较为深刻，总结下来为两个问题，分别是演讲者催眠问题与砸场子问题。&lt;/p&gt;
+&lt;p&gt;前者问题比较多见，我看到有些社区的活动演讲主题非常多，往往一下午能讲上5个甚至以上的topic，不间断的演讲对于治疗失眠有着绝佳的疗效。另一个完全极端的方面是砸场子问题，因为在这里，问题是参与者反应过度，而前者的问题是毫无反应。我看到过有一次商业活动，是与Linux和开源技术相关，却有一个演讲者是用着Windows上的Microsoft Office来播放他的slide的，这个时候就有好事者挑衅引起了争端，到最后组织者与演讲者都难以下台，活动结束后反应奇差。&lt;/p&gt;
+&lt;h3 id="3-mozilla"&gt;案例3: Mozilla的成功与挑战&lt;/h3&gt;
+&lt;p&gt;现在我们来看4个成功案例，前两个为商业社区，后两个为非盈利社区，首先是Mozilla，Mozilla是早期通过开源核心竞争产品以及组建开源社区成功的组织。它的前身是Netscape，当时的Netscape在90年代中期占据着90%的浏览器市场份额，后来在第一次浏览器大战中败给了微软的绑定自家IE的市场营销策略。Netscape是一家有着深厚技术功底的企业，它发明了SSL，创造了JavaScript，但是其核心产品却被干掉了。好在当时Netscape的一位高管阅读了Eric S. Raymond的&lt;a href="http://www.aka.org.cn/Docs/c&amp;amp;b.html"&gt;《大教堂与集市》&lt;/a&gt;，在最后关头，Mozilla社区被创建，开源浏览器Firefox诞生。&lt;/p&gt;
+&lt;p&gt;Mozilla目前随着Linux的日益普及以及Web 2.0时代的到来飞速地成长着， 通过开放开发接口，让更多的技术爱好者参与到其产品的发展中，实现了无数双赢的局面。现在，Mozilla的模式被许多大企业争相模仿，主要的挑战会来自于Google Chrome。&lt;/p&gt;
+&lt;h3 id="4-canonical"&gt;案例4: Canonical的成功与挑战&lt;/h3&gt;
+&lt;p&gt;Canonical的成长道路与Mozilla大不相同，有着有钱的老板，大量的财力在背后支撑运作。先通过一定的资金募集到优秀的开发人员，基于当时现有的Debian系统，闭门造车，主攻Linux在当时的一个弱项，桌面应用体验。结果大为成功，ubuntu如今几乎就是对Linux完全不了解但听说过的人对Linux这个词的定义。&lt;/p&gt;
+&lt;p&gt;ubuntu有一个有财力的技术爱好者用心培养，并且在开发之处就确定了明确的研发策略。通过对同类型产品的弱点研究，改进这个弱点，通过金钱砸出一个优秀的社区，快速抢占市场份额，到最后家喻户晓。&lt;/p&gt;
+&lt;p&gt;Canonical的挑战主要还是在于盈利模式的创新上，优秀的用户体验的确为ubuntu带来了大量Linux爱好者和开发者。但是，光是靠Redhat那样以面向企业服务为主的盈利模式不会符合ubuntu的定位并且无法和其资金投入成正比。个人以为，Canonical需要做的事情在于与各领域专业的商业公司进行合作，合力开发更多ubuntu平台上的商业软件，其中以金融软件及娱乐软件最为关键。最后达到双赢的成果。&lt;/p&gt;
+&lt;h3 id="5-shlug"&gt;案例5: SHLUG的成功与挑战&lt;/h3&gt;
+&lt;p&gt;举了两个比较典型的商业社区的例子，接下来说说非盈利社区。首先就拿我所组织管理的SHLUG为例。包括李道兵大哥在内，我听到过很多优秀的朋友对于SHLUG的评价极高，Gary Shi(中国第一位RHCE考官)与Herbert Xu(Linux Kernel Team成员)两位大牛甚至不约而同地给出了”全世界范围内属于一流LUG”的赞扬。&lt;/p&gt;
+&lt;p&gt;SHLUG的成功有两大要素:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;对于原则问题的坚定立场&lt;/strong&gt;: 在SHLUG发展的初期，曾经经历过一次比较严重的分裂问题，有一些Co-Founder认为LUG可以商业化发展，并擅自做出了不恰当的决策。导致社区分裂，多年后，当年坚持非盈利社区方向发展的管理者们依然勤勤恳恳地将SHLUG做得更好，也证明了当时选择非盈利社区是完全正确并且应有的做法。如今，随着SHLUG名声外扬，有许多优秀的企业愿意主动对我们进行赞助，在选择赞助的过程中，我们管理层小心翼翼，依旧坚持应当坚持的原则与立场，从而使得SHLUG更为健康和稳定的发展。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;线上与线下的高质量的交流&lt;/strong&gt;: 这是SHLUG能够有高Volume邮件列表以及线下活动得以成功组织的关键因素。有营养的交流能够吸引优秀的爱好者，组织起氛围良好的技术社区。我们在管理邮件列表的过程中，也是努力引导订阅者意识到这一点。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对于SHLUG这样的非盈利社区来说，唯一的挑战就是怎样将这样一个优秀的社区传承下去，而不是如何扩大影响力！社区做的好了，自然会吸引更多的人来参与，以扩大影响力为目的的社区，组织者多半都是冲着功名去做事，最终导致失败，原因无需过多解释，时间会证明一切。&lt;/p&gt;
+&lt;p&gt;至于传承的问题，也就是新老交替的问题，其实是每一个非盈利社区也好，企业也好，都会面临的问题。SHLUG的Co-Founder geek大哥曾经和我说过这么一句话，一流的国家产出的是文化，二流产出技术，三流产出劳动力。形成良好的文化，可以让每一位参与者都受其熏陶，那么在以后的新老交替过程中，就会变得自然而然，过度会很平滑。&lt;/p&gt;
+&lt;h3 id="6"&gt;案例6: 啄木鸟社区的成功与挑战&lt;/h3&gt;
+&lt;p&gt;啄木鸟社区是与SHLUG截然不同的开源社区，它以Python爱好者为核心，并且有着和SHLUG流量一样高的邮件列表。同样也是User Group，啄木鸟社区的不同之处在于社区本身提供大量的技术资料以及一些Python的相关项目。这是SHLUG不会尝试去做的事情，也是为什么我用了截然不同四个字去形容两个User Group。&lt;/p&gt;
+&lt;p&gt;一个开源社区要组织好一批只是靠兴趣和有一定业余时间的爱好者去做一个开源项目其实是一件失败概率比较高的事情，尤其是当这样的一个开源项目需要长期维护的时候，成功概率几乎为0。但是啄木鸟社区在这方面有着一些成功的案例，有许多优秀的企业同样赞助者啄木鸟社区。其成功模型为，社区提供优秀的人力资源来写出、翻译出好的技术资料并毫无保留地奉献出来，得利的企业自然会愿意回报并以此来提高自身的企业形象。&lt;/p&gt;
+&lt;p&gt;CPyUG在各地也会有一些线下聚会，相对于LUG来说，Python这样单一的技术点支撑起的非盈利社区，个人强烈建议线下活动不宜过多，如果只是一味的追求像我们SHLUG这样的活动频率，很容易会导致Python User Group等这样类似的社区交流水准降低。在这点上，Shanghai on Rails这个社区就是采取一个季度一次线下技术聚会的方法，来稳步发展。其实，在我开始帮助管理SHLUG之前，SHLUG的线下活动组织频率也是一个季度一次，在更早的时候甚至是一年一次。所以，社区的管理者需要看清自身所处的阶段，采取正确的管理策略而不是盲目跟从。&lt;/p&gt;
+&lt;p&gt;啄木鸟社区面临的挑战与SHLUG一样，由于有着大量的人气，所以对于管理团队的要求非常高，如何代代相传，将这样的非盈利社区做好而不是去想着如何扩大影响力，我认为是每一位啄木鸟社区的管理者需要考虑的问题。&lt;/p&gt;
+&lt;h2 id="_9"&gt;成功的核心因素&lt;/h2&gt;
+&lt;p&gt;4个案例分析结束了，各位有没有看出这4个案例中最大的共同点。技术、技术、技术和技术。Mozilla有着Web开发者首选的浏览器，Canonical有着装机份额第一的Linux发行版本，SHLUG有着极其资深的一批Linux玩家和专家，啄木鸟社区有着大量Python顶尖高手为其贡献wiki。&lt;/p&gt;
+&lt;p&gt;无论是商业社区还是非盈利社区，只要是开源社区，专业性是吸引新人以及做好社区的最为关键的因素。&lt;/p&gt;
+&lt;h2 id="best-practice"&gt;Best Practice&lt;/h2&gt;
+&lt;p&gt;在这次演讲的最后，我给出创建一个LUG和创建一个商业社区的两个Best Practice，罗列出基本要素，然后留给需要的朋友自行参考与思考。&lt;/p&gt;
+&lt;p&gt;首先是创建LUG:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;组建邮件列表&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;创建官方网站&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;一定时间的线上交流&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;有规律的组织线下活动&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;得到其他LUG的认可&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;然后是创建一个商业社区:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;优秀的核心产品&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;优秀的技术文档&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;交流平台的统一(邮件列表或是论坛等，根据目标用户的习惯进行抉择)&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;专业的宣传渠道与优雅的手法&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;规范的回报机制&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;演讲slides下载地址&lt;a href="ftp://www.shlug.org/Slide/2010/12/OpenSource_Community_How-to.odp"&gt;在这里&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;原文链接：&lt;a href="http://ghostunix.org/blog/?p=242"&gt;开源社区的创立与运作&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</summary></entry><entry><title>阿里云CentOS 6.3安装phpMyAdmin</title><link href="http://localhost:8000/linux/e998bfe9878ce4ba91centos-6-3e5ae89e8a385phpmyadmin.html" rel="alternate"></link><updated>2014-04-22T05:20:54+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-04-22:linux/e998bfe9878ce4ba91centos-6-3e5ae89e8a385phpmyadmin.html</id><summary type="html">&lt;p&gt;安装 mysql客户端和服务端&lt;/p&gt;
+&lt;h1 id="yum-install-mysql-mysql-server"&gt;yum install mysql mysql-server&lt;/h1&gt;
+&lt;h1 id="service-mysqld-restart"&gt;service mysqld restart&lt;/h1&gt;
+&lt;p&gt;重新设置密码。默认mysql root用户密码为空，phpMyAdmin不允许密码位空。&lt;/p&gt;
+&lt;h1 id="mysql_secure_installation"&gt;mysql_secure_installation&lt;/h1&gt;
+&lt;p&gt;设置mysql服务默认启动&lt;/p&gt;
+&lt;h1 id="chkconfig-mysqld-on"&gt;chkconfig mysqld on&lt;/h1&gt;
+&lt;p&gt;安装rpmforge YUM源 （默认源里不包含phpMyAdmin）&lt;/p&gt;
+&lt;h1 id="yum-install-httppkgsrepoforgeorgrpmforge-releaserpmforge-release-053-1el6rfx86_64rpm"&gt;yum install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm&lt;/h1&gt;
+&lt;p&gt;安装默认源里不包含phpMyAdmin&lt;/p&gt;
+&lt;h1 id="yum-install-phpmyadmin"&gt;yum install phpMyAdmin&lt;/h1&gt;
+&lt;p&gt;设置访问权限&lt;/p&gt;
+&lt;h1 id="vim-etchttpdconfdphpmyadminconf"&gt;vim /etc/httpd/conf.d/phpMyAdmin.conf&lt;/h1&gt;
+&lt;p&gt;注释掉只允许本地访问限制&lt;/p&gt;
+&lt;h1 id="wzxhzdk0"&gt;&lt;Directory /usr/share/phpMyAdmin/&gt;&lt;/h1&gt;
+&lt;h1 id="order-denyallow"&gt;Order Deny,Allow&lt;/h1&gt;
+&lt;h1 id="deny-from-all"&gt;Deny from All&lt;/h1&gt;
+&lt;h1 id="allow-from-127001"&gt;Allow from 127.0.0.1&lt;/h1&gt;
+&lt;h1 id="allow-from-1"&gt;Allow from ::1&lt;/h1&gt;
+&lt;h1 id="wzxhzdk1"&gt;&lt;/Directory&gt;&lt;/h1&gt;
+&lt;p&gt;重启httpd服务&lt;/p&gt;
+&lt;h1 id="service-httpd-restart"&gt;service httpd restart&lt;/h1&gt;
+&lt;p&gt;访问 http://my_ip/phpMyAdmin/
+使用刚才设置的mysql密码登陆&lt;/p&gt;</summary></entry><entry><title>Linux 搜狗拼音输入法 （Ubuntu 14.04发布）</title><link href="http://localhost:8000/linux/linux-e6909ce78b97e68bbce99fb3e8be93e585a5e6b395.html" rel="alternate"></link><updated>2014-04-18T03:50:26+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-04-18:linux/linux-e6909ce78b97e68bbce99fb3e8be93e585a5e6b395.html</id><summary type="html">&lt;p&gt;&lt;a href="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-113814.png"&gt;&lt;img alt="Screenshot from 2014-04-18 11:38:14" src="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-113814.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;http://pinyin.sogou.com/linux/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;  2014-09-02 update: 可以下载deb文件, 解压后会有一个data.tar.xz, 把这个文件解压到 / 根目录下, 配置系统输入法就可以了.  当前最新版本为: 1.1.0.0037&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;strong&amp;gt;&lt;/span&gt;sudo tar Jxvf data.tar.xz -C /
+sudo mv /usr/lib/x86_64-linux-gnu/fcitx/fcitx-sogoucloudpinyin.so /usr/lib64/fcitx/
+&lt;span class="nt"&gt;&amp;lt;/strong&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;&amp;gt;&amp;gt;&amp;gt; END&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Ubuntu14.04昨天发布[0]，搜狗官方同时推出支持 Ubuntu 12.04和14.04 的拼音输入法。&lt;strong&gt;Note：软件包中包含不开源的二进制包！
+&lt;/strong&gt;Fedora用户可以从这里[1] 下载 Fedora RPM 包， &lt;a href="http://pan.baidu.com/s/1GKoUJ#dir/path=%2Flinux%2Frpms"&gt;搜狗&lt;/a&gt;拼音作为fcitx的一个扩展，这里需要预先安装 fctix.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;amosk&lt;/span&gt; &lt;span class="n"&gt;devel&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qa&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;fcitx&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;libs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gtk3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;chinese&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;configtool&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.4.7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qt4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gtk2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;libpinyin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.3.1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;table&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;span class="n"&gt;fcitx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pinyin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.2.8.4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.f&lt;/span&gt;&lt;span class="n"&gt;c20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x86_64&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;并添加下面内容到 /etc/profile&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;export&lt;/span&gt;  &lt;span class="n"&gt;GTK_IM_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fcitx&lt;/span&gt;  
+&lt;span class="n"&gt;export&lt;/span&gt;  &lt;span class="n"&gt;QT_IM_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;fcitx&lt;/span&gt;  
+&lt;span class="n"&gt;export&lt;/span&gt;  &lt;span class="n"&gt;XMODIFIERS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;@im=fcitx&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这篇博客就是使用sougou-pinyin输入的。&lt;/p&gt;
+&lt;p&gt;[0] &lt;a href="http://mirrors.neusoft.edu.cn/ubuntu-releases/14.04/ubuntu-14.04-desktop-amd64.iso"&gt;http://mirrors.neusoft.edu.cn/ubuntu-releases/14.04/ubuntu-14.04-desktop-amd64.iso&lt;/a&gt;
+[1] &lt;a href="http://pan.baidu.com/s/1GKoUJ#dir/path=%2Flinux%2Frpms"&gt;http://pan.baidu.com/s/1GKoUJ#dir/path=%2Flinux%2Frpms&lt;/a&gt; (已经失效!!请直接解压官方deb安装)&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;p&gt;&lt;a href="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-114820.png"&gt;&lt;img alt="Screenshot from 2014-04-18 11:48:20" src="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-114820.png" /&gt;&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>使用 nethogs 查看进程占用带宽</title><link href="http://localhost:8000/linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html" rel="alternate"></link><updated>2014-04-12T04:12:56+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2014-04-12:linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html</id><summary type="html">&lt;p&gt;netstat --statistics 可以查看非常详细的统计信息，但是不包含进程信息，只包含没有计算的原始数据。&lt;/p&gt;
+&lt;p&gt;nethogs 是一款简洁的终端网络监控软件，可以输出进程PID，用户名，程序名或IP端口信息，收发速率，非常直观。 可以使用 -d 参数调整刷新的频率。Web服务器套用了nginx, ruby, c 系统调用等，所以PID信息没有抓取到，可以看到下面80/8080端口的行没有PID。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;使用&lt;/span&gt;&lt;span class="n"&gt;iptables&lt;/span&gt;&lt;span class="err"&gt;规则限制下载&lt;/span&gt;&lt;span class="n"&gt;amosk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="err"&gt;服务器文件速率，每秒&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="err"&gt;个包&lt;/span&gt;
+&lt;span class="cp"&gt;# iptables -A INPUT -d amosk.info -m limit --limit 1/s -j ACCEPT&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多iptables使用：&lt;a href="http://www.cnblogs.com/JemBai/archive/2009/03/19/1416364.html"&gt;http://www.cnblogs.com/JemBai/archive/2009/03/19/1416364.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# nethogs -h&lt;/span&gt;
+&lt;span class="nl"&gt;usage:&lt;/span&gt; &lt;span class="n"&gt;nethogs&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="p"&gt;...]]]&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;V&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;prints&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;delay&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="n"&gt;refresh&lt;/span&gt; &lt;span class="n"&gt;rate&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;seconds&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;tracemode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;bughunt&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;implies&lt;/span&gt; &lt;span class="n"&gt;tracemode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;sniff&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;promiscious&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;recommended&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+        &lt;span class="n"&gt;device&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;device&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;monitor&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;eth0&lt;/span&gt;
+
+&lt;span class="n"&gt;When&lt;/span&gt; &lt;span class="n"&gt;nethogs&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;press&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+ &lt;span class="nl"&gt;q:&lt;/span&gt; &lt;span class="n"&gt;quit&lt;/span&gt;
+ &lt;span class="nl"&gt;m:&lt;/span&gt; &lt;span class="k"&gt;switch&lt;/span&gt; &lt;span class="n"&gt;between&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;kb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt;
+
+&lt;span class="cp"&gt;# nethogs -d 5 eth1&lt;/span&gt;
+&lt;span class="n"&gt;NetHogs&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="mf"&gt;0.8.0&lt;/span&gt;
+
+  &lt;span class="n"&gt;PID&lt;/span&gt; &lt;span class="n"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;PROGRAM&lt;/span&gt;                                 &lt;span class="n"&gt;DEV&lt;/span&gt;    &lt;span class="n"&gt;SENT&lt;/span&gt;  &lt;span class="n"&gt;RECEIVED&lt;/span&gt;       
+&lt;span class="mi"&gt;24784&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;ruby&lt;/span&gt;                                    &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.949&lt;/span&gt;  &lt;span class="mf"&gt;12.052&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;25966&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;sshd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;                        &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;5.996&lt;/span&gt;   &lt;span class="mf"&gt;1.775&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64983&lt;/span&gt;        &lt;span class="mf"&gt;31.991&lt;/span&gt;   &lt;span class="mf"&gt;1.676&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;27.150.134.139&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;57327&lt;/span&gt;         &lt;span class="mf"&gt;39.763&lt;/span&gt;   &lt;span class="mf"&gt;1.468&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64984&lt;/span&gt;        &lt;span class="mf"&gt;26.885&lt;/span&gt;   &lt;span class="mf"&gt;1.243&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;27.150.134.139&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;57328&lt;/span&gt;        &lt;span class="mf"&gt;1.937&lt;/span&gt;   &lt;span class="mf"&gt;0.219&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;114.102.76.57&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;35705&lt;/span&gt;         &lt;span class="mf"&gt;0.180&lt;/span&gt;   &lt;span class="mf"&gt;0.167&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;7808&lt;/span&gt;  &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;sshd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;                        &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.089&lt;/span&gt;   &lt;span class="mf"&gt;0.141&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;737&lt;/span&gt;   &lt;span class="n"&gt;newr&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sbin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;nrsysmond&lt;/span&gt;                     &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.496&lt;/span&gt;   &lt;span class="mf"&gt;0.114&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;19887&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;sshd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;                        &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.143&lt;/span&gt;   &lt;span class="mf"&gt;0.064&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;22187&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;sshd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;                        &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.488&lt;/span&gt;   &lt;span class="mf"&gt;0.013&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;114.102.76.57&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;35704&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64982&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;114.102.76.57&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;35703&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;1310&lt;/span&gt;  &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;aegis&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;aegis_client&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;aegis_00&lt;/span&gt;  &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;27.36.218.38&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;34520&lt;/span&gt;          &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64981&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64980&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64979&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;113.74.211.34&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;64978&lt;/span&gt;         &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;114.102.76.57&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;35702&lt;/span&gt;           &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="mf"&gt;12.12.123.212&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;27.156.33.66&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;55921&lt;/span&gt;            &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="mi"&gt;24982&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;sshd&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;                        &lt;span class="n"&gt;eth1&lt;/span&gt;   &lt;span class="mf"&gt;0.013&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt;     &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="n"&gt;unknown&lt;/span&gt; &lt;span class="n"&gt;TCP&lt;/span&gt;                                    &lt;span class="mf"&gt;0.000&lt;/span&gt;   &lt;span class="mf"&gt;0.000&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+
+  &lt;span class="n"&gt;TOTAL&lt;/span&gt;                                                 &lt;span class="mf"&gt;108.928&lt;/span&gt;  &lt;span class="mf"&gt;18.932&lt;/span&gt; &lt;span class="n"&gt;KB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sec&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;!-- more --&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# netstat -s&lt;/span&gt;
+&lt;span class="nl"&gt;Ip:&lt;/span&gt;
+    &lt;span class="mi"&gt;1196603371&lt;/span&gt; &lt;span class="n"&gt;total&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;forwarded&lt;/span&gt;
+    &lt;span class="mi"&gt;33&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;unknown&lt;/span&gt; &lt;span class="n"&gt;protocol&lt;/span&gt;
+    &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;incoming&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;discarded&lt;/span&gt;
+    &lt;span class="mi"&gt;1196603338&lt;/span&gt; &lt;span class="n"&gt;incoming&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;delivered&lt;/span&gt;
+    &lt;span class="mi"&gt;821308850&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt;
+&lt;span class="nl"&gt;Icmp:&lt;/span&gt;
+    &lt;span class="mi"&gt;33261&lt;/span&gt; &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;877&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt; &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt; &lt;span class="n"&gt;histogram&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;destination&lt;/span&gt; &lt;span class="n"&gt;unreachable&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;27959&lt;/span&gt;
+        &lt;span class="n"&gt;timeout&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;transit&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;83&lt;/span&gt;
+        &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;quenches&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5208&lt;/span&gt;
+        &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="n"&gt;replies&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;timestamp&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="mi"&gt;9638&lt;/span&gt; &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt;
+    &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;messages&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;
+    &lt;span class="n"&gt;ICMP&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="n"&gt;histogram&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;destination&lt;/span&gt; &lt;span class="n"&gt;unreachable&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;4428&lt;/span&gt;
+        &lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="n"&gt;replies&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5208&lt;/span&gt;
+        &lt;span class="n"&gt;timestamp&lt;/span&gt; &lt;span class="n"&gt;replies&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="nl"&gt;IcmpMsg:&lt;/span&gt;
+        &lt;span class="nl"&gt;InType0:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="nl"&gt;InType3:&lt;/span&gt; &lt;span class="mi"&gt;27959&lt;/span&gt;
+        &lt;span class="nl"&gt;InType4:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="nl"&gt;InType8:&lt;/span&gt; &lt;span class="mi"&gt;5208&lt;/span&gt;
+        &lt;span class="nl"&gt;InType11:&lt;/span&gt; &lt;span class="mi"&gt;83&lt;/span&gt;
+        &lt;span class="nl"&gt;InType13:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="nl"&gt;OutType0:&lt;/span&gt; &lt;span class="mi"&gt;5208&lt;/span&gt;
+        &lt;span class="nl"&gt;OutType3:&lt;/span&gt; &lt;span class="mi"&gt;4428&lt;/span&gt;
+        &lt;span class="nl"&gt;OutType14:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="nl"&gt;Tcp:&lt;/span&gt;
+    &lt;span class="mi"&gt;9725137&lt;/span&gt; &lt;span class="n"&gt;active&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;openings&lt;/span&gt;
+    &lt;span class="mi"&gt;1240953&lt;/span&gt; &lt;span class="n"&gt;passive&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="n"&gt;openings&lt;/span&gt;
+    &lt;span class="mi"&gt;34063&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="n"&gt;attempts&lt;/span&gt;
+    &lt;span class="mi"&gt;17180&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="n"&gt;resets&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;31&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;established&lt;/span&gt;
+    &lt;span class="mi"&gt;1196269750&lt;/span&gt; &lt;span class="n"&gt;segments&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;830752456&lt;/span&gt; &lt;span class="n"&gt;segments&lt;/span&gt; &lt;span class="n"&gt;send&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt;
+    &lt;span class="mi"&gt;1311497&lt;/span&gt; &lt;span class="n"&gt;segments&lt;/span&gt; &lt;span class="n"&gt;retransmited&lt;/span&gt;
+    &lt;span class="mi"&gt;3178&lt;/span&gt; &lt;span class="n"&gt;bad&lt;/span&gt; &lt;span class="n"&gt;segments&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="mi"&gt;199120&lt;/span&gt; &lt;span class="n"&gt;resets&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt;
+&lt;span class="nl"&gt;Udp:&lt;/span&gt;
+    &lt;span class="mi"&gt;295790&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;4522&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;unknown&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;errors&lt;/span&gt;
+    &lt;span class="mi"&gt;297048&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt;
+&lt;span class="nl"&gt;UdpLite:&lt;/span&gt;
+&lt;span class="nl"&gt;TcpExt:&lt;/span&gt;
+    &lt;span class="mi"&gt;10828&lt;/span&gt; &lt;span class="n"&gt;invalid&lt;/span&gt; &lt;span class="n"&gt;SYN&lt;/span&gt; &lt;span class="n"&gt;cookies&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;9148&lt;/span&gt; &lt;span class="n"&gt;resets&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;embryonic&lt;/span&gt; &lt;span class="n"&gt;SYN_RECV&lt;/span&gt; &lt;span class="n"&gt;sockets&lt;/span&gt;
+    &lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;pruned&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt; &lt;span class="n"&gt;because&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="n"&gt;buffer&lt;/span&gt; &lt;span class="n"&gt;overrun&lt;/span&gt;
+    &lt;span class="mi"&gt;1373290&lt;/span&gt; &lt;span class="n"&gt;TCP&lt;/span&gt; &lt;span class="n"&gt;sockets&lt;/span&gt; &lt;span class="n"&gt;finished&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="n"&gt;wait&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;fast&lt;/span&gt; &lt;span class="n"&gt;timer&lt;/span&gt;
+    &lt;span class="mi"&gt;23367&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;rejects&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;established&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;because&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;timestamp&lt;/span&gt;
+    &lt;span class="mi"&gt;20165100&lt;/span&gt; &lt;span class="n"&gt;delayed&lt;/span&gt; &lt;span class="n"&gt;acks&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt;
+    &lt;span class="mi"&gt;4209&lt;/span&gt; &lt;span class="n"&gt;delayed&lt;/span&gt; &lt;span class="n"&gt;acks&lt;/span&gt; &lt;span class="n"&gt;further&lt;/span&gt; &lt;span class="n"&gt;delayed&lt;/span&gt; &lt;span class="n"&gt;because&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;locked&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;
+    &lt;span class="n"&gt;Quick&lt;/span&gt; &lt;span class="n"&gt;ack&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;was&lt;/span&gt; &lt;span class="n"&gt;activated&lt;/span&gt; &lt;span class="mi"&gt;2611513&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt;
+    &lt;span class="mi"&gt;50928669&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;directly&lt;/span&gt; &lt;span class="n"&gt;queued&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;recvmsg&lt;/span&gt; &lt;span class="n"&gt;prequeue&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+    &lt;span class="mi"&gt;15261568&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;directly&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;backlog&lt;/span&gt;
+    &lt;span class="mi"&gt;1694004723&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;directly&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;prequeue&lt;/span&gt;
+    &lt;span class="mi"&gt;714008734&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="n"&gt;predicted&lt;/span&gt;
+    &lt;span class="mi"&gt;798736&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;predicted&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;directly&lt;/span&gt; &lt;span class="n"&gt;queued&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;
+    &lt;span class="mi"&gt;35195159&lt;/span&gt; &lt;span class="n"&gt;acknowledgments&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;containing&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="n"&gt;payload&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;119615013&lt;/span&gt; &lt;span class="n"&gt;predicted&lt;/span&gt; &lt;span class="n"&gt;acknowledgments&lt;/span&gt;
+    &lt;span class="mi"&gt;56&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;fast&lt;/span&gt; &lt;span class="n"&gt;retransmit&lt;/span&gt;
+    &lt;span class="mi"&gt;29431&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;selective&lt;/span&gt; &lt;span class="n"&gt;acknowledgements&lt;/span&gt;
+    &lt;span class="mi"&gt;273&lt;/span&gt; &lt;span class="n"&gt;bad&lt;/span&gt; &lt;span class="n"&gt;SACK&lt;/span&gt; &lt;span class="n"&gt;blocks&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="n"&gt;Detected&lt;/span&gt; &lt;span class="n"&gt;reordering&lt;/span&gt; &lt;span class="mi"&gt;63&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;FACK&lt;/span&gt;
+    &lt;span class="n"&gt;Detected&lt;/span&gt; &lt;span class="n"&gt;reordering&lt;/span&gt; &lt;span class="mi"&gt;530&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;SACK&lt;/span&gt;
+    &lt;span class="n"&gt;Detected&lt;/span&gt; &lt;span class="n"&gt;reordering&lt;/span&gt; &lt;span class="mi"&gt;822&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="n"&gt;stamp&lt;/span&gt;
+    &lt;span class="mi"&gt;1977&lt;/span&gt; &lt;span class="n"&gt;congestion&lt;/span&gt; &lt;span class="n"&gt;windows&lt;/span&gt; &lt;span class="n"&gt;fully&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
+    &lt;span class="mi"&gt;10742&lt;/span&gt; &lt;span class="n"&gt;congestion&lt;/span&gt; &lt;span class="n"&gt;windows&lt;/span&gt; &lt;span class="n"&gt;partially&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;Hoe&lt;/span&gt; &lt;span class="n"&gt;heuristic&lt;/span&gt;
+    &lt;span class="mi"&gt;832&lt;/span&gt; &lt;span class="n"&gt;congestion&lt;/span&gt; &lt;span class="n"&gt;windows&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;DSACK&lt;/span&gt;
+    &lt;span class="mi"&gt;515352&lt;/span&gt; &lt;span class="n"&gt;congestion&lt;/span&gt; &lt;span class="n"&gt;windows&lt;/span&gt; &lt;span class="n"&gt;recovered&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="n"&gt;partial&lt;/span&gt; &lt;span class="n"&gt;ack&lt;/span&gt;
+    &lt;span class="mi"&gt;37356&lt;/span&gt; &lt;span class="n"&gt;TCP&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="n"&gt;events&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPLostRetransmit:&lt;/span&gt; &lt;span class="mi"&gt;4355&lt;/span&gt;
+    &lt;span class="mi"&gt;12&lt;/span&gt; &lt;span class="n"&gt;timeouts&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="n"&gt;reno&lt;/span&gt; &lt;span class="n"&gt;fast&lt;/span&gt; &lt;span class="n"&gt;retransmit&lt;/span&gt;
+    &lt;span class="mi"&gt;4324&lt;/span&gt; &lt;span class="n"&gt;timeouts&lt;/span&gt; &lt;span class="n"&gt;after&lt;/span&gt; &lt;span class="n"&gt;SACK&lt;/span&gt; &lt;span class="n"&gt;recovery&lt;/span&gt;
+    &lt;span class="mi"&gt;2700&lt;/span&gt; &lt;span class="n"&gt;timeouts&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt; &lt;span class="n"&gt;state&lt;/span&gt;
+    &lt;span class="mi"&gt;92192&lt;/span&gt; &lt;span class="n"&gt;fast&lt;/span&gt; &lt;span class="n"&gt;retransmits&lt;/span&gt;
+    &lt;span class="mi"&gt;8830&lt;/span&gt; &lt;span class="n"&gt;forward&lt;/span&gt; &lt;span class="n"&gt;retransmits&lt;/span&gt;
+    &lt;span class="mi"&gt;47669&lt;/span&gt; &lt;span class="n"&gt;retransmits&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;slow&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt;
+    &lt;span class="mi"&gt;923558&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;TCP&lt;/span&gt; &lt;span class="n"&gt;timeouts&lt;/span&gt;
+    &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;classic&lt;/span&gt; &lt;span class="n"&gt;Reno&lt;/span&gt; &lt;span class="n"&gt;fast&lt;/span&gt; &lt;span class="n"&gt;retransmits&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;
+    &lt;span class="mi"&gt;2498&lt;/span&gt; &lt;span class="n"&gt;SACK&lt;/span&gt; &lt;span class="n"&gt;retransmits&lt;/span&gt; &lt;span class="n"&gt;failed&lt;/span&gt;
+    &lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="n"&gt;times&lt;/span&gt; &lt;span class="n"&gt;receiver&lt;/span&gt; &lt;span class="n"&gt;scheduled&lt;/span&gt; &lt;span class="n"&gt;too&lt;/span&gt; &lt;span class="n"&gt;late&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;direct&lt;/span&gt; &lt;span class="n"&gt;processing&lt;/span&gt;
+    &lt;span class="mi"&gt;530&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;collapsed&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;receive&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;low&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt; &lt;span class="n"&gt;buffer&lt;/span&gt;
+    &lt;span class="mi"&gt;2604726&lt;/span&gt; &lt;span class="n"&gt;DSACKs&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;old&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt;
+    &lt;span class="mi"&gt;253239&lt;/span&gt; &lt;span class="n"&gt;DSACKs&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt;
+    &lt;span class="mi"&gt;5286&lt;/span&gt; &lt;span class="n"&gt;DSACKs&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;DSACKs&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;
+    &lt;span class="mi"&gt;13385&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;reset&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;unexpected&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+    &lt;span class="mi"&gt;458&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;reset&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;early&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;close&lt;/span&gt;
+    &lt;span class="mi"&gt;45406&lt;/span&gt; &lt;span class="n"&gt;connections&lt;/span&gt; &lt;span class="n"&gt;aborted&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPSACKDiscard:&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPDSACKIgnoredOld:&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPDSACKIgnoredNoUndo:&lt;/span&gt; &lt;span class="mi"&gt;921&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPSpuriousRTOs:&lt;/span&gt; &lt;span class="mi"&gt;2853&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPSackShifted:&lt;/span&gt; &lt;span class="mi"&gt;190479&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPSackMerged:&lt;/span&gt; &lt;span class="mi"&gt;152819&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPSackShiftFallback:&lt;/span&gt; &lt;span class="mi"&gt;251450&lt;/span&gt;
+    &lt;span class="nl"&gt;TCPBacklogDrop:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nl"&gt;IpExt:&lt;/span&gt;
+    &lt;span class="nl"&gt;InOctets:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;654005353&lt;/span&gt;
+    &lt;span class="nl"&gt;OutOctets:&lt;/span&gt; &lt;span class="mi"&gt;884338795&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Fedora 20 Skype @ x86_64</title><link href="http://localhost:8000/linux/fedora-20-skype-x86_64.html" rel="alternate"></link><updated>2013-12-23T10:52:36+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2013-12-23:linux/fedora-20-skype-x86_64.html</id><summary type="html">&lt;p&gt;&lt;a href="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png"&gt;&lt;img alt="Screenshot from 2013-12-23 18:49:37" src="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://negativo17.org/repos/skype/fedora-20/x86_64/&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//negativo17.org/repos/skype/fedora-20/x86_64/&amp;lt;/a&amp;gt;&lt;/span&gt;
 &lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;DIR&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; repodata/                             2013-12-19 06:10    -   
 &lt;span class="cp"&gt;[&lt;/span&gt;   &lt;span class="cp"&gt;]&lt;/span&gt; skype-4.2.0.11-8.fc20.i686.rpm        2013-12-19 06:10   12M  

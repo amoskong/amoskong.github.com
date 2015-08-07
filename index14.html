@@ -67,201 +67,292 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
-                <h2><a href="./linux/about-dmadirect-memory-access.html">About DMA(Direct Memory Access)</a></h2>
+                <h2><a href="./life/python-debug-methods.html">Python Debug Methods</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-05 01:09
+        <i class="icon-calendar"></i>2010-08-14 15:57
     </span>
     <hr>
-                <div class="summary"><p>在PC上都有一个DMAC(直接内存访问控制器)，用于控制RMA和I/O设备之间的数据传送。DMAC需要被CPU激活，才能自行传送数据，数据传送完，DMAC发出一个中请求。一个名为存储器仲裁器的硬件电路用于解决CPU和DMAC并发访问同一存储单元时的冲突。</p>
-<p>DMAC常使用在磁盘驱动器等一次传送大量数据的慢速设备。DMAC的设置时间长，少量数据使用CPU效率较高。</p>
-<p>除CPU之外的硬件设备驱动数据总线所用的存储器地址，称作总线地址(bus address)。在PC体系结构中，总线地址和物理地址相同，但在Sun的SPARC和HP的Alpha体系结构中，两者不同。内核提供virt_to_bus和bus_to_virt宏转换线性地址和总线地址。</p>
-<p>DMA操作中，I/O设备和DMAC直接驱动数据总线，需要把涉及的存储去缓冲区总线地址写入DMAC相应I/O端口，或I/O设备相应端口。</p>
-<p>打开设备文件时，就会分配一条IRQ线准备发送DMA传送结束的信号。为了启动DMA操作，设备驱动程序只是在硬件设备的I/O端口写入DMA缓冲区的总线地址、传输方向和传输数据大小；然后驱动程序挂起当前进程。当DMA结束时，硬件设备产生一个中断唤醒设备驱动程序。当设备文件对象被最后一个进程关闭时，其release方法中释放IRQ线。</p>
-                    <a class="btn btn-default btn-xs" href="./linux/about-dmadirect-memory-access.html">more ...</a>
+                <div class="summary"><ol>
+<li>
+<p>print</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>print "hello"</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>logging module
+(setup debug level)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>logging.debug()
+logging.info()
+logging.error()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>import/reload</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import test
+test.foo()
+(change code)
+reload(test)
+test.foo()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>exec</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>d = {}
+exec(file('/tmp/test.py'), d)
+d.get('foo')(args='hello')</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>eval</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>evel('foo(args='hello'), d)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>
+<p>python -i
+python -i test ...</p></li></ol>
+                    <a class="btn btn-default btn-xs" href="./life/python-debug-methods.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html">关于Linux内核性能测试</a></h2>
+                <h2><a href="./virtualization/kvm-network-model.html">KVM Network Model</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-01 11:34
+        <i class="icon-calendar"></i>2010-06-26 23:49
     </span>
     <hr>
-                <div class="summary"><p>参考上篇文章，我把自己最近碰到的内核测试方法总结了一下，希望大家指错 :)</p>
-<p>一、概述：
-一般意义上的内核测试可能更多的偏重于功能测试，但在内核开发中，内核退化是很严重的问题，特别是在添加新特性的时候，性能测试显得尤为重要。
-内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。</p>
-<p>二、内核性能测试开源项目：
-http://www.linuxdna.com/
-http://kernel-perf.sourceforge.net/</p>
-<p>三、Linux内核测试法：</p>
-<p>1.Linux测试项目(LTP)
-LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。</p>
-<p>2 ...</p>
-                    <a class="btn btn-default btn-xs" href="./linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html">more ...</a>
+                <div class="summary"><p>[1] Userspace Virtio network architecture
+    [2] Vd-t,sriov architecture
+    [3] Vhost_net architecture
+    [4] Vhost over sriov &amp; macvtap architecture</p>
+<div class="highlight"><pre>      <span class="o">+--------------+</span>
+      <span class="o">|</span>  <span class="n">Guest</span> <span class="n">VM</span>    <span class="o">|</span>
+      <span class="o">|</span> <span class="o">+--+</span>    <span class="o">+--+</span> <span class="o">|</span>
+      <span class="o">+-|</span>  <span class="o">|----|</span>  <span class="o">|-+</span>
+        <span class="o">|</span><span class="n">tx</span><span class="o">|</span>    <span class="o">|</span><span class="n">rx</span><span class="o">|</span>
+      <span class="o">+-+--+----+--+-+</span>
+      <span class="o">|</span>   <span class="err">\</span> <span class="n">QEMU</span>  <span class="o">^</span>  <span class="o">|</span>
+      <span class="o">|</span>    <span class="n">v</span>     <span class="o">/</span>   <span class="o">|</span>
+      <span class="o">|</span>    <span class="o">+----+</span>    <span class="o">|</span>
+      <span class="o">+----|</span> <span class="n">tap</span><span class="o">|----+</span>
+  <span class="o">+--------|</span>    <span class="o">|--------+</span>
+  <span class="o">|</span>        <span class="o">+----+</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">Kernel</span><span class="o">/</span><span class="n">HV</span>  <span class="o">^</span>          <span class="o">|</span>
+  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>
+  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
+  <span class="o">|</span>       <span class="o">|</span><span class="n">bridge</span><span class="o">|</span>       <span class="o">|</span>
+  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
+  <span class="o">|</span>           <span class="o">^</span>          <span class="o">|</span>
+  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>
+  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
+  <span class="o">+-------|</span> <span class="n">NIC</span>  <span class="o">|-------+</span>
+          <span class="o">+------+</span>
+              <span class="o">^</span>
+              <span class="o">|</span>
+              <span class="n">v</span>
+
+      <span class="o">+------------------------+</span>
+      <span class="o">|</span>     <span class="n">Guest</span> <span class="n">VM</span>           <span class="o">|</span>
+      <span class="o">|</span>              <span class="o">+--+</span> <span class="o">+--+</span> <span class="o">|</span>
+      <span class="o">+--------------|</span><span class="n">tx</span><span class="o">|-|</span><span class="n">rx</span><span class="o">|-+</span>
+                     <span class="o">+--+</span> <span class="o">+--+</span>
+                       <span class="o">^</span>   <span class="o">^</span>
+                        <span class="err">\</span> <span class="o">/</span>
+                         <span class="o">|</span>
+                         <span class="n">v</span>
+      <span class="o">+--------+</span>   <span class="o">+-----------+</span>
+      <span class="o">|</span> <span class="n">QEMU</span>   <span class="o">|</span>   <span class="o">|</span> <span class="n">VF</span> <span class="n">NIC</span> <span class="err">#</span><span class="mi">2</span> <span class="o">|</span>
+      <span class="o">+--------+</span>   <span class="o">+-----------+</span>
+  <span class="o">+----------------------+</span>  <span class="o">^</span>
+  <span class="o">|</span> <span class="n">Kernel</span><span class="o">/</span><span class="n">HV</span>            <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>    <span class="o">+-----------+</span>     <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>    <span class="o">|</span> <span class="n">VF</span> <span class="n">NIC</span> <span class="err">#</span><span class="mi">1</span> <span class="o">|</span>     <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>    <span class="o">+-----------+</span>     <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>           <span class="o">^</span>          <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>  <span class="o">|</span>
+  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>  <span class="n">v</span>
+  <span class="o">|</span>       <span class="o">+--------------+----+</span>
+  <span class="o">+-------|</span> <span class="n">Physical</span> <span class="n">NIC ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./virtualization/kvm-network-model.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html">Linux系统内核性能评测</a></h2>
+                <h2><a href="./linux/how-to-use-kexec.html">How to use kexec</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-01 11:29
+        <i class="icon-calendar"></i>2010-06-15 01:14
     </span>
     <hr>
-                <div class="summary"><p>Linux以其开放和自由的特性，日益受到人们的关注，并被广泛应用于科学计算、电子商务、并行运算、辅助教学、大型服务器、嵌入式应用和桌面办公等不同的领域，为我国软件产业的发展带来了契机。研究Linux内核的评测方法、评价工具和评测标准，颇具意义和实用价值，有助于 Linux国产化发展，同时也是国家电子基金项目的重要组成部分。</p>
-<p>Linux内核是Linux操作系统最核心的部分，其性能直接决定了操作系统的性能。测试内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。</p>
-<p>Linux内核测试法</p>
-<p>1.Linux测试项目(LTP)</p>
-<p>LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。</p>
-<p>2.可扩展性测试平台（STP）</p>
-<p>开放源代码开发实验室 (Open ...</p>
-                    <a class="btn btn-default btn-xs" href="./linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html">more ...</a>
+                <div class="summary"><p>Tue Jun 15 09:07:36 2010</p>
+<ol>
+<li>check if current kernel support kexec</li>
+</ol>
+<h1 id="grep-kexec-boogconfig-2634-rc6">grep KEXEC /boog/config-2.6.34-rc6</h1>
+<ol>
+<li>
+<p>install kexec tools
+1) apt-get / yum install kexec-tools
+2) src: http://www.kernel.org/pub/linux/kernel/people/horms/kexec-tools/kexec-tools-2.0.1.tar.gz</p>
+</li>
+<li>
+<p>get command line of new kernel ...</p></li></ol>
+                    <a class="btn btn-default btn-xs" href="./linux/how-to-use-kexec.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./programming/e58f82e58aa0opensourcecamp-09e8a5bfe5ae89-2.html">参加OpenSourceCamp 09'西安</a></h2>
+                <h2><a href="./virtualization/virtioe7bd91e58da1.html">Virtual Virtio Nic</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-28 13:06
+        <i class="icon-calendar"></i>2010-06-01 00:07
     </span>
     <hr>
-                <div class="summary"><p>今天和陈老师、张斌等六个人一块去参加了这个活动，第一次参加这种unconference形式的聚会，有很多东西值得借鉴，环境不错，是在一个咖啡厅。由于演讲主题由大家选举产生，而且有多个选择，这样能保证自己听的主题是最喜欢的，而且每个参与聚会的人都可以发表主题，有机会给大家讲。比起以往的传统讲座，增强了听众于演讲者之间的交流，形式更灵活。
-今天去的多数是企业的人，学生很少也就五六个吧。开始大家举手选出了四个最感兴趣的话题，一是如何平衡工作与生活，二是开源在企业的应用，三是When junit does not work，四是Groovy方面的。分两个时段进行，我们参与的是第二个和第四个。
-开源在企业的应用讲了一些法律许可、集成开发、开源咨询等方面的东西，只是感觉离自己有点远。下来是北京ThoughtWork的一个咨询师胡凯讲单元测试，讲了junit、aunit单元测试方面的东西，像创造测试环境、调用测试方法、验证测试结果，测试程序如何在不同平台正常工作。还演示了Linux平台，一个叫AB(ApacheBench)的命令行web压力测试工具。
-在讲的过程中大家提了很多问题，最后他还专门现场演示了一下TDD开发，以做一个计算器为例，边写测试程序，边进行计算器代码编写。而且也说明了这样开发软件的好处，有人提出当用户需求不断变化的时候，可能造成测试程序更大的变动 ...</p>
-                    <a class="btn btn-default btn-xs" href="./programming/e58f82e58aa0opensourcecamp-09e8a5bfe5ae89-2.html">more ...</a>
+                <div class="summary"><p>keywords: network, virtio, vhost, virtualization</p>
+<p>前两周一直在研究网卡offload的特性，目的是通过ethtool设置虚拟网卡功能，进行功能验证。物理网卡、虚拟e1000基本都搞清楚了，rtl8139比较老，很多新特新都不支持，所以忽略。问题就处在了Virtio虚拟网卡上，这个玩意不同于一般的虚拟网卡，不是单纯的硬件模拟，她需要利用内核里边提供的相关API，争取最高性能。由于是内核跟hypervisor相互调用，所以虚拟机用户感知到的网卡功能，也需要hypervisor的支持(特性支持、参数配置等)。
+QEMU 有个新参数 "-netdev tap,vhost=on..." 替换了原来的 "-net tap,..."，用于创建网络设备，很多新特性只有在新参数才能使用。比如虚拟网卡的offload功能，老参数需要QEMU实现对offload功能的支持，目前只能使用GSO一种。新参数则可以使用主机内核提供的vhost支持，offload工作由内核中的vhost_net模块来完成，性能提升就不用说了，rx/tx/sg/tso/gso/ufo都支持。开始觉得奇怪，为什么不支持receive offload？offload的思想就是把数据切割 ...</p>
+                    <a class="btn btn-default btn-xs" href="./virtualization/virtioe7bd91e58da1.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html">操作系统中的一些重要知识点</a></h2>
+                <h2><a href="./life/e9878de5a4b4e5868de69da5.html">个人主页二次上线</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-28 13:05
+        <i class="icon-calendar"></i>2010-05-29 02:07
     </span>
     <hr>
-                <div class="summary"><p>－－－操作系统中的一些重要知识点－－－(继续更新)</p>
-<p>进程状态转换：(转换规则)
-初始化、就绪、执行、等待、终止
-进程创建和撤销</p>
-<p>临界区：每个进程访问临界资源(一个仅允许一个进程使用的共享资源)的那段代码
-进程同步和互斥(不允许两个以上共享该资源的并发进程同时进入临界区)
-信号量和P，V原语
-生产者－消费者问题</p>
-<p>死锁(并发进程彼此等待对方占有资源，并在得到对方资源前不会释放自己占有资源；预防、避免、检测(是否构成资源请求和保持环路)、恢复)
-哲学家就餐算法
-理发师问题
-银行家算法</p>
-<p>进程(PCB)和线程(TCB)的区别</p>
-<p>进程间通信：
-管道、共享内存、SOCKET、FIFO、消息队列、信号量...</p>
-<p>调度算法：
-先来先服务FCFS、轮转法、多级反馈轮转法(3种状态)、优先级法、最短作业优先法SJF ...</p>
-                    <a class="btn btn-default btn-xs" href="./linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html">more ...</a>
+                <div class="summary"><p>2005年高考报志愿是选择了自己喜欢的计算机专业，刚进大学是不允许在宿舍放电脑的，好几个宿舍靠一个笔记本看电影解闷。
+2006年，我与Linux结缘，买了一个台式机，512内存、80G硬盘。
+2007年，在cocobear的帮助下，创建了自己的个人主页 http://kongove.cn，有自己的博客，还有一些自己感兴趣的东西。
+一晃三年过去了，此时我已身处校外，从古城西安来到首都北京，做Linux相关的工作。中间经历了多次和谐运动，我的网站一直很坚挺。前几天发现kongove.cn域名过期了，居然
+要交‘赎金’500RMB才能继续使用，应该是域名提供商ename帮忙续费了。本来想注测一个info或者org的域名，用CN域名揪心～还没来得及注册，看到林含烟分享的免费主机信息，自己注册了一个帐号，把数据导了进来，很方便，感觉提供的功能已经足够了，所以暂时就先用着。反正数据在本地有备份，有问题再换，用王聪的话说叫“换换更健康～” ;)</p>
+<p>域名： kongove.whostas.com
+目前我用到的功能：PHP、数据库、phpadmin管理 ...</p>
+                    <a class="btn btn-default btn-xs" href="./life/e9878de5a4b4e5868de69da5.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./life/e99da2e69c9de5a4a7e6b5b7efbc8ce698a5e69a96e88ab1e5bc80e6b5b7e5ad90e887aae69d8020e591a8e5b9b4e7baaae5bfb5e697a5.html">面朝大海，春暖花开(海子自杀20周年纪念日)</a></h2>
+                <h2><a href="./life/e4b880e4b8aalinuxe7a88be5ba8fe59198e79a84e682b2e59380.html">一个Linux程序员的悲哀</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-26 01:03
+        <i class="icon-calendar"></i>2010-03-10 14:25
     </span>
     <hr>
-                <div class="summary"><p><img alt="" src="http://anlandedong.bokee.com/photo/view.fcgi?mode=3&amp;id=7923247" /><img alt="haizi" src="http://www.rdxw.net/uploads/allimg/090326/1Z3442Y2-0.jpg" /></p>
-<p><strong>面朝大海，春暖花开</strong>
-从明天起，做一个幸福的人
-喂马，劈柴，周游世界
-从明天起，关心粮食和蔬菜
-我有一所房子，面朝大海，春暖花开
-从明天起，和每一个亲人通信
-告诉他们我的幸福
-那幸福的闪电告诉我的
-我将告诉每一个人
-给每一条河每一座山取一个温暖的名字
-陌生人，我也为你祝福
-愿你有一个灿烂的前程
-愿你有情人终成眷属
-愿你在尘世获得幸福
-我只愿面朝大海，春暖花开</p>
-                    <a class="btn btn-default btn-xs" href="./life/e99da2e69c9de5a4a7e6b5b7efbc8ce698a5e69a96e88ab1e5bc80e6b5b7e5ad90e887aae69d8020e591a8e5b9b4e7baaae5bfb5e697a5.html">more ...</a>
+                <div class="summary"><p>静听花开♂  2010-03-10 20:56:41</p>
+<div class="highlight"><pre><span class="err">最近有什么好电影吗？</span>
+
+<span class="n">GL2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">17</span><span class="o">:</span><span class="mi">57</span>
+
+<span class="err">呵呵，听说《七天爱上你》不错，还没看</span>
+
+<span class="err">静听花开♂</span>  <span class="mi">2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">19</span><span class="o">:</span><span class="mi">25</span>
+
+<span class="err">我查查</span>
+
+<span class="n">GL</span> <span class="mi">2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">20</span><span class="o">:</span><span class="mo">04</span>
+
+<span class="err">问个问题，</span><span class="n">linux</span><span class="err">内核中包括哪些管理，用户接口是否属于内核</span>
+
+
+
+
+
+
+
+ <span class="n">kong</span> <span class="err">有</span><span class="n">qq</span><span class="err">或者</span><span class="n">msn</span><span class="err">么。。有</span><span class="n">baidu</span><span class="err">的美女要和你聊理想和志向</span>
+
+ <span class="n">hehe</span>   <span class="err">那很好呀</span>     <span class="mi">284432342</span>
+
+ <span class="err">哦。我给她了 ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./life/e4b880e4b8aalinuxe7a88be5ba8fe59198e79a84e682b2e59380.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html">网络连接图标打红叉(device is unmanaged)</a></h2>
+                <h2><a href="./life/e59091e99bb7e9948be5908ce5bf97e5ada6e4b9a0.html">向雷锋同志学习</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-23 08:49
+        <i class="icon-calendar"></i>2010-03-04 16:51
     </span>
     <hr>
-                <div class="summary"><p>Fedora10安装的好几个机器都是网络设置图标打叉，还以为是BUG，上次给一朋友直接在网上复制了个网络接口配置文件就好了，当时也没仔细对比文件差异。上次我的Ubuntu升级软件、安装UbuntuStudio后也出现这个问题，但网络连接没有任何问题也就没关。今天突然发现有下面这个解决方法。</p>
-<p>当然其他问题也可能导致图标打红叉，如没有网卡驱动、没有激活网络、没有配置等，上面是没有设置网络管理选项带来的问题。</p>
-<p>Ubuntu网络连接图标打红叉，但通过命令行可以配置网络。将下面文件的managed值由false改为true，重启即可！</p>
-<p>sudo vim /etc/NetworkManager/nm-system-settings.conf
-[main]
-plugins=ifupdown,keyfile
-[ifupdown]
-managed=true</p>
-<p>Fedora10网络连接图标打红叉，但通过命令行可以配置网络。修改网络连接文件，添加 NM_CONTROLLED=yes，重启网络即可。</p>
-<p>sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0
-..
-NM_CONTROLLED=yes
-...</p>
-                    <a class="btn btn-default btn-xs" href="./linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html">more ...</a>
+                <div class="summary"><p><img alt="xue xi leifeng " src="http://kongove.whostas.com/pub/images/learn-leifeng.jpg" /></p>
+                    <a class="btn btn-default btn-xs" href="./life/e59091e99bb7e9948be5908ce5bf97e5ada6e4b9a0.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./life/e8a5bfe5ae89e982aee794b5e5ada6e999a2e5bbbae999a250e591a8e5b9b4e6a0a1e5ba86e585ace5918a.html">西安邮电学院建院50周年校庆公告 (真诚欢迎各位校友归来！)</a></h2>
+                <h2><a href="./life/happy-spring-festival.html">Happy Spring Festival</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-21 00:58
+        <i class="icon-calendar"></i>2010-02-09 05:07
     </span>
     <hr>
-                <div class="summary"><p>From:<a href="http://www.xiyou.edu.cn/_info/2008content_2920.htm">http://www.xiyou.edu.cn/_info/2008content_2920.htm</a></p>
-<p><img alt="" src="http://www.xiyou.edu.cn/_imglib/xiaoqingfangan1.jpg" /></p>
-<p>2009年5月8日，西安邮电学院将迎来建院50周年暨建校59周年华诞，届时学院将在长安校区举行隆重庆典。在此，谨向长期以来关心、支持西邮建设发展的各级领导、海内外校友、各界人士致以衷心的感谢和崇高的敬意。</p>
-<p>岁月如歌，薪火相传，巍巍学府，铸就辉煌。西安邮电学院创建于1950年的陕西和甘肃两省邮电人员培训班及随后的西安邮电学校，1959年经国务院批准为本科院校，是原邮电部在西北地区布点的唯一的邮电通信类普通高等学校。2000年划转到陕西省，实行中央与陕西省共建，以陕西省管理为主的管理体制。经过几代西邮人的艰苦创业、拼搏进取，如今的西安邮电学院已发展成以信息科学技术为特色，以工为主，工、理、管、经、文、法等学科协调发展的多科性大学。学院现有3个硕士学位授权一级学科和11个硕士学位授权二级学科，设有37个本科专业，在通信、电子、计算机、企业信息化、经济管理等科研领域取得显著成果，为国家培养了四万多名优秀专门人才，为我国信息通信业发展和地方经济社会进步作出了积极的贡献。</p>
-<p>五十年风雨历程，半世纪春华秋实。2009年校庆是西安邮电学院发展史上的里程碑，它将更有力地推动学院科学发展 ...</p>
-                    <a class="btn btn-default btn-xs" href="./life/e8a5bfe5ae89e982aee794b5e5ada6e999a2e5bbbae999a250e591a8e5b9b4e6a0a1e5ba86e585ace5918a.html">more ...</a>
+                <div class="summary"><p>本来打算坐12的临客回家，如果晚点估计得在车上过年了。</p>
+<p>但是，，，今早来上班，一个同事的哥哥临时改变行程，有了张余票—特快卧铺，直接拿下，马上准备回家！</p>
+<p>能待到初八。</p>
+                    <a class="btn btn-default btn-xs" href="./life/happy-spring-festival.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./web/e98083e4baa1e88085e6898be69cbae6b8b8e6888f.html">逃亡者手机游戏</a></h2>
+                <h2><a href="./life/wedding.html">wedding</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-20 10:40
+        <i class="icon-calendar"></i>2010-01-10 03:24
     </span>
     <hr>
-                <div class="summary"><p>下载地址：<a href="http://kongove.whostas.com/down/prog/Escaper.rar">http://kongove.whostas.com/down/prog/Escaper.rar</a></p>
-<p>集体合影：<a href="http://picasaweb.google.com/lh/photo/PKnFnE7O_Y45q0UPB_pJJw?feat=directlink">http://picasaweb.google.com/lh/photo/PKnFnE7O_Y45q0UPB_pJJw?feat=directlink</a></p>
-<p>这个代码基本是四天时间我一个人写出来的，使用myEclipse+WTK开发。还有一些功能没有实现，还存在一些bug。不过想学习j2me游戏开发的人，可以读一下源码。这个程序还有很多扩展开发的空间，有时间在研究吧，下来得忙毕设了。</p>
-<p><img alt="null" src="http://kongove.whostas.com/blog/download/game-escape1.png" /><img alt="null" src="http://kongove.whostas.com/blog/download/game-escape3.png" /><!-- more --></p>
-<p><img alt="null" src="http://kongove.whostas.com/blog/download/game-escape2.png" /><img alt="null" src="http://kongove.whostas.com/blog/download/game-escape6.png" />
-<img alt="null" src="http://kongove.whostas.com/blog/download/game-escape4.png" /><img alt="null" src="http://kongove.whostas.com/blog/download/game-escape5.png" />
-<img alt="null" src="http://kongove.whostas.com/blog/download/game-escape7.png" /></p>
-                    <a class="btn btn-default btn-xs" href="./web/e98083e4baa1e88085e6898be69cbae6b8b8e6888f.html">more ...</a>
+                <div class="summary"><p>昨天得知三位朋友要结婚，(老田 腊月初八｜小妹 腊月二十二｜军科 正月初六)其中两位是小学同学。今天是农历十一月二十六，我大概要到腊月二十五后才能回家，所以只能参加初六的婚礼，老田就给随个份子、打个祝福电话，回家再好好喝酒、聊天。虽然有段时间没跟他们联系了，可知道他们结婚的消息后很兴奋，赶紧打电话祝福。寒冷的冬天，我又一次感受到了来自千里之外的温暖。</p>
+<p>小妹在河北，这个时间肯定也参加不了。好像是家里给她刚介绍了一个办工厂的小老板，认识不到几天就要结婚。听她意思就随家里人，嫁给这个“爱她的人”。这是封建残余思想？门当户对？包办婚姻？我不知道，我只知道这是一场赌局，一个无知、内心充满恐惧的小女生用她的青春和幸福当赌注。家人的决定也不无道理，只是应该彼此更加深入了解、建立感情才行呀。
+作为旁观者，我只能理解她内心的感受，只能这些。‘煽动/鼓励’她反抗包办婚姻、追求自己人生幸福？ 或许只有我十八岁的时候才会那样做。其实人生很多事情和赌博性质查不多，愿赌就得服输。</p>
+<p>祝福三位 :)</p>
+                    <a class="btn btn-default btn-xs" href="./life/wedding.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./linux/e6a0a1e5a496e5ae9ee4b9a0.html">校外实习</a></h2>
+                <h2><a href="./life/e8bdacefbc9ae4b880e4b8aae5a4a7e5ada6e7949fe59ca8e4b88ae6b5b7e79a84e5a58be69697e38081e68385e6849fe7bb8fe58e86.html">转：一个大学生在上海的奋斗、情感经历</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-09 12:37
+        <i class="icon-calendar"></i>2010-01-02 17:32
     </span>
     <hr>
-                <div class="summary"><p>从今天开始，学校安排了两周的校外实习，地点在<a href="http://www.nwpu.edu.cn/web/ruanjian/xasxjd/xajdjs/">国家软件人才国际培训(西安)基地</a>，听过是国内只有七家，内陆只有一家。每天早上9:00~下午5:00，中午休息两个小时，吃饭还得自己买粮票。每天都是半天理论课加半天上机实习。这段期间大家都要组队完成一个j2ee开发的“是男人就撑20秒”这个手机游戏。开发过程完全按照软件开发标准流程走，俺还是我们小组的项目组长，在这短短十天带领大家完成好项目也不容易，正好可以锻炼一下。
-今天第一天，讲了一些基地介绍、个人职业生涯规划、就业这些问题，他们那里也有很多国际资格认证，不过讲座中提及不多，感觉讲的还可以。这个地方有一点，我比较喜欢，就是把Linux提的很高，就连楼道都是Linus的头像，机房装的全是即时linux操作系统。而且他们也有Linux平台的嵌入式机顶盒、中间件、动漫等研究项目，听说成果很不错。下午的理论课程将Java，可光Linux讲了半天，那讲师装的是Ubuntu8.10，不过没见他启动。
-总得来说，这种实习比成天待宿舍要好一些，起码能更人多沟通，学习一些东西。今天第一天，回来还有点累，不过手头该做的还得做 :)</p>
-<p><img alt="http://kongove.whostas.com/blog/download/j2me-pig.png" src="http://kongove.whostas.com/blog/download/j2me-pig.png" /><img alt="" src="http://kongove.whostas.com/blog/download/20s.jpg" /></p>
-                    <a class="btn btn-default btn-xs" href="./linux/e6a0a1e5a496e5ae9ee4b9a0.html">more ...</a>
+                <div class="summary"><p>来上海整整五年了，事业上已有了突飞猛进的飞跃，生活方面有过一段段的辛酸。然而，如今回首看来，这五年来也这是这些苦恼最终成为我前进的机遇，让 我拥有了目前还算可以的生活境遇?700万身价，对有些兄弟来说可能是微不足道，但是我想大多数朋友还可能暂时没有达到这个状态---没有半点炫耀的意 思，我知道朋友们很多都会成功，会比我强得多---所以会对我的经历感兴趣，我决定定下心来，好好写点文字，希望不会让朋友们失望。
+今天 我的心里有一个想法更加清晰，那就是：爱，只有爱，才是一个男人成功的最好动力、最合适的动力。而绝不是自己的虚荣心，或者所谓的雄心壮志。作为一个男 人，首要的一件事是你要有你的真正所爱。它会像原子弹一样激发你的能力，让你爆发无穷的动力，上帝也会为你感动。这样的状态，就是每个人梦寐以求的状态。
+朋友们，也许你们不同意我的看法，我们先不忙争论，您先看看我的经历，看看是不是有道理。
+1，上海
+1999年中，我辞去了刚刚分配的国家机关的工作，从新疆来到了上海。当时我踌躇满志，认为凭借自己的力量和努力一定能够在这个大都市里站稳脚跟，创下一片属于自己的天空。
+我是1976年出生在新疆，新疆的日照和高原气候，让我的身材像白杨一样挺拔 ...</p>
+                    <a class="btn btn-default btn-xs" href="./life/e8bdacefbc9ae4b880e4b8aae5a4a7e5ada6e7949fe59ca8e4b88ae6b5b7e79a84e5a58be69697e38081e68385e6849fe7bb8fe58e86.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -299,6 +390,16 @@ NM_CONTROLLED=yes
                         href="./index14.html">14</a></li>
                 <li class=""><a
                         href="./index15.html">15</a></li>
+                <li class=""><a
+                        href="./index16.html">16</a></li>
+                <li class=""><a
+                        href="./index17.html">17</a></li>
+                <li class=""><a
+                        href="./index18.html">18</a></li>
+                <li class=""><a
+                        href="./index19.html">19</a></li>
+                <li class=""><a
+                        href="./index20.html">20</a></li>
                 <li class="next"><a
                         href="./index15.html">&raquo;</a></li>
         </ul>

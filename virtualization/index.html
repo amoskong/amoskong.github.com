@@ -68,6 +68,51 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
+                <h2><a href="../virtualization/e694b6e7bca9qemue8999ae68b9fe69cbae7a381e79b98e7a9bae997b4.html">收缩QEMU虚拟机磁盘空间</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-09-20 01:16
+    </span>
+    <hr>
+                <div class="summary"><p>相机照了很多照片，删了可惜，只能精选一些放网上．还有很多景色照片全部丢到百度网盘了．再加上很多虚拟机磁盘镜像，硬盘空间经常不够用．除了删除大量不经典的照片，就是在虚拟机镜像上想办法了．</p>
+<p>qcow2磁盘镜像在创建后只占很小的空间，随着虚拟机里磁盘空间的真正的使用，镜像会越来越大．即便文件删除后，空间也不会自动收缩．下面是的方法可以用于回收为使用的磁盘空间．</p>
+<div class="highlight"><pre><span class="o">+</span> <span class="n">Reclaimed</span> <span class="n">space</span> <span class="n">of</span> <span class="n">my</span> <span class="n">old</span> <span class="n">guests</span> <span class="n">images</span>
+
+  <span class="mi">1</span><span class="p">)</span> <span class="n">Fill</span> <span class="n">unused</span> <span class="n">space</span> <span class="n">to</span> <span class="n">zero</span><span class="o">:</span>
+    <span class="n">In</span> <span class="n">Linux</span> <span class="n">guests</span><span class="o">:</span>
+     <span class="err">#</span> <span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span> <span class="n">of</span><span class="o">=</span><span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span>
+     <span class="err">#</span> <span class="n">rm</span> <span class="n">a</span><span class="p">.</span><span class="n">out</span>
+
+    <span class="n">In</span> <span class="n">Windows</span> <span class="n">guests</span><span class="o">:</span>
+     <span class="err">#</span> <span class="n">download</span> <span class="n">sdelete</span> <span class="n">from</span> <span class="n">http ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../virtualization/e694b6e7bca9qemue8999ae68b9fe69cbae7a381e79b98e7a9bae997b4.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../virtualization/level-triggered-interrupt-edge-triggered-interrupt-efbc88e794b5e5b9b3e8a7a6e58f91e4b8ade696ad-e4b88e-e8beb9e6b2bfe8a7a6e58f91e4b8ade696adefbc89.html">level-triggered interrupt & edge-triggered interrupt （电平触发中断 与 边沿触发中断）</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-29 03:52
+    </span>
+    <hr>
+                <div class="summary"><p>（谢谢 wanpin Li对这篇博客的反馈，让我重新发现了一些问题）</p>
+<p>两种触发方式，是为了在多个设备共享中断线时，实现流量控制。</p>
+<ul>
+<li>
+<p>所谓边沿触发，就是电平发生变化（通常是从高到低）时触发的中断 （CPU忙时中断可能丢失）</p>
+</li>
+<li>
+<p>所谓电平触发，就是设备保持中断请求引脚（中断线）处于预设的有效触发电频（通常为高），中断会一直被请求（CPU忙时中断也不会丢失）。为了避免中断请求被重复处理，需要在处理前 标记 irq，然后 ACK irq（复位中断请求引脚为无效电频，以便能够接受其他中断请求），处理中断，然后 取消 irq 标记。</p>
+</li>
+</ul>
+<p>KVM 最先只支持 edge-triggered 中断，使用一个irqfd通知guest，电频下降边沿可在注入模拟中一次完成。看下面代码连续调用两个kvm_set_irq()，倒数第二个参数为电平。</p>
+<p>虚拟机 level-triggered 的注入仍然依赖的是userspace，在QEMU里模拟了 PCI / IOapic /LAPIC(8259)。KVM_IRQFD ...</p>
+                    <a class="btn btn-default btn-xs" href="../virtualization/level-triggered-interrupt-edge-triggered-interrupt-efbc88e794b5e5b9b3e8a7a6e58f91e4b8ade696ad-e4b88e-e8beb9e6b2bfe8a7a6e58f91e4b8ade696adefbc89.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="../virtualization/e5b081e8a385e4b880e4b8aasendkeye587bde695b0e59091e8999ae68b9fe69cbae4b880e6aca1e680a7e58f91e98081e5ad97e7aca6e4b8b2.html">封装一个sendkey函数向虚拟机一次性发送字符串</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">

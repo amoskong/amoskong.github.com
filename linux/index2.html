@@ -68,180 +68,205 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
-                <h2><a href="../linux/how-to-use-kexec.html">How to use kexec</a></h2>
+                <h2><a href="../linux/fedora-20-skype-x86_64.html">Fedora 20 Skype @ x86_64</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-06-15 01:14
+        <i class="icon-calendar"></i>2013-12-23 10:52
     </span>
     <hr>
-                <div class="summary"><p>Tue Jun 15 09:07:36 2010</p>
-<ol>
-<li>check if current kernel support kexec</li>
-</ol>
-<h1 id="grep-kexec-boogconfig-2634-rc6">grep KEXEC /boog/config-2.6.34-rc6</h1>
-<ol>
-<li>
-<p>install kexec tools
-1) apt-get / yum install kexec-tools
-2) src: http://www.kernel.org/pub/linux/kernel/people/horms/kexec-tools/kexec-tools-2.0.1.tar.gz</p>
-</li>
-<li>
-<p>get command line of new kernel ...</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="../linux/how-to-use-kexec.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/e68890e58a9fe7bc96e8af91e7bd91e58da1e9a9b1e58aa8.html">成功编译网卡驱动</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2009-04-07 01:43
-    </span>
-    <hr>
-                <div class="summary"><p>我的毕设终于有眉目了 :)
-我的网卡驱动文件是： driver/net/forcedeth.c
-最近在读代码过程中，做了一下代码汉字注释，还有一些笔记。就是编译总出现格式不可用。今天在helight的帮助下，终于把经过自己稍微修改的网卡驱动，编译、安装好，现在使用的就是“自己的网卡驱动了”。</p>
-<div class="highlight"><pre><span class="mf">1.</span> <span class="n">Install</span> <span class="n">the</span> <span class="n">kernel</span> <span class="n">header</span> <span class="n">files</span>
-<span class="err">$</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="mf">2.6.27</span><span class="o">-</span><span class="mi">13</span><span class="o">-</span><span class="n">generic</span>
+                <div class="summary"><p><a href="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png"><img alt="Screenshot from 2013-12-23 18:49:37" src="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png" /></a></p>
+<div class="highlight"><pre><span class="err">#</span> <span class="o">&lt;</span><span class="nx">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;http://negativo17.org/repos/skype/fedora-20/x86_64/&quot;</span><span class="o">&gt;</span><span class="nx">http</span><span class="p">:</span><span class="c1">//negativo17.org/repos/skype/fedora-20/x86_64/&lt;/a&gt;</span>
+<span class="err">[</span><span class="nb">DIR</span><span class="cp">]</span> repodata/                             2013-12-19 06:10    -   
+<span class="cp">[</span>   <span class="cp">]</span> skype-4.2.0.11-8.fc20.i686.rpm        2013-12-19 06:10   12M  
+<span class="cp">[</span>   <span class="cp">]</span> skype-data-4.2.0.11-8.fc20.noarch.rpm 2013-12-19 06:10  2.1M
 
-<span class="mf">2.</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">source</span> <span class="n">code</span> <span class="n">of</span> <span class="n">forcedeth</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">and</span> <span class="n">modify</span> <span class="n">it</span>
-<span class="n">kongove</span><span class="err">@</span><span class="n">ubuntu</span><span class="o">:~/</span><span class="n">code</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">force</span><span class="err">$</span> <span class="n">ls ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../linux/e68890e58a9fe7bc96e8af91e7bd91e58da1e9a9b1e58aa8.html">more ...</a>
+
+
+
+# cat /etc/yum.repos.d ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/fedora-20-skype-x86_64.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/icce7bc96e8af91linuxe58685e6a0b8.html">ICC编译Linux内核</a></h2>
+                <h2><a href="../linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html">在Linux下使用QEMU虚拟机U盾认证网银</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-06 09:25
+        <i class="icon-calendar"></i>2013-07-04 02:18
     </span>
     <hr>
-                <div class="summary"><p>听说使用ICC编译Linux内核，性能可以提升40%，我的第一感觉是，应该有提升，也没这么夸张吧，应该是有人估计夸大，玩数字游戏。  从4月1日起，开始尝试编译。从Intel官网下载ICC 10.0.022，在虚拟机的Fedora10上安装(安装需要licence)。然后从LinuxDNA.com下载2.6.22内核代码，下载最新的封装脚本(<a href="http://linuxdna.com/wrapper.html">http://linuxdna.com/wrapper.html</a>)，使用POE提供给我的一个补丁(针对2.6.18)，下载linuxdna配置文件(<a href="http://www.linuxdna.com/configdna">http://www.linuxdna.com/configdna</a>)放到内核根目录 手工对内核代码进行了修改，按照LinuxDNA网页的简单说明编译内核。  刚刚把内核安装成功，发现启动速度比原来(2.6.22)快了一半，我都怀疑是不是有其他问题，但目前的使用都正常，特别是响应速度明显提升，也不知道是不是心理作用。下面需要一些具体的测试，才能说明问题 ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/icce7bc96e8af91linuxe58685e6a0b8.html">more ...</a>
+                <div class="summary"><p>这里以招商银行为例， 使用 lsusb 命令查看当前usb状态，然后将招商银行U盾插入主机USB插口。再通过lsusb查看新设备的的USB串号（这里查找到的是1483:c007）。</p>
+<p><code># lsusb
+Bus 003 Device 007: ID 1483:c007
+......</code></p>
+<p>启动QEMU虚拟机，使用（-usbdevice host:U盾串号）把主机上的U盾指定给虚拟机使用</p>
+<p><code># qemu --enable-kvm /images/winXP-32-virtio.qcow2 -m 2000 -vnc :10 -usbdevice tablet -net nic,model=rtl8139 -net tap -usbdevice host:1483:c007[![Screenshot from 2013-07-04 09:34:18](http ...</code></p>
+                    <a class="btn btn-default btn-xs" href="../linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/about-dmadirect-memory-access.html">About DMA(Direct Memory Access)</a></h2>
+                <h2><a href="../linux/workshop-e28093-beijing-e28093-march-21st.html">'oVirt project: Workshop – Beijing – March 21st'</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-05 01:09
+        <i class="icon-calendar"></i>2012-02-06 01:20
     </span>
     <hr>
-                <div class="summary"><p>在PC上都有一个DMAC(直接内存访问控制器)，用于控制RMA和I/O设备之间的数据传送。DMAC需要被CPU激活，才能自行传送数据，数据传送完，DMAC发出一个中请求。一个名为存储器仲裁器的硬件电路用于解决CPU和DMAC并发访问同一存储单元时的冲突。</p>
-<p>DMAC常使用在磁盘驱动器等一次传送大量数据的慢速设备。DMAC的设置时间长，少量数据使用CPU效率较高。</p>
-<p>除CPU之外的硬件设备驱动数据总线所用的存储器地址，称作总线地址(bus address)。在PC体系结构中，总线地址和物理地址相同，但在Sun的SPARC和HP的Alpha体系结构中，两者不同。内核提供virt_to_bus和bus_to_virt宏转换线性地址和总线地址。</p>
-<p>DMA操作中，I/O设备和DMAC直接驱动数据总线，需要把涉及的存储去缓冲区总线地址写入DMAC相应I/O端口，或I/O设备相应端口。</p>
-<p>打开设备文件时，就会分配一条IRQ线准备发送DMA传送结束的信号。为了启动DMA操作，设备驱动程序只是在硬件设备的I/O端口写入DMA缓冲区的总线地址、传输方向和传输数据大小；然后驱动程序挂起当前进程。当DMA结束时，硬件设备产生一个中断唤醒设备驱动程序。当设备文件对象被最后一个进程关闭时，其release方法中释放IRQ线。</p>
-                    <a class="btn btn-default btn-xs" href="../linux/about-dmadirect-memory-access.html">more ...</a>
+                <div class="summary"><p>From: <a href="http://www.ovirt.org/news-and-events/workshop/">http://www.ovirt.org/news-and-events/workshop/</a></p>
+<div class="highlight"><pre><span class="n">Workshop</span> <span class="err">–</span> <span class="n">Beijing</span> <span class="err">–</span> <span class="n">March</span> <span class="mi">21</span><span class="n">st</span>
+
+<span class="n">To</span> <span class="n">RSVP</span> <span class="n">please</span> <span class="n">email</span> <span class="n">to</span> <span class="n">rsvp</span><span class="err">@</span><span class="n">oVirt</span><span class="p">.</span><span class="n">org</span> <span class="p">.</span>
+
+<span class="n">During</span> <span class="n">this</span> <span class="n">workshop</span> <span class="n">you</span><span class="err">’</span><span class="n">ll</span> <span class="n">learn</span> <span class="n">about</span> <span class="n">the</span> <span class="n">technical</span> <span class="n">background</span> <span class="n">and</span> <span class="n">direction</span>
+<span class="n">of</span> <span class="n">the</span> <span class="n">project</span><span class="p">.</span> <span class="n">You</span><span class="err">’</span><span class="n">ll</span> <span class="n">meet</span> <span class="n">the</span> <span class="n">developers</span><span class="p">,</span> <span class="n">and</span> <span class="n">have</span> <span class="n">an</span> <span class="n">opportunity</span> <span class="n">to</span> <span class="n">use</span> <span class="err">–</span>
+<span class="n">yes</span> <span class="n">our</span> <span class="n">first</span> <span class="n">release ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/workshop-e28093-beijing-e28093-march-21st.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html">关于Linux内核性能测试</a></h2>
+                <h2><a href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">网络性能测试</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-01 11:34
+        <i class="icon-calendar"></i>2011-12-29 00:40
     </span>
     <hr>
-                <div class="summary"><p>参考上篇文章，我把自己最近碰到的内核测试方法总结了一下，希望大家指错 :)</p>
-<p>一、概述：
-一般意义上的内核测试可能更多的偏重于功能测试，但在内核开发中，内核退化是很严重的问题，特别是在添加新特性的时候，性能测试显得尤为重要。
-内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。</p>
-<p>二、内核性能测试开源项目：
-http://www.linuxdna.com/
-http://kernel-perf.sourceforge.net/</p>
-<p>三、Linux内核测试法：</p>
-<p>1.Linux测试项目(LTP)
-LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。</p>
-<p>2 ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html">more ...</a>
+                <div class="summary"><p>我主要做的是Virtual IO, PCI, Network 这几块，提高虚拟机的IO性能。网络性能主要使用netperf，iperf，Ntttcp(win)，需要统计吞吐率，CPU利用率，收发包数目，收发字节数，注入中断，IO_exit 等。需要多次测试，调整测试时间，计算平均值，并求标准方差，看看同样环境结果是否稳定，从而确定一些经验值（合理的测试次数，单个测试执行时间等）。</p>
+<p>然后对打Patch前后版本的平均值进行比较，评估是否有性能回归bug。顺便给大家推荐一本书[1]，大学学的概率论、高数基本都还给老师了，所以还得重新看资料复习。</p>
+<p>发程序到社区的时候碰到一个版权问题，NTttcp，微软禁止其他人传播，所以只能提示用户自己去官网下载。我的程序里使用AutoIT脚本自动签订了最终用户许可协议（<em>EULA</em> End User License Agreement），然后在文档、程序、commitlog 里提示如果不同意此协议不要使用此脚本。不清楚是否合法，所以发邮件给内部法律部门咨询了。所以离开自由软件世界是很麻烦的，哈哈 ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html">Linux系统内核性能评测</a></h2>
+                <h2><a href="../linux/cn-opensource-week-fad_2011.html">CN Opensource week & FAD_2011</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-04-01 11:29
+        <i class="icon-calendar"></i>2011-10-18 13:08
     </span>
     <hr>
-                <div class="summary"><p>Linux以其开放和自由的特性，日益受到人们的关注，并被广泛应用于科学计算、电子商务、并行运算、辅助教学、大型服务器、嵌入式应用和桌面办公等不同的领域，为我国软件产业的发展带来了契机。研究Linux内核的评测方法、评价工具和评测标准，颇具意义和实用价值，有助于 Linux国产化发展，同时也是国家电子基金项目的重要组成部分。</p>
-<p>Linux内核是Linux操作系统最核心的部分，其性能直接决定了操作系统的性能。测试内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。</p>
-<p>Linux内核测试法</p>
-<p>1.Linux测试项目(LTP)</p>
-<p>LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。</p>
-<p>2.可扩展性测试平台（STP）</p>
-<p>开放源代码开发实验室 (Open ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html">more ...</a>
+                <div class="summary"><p><img alt="osw-fad" src="/blog/wp-content/uploads/osw-fad.jpg" /></p>
+<p>上周六参加了CN Opensource week &amp; FAD [1]，从早上9点签到，一直玩到晚上8点多。印象当中好久没有参加社区活动了，这次是和公司的朋友们一起去参加的。</p>
+<p>我早早过去签到，碰见了peter chen，他最近好像在搞开源硬件，还认识了中国区的fedora大使 gbraad，他很活跃。上午主要是ow2公司讲解为社区、技术人员、公司提供平台，进行相关协作；还有红帽社区关系manager - Harish Pillay讲红帽与fedora社区的关系运作模式；再下来是David li 讲的开源硬件和创科空间[2]；IBM 讲解自己的社区贡献和developerworks知识分享平台。 linuxtoys.org的编辑 tommy 同学带领大家怀念了一下 DennisRitchie。</p>
+<p>中午提供比格比萨的自助餐卷，人很多，但吃的也不错。下午我主要是在听FAD的topic，比较有意思的有synfig studio，它是一个开源的二维动画制作软件，flash、ps都不精的我很像体验一下；csslayer同学又分享了kde开发的一些经验，并极力宣传他的KDE开发资讯网站[3]；下来是清华alink同学讲的texlive，主要讲安装步骤，其实安装步骤发给大家就可以，没必要那么细的讲 ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/cn-opensource-week-fad_2011.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html">操作系统中的一些重要知识点</a></h2>
+                <h2><a href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">'自由软件日上的问答 '</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-28 13:05
+        <i class="icon-calendar"></i>2011-09-24 09:48
     </span>
     <hr>
-                <div class="summary"><p>－－－操作系统中的一些重要知识点－－－(继续更新)</p>
-<p>进程状态转换：(转换规则)
-初始化、就绪、执行、等待、终止
-进程创建和撤销</p>
-<p>临界区：每个进程访问临界资源(一个仅允许一个进程使用的共享资源)的那段代码
-进程同步和互斥(不允许两个以上共享该资源的并发进程同时进入临界区)
-信号量和P，V原语
-生产者－消费者问题</p>
-<p>死锁(并发进程彼此等待对方占有资源，并在得到对方资源前不会释放自己占有资源；预防、避免、检测(是否构成资源请求和保持环路)、恢复)
-哲学家就餐算法
-理发师问题
-银行家算法</p>
-<p>进程(PCB)和线程(TCB)的区别</p>
-<p>进程间通信：
-管道、共享内存、SOCKET、FIFO、消息队列、信号量...</p>
-<p>调度算法：
-先来先服务FCFS、轮转法、多级反馈轮转法(3种状态)、优先级法、最短作业优先法SJF ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html">more ...</a>
+                <div class="summary"><p>自由软件日上的问答
+From: <a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html">http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html</a></p>
+<p>陈莉君 2011年09月21日 星期三 23:30 | 54次浏览 | 0条评论</p>
+<p>20日，西电举办国际自由软件日活动，邀请我去参加。比起西邮17日的隆重举办，西电的活动看起来平淡和朴素。他们本来让我从宏观上讲讲自由软件和开源软件，对于空洞的讲这些概念，自己都有点烦了，总觉得自己自以为是头头是道所讲，并非大家感兴趣的，于是准备以问答形式来解答大家提问，不管什么问题，我准备充分调动自己的内存资源，以百度搜索的速度进行检索，一旦不会，就让他们去问百度知道。</p>
+<p>回想一下他们的问题，觉得自己回答不尽全面，但基本上能自圆其说，因此分享出来：</p>
+<p>问：自由软件和开源软件有什么区别？</p>
+<p>答：Richard Stallman对自由软件有一个明确的定义，但我总是记不全，因此，不打算较真Stallman的定义，而以自己的理解解释。比如，Linux和android，哪个是开源软件？二者都是，哪个自由呢，Linux ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html">网络连接图标打红叉(device is unmanaged)</a></h2>
+                <h2><a href="../linux/announce-native-linux-kvm-tool.html">'[ANNOUNCE] Native Linux KVM tool'</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-23 08:49
+        <i class="icon-calendar"></i>2011-04-10 14:08
     </span>
     <hr>
-                <div class="summary"><p>Fedora10安装的好几个机器都是网络设置图标打叉，还以为是BUG，上次给一朋友直接在网上复制了个网络接口配置文件就好了，当时也没仔细对比文件差异。上次我的Ubuntu升级软件、安装UbuntuStudio后也出现这个问题，但网络连接没有任何问题也就没关。今天突然发现有下面这个解决方法。</p>
-<p>当然其他问题也可能导致图标打红叉，如没有网卡驱动、没有激活网络、没有配置等，上面是没有设置网络管理选项带来的问题。</p>
-<p>Ubuntu网络连接图标打红叉，但通过命令行可以配置网络。将下面文件的managed值由false改为true，重启即可！</p>
-<p>sudo vim /etc/NetworkManager/nm-system-settings.conf
-[main]
-plugins=ifupdown,keyfile
-[ifupdown]
-managed=true</p>
-<p>Fedora10网络连接图标打红叉，但通过命令行可以配置网络。修改网络连接文件，添加 NM_CONTROLLED=yes，重启网络即可。</p>
-<p>sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0
-..
-NM_CONTROLLED=yes
-...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html">more ...</a>
+                <div class="summary"><div class="highlight"><pre><span class="n">Date</span><span class="o">:</span> <span class="n">Thu</span><span class="o">,</span> <span class="mi">31</span> <span class="n">Mar</span> <span class="mi">2011</span> <span class="mi">20</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="mi">56</span> <span class="o">+</span><span class="mi">0300</span>
+<span class="n">From</span><span class="o">:</span> <span class="n">Pekka</span> <span class="n">Enberg</span> <span class="o">&lt;</span><span class="n">penberg</span><span class="err">@</span><span class="n">kernel</span><span class="o">.</span><span class="na">org</span><span class="o">&gt;</span>
+<span class="n">To</span><span class="o">:</span> <span class="n">linux</span><span class="o">-</span><span class="n">kernel</span><span class="err">@</span><span class="n">vger</span><span class="o">.</span><span class="na">kernel</span><span class="o">.</span><span class="na">org</span>
+<span class="n">Cc</span><span class="o">:</span> <span class="n">aarcange</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">avi</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">mtosatti</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span>
+        <span class="n">kvm</span><span class="err">@</span><span class="n">vger</span><span class="o">.</span><span class="na">kernel</span><span class="o">.</span><span class="na">org</span><span class="o">,</span> <span class="n">joro</span><span class="err">@</span><span class="mi">8</span><span class="n">bytes</span><span class="o">.</span><span class="na">org</span><span class="o">,</span> <span class="n">penberg</span><span class="err">@</span><span class="n">cs</span><span class="o">.</span><span class="na">helsinki</span><span class="o">.</span><span class="na">fi</span><span class="o">,</span>
+        <span class="n">asias</span><span class="o">.</span><span class="na">hejun</span><span class="err">@</span><span class="n">gmail</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">gorcunov</span><span class="err">@</span><span class="n">gmail</span><span class="o">.</span><span class="na">com ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/announce-native-linux-kvm-tool.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/e6a0a1e5a496e5ae9ee4b9a0.html">校外实习</a></h2>
+                <h2><a href="../linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html">正则表达式【from javaeye.com/iteye.com】</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2009-03-09 12:37
+        <i class="icon-calendar"></i>2011-04-03 23:37
     </span>
     <hr>
-                <div class="summary"><p>从今天开始，学校安排了两周的校外实习，地点在<a href="http://www.nwpu.edu.cn/web/ruanjian/xasxjd/xajdjs/">国家软件人才国际培训(西安)基地</a>，听过是国内只有七家，内陆只有一家。每天早上9:00~下午5:00，中午休息两个小时，吃饭还得自己买粮票。每天都是半天理论课加半天上机实习。这段期间大家都要组队完成一个j2ee开发的“是男人就撑20秒”这个手机游戏。开发过程完全按照软件开发标准流程走，俺还是我们小组的项目组长，在这短短十天带领大家完成好项目也不容易，正好可以锻炼一下。
-今天第一天，讲了一些基地介绍、个人职业生涯规划、就业这些问题，他们那里也有很多国际资格认证，不过讲座中提及不多，感觉讲的还可以。这个地方有一点，我比较喜欢，就是把Linux提的很高，就连楼道都是Linus的头像，机房装的全是即时linux操作系统。而且他们也有Linux平台的嵌入式机顶盒、中间件、动漫等研究项目，听说成果很不错。下午的理论课程将Java，可光Linux讲了半天，那讲师装的是Ubuntu8.10，不过没见他启动。
-总得来说，这种实习比成天待宿舍要好一些，起码能更人多沟通，学习一些东西。今天第一天，回来还有点累，不过手头该做的还得做 :)</p>
-<p><img alt="http://kongove.whostas.com/blog/download/j2me-pig.png" src="http://kongove.whostas.com/blog/download/j2me-pig.png" /><img alt="" src="http://kongove.whostas.com/blog/download/20s.jpg" /></p>
-                    <a class="btn btn-default btn-xs" href="../linux/e6a0a1e5a496e5ae9ee4b9a0.html">more ...</a>
+                <div class="summary"><p>From : <a href="http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0">http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0</a></p>
+<p>正则表达式是个好东西,就是有些复杂.在验证输入,字符串查找,处理上确实很方便.</p>
+<p>30分钟教程<a href="http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm">http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm</a></p>
+<p>D可使用的表达式:<a href="http://www.digitalmars.com/ctg/regular.html">http://www.digitalmars.com/ctg/regular.html ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html">apt , yum 相似功能命令列表</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2011-03-09 05:24
+    </span>
+    <hr>
+                <div class="summary"><p>Below is a table of equivalent commands for package management on both Ubuntu/Debian and Red Hat/Fedora systems.</p>
+<h2 id="task">Task</h2>
+<h2 id="red-hatfedora">Red Hat/Fedora</h2>
+<h2 id="ubuntu">Ubuntu</h2>
+<h3 id="adding-removing-and-upgrading-packages">Adding, Removing and Upgrading Packages</h3>
+<div class="highlight"><pre><span class="n">Refresh</span> <span class="n">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">packages</span>
+
+<span class="n">Yum</span> <span class="n">refreshes</span> <span class="n">each</span> <span class="n">time</span> <span class="n">it</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">used</span>
+
+<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+
+<span class="n">Install</span> <span class="n">a</span> <span class="n">package</span> <span class="n">from</span> <span class="n">a</span> <span class="n">repository ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html">10 个最酷的 Linux 单行命令</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2010-11-04 14:19
+    </span>
+    <hr>
+                <div class="summary"><p>下面是来自   <a href="http://commandlinefu.com/"> Commandlinefu  </a> 网站由用户投票决出的 10 个最酷的 Linux 单行命令，希望对你有用。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>sudo !!</code>以 root 帐户执行上一条命令。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>python -m SimpleHTTPServer</code>利用 Python 搭建一个简单的 Web 服务器，可通过 http://$HOSTNAME:8000 访问。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>:w !sudo tee %</code>在 Vim 中无需权限保存编辑的文件。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>cd -</code>更改到上一次访问的目录。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>^foo^bar</code>将上一条命令中的 foo 替换为 bar，并执行。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>cp filename{,.bak}</code>快速备份或复制文件。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>mtr google.com</code>traceroute + ping。</p>
+<ol>
+<li></li>
+</ol>
+<p><code>!whatever ...</code></p>
+                    <a class="btn btn-default btn-xs" href="../linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -253,7 +278,10 @@ NM_CONTROLLED=yes
                         href="../linux/index.html">1</a></li>
                 <li class="active"><a
                         href="../linux/index2.html">2</a></li>
-                <li class="next disabled"><a href="#">&laquo;</a></li>
+                <li class=""><a
+                        href="../linux/index3.html">3</a></li>
+                <li class="next"><a
+                        href="../linux/index3.html">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-lg-3 well well-sm" id="sidebar">

@@ -68,205 +68,223 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
-                <h2><a href="../linux/fedora-20-skype-x86_64.html">Fedora 20 Skype @ x86_64</a></h2>
+                <h2><a href="../linux/e4bdbfe794a8bipe4bba3e79086e995bfe69c9fe68c82irc.html">使用BIP代理长期挂IRC</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2013-12-23 10:52
+        <i class="icon-calendar"></i>2014-11-06 14:09
     </span>
     <hr>
-                <div class="summary"><p><a href="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png"><img alt="Screenshot from 2013-12-23 18:49:37" src="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png" /></a></p>
-<div class="highlight"><pre><span class="err">#</span> <span class="o">&lt;</span><span class="nx">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;http://negativo17.org/repos/skype/fedora-20/x86_64/&quot;</span><span class="o">&gt;</span><span class="nx">http</span><span class="p">:</span><span class="c1">//negativo17.org/repos/skype/fedora-20/x86_64/&lt;/a&gt;</span>
-<span class="err">[</span><span class="nb">DIR</span><span class="cp">]</span> repodata/                             2013-12-19 06:10    -   
-<span class="cp">[</span>   <span class="cp">]</span> skype-4.2.0.11-8.fc20.i686.rpm        2013-12-19 06:10   12M  
-<span class="cp">[</span>   <span class="cp">]</span> skype-data-4.2.0.11-8.fc20.noarch.rpm 2013-12-19 06:10  2.1M
-
-
-
-
-# cat /etc/yum.repos.d ...</pre></div>
-                    <a class="btn btn-default btn-xs" href="../linux/fedora-20-skype-x86_64.html">more ...</a>
+                <div class="summary"><p>使用BIP [1] 代理挂IRC和以前在远端服务器挂QQ升级是一个模式, 不过不是为了升级, 而是为了保存日志, 特别是在一些全球的频道, 晚上关了IRC可能错过一些有趣的讨论.</p>
+<p>以前听说过这个功能, 但是自己没有去配置, 我想着不安全. 而且一致用命令行的irssi, 或者 emacs里的erc, 都很轻便. 今天Fam告诉我, 我们组有一个公用的服务器, 有kerbose个人账号保证安全, 于是配置了一下, 确实很实用又方便.</p>
+<p>需要在一台长期运转的服务器上配置BIP服务, 可以参考这里详细的步骤 [2] 或 3. 然后简单配置客户端就可以.</p>
+<p>这里说一下我觉得特别的地方:
+1) 我们的服务器是公用, 所以不能使用默认7778端口, 可以先用 nc -l xxxx 来做个监听测试, 确保其他人没有使用.
+2) on_connect_send 定义的命令是用来验证IRC服务器上的账号, 不同服务器的命令不一样.  "PRIVMSG UserServ login user password", 也可以是 "PRIVMSG NickServ :IDENTIFY user password ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/e4bdbfe794a8bipe4bba3e79086e995bfe69c9fe68c82irc.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html">在Linux下使用QEMU虚拟机U盾认证网银</a></h2>
+                <h2><a href="../linux/fedora-20-muttmsmtp-e4bdbfe794a8gmaile58f91e98081e982aee4bbb6.html">'Fedora 20: mutt/msmtp: 使用Gmail发送邮件'</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2013-07-04 02:18
+        <i class="icon-calendar"></i>2014-11-04 19:51
     </span>
     <hr>
-                <div class="summary"><p>这里以招商银行为例， 使用 lsusb 命令查看当前usb状态，然后将招商银行U盾插入主机USB插口。再通过lsusb查看新设备的的USB串号（这里查找到的是1483:c007）。</p>
-<p><code># lsusb
-Bus 003 Device 007: ID 1483:c007
-......</code></p>
-<p>启动QEMU虚拟机，使用（-usbdevice host:U盾串号）把主机上的U盾指定给虚拟机使用</p>
-<p><code># qemu --enable-kvm /images/winXP-32-virtio.qcow2 -m 2000 -vnc :10 -usbdevice tablet -net nic,model=rtl8139 -net tap -usbdevice host:1483:c007[![Screenshot from 2013-07-04 09:34:18](http ...</code></p>
-                    <a class="btn btn-default btn-xs" href="../linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/workshop-e28093-beijing-e28093-march-21st.html">'oVirt project: Workshop – Beijing – March 21st'</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2012-02-06 01:20
-    </span>
-    <hr>
-                <div class="summary"><p>From: <a href="http://www.ovirt.org/news-and-events/workshop/">http://www.ovirt.org/news-and-events/workshop/</a></p>
-<div class="highlight"><pre><span class="n">Workshop</span> <span class="err">–</span> <span class="n">Beijing</span> <span class="err">–</span> <span class="n">March</span> <span class="mi">21</span><span class="n">st</span>
+                <div class="summary"><p>在mutt里使用fetchmail接受gmail很容易, ~/.fetchmailrc一句命令就能搞定. 今天记录一下, 使用msmtp发送Gmail, 重点在于必须使用tls, 需要的认证文件需要从ca-certificates包里获得, 路径为: /etc/pki/tls/certs/ca-bundle.crt, 这和ubuntu里不一样.</p>
+<div class="highlight"><pre><span class="cp"># cat ~/.msmtprc</span>
+<span class="cp">#Company</span>
+<span class="n">account</span> <span class="k">default</span>
+<span class="n">host</span> <span class="n">smtp</span><span class="p">.</span><span class="n">company</span><span class="p">.</span><span class="n">com</span>
+<span class="n">port</span> <span class="mi">25</span>
+<span class="n">from</span> <span class="n">akong</span><span class="err">@</span><span class="n">company</span><span class="p">.</span><span class="n">com</span>
+<span class="n">logfile</span> <span class="o">~/</span><span class="n">Mail</span><span class="o">/</span><span class="p">.</span><span class="n">msmtp</span><span class="p">.</span><span class="n">log</span>
 
-<span class="n">To</span> <span class="n">RSVP</span> <span class="n">please</span> <span class="n">email</span> <span class="n">to</span> <span class="n">rsvp</span><span class="err">@</span><span class="n">oVirt</span><span class="p">.</span><span class="n">org</span> <span class="p">.</span>
+<span class="cp">#Gmail</span>
+<span class="n">account</span> <span class="n">gmail</span>
+<span class="n">protocol</span> <span class="n">smtp</span>
+<span class="n">tls</span> <span class="n">on</span>
+<span class="n">tls_starttls</span> <span class="n">on</span>
+<span class="n">tls_trust_file</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="o">-</span><span class="n">bundle</span><span class="p">.</span><span class="n">crt ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/fedora-20-muttmsmtp-e4bdbfe794a8gmaile58f91e98081e982aee4bbb6.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/e4bfaee694b9mutte9878cgpg-e7adbee5908de585ace992a5e99984e4bbb6e5908d.html">修改mutt里GPG 签名公钥附件名</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-11-04 18:22
+    </span>
+    <hr>
+                <div class="summary"><p>在mutt里配置好gpg后, 加密邮件会附带一个公钥文件, 这个文件名在Gmail里是 noname, 在QQ邮箱里是tcmime.1591.1634.2471.bin. 这些都会给人造成困惑, Thunderbird 里会把这个文件命名为 signature.asc</p>
+<p>在archlinux 的github [1], 有一个patch为mutt添加了定义公钥文件名称和描述的功能. 于是从FedoraProject[2]下载mutt代码, 重新用rpmbuild编译rpm安装. 当然也可以使用Upstream[3]的代码, 记着configure时候打开需要的特性, 如 --enable-hcache 用于缓冲邮件头部改进加载速度.</p>
+<p>安装完mutt, 只需要在~/.Muttrc里添加如下内容, 就可以修改公钥文件名了.</p>
+<p>set pgp_mime_signature_filename="signature.asc"
+set pgp_mime_signature_description="Digital signature"</p>
+<p>[1] <a href="https://github.com/felix/archlinux/blob/master/mutt/pgp_verbose_mime.patch">https://github.com/felix/archlinux/blob/master/mutt ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../linux/e4bfaee694b9mutte9878cgpg-e7adbee5908de585ace992a5e99984e4bbb6e5908d.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/looking-for-a-sw-engineer-to-join-the-avocado-team-power8.html">Looking for a SW Engineer to join the Avocado team  (Power8)</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-09-30 03:41
+    </span>
+    <hr>
+                <div class="summary"><p>Hi folks. (from: https://www.redhat.com/archives/autotest-kernel/2014-September/msg00012.html)</p>
+<p>We're looking for a SW Engineer to work on the KVM Test Automation team (currently working on Avocado), focusing on Power8.</p>
+<p>The primary assignment of this person will be to work on the Power8 port of Avocado ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/looking-for-a-sw-engineer-to-join-the-avocado-team-power8.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/e8bdac-e4bdbfe794a8-ffmpeg-e7bca9e694bee38081e8a381e589aae38081e589aae8be91e8a786e9a291.html">'转: 使用 ffmpeg 缩放、裁剪、剪辑视频'</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-09-29 12:50
+    </span>
+    <hr>
+                <div class="summary"><p>以前系统里装了一个剪辑软件, 用起来很占资源. 刚才想简单剪辑一个视频, 搜到下面文章, 比图形界面方便多了 :-)</p>
+<p>我们平时使用手机拍摄的视频一般都在1080p及以上，在实际应用中，比如共享给朋友等，可能需要处理一下会比较方便。下面列出几个 ffmpeg 常用的处理视频方法（如果只需要格式转换，可以参考我之前的一篇文章<a href="http://archboy.org/2011/08/17/h264-encode-mpeg2-to-mp4/">《使用H264编码转换视频》</a>）</p>
+<h2 id="_1">缩小视频</h2>
+<p>假设原始视频尺寸是 1080p（即 1920×1080 px，16:9），使用下面命令可以缩小到 480p：</p>
+<table >
+<tbody >
+<tr >
 
-<span class="n">During</span> <span class="n">this</span> <span class="n">workshop</span> <span class="n">you</span><span class="err">’</span><span class="n">ll</span> <span class="n">learn</span> <span class="n">about</span> <span class="n">the</span> <span class="n">technical</span> <span class="n">background</span> <span class="n">and</span> <span class="n">direction</span>
-<span class="n">of</span> <span class="n">the</span> <span class="n">project</span><span class="p">.</span> <span class="n">You</span><span class="err">’</span><span class="n">ll</span> <span class="n">meet</span> <span class="n">the</span> <span class="n">developers</span><span class="p">,</span> <span class="n">and</span> <span class="n">have</span> <span class="n">an</span> <span class="n">opportunity</span> <span class="n">to</span> <span class="n">use</span> <span class="err">–</span>
-<span class="n">yes</span> <span class="n">our</span> <span class="n">first</span> <span class="n">release ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../linux/workshop-e28093-beijing-e28093-march-21st.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">网络性能测试</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-12-29 00:40
-    </span>
-    <hr>
-                <div class="summary"><p>我主要做的是Virtual IO, PCI, Network 这几块，提高虚拟机的IO性能。网络性能主要使用netperf，iperf，Ntttcp(win)，需要统计吞吐率，CPU利用率，收发包数目，收发字节数，注入中断，IO_exit 等。需要多次测试，调整测试时间，计算平均值，并求标准方差，看看同样环境结果是否稳定，从而确定一些经验值（合理的测试次数，单个测试执行时间等）。</p>
-<p>然后对打Patch前后版本的平均值进行比较，评估是否有性能回归bug。顺便给大家推荐一本书[1]，大学学的概率论、高数基本都还给老师了，所以还得重新看资料复习。</p>
-<p>发程序到社区的时候碰到一个版权问题，NTttcp，微软禁止其他人传播，所以只能提示用户自己去官网下载。我的程序里使用AutoIT脚本自动签订了最终用户许可协议（<em>EULA</em> End User License Agreement），然后在文档、程序、commitlog 里提示如果不同意此协议不要使用此脚本。不清楚是否合法，所以发邮件给内部法律部门咨询了。所以离开自由软件世界是很麻烦的，哈哈 ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/cn-opensource-week-fad_2011.html">CN Opensource week & FAD_2011</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-10-18 13:08
-    </span>
-    <hr>
-                <div class="summary"><p><img alt="osw-fad" src="/blog/wp-content/uploads/osw-fad.jpg" /></p>
-<p>上周六参加了CN Opensource week &amp; FAD [1]，从早上9点签到，一直玩到晚上8点多。印象当中好久没有参加社区活动了，这次是和公司的朋友们一起去参加的。</p>
-<p>我早早过去签到，碰见了peter chen，他最近好像在搞开源硬件，还认识了中国区的fedora大使 gbraad，他很活跃。上午主要是ow2公司讲解为社区、技术人员、公司提供平台，进行相关协作；还有红帽社区关系manager - Harish Pillay讲红帽与fedora社区的关系运作模式；再下来是David li 讲的开源硬件和创科空间[2]；IBM 讲解自己的社区贡献和developerworks知识分享平台。 linuxtoys.org的编辑 tommy 同学带领大家怀念了一下 DennisRitchie。</p>
-<p>中午提供比格比萨的自助餐卷，人很多，但吃的也不错。下午我主要是在听FAD的topic，比较有意思的有synfig studio，它是一个开源的二维动画制作软件，flash、ps都不精的我很像体验一下；csslayer同学又分享了kde开发的一些经验，并极力宣传他的KDE开发资讯网站[3]；下来是清华alink同学讲的texlive，主要讲安装步骤，其实安装步骤发给大家就可以，没必要那么细的讲 ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/cn-opensource-week-fad_2011.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">'自由软件日上的问答 '</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-09-24 09:48
-    </span>
-    <hr>
-                <div class="summary"><p>自由软件日上的问答
-From: <a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html">http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html</a></p>
-<p>陈莉君 2011年09月21日 星期三 23:30 | 54次浏览 | 0条评论</p>
-<p>20日，西电举办国际自由软件日活动，邀请我去参加。比起西邮17日的隆重举办，西电的活动看起来平淡和朴素。他们本来让我从宏观上讲讲自由软件和开源软件，对于空洞的讲这些概念，自己都有点烦了，总觉得自己自以为是头头是道所讲，并非大家感兴趣的，于是准备以问答形式来解答大家提问，不管什么问题，我准备充分调动自己的内存资源，以百度搜索的速度进行检索，一旦不会，就让他们去问百度知道。</p>
-<p>回想一下他们的问题，觉得自己回答不尽全面，但基本上能自圆其说，因此分享出来：</p>
-<p>问：自由软件和开源软件有什么区别？</p>
-<p>答：Richard Stallman对自由软件有一个明确的定义，但我总是记不全，因此，不打算较真Stallman的定义，而以自己的理解解释。比如，Linux和android，哪个是开源软件？二者都是，哪个自由呢，Linux ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/announce-native-linux-kvm-tool.html">'[ANNOUNCE] Native Linux KVM tool'</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-04-10 14:08
-    </span>
-    <hr>
-                <div class="summary"><div class="highlight"><pre><span class="n">Date</span><span class="o">:</span> <span class="n">Thu</span><span class="o">,</span> <span class="mi">31</span> <span class="n">Mar</span> <span class="mi">2011</span> <span class="mi">20</span><span class="o">:</span><span class="mi">30</span><span class="o">:</span><span class="mi">56</span> <span class="o">+</span><span class="mi">0300</span>
-<span class="n">From</span><span class="o">:</span> <span class="n">Pekka</span> <span class="n">Enberg</span> <span class="o">&lt;</span><span class="n">penberg</span><span class="err">@</span><span class="n">kernel</span><span class="o">.</span><span class="na">org</span><span class="o">&gt;</span>
-<span class="n">To</span><span class="o">:</span> <span class="n">linux</span><span class="o">-</span><span class="n">kernel</span><span class="err">@</span><span class="n">vger</span><span class="o">.</span><span class="na">kernel</span><span class="o">.</span><span class="na">org</span>
-<span class="n">Cc</span><span class="o">:</span> <span class="n">aarcange</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">avi</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">mtosatti</span><span class="err">@</span><span class="n">redhat</span><span class="o">.</span><span class="na">com</span><span class="o">,</span>
-        <span class="n">kvm</span><span class="err">@</span><span class="n">vger</span><span class="o">.</span><span class="na">kernel</span><span class="o">.</span><span class="na">org</span><span class="o">,</span> <span class="n">joro</span><span class="err">@</span><span class="mi">8</span><span class="n">bytes</span><span class="o">.</span><span class="na">org</span><span class="o">,</span> <span class="n">penberg</span><span class="err">@</span><span class="n">cs</span><span class="o">.</span><span class="na">helsinki</span><span class="o">.</span><span class="na">fi</span><span class="o">,</span>
-        <span class="n">asias</span><span class="o">.</span><span class="na">hejun</span><span class="err">@</span><span class="n">gmail</span><span class="o">.</span><span class="na">com</span><span class="o">,</span> <span class="n">gorcunov</span><span class="err">@</span><span class="n">gmail</span><span class="o">.</span><span class="na">com ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../linux/announce-native-linux-kvm-tool.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html">正则表达式【from javaeye.com/iteye.com】</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-04-03 23:37
-    </span>
-    <hr>
-                <div class="summary"><p>From : <a href="http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0">http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0</a></p>
-<p>正则表达式是个好东西,就是有些复杂.在验证输入,字符串查找,处理上确实很方便.</p>
-<p>30分钟教程<a href="http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm">http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm</a></p>
-<p>D可使用的表达式:<a href="http://www.digitalmars.com/ctg/regular.html">http://www.digitalmars.com/ctg/regular.html ...</a></p>
-                    <a class="btn btn-default btn-xs" href="../linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html">apt , yum 相似功能命令列表</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-03-09 05:24
-    </span>
-    <hr>
-                <div class="summary"><p>Below is a table of equivalent commands for package management on both Ubuntu/Debian and Red Hat/Fedora systems.</p>
-<h2 id="task">Task</h2>
-<h2 id="red-hatfedora">Red Hat/Fedora</h2>
-<h2 id="ubuntu">Ubuntu</h2>
-<h3 id="adding-removing-and-upgrading-packages">Adding, Removing and Upgrading Packages</h3>
-<div class="highlight"><pre><span class="n">Refresh</span> <span class="n">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">packages</span>
+<td >
 
-<span class="n">Yum</span> <span class="n">refreshes</span> <span class="n">each</span> <span class="n">time</span> <span class="n">it</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">used</span>
 
-<span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+    $ ffmpeg -i a.mov -vf scale=853:480 -acodec aac -vcodec h264 out.mp4
 
-<span class="n">Install</span> <span class="n">a</span> <span class="n">package</span> <span class="n">from</span> <span class="n">a</span> <span class="n">repository ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html">more ...</a>
+
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>各个参数的含义：</p>
+<ul>
+<li>
+<p>-i a.mov 指定待处理视频的文件名</p>
+</li>
+<li>
+<p>-vf scale=853:480 vf ...</p></li></ul>
+                    <a class="btn btn-default btn-xs" href="../linux/e8bdac-e4bdbfe794a8-ffmpeg-e7bca9e694bee38081e8a381e589aae38081e589aae8be91e8a786e9a291.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html">10 个最酷的 Linux 单行命令</a></h2>
+                <h2><a href="../linux/muttefbc9ae4bdbfe794a8fetchmaile694b6e982aee4bbb6e697b6e59ca8e69c8de58aa1e599a8e4b88ae58faae4bf9de79599e983a8e58886e69687e4bbb6e5a4b9.html">Mutt：使用Fetchmail收邮件时在服务器上只保留部分文件夹内容</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-11-04 14:19
+        <i class="icon-calendar"></i>2014-09-23 09:48
     </span>
     <hr>
-                <div class="summary"><p>下面是来自   <a href="http://commandlinefu.com/"> Commandlinefu  </a> 网站由用户投票决出的 10 个最酷的 Linux 单行命令，希望对你有用。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>sudo !!</code>以 root 帐户执行上一条命令。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>python -m SimpleHTTPServer</code>利用 Python 搭建一个简单的 Web 服务器，可通过 http://$HOSTNAME:8000 访问。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>:w !sudo tee %</code>在 Vim 中无需权限保存编辑的文件。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>cd -</code>更改到上一次访问的目录。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>^foo^bar</code>将上一条命令中的 foo 替换为 bar，并执行。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>cp filename{,.bak}</code>快速备份或复制文件。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>mtr google.com</code>traceroute + ping。</p>
-<ol>
-<li></li>
-</ol>
-<p><code>!whatever ...</code></p>
-                    <a class="btn btn-default btn-xs" href="../linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html">more ...</a>
+                <div class="summary"><p>公司邮箱空间只有４Ｇ，邮件太多，特别是社区里的邮件．现在是收到警告就上去删一次，太麻烦了．当然强大的Gmail不存在这个问题.</p>
+<p>~/.fetchmailrc 里可以执行多次poll 命令, 针对不同的文件夹采用不同的选项参数.
+"no keep" 表示不在服务器保留接受过的邮件.
+mda命令是对poll回来的邮件做处理, 每个poll命令后面需要紧跟一个mda命令.</p>
+<div class="highlight"><pre><span class="cp"># Only keep important internal mails on mail server</span>
+<span class="n">poll</span> <span class="n">mailserver</span><span class="p">.</span><span class="n">com</span> <span class="n">proto</span> <span class="n">imap</span> <span class="n">authenticate</span> <span class="n">password</span> <span class="n">user</span> <span class="n">akong</span> <span class="n">password</span> <span class="n">mypasswd</span> <span class="n">folder</span> <span class="err">&#39;</span><span class="n">inbox</span><span class="sc">&#39; &#39;</span><span class="n">rhvirt</span><span class="sc">&#39; &#39;</span><span class="n">rhkernel</span><span class="err">&#39;</span> <span class="n">no</span> <span class="n">fetchall</span> <span class="n">keep</span> <span class="n">ssl</span>
+<span class="n">mda</span> <span class="s">&quot;/usr/bin/procmail -d %T&quot;</span>
+
+<span class="cp"># Upstream maillists ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/muttefbc9ae4bdbfe794a8fetchmaile694b6e982aee4bbb6e697b6e59ca8e69c8de58aa1e599a8e4b88ae58faae4bf9de79599e983a8e58886e69687e4bbb6e5a4b9.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/e8bdac-e5a79ae6aca3e5ae87e8b088e5bc80e6ba90e7a4bee58cbae79a84e5889be7ab8be5928ce8bf90e4bd9c.html">'转: 姚欣宇谈开源社区的创立和运作'</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-09-21 04:33
+    </span>
+    <hr>
+                <div class="summary"><p>姚欣宇，<a href="http://gitcafe.com/">GitCafe</a>创始人。自称Thomas，网络ID是ghosTM55。他自己这么介绍自己：</p>
+<blockquote>我是在校学生，计算机系信息安全专业，大三。我个人比较喜欢计算机科学，哲学，运动，音乐与武术。我是Shanghai Linux User Group的组织者之一。我富有激情、理想、创新以及号召力。我不是牛人。</blockquote>
+
+<p>本文选自<a href="http://ghostunix.org/blog/">他的博客</a>，是他自己整理自2010年在盛大创新院的演讲，为大家分享个人对社区文化的理解以及运作经验。</p>
+<h2 id="_1">为什么</h2>
+<p>为什么要做这样的一个演讲？一，在国内，我看到有很多朋友都想创立各类社区，却找不到人和文献去学习以及借鉴经验。我今天的演讲稿会发布到我的BLOG中，有助于这些真正想将社区做好的朋友进行参考。二，社区的创立并不困难，但是社区的规模上升到一定程度后，其组织者、管理者需要考虑的问题非常多，由于其特殊性，有的时候问题的复杂度堪比商业项目中遇到的重重阻碍，我在举出各种事例的同时，在座的各位，也可以进行发散性的思考，帮助自己在生活中或者是从事的项目中遇到的问题提供新的解决方案与点子。</p>
+<h2 id="_2">开源社区的性质</h2>
+<p>好了，各位，我们可以看到，在上海有许许多多的社区，计算机技术社区是其中的一个子集 ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/e8bdac-e5a79ae6aca3e5ae87e8b088e5bc80e6ba90e7a4bee58cbae79a84e5889be7ab8be5928ce8bf90e4bd9c.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/e998bfe9878ce4ba91centos-6-3e5ae89e8a385phpmyadmin.html">阿里云CentOS 6.3安装phpMyAdmin</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-04-22 05:20
+    </span>
+    <hr>
+                <div class="summary"><p>安装 mysql客户端和服务端</p>
+<h1 id="yum-install-mysql-mysql-server">yum install mysql mysql-server</h1>
+<h1 id="service-mysqld-restart">service mysqld restart</h1>
+<p>重新设置密码。默认mysql root用户密码为空，phpMyAdmin不允许密码位空。</p>
+<h1 id="mysql_secure_installation">mysql_secure_installation</h1>
+<p>设置mysql服务默认启动</p>
+<h1 id="chkconfig-mysqld-on">chkconfig mysqld on</h1>
+<p>安装rpmforge YUM源 （默认源里不包含phpMyAdmin）</p>
+<h1 id="yum-install-httppkgsrepoforgeorgrpmforge-releaserpmforge-release-053-1el6rfx86_64rpm">yum install http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm</h1>
+<p>安装默认源里不包含phpMyAdmin</p>
+<h1 id="yum-install-phpmyadmin">yum install phpMyAdmin</h1>
+<p>设置访问权限</p>
+<h1 id="vim-etchttpdconfdphpmyadminconf">vim /etc/httpd/conf.d/phpMyAdmin.conf</h1>
+<p>注释掉只允许本地访问限制</p>
+<h1 id="wzxhzdk0"><Directory /usr/share/phpMyAdmin/></h1>
+<h1 id="order-denyallow">Order Deny ...</h1>
+                    <a class="btn btn-default btn-xs" href="../linux/e998bfe9878ce4ba91centos-6-3e5ae89e8a385phpmyadmin.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/linux-e6909ce78b97e68bbce99fb3e8be93e585a5e6b395.html">Linux 搜狗拼音输入法 （Ubuntu 14.04发布）</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-04-18 03:50
+    </span>
+    <hr>
+                <div class="summary"><p><a href="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-113814.png"><img alt="Screenshot from 2014-04-18 11:38:14" src="http://amoskong.files.wordpress.com/2014/04/screenshot-from-2014-04-18-113814.png" /></a></p>
+<ul>
+<li>http://pinyin.sogou.com/linux/</li>
+</ul>
+<p><strong>&gt;&gt;&gt;&gt;  2014-09-02 update: 可以下载deb文件, 解压后会有一个data.tar.xz, 把这个文件解压到 / 根目录下, 配置系统输入法就可以了.  当前最新版本为: 1.1.0.0037</strong></p>
+<div class="highlight"><pre><span class="nt">&lt;strong&gt;</span>sudo tar Jxvf data.tar.xz -C /
+sudo mv /usr/lib/x86_64-linux-gnu/fcitx/fcitx-sogoucloudpinyin.so /usr/lib64/fcitx/
+<span class="nt">&lt;/strong&gt;</span>
+</pre></div>
+
+
+<p><strong>&gt;&gt;&gt; END</strong></p>
+<p>Ubuntu14.04昨天发布[0]，搜狗官方同时推出支持 Ubuntu 12.04和14.04 的拼音输入法。<strong>Note ...</strong></p>
+                    <a class="btn btn-default btn-xs" href="../linux/linux-e6909ce78b97e68bbce99fb3e8be93e585a5e6b395.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html">使用 nethogs 查看进程占用带宽</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-04-12 04:12
+    </span>
+    <hr>
+                <div class="summary"><p>netstat --statistics 可以查看非常详细的统计信息，但是不包含进程信息，只包含没有计算的原始数据。</p>
+<p>nethogs 是一款简洁的终端网络监控软件，可以输出进程PID，用户名，程序名或IP端口信息，收发速率，非常直观。 可以使用 -d 参数调整刷新的频率。Web服务器套用了nginx, ruby, c 系统调用等，所以PID信息没有抓取到，可以看到下面80/8080端口的行没有PID。</p>
+<div class="highlight"><pre><span class="err">使用</span><span class="n">iptables</span><span class="err">规则限制下载</span><span class="n">amosk</span><span class="p">.</span><span class="n">info</span><span class="err">服务器文件速率，每秒</span><span class="mi">10</span><span class="err">个包</span>
+<span class="cp"># iptables -A INPUT -d amosk.info -m limit --limit 1/s -j ACCEPT</span>
+</pre></div>
+
+
+<p>更多iptables使用：<a href="http://www.cnblogs.com/JemBai/archive/2009/03/19/1416364.html">http://www.cnblogs.com/JemBai ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -277,6 +295,8 @@ From: <a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.
                         href="../linux/index.html">1</a></li>
                 <li class=""><a
                         href="../linux/index2.html">2</a></li>
+                <li class=""><a
+                        href="../linux/index3.html">3</a></li>
                 <li class="next"><a
                         href="../linux/index2.html">&raquo;</a></li>
         </ul>

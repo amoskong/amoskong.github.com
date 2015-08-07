@@ -67,192 +67,222 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
-                <h2><a href="../computer/e585b3e4ba8eacpi-tablee79a84e59fbae69cace6a682e5bfb5e5928ce59bbee7a4ba.html">关于ACPI table的基本概念和图示</a></h2>
+                <h2><a href="../linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html">使用 nethogs 查看进程占用带宽</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2011-10-12 16:49
+        <i class="icon-calendar"></i>2014-04-12 04:12
     </span>
     <hr>
-                <div class="summary"><p><a href="http://www.cnitblog.com/yuhensong/archive/2009/10/21/62042.html">关于ACPI table的基本概念和图示</a></p>
-<p>ACPI Table是BIOS提供给OSPM的硬件配置数据，包括系统硬件的电源管理和配置管理，ACPI Table有很多表，根据存储的位置，可以分为：</p>
-<p>1） RSDP位于F段，用于OSPM搜索ACPI Table，RSDP可以定位其他所有ACPI Table
-2） FACS位于ACPI NVS内存，用于系统进行S3保存的恢复指针，内存为NV Store
-3） 剩下所有ACPI Table都位于ACPI Reclaim内存，进入OS后，内存可以释放
-ACPI Table根据版本又分为1.0B，2.0，3.0，4.0。2.0以后，支持了64-bit的地址空间，因此几个重要的Table会不大一样，比如：RSDP，RSDT，FADT，FACS。简单的列举一下不同版本的ACPI Table：
-1） ACPI 1 ...</p>
-                    <a class="btn btn-default btn-xs" href="../computer/e585b3e4ba8eacpi-tablee79a84e59fbae69cace6a682e5bfb5e5928ce59bbee7a4ba.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../virtualization/kvm-forum-2011-videos.html">KVM Forum 2011 Videos</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-10-10 09:29
-    </span>
-    <hr>
-                <div class="summary"><p><a href="http://www.youtube.com/playlist?list=PL7C0F52E2227156B3">http://www.youtube.com/playlist?list=PL7C0F52E2227156B3</a></p>
-<p><img alt="/blog/wp-content/uploads/kvmformu2011video.png" src="/blog/wp-content/uploads/kvmformu2011video.png" /></p>
-                    <a class="btn btn-default btn-xs" href="../virtualization/kvm-forum-2011-videos.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/e88ab1e5928ce9b1bc.html">花和鱼</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-10-10 05:30
-    </span>
-    <hr>
-                <div class="summary"><p><img alt="/blog/wp-content/uploads/flower-fish.png" src="/blog/wp-content/uploads/flower-fish.png" /></p>
-<p>前天在家里栽种了9盆绿萝，花盆和肥料是农大老乡5个月前给的。小鱼是原来房客留下的，准备再给它买些伙伴，要不太孤独了。</p>
-                    <a class="btn btn-default btn-xs" href="../life/e88ab1e5928ce9b1bc.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/e5a4a7e5ada6e6af95e4b89ae587bae8b7afe588a9e5bc8ae4b880e8a788e8a1a8e6af94e788b6e6af8de88083e89991e79a84e69bb4e585a8.html">大学毕业出路利弊一览表~比父母考虑的更全</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-10-09 12:34
-    </span>
-    <hr>
-                <div class="summary"><h3></h3>
-<h3 id="httpblogrenrencomgetentrydoid708786440owner283047716">源地址：<a href="http://blog.renren.com/GetEntry.do?id=708786440&amp;owner=283047716">http://blog.renren.com/GetEntry.do?id=708786440&amp;owner=283047716</a></h3>
-<h3></h3>
-<div class="highlight"><pre><span class="mf">1.</span><span class="err">考研</span>
-<span class="err">利</span><span class="o">:</span><span class="err">延缓就业压力</span><span class="p">,</span><span class="err">推迟就业期的到来</span><span class="p">;</span><span class="err">有些城市</span><span class="p">,</span><span class="err">有些学校能给研究所解决户口的问题提高自身学历</span><span class="p">,</span><span class="err">增强竞争力</span><span class="p">;</span><span class="err">国家出台了新的研究所扩招政策</span><span class="p">,</span><span class="err">考研相对容易</span><span class="p">,</span><span class="err">能够拿到更高的文凭</span><span class="p">;</span><span class="err">学术上有创见</span><span class="p">,</span><span class="err">可以沿着这个方向一直努力</span><span class="p">,</span><span class="err">毕业后获得稳定的工作</span><span class="p">.</span>
+                <div class="summary"><p>netstat --statistics 可以查看非常详细的统计信息，但是不包含进程信息，只包含没有计算的原始数据。</p>
+<p>nethogs 是一款简洁的终端网络监控软件，可以输出进程PID，用户名，程序名或IP端口信息，收发速率，非常直观。 可以使用 -d 参数调整刷新的频率。Web服务器套用了nginx, ruby, c 系统调用等，所以PID信息没有抓取到，可以看到下面80/8080端口的行没有PID。</p>
+<div class="highlight"><pre><span class="err">使用</span><span class="n">iptables</span><span class="err">规则限制下载</span><span class="n">amosk</span><span class="p">.</span><span class="n">info</span><span class="err">服务器文件速率，每秒</span><span class="mi">10</span><span class="err">个包</span>
+<span class="cp"># iptables -A INPUT -d amosk.info -m limit --limit 1/s -j ACCEPT</span>
+</pre></div>
 
-<span class="err">弊</span><span class="o">:</span><span class="err">研究生毕业后</span><span class="p">,</span><span class="err">毕业压力仍在</span><span class="p">,</span><span class="err">而且有了更为年轻的竞争者</span><span class="p">,</span><span class="err">压力越加沉重</span><span class="p">;</span><span class="err">读研期间</span><span class="p">,</span><span class="err">不一定能学到对自身职业有用处的知识</span><span class="p">,</span><span class="err">白白浪费了积累经验的时间</span><span class="p">;</span><span class="err">研究会生扩招</span><span class="p">,</span><span class="err">会出现和大学扩招相同的结果</span><span class="o">---</span><span class="err">研究所学历贬值</span><span class="p">,</span><span class="err">也许毕业后只有一个选择</span><span class="o">---</span><span class="err">考博</span><span class="p">...</span>
-<span class="err">研究生毕业或博士毕业后年龄偏大</span><span class="p">,</span><span class="err">失去年龄优势</span><span class="p">,</span><span class="err">特别是女生</span><span class="p">,</span><span class="err">要面临更多的年龄歧视</span><span class="p">..</span> <span class="err">学术研究</span><span class="p">,</span><span class="err">层次越高</span><span class="p">,</span><span class="err">就业面越窄</span><span class="p">,</span><span class="err">毕业后</span><span class="p">,</span><span class="err">面对更加激烈的竞争</span><span class="p">,</span><span class="err">此时却已无法放弃本专业</span><span class="p">...</span>
 
-<span class="err">建议</span><span class="o">:</span><span class="err">如果对某个专业 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../life/e5a4a7e5ada6e6af95e4b89ae587bae8b7afe588a9e5bc8ae4b880e8a788e8a1a8e6af94e788b6e6af8de88083e89991e79a84e69bb4e585a8.html">more ...</a>
+<p>更多iptables使用：<a href="http://www.cnblogs.com/JemBai/archive/2009/03/19/1416364.html">http://www.cnblogs.com/JemBai ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../linux/e4bdbfe794a8-nethogs-e69fa5e79c8be8bf9be7a88be58da0e794a8e5b8a6e5aebd.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../computer/e59ca8red-hate4b8a4e5b9b4-from-caspar-ant.html">在Red Hat两年---- From Caspar Ant</a></h2>
+                <h2><a href="../computer/workrave-e9a284e998b2e9878de5a48de4bdbfe58a9be4bca4e5aeb3.html">workrave 预防重复使力伤害</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2011-10-04 20:18
+        <i class="icon-calendar"></i>2014-04-02 01:10
     </span>
     <hr>
-                <div class="summary"><h3 id="from-httpwwwcasparantcombeginning-of-my-third-year-in-red-hathtml">From: <a href="http://www.casparant.com/beginning-of-my-third-year-in-red-hat.html">http://www.casparant.com/beginning-of-my-third-year-in-red-hat.html</a></h3>
-<p>2011年7月16日 | 分类: <a href="http://www.casparant.com/category/default">No Category</a> | 标签: <a href="http://www.casparant.com/tag/qa">qa</a>, <a href="http://www.casparant.com/tag/red-hat">Red Hat</a>, <a href="http://www.casparant.com/tag/work">work</a></p>
-<p>欢迎光临<strong>Caspar Ant</strong>，如果您喜欢本站的内容，欢迎<a href="http://fusion.google.com/add?feedurl=http://feeds2.feedburner.com/CasparAnt">订阅我的RSS</a>；如果您需要出于非商业性质的转载，请先阅读<a href="http://www.casparant.com/copyright-notice">版权声明</a>页面。</p>
-<p>已经进入我在Red Hat的第三年了，看到两年来这贫瘠无比的博客，决定把阶段总结发到这里来，挽回一下我那正在疯狂下滑的订阅数，嗯。回头看了一下以前的日志，去年这个时候竟然没有写总结，干脆两年的一起写好了。行文照旧会比较混乱，请将就将就。</p>
-<p>刚以实习生身份进入Red Hat时，主要工作就是验Bug。记得当时很多Bug的描述都很不清晰，往往一个Bug就浪费一两天时间去分析。有的Bug还不能用脚本重现，只能物理接触硬件。有一次在机房里呆了一个下午，要用针头去戳机器上的一个小孔[<a href="http://en.wikipedia.org/wiki/Non-maskable_interrupt">1</a>]，戳了我整整一个下午。类似的折腾人的Bug仿佛是永远都不会消失，现在我还在跟他们打交道 ...</p>
-                    <a class="btn btn-default btn-xs" href="../computer/e59ca8red-hate4b8a4e5b9b4-from-caspar-ant.html">more ...</a>
+                <div class="summary"><p>workrave是一款预防 <a href="http://zh.wikipedia.org/wiki/%E9%87%8D%E8%A4%87%E4%BD%BF%E5%8A%9B%E5%82%B7%E5%AE%B3">RSI</a> (Repetitive strain injury：重复使力伤害) 的软件，此类软件对于经常使用电脑的人非常管用。</p>
+<p>简单说这款软件能根据键盘鼠标等输入，记录使用计算机时间，打开软件有一个很小的窗口，上面有三个时间进度条。提前休息、滞后休息都会影响下一次休息提醒的时间和长短，比较智能。</p>
+<p>软件会有不同种类的提醒，如手脚活动提醒、饮水提醒等，还配套有特种保健操演示，可以跟着一起做。提醒的方式有弹窗、声音等。也可以设置强制休息，这时候键盘鼠标输入无效，直到休息时间结束。</p>
+<p>总之对于经常忘我工作、忘记休息，脖子疼、手腕疼、背部疼、眼睛疼的人非常有用。</p>
+<p>workrave是自由软件，支持GNU/Linux和Windows。</p>
+<p><a href="http://www.workrave.org/">http://www.workrave.org/</a>
+<a href="http://nchc.dl.sourceforge.net/project/workrave/workrave/1.10/workrave-win32-v1.10-installer.exe">http://nchc.dl.sourceforge.net/project/workrave/workrave/1.10/workrave-win32-v1.10-installer ...</a></p>
+                    <a class="btn btn-default btn-xs" href="../computer/workrave-e9a284e998b2e9878de5a48de4bdbfe58a9be4bca4e5aeb3.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/xkuangs-wedding.html">xkuang's Wedding</a></h2>
+                <h2><a href="../virtualization/level-triggered-interrupt-edge-triggered-interrupt-efbc88e794b5e5b9b3e8a7a6e58f91e4b8ade696ad-e4b88e-e8beb9e6b2bfe8a7a6e58f91e4b8ade696adefbc89.html">level-triggered interrupt & edge-triggered interrupt （电平触发中断 与 边沿触发中断）</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2011-10-04 11:52
+        <i class="icon-calendar"></i>2014-03-29 03:52
     </span>
     <hr>
-                <div class="summary"><p>今天去参加同事小旷的婚礼了，很热闹，后来居然有幸捡到了新娘抛出的鲜花 :-)
-<!-- more -->
-<img alt="" src="http://amosk.info/blog/wp-content/uploads/2011/10/DSC_0055.jpg" />
-<img alt="" src="http://amosk.info/blog/wp-content/uploads/2011/10/DSC_0099.jpg" /></p>
-                    <a class="btn btn-default btn-xs" href="../life/xkuangs-wedding.html">more ...</a>
+                <div class="summary"><p>（谢谢 wanpin Li对这篇博客的反馈，让我重新发现了一些问题）</p>
+<p>两种触发方式，是为了在多个设备共享中断线时，实现流量控制。</p>
+<ul>
+<li>
+<p>所谓边沿触发，就是电平发生变化（通常是从高到低）时触发的中断 （CPU忙时中断可能丢失）</p>
+</li>
+<li>
+<p>所谓电平触发，就是设备保持中断请求引脚（中断线）处于预设的有效触发电频（通常为高），中断会一直被请求（CPU忙时中断也不会丢失）。为了避免中断请求被重复处理，需要在处理前 标记 irq，然后 ACK irq（复位中断请求引脚为无效电频，以便能够接受其他中断请求），处理中断，然后 取消 irq 标记。</p>
+</li>
+</ul>
+<p>KVM 最先只支持 edge-triggered 中断，使用一个irqfd通知guest，电频下降边沿可在注入模拟中一次完成。看下面代码连续调用两个kvm_set_irq()，倒数第二个参数为电平。</p>
+<p>虚拟机 level-triggered 的注入仍然依赖的是userspace，在QEMU里模拟了 PCI / IOapic /LAPIC(8259)。KVM_IRQFD ...</p>
+                    <a class="btn btn-default btn-xs" href="../virtualization/level-triggered-interrupt-edge-triggered-interrupt-efbc88e794b5e5b9b3e8a7a6e58f91e4b8ade696ad-e4b88e-e8beb9e6b2bfe8a7a6e58f91e4b8ade696adefbc89.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/e690ace5aeb6e588b0e58c97e4baace7acace59b9be7ab99.html">北漂第四站</a></h2>
+                <h2><a href="../web/e9809ae8bf87-httpkej-twflvretriever-e59ca8e7babfe4b88be8bdbdyoutubee8a786e9a291.html">通过 http://kej.tw/flvretriever 在线下载YouTube视频</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2011-09-30 15:33
+        <i class="icon-calendar"></i>2014-03-24 02:18
     </span>
     <hr>
-                <div class="summary"><p>2009年毕业，到现在共住了四个地方，这次还是选择离公司近些，成天抵地铁挺累的。</p>
-<p>人们总试图通过环境的改变，带来思想、生活状况的转变。今天搬家太累了，希望后面工作生活开心顺利！</p>
-<!-- more -->
+                <div class="summary"><p>为了强奸自己的耳朵，我想从下载 colleague 的讲座视频，这样就可以随时随地，反复加强对这种口音的适应。 豆瓣上（<a href="http://www.douban.com/group/topic/24048538/">http://www.douban.com/group/topic/24048538/</a>）推荐了几个，多数都需要安装EXE的客户端 :-(</p>
+<ul>
+<li><a href="http://kej.tw/flvretriever">http://kej.tw/flvretriever</a> 可以直接通过网页提供的连接下载多种质量、格式的文件 :-)</li>
+</ul>
+<p><a href="http://kej.tw/flvretriever"><img alt="Screenshot from 2014-03-24 10:17:46" src="http://amoskong.files.wordpress.com/2014/03/screenshot-from-2014-03-24-101746.png" /></a></p>
+                    <a class="btn btn-default btn-xs" href="../web/e9809ae8bf87-httpkej-twflvretriever-e59ca8e7babfe4b88be8bdbdyoutubee8a786e9a291.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../web/javascript-e5b08fe6b8b8e6888f-efbc9a2048.html">好玩的 JavaScript 小游戏 ：2048</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-20 03:21
+    </span>
+    <hr>
+                <div class="summary"><ul>
+<li>
+<p>游戏地址：  <a href="https://i-kvm.rhcloud.com/static/2048/">https://i-kvm.rhcloud.com/static/2048/</a></p>
+</li>
+<li>
+<p>代码地址：  <a href="https://github.com/gabrielecirulli/2048/">https://github.com/gabrielecirulli/2048/</a></p>
+</li>
+<li>
+<p><strong>HOW TO PLAY:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong></p>
+</li>
+<li>
+<p>知乎（为什么一玩2048就停不下来？） <a href="http://www.zhihu.com/question/23062120">http://www.zhihu.com/question/23062120</a></p>
+</li>
+<li>
+<p>另外一个中国朝代版本：http://oprilzeng.github.io/2048 ...</p></li></ul>
+                    <a class="btn btn-default btn-xs" href="../web/javascript-e5b08fe6b8b8e6888f-efbc9a2048.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../default/use-github-blog.html">用Github做主页/博客</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-19 08:00
+    </span>
+    <hr>
+                <div class="summary"><ul>
+<li>Github博客: <a href="http://github.amosk.info">http://github.amosk.info</a></li>
+<li>历史文档导入： <a href="http://github.amosk.info/archive.html">http://github.amosk.info/archive.html</a> （由于格式转换错误太多，2007和2008的文章没有导入）</li>
+<li>openshift上的一个博客备份 <a href="http://blog.amosk.info/">http://blog.amosk.info/</a></li>
+</ul>
+<hr />
+<p>听说用github做博客系统很久了，之前只是传了一个简单的首页，没体会到markdown等支持的方便性。</p>
+<p>前几天开始用markdown在github编写博客，感觉方便很多。之前wordpress的博客在国外，访问速度慢，再加上Fedora、chrome等自身的bug，在编辑时候非常痛苦，特别是一些换行、缩进，可能是平时&gt;使用文档编辑软件太少，还是喜欢TXT模式。</p>
+<p>由于有了markdown的支持，所要表达的样式都很灵活方便，复杂的数学公式都能轻松绘制，更不用说简单的HTML文本样式了。MAC 上有强大的Mou，Linux上我用wenb版的 <a href="http://dillinger.io/">http://dillinger.io/</a>。还有一个好处就是能在git log里记录所有更改。</p>
+<p>性能方面目前没有啥体会，不知到这种无数据库形式的博客，当博文数量很大时，会不会有问题 ...</p>
+                    <a class="btn btn-default btn-xs" href="../default/use-github-blog.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../default/django-demo-power-management.html">用Django创建一个简单的动态请求站点</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-18 08:00
+    </span>
+    <hr>
+                <div class="summary"><h3 id="_1">目标</h3>
+<p>在数梅派上启动一个HTTP服务，通过 GPIO 接口控制继电器 (可以参考 <a href="http://amosk.info/blog/archives/914">使用RaspberryPi 的GPIO接口控制LED灯闪烁</a> )，从而控制电器的开关。这样可以随时随地控制电源开关。</p>
+<p><a href="https://github.com/kongove/PowerManagement">下载演示代码</a></p>
+<h3 id="django-adminproject">首先使用django-admin创建一个project</h3>
+<div class="highlight"><pre><span class="cp"># django-admin.py startproject PowerManagement</span>
+<span class="cp"># cd PowerManagement/</span>
+<span class="cp"># ls</span>
+  <span class="n">manage</span><span class="p">.</span><span class="n">py</span>  <span class="n">PowerManagement</span>
+</pre></div>
 
-<p><a href="http://amosk.info/blog/wp-content/uploads/2011/09/pek-bag.jpg"><img alt="" src="http://amosk.info/blog/wp-content/uploads/2011/09/pek-bag.jpg" /></a>(毕业时邮寄东西的袋子)</p>
-                    <a class="btn btn-default btn-xs" href="../life/e690ace5aeb6e588b0e58c97e4baace7acace59b9be7ab99.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/e683b3e683b3e883bde5819ae782b9e4bb80e4b988e4baa7e59381e68896e69c8de58aa1.html">想想能做点什么产品或服务</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-09-25 03:45
-    </span>
-    <hr>
-                <div class="summary"><p>From: http://amos.openetherpad.org/ideas</p>
-<div class="highlight"><pre><span class="err">从不同角度出发，罗列了一些点，可以考虑从某个点出发，整合资源，推出一些应用产品或服务。欢迎补充评论！</span>
-<span class="o">=======================================</span>
-<span class="o">+</span> <span class="err">产品导向</span>
-    <span class="o">-</span> <span class="err">互联网</span> <span class="p">(</span><span class="n">S</span><span class="o">/</span><span class="n">B</span><span class="p">)</span>
-        <span class="o">-</span> <span class="err">搜索引擎</span>
-             <span class="o">-</span> <span class="err">百度</span><span class="o">/</span><span class="err">腾讯</span><span class="o">/</span><span class="err">搜狗</span>
-        <span class="o">-</span> <span class="err">关系网络</span><span class="n">SNS</span>
-              <span class="o">-</span> <span class="err">资源：微薄</span><span class="o">/</span><span class="err">人人</span><span class="o">/</span><span class="err">开心</span><span class="o">/</span><span class="err">飞信</span><span class="o">/</span><span class="n">facebook</span><span class="o">/</span><span class="n">twitter</span>
-              <span class="o">-</span> <span class="err">开放平台</span>
-        <span class="o">-</span> <span class="err">知识共享</span>
-              <span class="o">-</span> <span class="err">知乎</span><span class="o">/</span><span class="err">百度知道</span>
-        <span class="o">-</span> <span class="err">电子商务</span>
-            <span class="o">-</span> <span class="err">资源：淘宝</span><span class="o">/</span> <span class="err">好乐买</span>
-            <span class="o">-</span> <span class="err">在线支付</span>
-        <span class="o">-</span> <span class="err">资讯</span>
-        <span class="o">-</span> <span class="err">计算处理</span>
-            <span class="o">-</span> <span class="err">图片</span><span class="o">/</span><span class="err">音乐</span><span class="o">/</span><span class="err">视频处理</span>
-            <span class="o">-</span> <span class="err">在线编译</span>
-            <span class="o">-</span> <span class="err">统计分析</span> <span class="p">(</span><span class="err">股票，健康，算命解梦</span><span class="p">)</span>
-            <span class="o">-</span> <span class="err">排名</span>
-        <span class="o">-</span> <span class="err">游戏 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../life/e683b3e683b3e883bde5819ae782b9e4bb80e4b988e4baa7e59381e68896e69c8de58aa1.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">'自由软件日上的问答 '</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-09-24 09:48
-    </span>
-    <hr>
-                <div class="summary"><p>自由软件日上的问答
-From: <a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html">http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html</a></p>
-<p>陈莉君 2011年09月21日 星期三 23:30 | 54次浏览 | 0条评论</p>
-<p>20日，西电举办国际自由软件日活动，邀请我去参加。比起西邮17日的隆重举办，西电的活动看起来平淡和朴素。他们本来让我从宏观上讲讲自由软件和开源软件，对于空洞的讲这些概念，自己都有点烦了，总觉得自己自以为是头头是道所讲，并非大家感兴趣的，于是准备以问答形式来解答大家提问，不管什么问题，我准备充分调动自己的内存资源，以百度搜索的速度进行检索，一旦不会，就让他们去问百度知道。</p>
-<p>回想一下他们的问题，觉得自己回答不尽全面，但基本上能自圆其说，因此分享出来：</p>
-<p>问：自由软件和开源软件有什么区别？</p>
-<p>答：Richard Stallman对自由软件有一个明确的定义，但我总是记不全，因此，不打算较真Stallman的定义，而以自己的理解解释。比如，Linux和android，哪个是开源软件？二者都是，哪个自由呢，Linux ...</p>
-                    <a class="btn btn-default btn-xs" href="../linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/e696b0e697a7e4b8aae4babae68980e5be97e7a88ee6b395e8aea1e7ae97.html">新旧个人所得税比较</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2011-09-23 17:32
-    </span>
-    <hr>
-                <div class="summary"><p>个税＝应纳税收入×对应的税率－速算扣除数
-<img alt="tax1" src="/pub/images/reduced-tax-1.png" />
-<img alt="tax2" src="/pub/images/reduced-tax-2.png" />
-<img alt="tax3" src="/pub/images/tax-rate-3.png" />
-<img alt="tax4" src="/pub/images/tax-4.png" /></p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">float</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">float</span> <span class="n">s</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">base</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">reduce</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">rate</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">float</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">base</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">((</span><span class="n">s</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">base</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="k">break</span><span class="p">;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">rate</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">reduce</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../life/e696b0e697a7e4b8aae4babae68980e5be97e7a88ee6b395e8aea1e7ae97.html">more ...</a>
+<h3 id="_2">启动服务</h3>
+<div class="highlight"><pre><span class="c"># python manage.py runserver example.com:80</span>
+<span class="c"># w3m http://example.com/</span>
+</pre></div>
+
+
+<h3 id="_3">这时候访问网站展示的是一个默认的欢迎页面</h3>
+<p>下面我们来添加一个自己的首页</p>
+<h6 id="templatessettingspy">创建templates目录，并添加到settings.py</h6>
+<div class="highlight"><pre><span class="o">+++</span> <span class="n">b</span><span class="o">/</span><span class="n">PowerManagement</span><span class="o">/</span><span class="n">settings</span><span class="p">.</span><span class="n">py</span>
+<span class="err">@@</span> <span class="o">-</span><span class="mi">26</span><span class="p">,</span><span class="mi">6</span> <span class="o">+</span><span class="mi">26</span><span class="p">,</span><span class="mi">10</span> <span class="err">@@</span> <span class="n">TEMPLATE_DEBUG</span> <span class="o">=</span> <span class="n">True</span>
+
+ <span class="n">ALLOWED_HOSTS ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../default/django-demo-power-management.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../hobbys/e794a8djangoe5889be5bbbae4b880e4b8aae7ae80e58d95e79a84e58aa8e68081e8afb7e6b182e7ab99e782b9.html">用Django创建一个简单的动态请求站点</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-18 02:01
+    </span>
+    <hr>
+                <div class="summary"><h3 id="_1">目标</h3>
+<p>在数梅派上启动一个HTTP服务，通过 GPIO 接口控制继电器 (可以参考 <a href="http://amosk.info/blog/archives/914">使用RaspberryPi 的GPIO接口控制LED灯闪烁</a> )，从而控制电器的开关。这样可以随时随地控制电源开关。</p>
+<p>如果想在任何地方都能控制数梅派GPIO这里有很多解决方案：</p>
+<ul>
+<li>
+<p>使用花生壳这样在任何地方都可以访问一个私网里的IP了</p>
+</li>
+<li>
+<p>自己假设一个web服务器，数梅派轮循（pool）从服务器URL检查状态值，并通过GPIO同步设置到硬件状态</p>
+</li>
+<li>
+<p>使用共有的服务器，如 http://<a href="yeelink.net">yeelink.net</a>，我们可以通过yelink客户端，设置服务器上的状态值，数梅派可以通过yelink分配的唯一URL，查询这个状态值，并同步设置硬件状态。可参考：<a href="http://www.kankanews.com/ICkengine/archives/97226.shtml">http://www.kankanews.com/ICkengine/archives/97226.shtml</a></p>
+</li>
+</ul>
+<p>下面的web服务可以直接放在数梅派上，也可以放在公共服务器上，它的作用只是提供HTTP控制接口。</p>
+<p><a href="https://github.com/kongove/PowerManagement">下载演示代码</a></p>
+<h3 id="django-adminproject">首先使用django-admin创建一个project</h3>
+<div class="highlight"><pre><span class="nt">&lt;code&gt;</span># django-admin.py startproject PowerManagement
+# cd PowerManagement/
+# ls
+  manage ...</pre></div>
+                    <a class="btn btn-default btn-xs" href="../hobbys/e794a8djangoe5889be5bbbae4b880e4b8aae7ae80e58d95e79a84e58aa8e68081e8afb7e6b182e7ab99e782b9.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../default/reboot-or-shutdown.html">Reboot or Shutdown?</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-13 18:00
+    </span>
+    <hr>
+                <div class="summary"><p>09年3月临近毕业的我，还在苦苦等待腾讯的offer，由于错过了校园招聘流程，迟迟没有结果。我心里知道对于我来说时间和机会都不太多了，似乎已经把这个offer当成唯一的希望了。</p>
+<p>日子一天天的过，磊子看出了我的忧虑，建议我多试几家，北京上海都可以看看。我给自己设置的思维限制似乎被打开了，一下子就没有那么多没必要的顾虑了，不管是什么结果，自己都有勇气去承受了。</p>
+<p>就这样，我把简历投到 Red Hat，开始自己准备英语，本来提到的开发职位，考虑我的经验压根没有给我机会，不过面试中有自动化测试框架的Python开发，这个也合我胃口，能加入当时心目中最最优秀的Linux企业发型商，在加上步入社会前对于未来的美好憧憬，心中的喜悦无法用语言表达。心里想着：北京我来了！ I will hack my life by Free Software!</p>
+<p>大学里几乎把所有课余时间都花在Linux兴趣小组的实验室了，每天晚上10点多被保安赶走，偶尔也在小黑屋里通宵。不管是开始和小康学习黑别人机器，郭老师给我们讲Linux基础，贾孟树教我编译mplayer，老大帮我解决GCC编译，和郭拓装红帽5，王聪讲GCC+makefile，还是后来一起开发XylFTP，举办各种活动、讲座。讲不玩的人 ...</p>
+                    <a class="btn btn-default btn-xs" href="../default/reboot-or-shutdown.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../life/reboot-or-shutdown-efbc88e4b880efbc89.html">reboot Or shutdown ? （一）</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2014-03-13 10:22
+    </span>
+    <hr>
+                <div class="summary"><p>09年3月临近毕业的我，还在苦苦等待腾讯的offer，由于错过了校园招聘流程，迟迟没有结果。我心里知道对于我来说时间和机会都不太多了，似乎已经把这个offer当成唯一的希望了。</p>
+<p>日子一天天的过，磊子看出了我的忧虑，建议我多试几家，北京上海都可以看看。我给自己设置的思维限制似乎被打开了，一下子就没有那么多没必要的顾虑了，不管是什么结果，自己都有勇气去承受了。</p>
+<p>就这样，我把简历投到 Red Hat，开始自己准备英语，本来提到的开发职位，考虑我的经验压根没有给我机会，不过面试中有自动化测试框架的Python开发，这个也合我胃口，能加入当时心目中最最优秀的Linux企业发型商，在加上步入社会前对于未来的美好憧憬，心中的喜悦无法用语言表达。心里想着：北京我来了！ I will hack my life by Free Software!</p>
+<p>大学里几乎把所有课余时间都花在Linux兴趣小组的实验室了，每天晚上10点多被保安赶走，偶尔也在小黑屋里通宵。不管是开始和小康学习黑别人机器，郭老师给我们讲Linux基础，贾孟树教我编译mplayer，老大帮我解决GCC编译，和郭拓装红帽5，王聪讲GCC+makefile，还是后来一起开发XylFTP，举办各种活动、讲座。讲不玩的人 ...</p>
+                    <a class="btn btn-default btn-xs" href="../life/reboot-or-shutdown-efbc88e4b880efbc89.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -290,6 +320,16 @@ From: <a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.
                         href="../author/amos14.html">14</a></li>
                 <li class=""><a
                         href="../author/amos15.html">15</a></li>
+                <li class=""><a
+                        href="../author/amos16.html">16</a></li>
+                <li class=""><a
+                        href="../author/amos17.html">17</a></li>
+                <li class=""><a
+                        href="../author/amos18.html">18</a></li>
+                <li class=""><a
+                        href="../author/amos19.html">19</a></li>
+                <li class=""><a
+                        href="../author/amos20.html">20</a></li>
                 <li class="next"><a
                         href="../author/amos6.html">&raquo;</a></li>
         </ul>

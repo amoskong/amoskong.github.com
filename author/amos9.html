@@ -67,331 +67,184 @@
     <div class="row">
         <div class="col-lg-9">
             <article>
-                <h2><a href="../life/interview-avi-kivity-2.html">'Interview: Avi Kivity (2)'</a></h2>
+                <h2><a href="../computer/e8b081e69da5e68bafe69591e4ba91e8aea1e7ae97-e5bab7e58d8e.html">谁来拯救云计算 - 康华</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-08-15 13:52
+        <i class="icon-calendar"></i>2012-02-16 07:47
     </span>
     <hr>
-                <div class="summary"><h3 id="fromhttpwwwdoubancomnote67747569">From:http://www.douban.com/note/67747569/</h3>
-<p>Compared to other virtualization projects:</p>
-<p>JA: What is kvm, and how does it compare to other virtualization projects?</p>
-<p>Avi Kivity: kvm is (now) a full virtualization system for x86-based Linux hosts. It allows users to create virtual machines and run various x86 operating ...</p>
-                    <a class="btn btn-default btn-xs" href="../life/interview-avi-kivity-2.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/interview-avi-kivity.html">'Interview: Avi Kivity'</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2010-08-15 13:22
-    </span>
-    <hr>
-                <div class="summary"><h2 id="fromhttpkerneltraporgnode8088">From:http://kerneltrap.org/node/8088</h2>
-<p>Submitted by <a href="http://kerneltrap.org/user/1">Jeremy</a></p>
-<p>on April 23, 2007 - 6:06am</p>
-<ul>
-<li>
-<p><a href="http://kerneltrap.org/2.6.20">2.6.20</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/taxonomy/term/352">Avi  Kivity</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/taxonomy/term/394">interview</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/KernelTrap_interview">KernelTrap  interview</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/kvm">kvm</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/lguest">lguest</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/Linux">Linux</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/taxonomy/term/397">qemu</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/virtual_machine">virtual  machine</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/virtualization">virtualization</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/taxonomy/term/396">vmware</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/Xen">Xen</a></p>
-</li>
-<li>
-<p><a href="http://kerneltrap.org/taxonomy/term/13">Linux  feature interview</a></p>
-</li>
-</ul>
-<p>Avi Kivity is the lead developer and  maintainer of the Kernel-based Virtual Machine project, better ...</p>
-                    <a class="btn btn-default btn-xs" href="../life/interview-avi-kivity.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../life/python-debug-methods.html">Python Debug Methods</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2010-08-14 15:57
-    </span>
-    <hr>
-                <div class="summary"><ol>
-<li>
-<p>print</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>print "hello"</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<p>logging module
-(setup debug level)</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>logging.debug()
-logging.info()
-logging.error()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<p>import/reload</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>import test
-test.foo()
-(change code)
-reload(test)
-test.foo()</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<p>exec</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>d = {}
-exec(file('/tmp/test.py'), d)
-d.get('foo')(args='hello')</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<p>eval</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>evel('foo(args='hello'), d)</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
-<li>
-<p>python -i
-python -i test ...</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="../life/python-debug-methods.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../virtualization/kvm-network-model.html">KVM Network Model</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2010-06-26 23:49
-    </span>
-    <hr>
-                <div class="summary"><p>[1] Userspace Virtio network architecture
-    [2] Vd-t,sriov architecture
-    [3] Vhost_net architecture
-    [4] Vhost over sriov &amp; macvtap architecture</p>
-<div class="highlight"><pre>      <span class="o">+--------------+</span>
-      <span class="o">|</span>  <span class="n">Guest</span> <span class="n">VM</span>    <span class="o">|</span>
-      <span class="o">|</span> <span class="o">+--+</span>    <span class="o">+--+</span> <span class="o">|</span>
-      <span class="o">+-|</span>  <span class="o">|----|</span>  <span class="o">|-+</span>
-        <span class="o">|</span><span class="n">tx</span><span class="o">|</span>    <span class="o">|</span><span class="n">rx</span><span class="o">|</span>
-      <span class="o">+-+--+----+--+-+</span>
-      <span class="o">|</span>   <span class="err">\</span> <span class="n">QEMU</span>  <span class="o">^</span>  <span class="o">|</span>
-      <span class="o">|</span>    <span class="n">v</span>     <span class="o">/</span>   <span class="o">|</span>
-      <span class="o">|</span>    <span class="o">+----+</span>    <span class="o">|</span>
-      <span class="o">+----|</span> <span class="n">tap</span><span class="o">|----+</span>
-  <span class="o">+--------|</span>    <span class="o">|--------+</span>
-  <span class="o">|</span>        <span class="o">+----+</span>        <span class="o">|</span>
-  <span class="o">|</span><span class="n">Kernel</span><span class="o">/</span><span class="n">HV</span>  <span class="o">^</span>          <span class="o">|</span>
-  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
-  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>
-  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
-  <span class="o">|</span>       <span class="o">|</span><span class="n">bridge</span><span class="o">|</span>       <span class="o">|</span>
-  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
-  <span class="o">|</span>           <span class="o">^</span>          <span class="o">|</span>
-  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
-  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>
-  <span class="o">|</span>       <span class="o">+------+</span>       <span class="o">|</span>
-  <span class="o">+-------|</span> <span class="n">NIC</span>  <span class="o">|-------+</span>
-          <span class="o">+------+</span>
-              <span class="o">^</span>
-              <span class="o">|</span>
-              <span class="n">v</span>
-
-      <span class="o">+------------------------+</span>
-      <span class="o">|</span>     <span class="n">Guest</span> <span class="n">VM</span>           <span class="o">|</span>
-      <span class="o">|</span>              <span class="o">+--+</span> <span class="o">+--+</span> <span class="o">|</span>
-      <span class="o">+--------------|</span><span class="n">tx</span><span class="o">|-|</span><span class="n">rx</span><span class="o">|-+</span>
-                     <span class="o">+--+</span> <span class="o">+--+</span>
-                       <span class="o">^</span>   <span class="o">^</span>
-                        <span class="err">\</span> <span class="o">/</span>
-                         <span class="o">|</span>
-                         <span class="n">v</span>
-      <span class="o">+--------+</span>   <span class="o">+-----------+</span>
-      <span class="o">|</span> <span class="n">QEMU</span>   <span class="o">|</span>   <span class="o">|</span> <span class="n">VF</span> <span class="n">NIC</span> <span class="err">#</span><span class="mi">2</span> <span class="o">|</span>
-      <span class="o">+--------+</span>   <span class="o">+-----------+</span>
-  <span class="o">+----------------------+</span>  <span class="o">^</span>
-  <span class="o">|</span> <span class="n">Kernel</span><span class="o">/</span><span class="n">HV</span>            <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>    <span class="o">+-----------+</span>     <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>    <span class="o">|</span> <span class="n">VF</span> <span class="n">NIC</span> <span class="err">#</span><span class="mi">1</span> <span class="o">|</span>     <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>    <span class="o">+-----------+</span>     <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>           <span class="o">^</span>          <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>  <span class="o">|</span>
-  <span class="o">|</span>           <span class="n">v</span>          <span class="o">|</span>  <span class="n">v</span>
-  <span class="o">|</span>       <span class="o">+--------------+----+</span>
-  <span class="o">+-------|</span> <span class="n">Physical</span> <span class="n">NIC ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../virtualization/kvm-network-model.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../linux/how-to-use-kexec.html">How to use kexec</a></h2>
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="icon-calendar"></i>2010-06-15 01:14
-    </span>
-    <hr>
-                <div class="summary"><p>Tue Jun 15 09:07:36 2010</p>
-<ol>
-<li>check if current kernel support kexec</li>
-</ol>
-<h1 id="grep-kexec-boogconfig-2634-rc6">grep KEXEC /boog/config-2.6.34-rc6</h1>
+                <div class="summary"><h1 id="by-from-httpblogcsdnnetkanghuaarticledetails7232191">—   云计算的技术路线探讨  BY 康华  from: <a href="http://blog.csdn.net/kanghua/article/details/7232191">http://blog.csdn.net/kanghua/article/details/7232191</a></h1>
+<p>引言</p>
+<p>当前的“云计算”一词已经被神话，似乎快成了放之四海皆准的时髦真理，就好比当初言必称“希腊”一般，表面光芒四射，但实际上却无比教条、且越来越令人生厌。</p>
+<p>作为“云计算”的一个普通开发者和是推广者，很有必要通过亲身实践，以正视听，希望能让后来者（云计算系统的开发者）少走弯路——有所为、有所不为。</p>
+<h2 id="_1">前言</h2>
+<p>我们所要谈论的不是商业领袖们所热衷的云计算概念、云计算市场，而是讨论技术人员眼中云计算具体形态和切实的实现办法。</p>
+<p>我们将从需求分析入手、进而讨论设计理念、再具体化到子系统设计和实现中存在的难点问题、最后谈谈云计算对外服务的技术选择。其中有些观点属于业界共识，也不少属于个人看法——难免有所偏颇——真诚欢迎从事云计算开发的朋友积极讨论和批评。</p>
+<p>本文试图回答这么几么几问题：</p>
 <ol>
 <li>
-<p>install kexec tools
-1) apt-get / yum install kexec-tools
-2) src: http://www.kernel.org/pub/linux/kernel/people/horms/kexec-tools/kexec-tools-2.0.1.tar.gz</p>
+<p>技术人员理想的云计算是什么。</p>
 </li>
 <li>
-<p>get command line of new kernel ...</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="../linux/how-to-use-kexec.html">more ...</a>
+<p>理想和现实的鸿沟是什么。</p>
+</li>
+<li>
+<p>云计算到底需要什么样的基础架构。</p>
+</li>
+<li>
+<p>云计算基础架构可能的组成部分 ...</p></li></ol>
+                    <a class="btn btn-default btn-xs" href="../computer/e8b081e69da5e68bafe69591e4ba91e8aea1e7ae97-e5bab7e58d8e.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../virtualization/virtioe7bd91e58da1.html">Virtual Virtio Nic</a></h2>
+                <h2><a href="../linux/workshop-e28093-beijing-e28093-march-21st.html">'oVirt project: Workshop – Beijing – March 21st'</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-06-01 00:07
+        <i class="icon-calendar"></i>2012-02-06 01:20
     </span>
     <hr>
-                <div class="summary"><p>keywords: network, virtio, vhost, virtualization</p>
-<p>前两周一直在研究网卡offload的特性，目的是通过ethtool设置虚拟网卡功能，进行功能验证。物理网卡、虚拟e1000基本都搞清楚了，rtl8139比较老，很多新特新都不支持，所以忽略。问题就处在了Virtio虚拟网卡上，这个玩意不同于一般的虚拟网卡，不是单纯的硬件模拟，她需要利用内核里边提供的相关API，争取最高性能。由于是内核跟hypervisor相互调用，所以虚拟机用户感知到的网卡功能，也需要hypervisor的支持(特性支持、参数配置等)。
-QEMU 有个新参数 "-netdev tap,vhost=on..." 替换了原来的 "-net tap,..."，用于创建网络设备，很多新特性只有在新参数才能使用。比如虚拟网卡的offload功能，老参数需要QEMU实现对offload功能的支持，目前只能使用GSO一种。新参数则可以使用主机内核提供的vhost支持，offload工作由内核中的vhost_net模块来完成，性能提升就不用说了，rx/tx/sg/tso/gso/ufo都支持。开始觉得奇怪，为什么不支持receive offload？offload的思想就是把数据切割 ...</p>
-                    <a class="btn btn-default btn-xs" href="../virtualization/virtioe7bd91e58da1.html">more ...</a>
+                <div class="summary"><p>From: <a href="http://www.ovirt.org/news-and-events/workshop/">http://www.ovirt.org/news-and-events/workshop/</a></p>
+<div class="highlight"><pre><span class="n">Workshop</span> <span class="err">–</span> <span class="n">Beijing</span> <span class="err">–</span> <span class="n">March</span> <span class="mi">21</span><span class="n">st</span>
+
+<span class="n">To</span> <span class="n">RSVP</span> <span class="n">please</span> <span class="n">email</span> <span class="n">to</span> <span class="n">rsvp</span><span class="err">@</span><span class="n">oVirt</span><span class="p">.</span><span class="n">org</span> <span class="p">.</span>
+
+<span class="n">During</span> <span class="n">this</span> <span class="n">workshop</span> <span class="n">you</span><span class="err">’</span><span class="n">ll</span> <span class="n">learn</span> <span class="n">about</span> <span class="n">the</span> <span class="n">technical</span> <span class="n">background</span> <span class="n">and</span> <span class="n">direction</span>
+<span class="n">of</span> <span class="n">the</span> <span class="n">project</span><span class="p">.</span> <span class="n">You</span><span class="err">’</span><span class="n">ll</span> <span class="n">meet</span> <span class="n">the</span> <span class="n">developers</span><span class="p">,</span> <span class="n">and</span> <span class="n">have</span> <span class="n">an</span> <span class="n">opportunity</span> <span class="n">to</span> <span class="n">use</span> <span class="err">–</span>
+<span class="n">yes</span> <span class="n">our</span> <span class="n">first</span> <span class="n">release ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../linux/workshop-e28093-beijing-e28093-march-21st.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/e9878de5a4b4e5868de69da5.html">个人主页二次上线</a></h2>
+                <h2><a href="../other/e4bba3e7a081e68998e7aea1e69c8de58aa1gitcafee6ada3e5bc8fe4b88ae7babf.html">代码托管服务GitCafe正式上线 — ghosTM55</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-05-29 02:07
+        <i class="icon-calendar"></i>2012-01-01 12:57
     </span>
     <hr>
-                <div class="summary"><p>2005年高考报志愿是选择了自己喜欢的计算机专业，刚进大学是不允许在宿舍放电脑的，好几个宿舍靠一个笔记本看电影解闷。
-2006年，我与Linux结缘，买了一个台式机，512内存、80G硬盘。
-2007年，在cocobear的帮助下，创建了自己的个人主页 http://kongove.cn，有自己的博客，还有一些自己感兴趣的东西。
-一晃三年过去了，此时我已身处校外，从古城西安来到首都北京，做Linux相关的工作。中间经历了多次和谐运动，我的网站一直很坚挺。前几天发现kongove.cn域名过期了，居然
-要交‘赎金’500RMB才能继续使用，应该是域名提供商ename帮忙续费了。本来想注测一个info或者org的域名，用CN域名揪心～还没来得及注册，看到林含烟分享的免费主机信息，自己注册了一个帐号，把数据导了进来，很方便，感觉提供的功能已经足够了，所以暂时就先用着。反正数据在本地有备份，有问题再换，用王聪的话说叫“换换更健康～” ;)</p>
-<p>域名： kongove.whostas.com
-目前我用到的功能：PHP、数据库、phpadmin管理 ...</p>
-                    <a class="btn btn-default btn-xs" href="../life/e9878de5a4b4e5868de69da5.html">more ...</a>
+                <div class="summary"><p><a href="http://ghostunix.org/blog/wp-content/uploads/2011/12/Screenshot.png"><img alt="" src="http://ghostunix.org/blog/wp-content/uploads/2011/12/Screenshot.png" /></a></p>
+<h1 id="gitcafe">GitCafe是什么?</h1>
+<p>GitCafe将以代码托管为核心业务，提供一系列优质前沿的服务来帮助到中国IT领域的开发者、项目以及企业更好地学习与成长。</p>
+<p>Git是目前世界上最流行最优秀的项目版本控制系统之一，Cafe的意思为咖啡馆，象征着程序员文化。在GitCafe这个平台上，开发者可以轻松的在线协作共同开发出一个又一个开源或者私有项目。通过GitCafe，开发项目的控制与团队管理将变得方便与有效。</p>
+<p>在GitCafe的网站以及团队，我希望每一个用户和员工都能感受到浓厚纯正的黑客精神与文化，发现和理解计算机技术的真正魅力与潜力，激励每一位中国的开发者去开发出更多更有趣的东西。</p>
+<p>今天，GitCafe正式上线内测，地址是<a href="http://gitcafe.com/">gitcafe.com</a>，目前需要邀请码才能够注册使用。</p>
+<p>现在，你可以在<a href="http://twitter.com/gitcafe">Twitter</a>以及<a href="http://weibo.com/gitcafe">Weibo</a>上关注我们，获取我们的第一手信息。</p>
+<h1 id="gitcafe_1">为什么会有GitCafe?</h1>
+<p>在2011年年初，一家做开源操作系统与服务的国企找到我希望我能够为他们提供一些解决方案，来帮助到他们的开源项目更好地在国内的技术社区得到推广以及获得更多用户、开发者的反馈。那已经不是第一次有创业团队、企业找到我希望我帮助他们解决这样的问题，于是我开始认真地思考这个问题，试图找到一个不错的解决方案。</p>
+<p>当时我带着<a href="http://groups.google.com/group/shlug">SHLUG</a>的一群朋友来到杭州参加支持<a href="http://groups.google.com/group/hzlug">HZLUG</a>的第一次线下聚会，晚上住在宾馆里讨论到这个问题的时候，有朋友突然提到说国内还没有好的代码托管服务。我很快地发现这件事情的确需要去做，并且有很多必要性，同时能够很大程度地帮助国内在开源道路上探索地团队和企业更好地去扩展他们的业务，于是我开始筹备这个项目的启动。</p>
+<h1 id="_1">新的想法与动力</h1>
+<p>2011上半年很不容易 ...</p>
+                    <a class="btn btn-default btn-xs" href="../other/e4bba3e7a081e68998e7aea1e69c8de58aa1gitcafee6ada3e5bc8fe4b88ae7babf.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/e4b880e4b8aalinuxe7a88be5ba8fe59198e79a84e682b2e59380.html">一个Linux程序员的悲哀</a></h2>
+                <h2><a href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">网络性能测试</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-03-10 14:25
+        <i class="icon-calendar"></i>2011-12-29 00:40
     </span>
     <hr>
-                <div class="summary"><p>静听花开♂  2010-03-10 20:56:41</p>
-<div class="highlight"><pre><span class="err">最近有什么好电影吗？</span>
-
-<span class="n">GL2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">17</span><span class="o">:</span><span class="mi">57</span>
-
-<span class="err">呵呵，听说《七天爱上你》不错，还没看</span>
-
-<span class="err">静听花开♂</span>  <span class="mi">2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">19</span><span class="o">:</span><span class="mi">25</span>
-
-<span class="err">我查查</span>
-
-<span class="n">GL</span> <span class="mi">2010</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">10</span> <span class="mi">21</span><span class="o">:</span><span class="mi">20</span><span class="o">:</span><span class="mo">04</span>
-
-<span class="err">问个问题，</span><span class="n">linux</span><span class="err">内核中包括哪些管理，用户接口是否属于内核</span>
-
-
-
-
-
-
-
- <span class="n">kong</span> <span class="err">有</span><span class="n">qq</span><span class="err">或者</span><span class="n">msn</span><span class="err">么。。有</span><span class="n">baidu</span><span class="err">的美女要和你聊理想和志向</span>
-
- <span class="n">hehe</span>   <span class="err">那很好呀</span>     <span class="mi">284432342</span>
-
- <span class="err">哦。我给她了 ...</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../life/e4b880e4b8aalinuxe7a88be5ba8fe59198e79a84e682b2e59380.html">more ...</a>
+                <div class="summary"><p>我主要做的是Virtual IO, PCI, Network 这几块，提高虚拟机的IO性能。网络性能主要使用netperf，iperf，Ntttcp(win)，需要统计吞吐率，CPU利用率，收发包数目，收发字节数，注入中断，IO_exit 等。需要多次测试，调整测试时间，计算平均值，并求标准方差，看看同样环境结果是否稳定，从而确定一些经验值（合理的测试次数，单个测试执行时间等）。</p>
+<p>然后对打Patch前后版本的平均值进行比较，评估是否有性能回归bug。顺便给大家推荐一本书[1]，大学学的概率论、高数基本都还给老师了，所以还得重新看资料复习。</p>
+<p>发程序到社区的时候碰到一个版权问题，NTttcp，微软禁止其他人传播，所以只能提示用户自己去官网下载。我的程序里使用AutoIT脚本自动签订了最终用户许可协议（<em>EULA</em> End User License Agreement），然后在文档、程序、commitlog 里提示如果不同意此协议不要使用此脚本。不清楚是否合法，所以发邮件给内部法律部门咨询了。所以离开自由软件世界是很麻烦的，哈哈 ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/e59091e99bb7e9948be5908ce5bf97e5ada6e4b9a0.html">向雷锋同志学习</a></h2>
+                <h2><a href="../programming/e5bfabe9809fe4bdbfe794a8pile8bdace68da2e785a7e78987e7949fe68890e9a284e8a788e7bd91e9a1b5.html">快速使用PIL转换照片生成预览网页</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-03-04 16:51
+        <i class="icon-calendar"></i>2011-11-01 07:25
     </span>
     <hr>
-                <div class="summary"><p><img alt="xue xi leifeng " src="http://kongove.whostas.com/pub/images/learn-leifeng.jpg" /></p>
-                    <a class="btn btn-default btn-xs" href="../life/e59091e99bb7e9948be5908ce5bf97e5ada6e4b9a0.html">more ...</a>
+                <div class="summary"><p>我们常常用很多照片，需要快速通过http服务器分享，下面这个脚本，用PIL(python image library)转换固定大小的缩略图，并生成一个简易的html文件，附带的链接可以用于点击察看大图片。递归目录、其他格式什么懒的支持了，这个够用了 :-)</p>
+<p>$ cat resize.py</p>
+<div class="highlight"><pre><span class="k">import</span> <span class="nx">os</span><span class="p">,</span> <span class="nb">Image</span>
+<span class="err">#</span> <span class="nx">Resize</span> <span class="nx">jpg</span> <span class="n">files</span> <span class="k">in</span> <span class="nx">current</span> <span class="nx">directory</span><span class="p">,</span> <span class="ow">and</span> <span class="nx">generate</span> <span class="nx">an</span> <span class="nx">html</span> <span class="nb">file</span> <span class="k">to</span> 
+<span class="err">#</span> <span class="nx">present</span> <span class="n">pictures</span> <span class="k">in</span> <span class="nx">a</span> <span class="nx">light</span> <span class="nx">way.</span>
+<span class="err">#</span> <span class="err">$</span> <span class="nx">cd</span> <span class="nx">picture</span><span class="na">-dir</span><span class="o">/</span>
+<span class="err">#</span> <span class="err">$</span> <span class="nx">python</span> <span class="nx">resize.py</span>
+<span class="err">#</span> <span class="err">$</span> <span class="nx">firefox</span> <span class="nx">index.html</span>
+
+<span class="nx">def</span> <span class="nx">resize</span><span class="p">(</span><span class="nb">filename</span><span class="p">,</span> <span class="n">width ...</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="../programming/e5bfabe9809fe4bdbfe794a8pile8bdace68da2e785a7e78987e7949fe68890e9a284e8a788e7bd91e9a1b5.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../life/happy-spring-festival.html">Happy Spring Festival</a></h2>
+                <h2><a href="../other/e5b9b3e8b0b7e58cbae4b880e697a5e6b8b8.html">平谷区一日游</a></h2>
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="icon-calendar"></i>2010-02-09 05:07
+        <i class="icon-calendar"></i>2011-10-30 03:46
     </span>
     <hr>
-                <div class="summary"><p>本来打算坐12的临客回家，如果晚点估计得在车上过年了。</p>
-<p>但是，，，今早来上班，一个同事的哥哥临时改变行程，有了张余票—特快卧铺，直接拿下，马上准备回家！</p>
-<p>能待到初八。</p>
-                    <a class="btn btn-default btn-xs" href="../life/happy-spring-festival.html">more ...</a>
+                <div class="summary"><p><img alt="pinggu-guajiayu.jpg" src="/blog/wp-content/uploads/pinggu-guajiayu.jpg" /></p>
+<p>平谷挂甲峪村: 采摘+爬山
+<img alt="pinggu" src="/blog/wp-content/uploads/pinggu-darongdong1-xiao.jpg" /></p>
+<p>水溶洞
+<img alt="pinggu" src="/blog/wp-content/uploads/pinggu-darongdong2-xiao.jpg" /></p>
+                    <a class="btn btn-default btn-xs" href="../other/e5b9b3e8b0b7e58cbae4b880e697a5e6b8b8.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../life/describe-vancouver-travel-for-meg.html">Describe Vancouver travel for meg</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2011-10-19 03:28
+    </span>
+    <hr>
+                <div class="summary"><p>Meg is my friend who lives in USA, she is also a FOSS fan as me ;-)  I knew her in ubuntu-user maillist in Oct 19, 2007 [0]. Today is Oct 19, 2011. Oh my god!!!  I found we have recognized integrated <em>4</em> years! I didn't realized this before I ...</p>
+                    <a class="btn btn-default btn-xs" href="../life/describe-vancouver-travel-for-meg.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../linux/cn-opensource-week-fad_2011.html">CN Opensource week & FAD_2011</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2011-10-18 13:08
+    </span>
+    <hr>
+                <div class="summary"><p><img alt="osw-fad" src="/blog/wp-content/uploads/osw-fad.jpg" /></p>
+<p>上周六参加了CN Opensource week &amp; FAD [1]，从早上9点签到，一直玩到晚上8点多。印象当中好久没有参加社区活动了，这次是和公司的朋友们一起去参加的。</p>
+<p>我早早过去签到，碰见了peter chen，他最近好像在搞开源硬件，还认识了中国区的fedora大使 gbraad，他很活跃。上午主要是ow2公司讲解为社区、技术人员、公司提供平台，进行相关协作；还有红帽社区关系manager - Harish Pillay讲红帽与fedora社区的关系运作模式；再下来是David li 讲的开源硬件和创科空间[2]；IBM 讲解自己的社区贡献和developerworks知识分享平台。 linuxtoys.org的编辑 tommy 同学带领大家怀念了一下 DennisRitchie。</p>
+<p>中午提供比格比萨的自助餐卷，人很多，但吃的也不错。下午我主要是在听FAD的topic，比较有意思的有synfig studio，它是一个开源的二维动画制作软件，flash、ps都不精的我很像体验一下；csslayer同学又分享了kde开发的一些经验，并极力宣传他的KDE开发资讯网站[3]；下来是清华alink同学讲的texlive，主要讲安装步骤，其实安装步骤发给大家就可以，没必要那么细的讲 ...</p>
+                    <a class="btn btn-default btn-xs" href="../linux/cn-opensource-week-fad_2011.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../computer/e585b3e4ba8eacpi-tablee79a84e59fbae69cace6a682e5bfb5e5928ce59bbee7a4ba.html">关于ACPI table的基本概念和图示</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2011-10-12 16:49
+    </span>
+    <hr>
+                <div class="summary"><p><a href="http://www.cnitblog.com/yuhensong/archive/2009/10/21/62042.html">关于ACPI table的基本概念和图示</a></p>
+<p>ACPI Table是BIOS提供给OSPM的硬件配置数据，包括系统硬件的电源管理和配置管理，ACPI Table有很多表，根据存储的位置，可以分为：</p>
+<p>1） RSDP位于F段，用于OSPM搜索ACPI Table，RSDP可以定位其他所有ACPI Table
+2） FACS位于ACPI NVS内存，用于系统进行S3保存的恢复指针，内存为NV Store
+3） 剩下所有ACPI Table都位于ACPI Reclaim内存，进入OS后，内存可以释放
+ACPI Table根据版本又分为1.0B，2.0，3.0，4.0。2.0以后，支持了64-bit的地址空间，因此几个重要的Table会不大一样，比如：RSDP，RSDT，FADT，FACS。简单的列举一下不同版本的ACPI Table：
+1） ACPI 1 ...</p>
+                    <a class="btn btn-default btn-xs" href="../computer/e585b3e4ba8eacpi-tablee79a84e59fbae69cace6a682e5bfb5e5928ce59bbee7a4ba.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="../virtualization/kvm-forum-2011-videos.html">KVM Forum 2011 Videos</a></h2>
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="icon-calendar"></i>2011-10-10 09:29
+    </span>
+    <hr>
+                <div class="summary"><p><a href="http://www.youtube.com/playlist?list=PL7C0F52E2227156B3">http://www.youtube.com/playlist?list=PL7C0F52E2227156B3</a></p>
+<p><img alt="/blog/wp-content/uploads/kvmformu2011video.png" src="/blog/wp-content/uploads/kvmformu2011video.png" /></p>
+                    <a class="btn btn-default btn-xs" href="../virtualization/kvm-forum-2011-videos.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -429,6 +282,16 @@ QEMU 有个新参数 "-netdev tap,vhost=on..." 替换了原来的 "-net tap,..."
                         href="../author/amos14.html">14</a></li>
                 <li class=""><a
                         href="../author/amos15.html">15</a></li>
+                <li class=""><a
+                        href="../author/amos16.html">16</a></li>
+                <li class=""><a
+                        href="../author/amos17.html">17</a></li>
+                <li class=""><a
+                        href="../author/amos18.html">18</a></li>
+                <li class=""><a
+                        href="../author/amos19.html">19</a></li>
+                <li class=""><a
+                        href="../author/amos20.html">20</a></li>
                 <li class="next"><a
                         href="../author/amos10.html">&raquo;</a></li>
         </ul>
