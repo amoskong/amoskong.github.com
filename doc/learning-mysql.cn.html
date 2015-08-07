@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/style/zeuux.cn.css" title="ZEUUX Project style">
+<title>学习MySQL－文档－哲思自由软件社区</title>
+</head>
+
+<body>
+<script src="/js/header.cn.js" language="javascript" type="text/javascript"></script>
+
+<div class="main">
+  <div class="big_content" auto-index="true">
+	<h1>学习 MySQL</h1>
+	<h2>作者：<a href="mailto:jianjun@zeuux.org">孔建军</a></h2>
+
+	<h3>MySQL 介绍</h3>
+	<p>MySQL 是瑞典 MySQL AB 公司开发的一个完全网络化的跨平台关系型数据库系统，具有多用户、多线程、多种客户工具和API支持、低消耗、底成本、高性能等特点。她具有客户机/服务器体系结构的分布式数据库管理系统，由一个服务器守护进程 mysqld 和不同客户程序和库组成。由于其源码的开放性及稳定性，在 WEB 开发应用等方面得到了广泛使用，具有较强的竞争力和市场前景。目前Internet上流行的网站构架方式是 LAMP（Linux+Apache+MySQL+PHP），即操作系统使用GNU/Linux，Web服务器使用Apache，数据库服务器使用MySQL，服务器端脚本解释器使用PHP。这四个软件都遵循 GPL 协议开放源代码，用户可以快速搭建一个真正稳定、免费的网站系统。虽然没有大型专业数据库（如Orcal）高端功能强大，但其灵活方便等优势也赢得了众多用户的关注。<br>
+Sun于今年初以10亿美元高价收购MySQL，据说 Sun 准备关闭MySQL备份方案的源代码，许多高级功能的代码也将不再开放，即不会再免费向开源社区贡献。<br>
+MySQL 特征：
+<ul>
+1.使用C和C++编写，并使用了多种编译器进行测试，保证了源代码的可移植性<br>
+2.支持AIX、FreeBSD、HP-UX、Linux、Mac OS、Novell Netware、OpenBSD、OS/2 Wrap、Solaris、Windows等多种操作系统<br>
+3.为多种编程语言提供了API。这些编程语言包括C、C++、Eiffel、Java、Perl、PHP、Python、Ruby和Tcl等<br>
+4.支持多线程，充分利用CPU资源<br>
+5.优化的SQL查询算法，有效地提高查询速度<br>
+6.既能够作为一个单独的应用程序应用在客户端服务器网络环境中，也能够作为一个库而嵌入到其他的软件中提供多语言支持，常见的编码如中文的GB 2312、BIG5，日文的Shift_JIS等都可以用作数据表名和数据列名<br>
+7.提供TCP/IP、ODBC和JDBC等多种数据库连接途径<br>
+8.提供用于管理、检查、优化数据库操作的管理工具<br>
+9.可以处理拥有上千万条记录的大型数据库<br>
+</ul>
+
+MySQL 官方网站：<a href="http://www.mysql.com/">http://www.mysql.com/</a>
+	</p>
+	<h3>运行效果</h3>
+	<div class="code_outline">
+	<pre class="display_code">
+kongove@ubuntu:~/Desktop/zeuux.org$ mysql -h localhost -u root -p
+Enter password: 
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+mysql> use test;
+Database changed
+mysql> select * from student;
++------+--------------+
+| id	      | name                     |
++------+--------------+
+|    1        | XiyouLinux           | 
++------+--------------+
+1 rows in set (0.01 sec)
+mysql> 
+</pre></div>
+
+	<h3>基本使用</h3>
+	<h4>安装</h4>
+	<ul>
+	<li>Redhat 下使用可执行压缩包安装 MySQL：</li>
+	# rpm -qa|grep mysql<br>
+	查看是否已经安装 mysql<br>
+	# wget http://URL-OF-MySQL/mysql.tar.gz<br>
+	下载 mysql 软件包<br>
+	# tar xcvf mysql.tar.gz<br>
+	解压软件包<br>
+	# cd mysql/<br>
+	# make<br>
+	# make install<br>
+	# cd scripts<br>
+	# mysql_install_db<br>
+	完成具体编译、安装<br>
+	<li>Fedora 下通过软件包管理工具 yum 安装 MySQL：</li>
+	# yum install mysql-server mysql-client mysqlversion
+	<li>Ubuntu 下通过APT软件包管理工具安装 MySQL：</li>
+	# apt-get install mysql-server mysql-client mysqlversion
+	</ul>
+	<h4>配置</h4>
+	<ul>
+	<li>启动系统时自动运行 MySQL 服务器</li>
+	在 /etc/rc.local中添加启动一行命令： /etc/init.d/mysql start<br>
+	<li>配置数据库用户</li>
+	安装mysql过程中，会自动提示设置默认用户 root 的登录数据库密码。<br>
+	管理员还可以使用GRANT语句添加新用户并指定其权限，使用REVOKE语句删除指定用户权限。<br>
+	<p>
+	$ mysql> grant select,insert,update,delete on *.* to "new_user"@"%" Identified by "password";<br>添加新用户new_user，密码为password，让该用户可在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。<br> 
+	$ mysql> delete from user where User="user_name";
+	$ mysql> flush privileges;<br>delete语句删除指定用户记录，flush语句告诉服务器重载授权表。<br>
+	$ mysql> grant select on table $tablename to $user;<br>把查询$tablename表的权利授给用户$user<br>
+	$ mysql> grant select on table $tablename to public;<br>把对表$tablename查询的权利给所有用户<br>
+	$ mysql> grant createtab on database $databasename to $user;<br>把在数据库$databasename中创建新表的权利授给用户$user<br>
+	$ mysql> revoke update(id) on table $tablename from $user;<br>把用户$user更新$tablename表 id 数据项的权利收回
+	</p>
+	
+	aCREATE和REVOKE语句影响4个表：
+	<table border="0" cellpadding="0" cellspacing="1" class="tab1">
+	        <tr>
+	        	<td>授权表</td>
+	                <td>内容</td>
+	        </tr>
+		<tr>
+			<td>user</td>
+			<td>能连接服务器的用户以及他们拥有的任何全局权限</td>
+		</tr>
+		<tr>
+			<td>db</td>
+			<td>数据库级权限</td>
+		</tr>
+		<tr>
+			<td>tables_priv</td>
+			<td>表级权限</td>
+		</tr>
+		<tr>
+			<td>columns_priv</td>
+			<td>列级权限</td>
+		</tr>
+	</table>
+
+	</ul>
+	<h4>测试</h4>
+	# mysqladmin version<br>
+	查看 MySQL 服务器是否正在运行<br>
+	# mysqladmin -u root shutdown<br>
+	测试服务器是否可以关闭<br>
+	# mysqlshow<br>
+	显示所有数据库<br>
+	# mysqlshow $database<br>
+	显示指定数据库中的表信息<br>
+	<h4>基本操作</h4>
+	<ul>
+
+	<li>服务器命令：</li>
+	#/etc/init.d/mysql start<br>
+	启动数据库服务<br>
+	#/etc/init.d/mysql stop<br>
+	关闭数据库服务<br>
+	#/etc/init.d/mysql restart<br>
+	重启数据库服务<br>
+	#/etc/init.d/mysql status<br>
+	查看数据库服务状态<br>
+	#/etc/init.d/mysql reload<br>
+	重新加载服务<br>
+	# /etc/init.d/mysql force-reload<br>
+	强制重新加载服务<br>
+
+	<li>客户端命令选项：</li>
+	mysql [-h $hostname] [-u $username] -p $datebasename
+	<table border="0" cellpadding="0" cellspacing="1" class="tab1">
+	  <tr>
+		<td>选项</td>
+		<td>含义</td>
+	  </tr>
+	  <tr>
+		<td>-h $hostname</td>
+		<td>指定数据库服务器，可以为IP地址或者域名</td>
+	  </tr>
+	  <tr>
+		<td>-p</td>
+		<td>提示用户输入密码</td>
+	  </tr>
+	  <tr>
+		<td>-u $username</td>
+		<td>指定用户名</td>
+	  </tr>
+	  <tr>
+		<td>$databasename</td>
+		<td>指定数据库名</td>
+	  </tr>
+	</table>
+
+	<li>客户端内部命令：</li>
+	<table border="0" cellpadding="0" cellspacing="1" class="tab1">
+	<tr>
+		<td>命令</td>
+		<td>简洁命令</td>
+		<td>含义</td>
+	</tr>
+	<tr>
+	<td>?</td>
+	<td>(\?)</td>
+	<td>等价于'help'</td>
+	</tr>
+	<tr>
+	<td>clear</td>
+	<td>(\c)</td>
+	<td>清除命令</td>
+	</tr>
+	<tr>
+	<td>connect</td>
+	<td>(\r)</td>
+	<td>重新连接服务器，选项参数是数据库名和主机名</td>
+	</tr>
+	<tr>
+	<td>delimiter</td>
+	<td>(\d)</td>
+	<td>设置定界符</td>
+	</tr>
+	<tr>
+	<td>edit</td>
+	<td>(\e)</td>
+	<td>采用 $EDITOR 编辑命令</td>
+	</tr>
+	<tr>
+	<td>ego</td>
+	<td>(\G)</td>
+	<td>向 mysql 数据库服务器发送命令，并将返回结果垂直输出</td>
+	</tr>
+	<tr>
+	<td>exit</td>
+	<td>(\q)</td>
+	<td>退出 mysql, 等价与 quit</td>
+	</tr>
+	<tr>
+	<td>go</td>
+	<td>(\g)</td>
+	<td>向数据库服务器发送命令</td>
+	</tr>
+	<tr>
+	<td>help</td>
+	<td>(\h)</td>
+	<td>显示此帮助信息</td>
+	</tr>
+	<tr>
+	<td>nopager</td>
+	<td>(\n)</td>
+	<td>紧用 PAGER，打印到标准输出</td>
+	</tr>
+	<tr>
+	<td>notee</td>
+	<td>(\t)</td>
+	<td>不写入输出文件</td>
+	</tr>
+	<tr>
+	<td>pager</td>
+	<td>(\P)</td>
+	<td>设置通过 PAGER 打印结果</td>
+	</tr>
+	<tr>
+	<td>print</td>
+	<td>(\p)</td>
+	<td>打印当前命令</td>
+	</tr>
+	<tr>
+	<td>prompt</td>
+	<td>(\R)</td>
+	<td>改变 mysql 提示模式</td>
+	</tr>
+	<tr>
+	<td>quit</td>
+	<td>(\q)</td>
+	<td>退出 mysql</td>
+	</tr>
+	<tr>
+	<td>rehash</td>
+	<td>(\#)</td>
+	<td>重新编译完成 hash</td>
+	</tr>
+	<tr>
+	<td>source</td>
+	<td>(\.)</td>
+	<td>执行 SQL 脚本文件，带一个文件名作为参数</td>
+	</tr>
+	<tr>
+	<td>status</td>
+	<td>(\s)</td>
+	<td>从服务器得到状态信息</td>
+	</tr>
+	<tr>
+	<td>system</td>
+	<td>(\!)</td>
+	<td>执行一个 Shell 命令</td>
+	</tr>
+	<tr>
+	<td>tee</td>
+	<td>(\T)</td>
+	<td>指定输出文件，添加所有信息到此文件</td>
+	</tr>
+	<tr>
+	<td>use</td>
+	<td>(\u)</td>
+	<td>指定别的数据库，新数据库名作为参数</td>
+	</tr>
+	<tr>
+	<td>charset</td>
+	<td>(\C)</td>
+	<td>转换成另一个字符编码，可能需要处理多自己编码的 binlog</td>
+	</tr>
+	<tr>
+	<td>warnings</td>
+	<td>(\W)</td>
+	<td>显示执行指令的警告信息</td>
+	</tr>
+	<tr>
+	<td>nowarning</td>
+	<td>(\w)</td>
+	<td>不显示执行指令的警告信息</td>
+	</tr>
+	</table>
+	<li>常用客户端命令范例：</li>
+	$mysql -h mysql.kongove.cn -u kong -p<br>
+	登录数据库<br>
+
+	$ mysql> show databases;<br>显示当前服务器上所有数据库<br>
+	$ mysql> use $databasename;<br>选择使用数据库<br>
+	$ mysql> show tables;<br>显示当前数据库中的所有表<br>
+	$ mysql> create database $databasename;<br>创建数据库<br>
+	$ mysql> create table $tablename(id int, name char(5), age int);<br>在当前数据库里创建表<br>
+	$ mysql> create view $viewname as select id, name from $tablename;<br>在当前数据库里创建视图<br>
+	$ mysql> drop table $tablename;<br>删除当前数据库里指定的表<br>
+	$ mysql> drop view $viewname;<br>删除当前数据库里指定的视图<br>
+	$ mysql> select * from $tablename;<br>显示指定表的内容<br>
+	$ mysql> select id, name from $tablename;<br>显示指定表中指定数据项<br>
+	$ mysql> select name from $viewname;<br>显示指定视图中指定内容<br>
+	$ mysql> select * from $tablename where id>20;<br>根据条件筛选查看指定表中id号大于20的表项<br>
+	$ mysql> select id from $tablename where age=(select age from $tablename2 where name='孔建军');<br>带有比较运算符的子查询<br>
+	$ mysql> insert into $tablename(id,name,score) values(1,'kong',100);<br>添加指定表项<br>
+	$ mysql> update $tablename set score=99 where id=1;<br>	修改指定表中满足条件表项的相关值<br>
+	$ mysql> delete from $tablename where id=1;<br>	删除满足条件的指定表项<br>
+
+
+	</ul>
+	
+	<h3>数据备份与恢复</h3>
+	<ul>
+	<li>备份数据库原则：</li>
+	1. 定期实施备份；<br>
+	2. 让服务器执行更新日志；<br>
+	3. 使用一种传统、易理解的备份文件名机制；<br>
+	4. 用文件系统备份用户的备份文件。<br>
+	<li>备份</li>
+	$ mysqldump -h $hostname -u $username -p $databasename >2008.5.22.sql<br>
+	使用 mysqldump 备份整个数据库到文件2008.5.22.sql<br>
+	$ cp -r $datadir/$databasename /usr/archive/mysql/ <br>
+	直接复制数据库进行数据备份<br>
+
+	编写Shell脚本，自动备份数据库内容：<br>
+	<div class="code_outline">
+	<pre class="display_code">
+#!/bin/bash
+#备份指定服务器、用户名的数据库内容，并以当前时间命名文件。
+mysqldump -u username -h hostname -p databasename > `date +%Y%m%d_%H:%M:%S`.sql
+
+运行脚本完成备份：
+[crystallight]$ ./mysqldump.sh 
+Enter password: 
+[crystallight]$ ls
+20081014_22:56:39.sql	mysqldump.sh</pre></div>
+
+	<li>还原</li>
+	$ mysql> source 2008.5.22.sql<br>
+	使用备份文件还原数据库<br>
+	$ mysql -u root -h mysql.kongove.cn -p $databasename <2008.5.22.sql <br>
+	使用备份文件还原指定数据库<br>
+
+	</ul>
+	<h3>数据库连接</h3>
+	<ul>
+	<li>PHP连接 MySQL 数据库</li>
+	<div class="code_outline">
+	<pre class="display_code">
+$db['host'] = "222.24.20.86";
+$db['user'] = "kong";
+$db['pass'] = "passwrod";
+$db['database'] = "kong_database";
+$db['table'] = "kong_table";
+#连接数据库
+ql_connect($db['host'],$db['user'],$db['pass']);
+mysql_select_db($db['database']);
+mysql_query($sql);
+#插入数据项
+$sql = "insert into ".$table." (id,user_name,user_info,head_type,hide,message,ip,time,reply,
+reply_time) values(null,'$user_name','$user_info','$head_type','$hide','$message','$ip','$time',null,null);";
+$result = mysql_query($sql);
+#筛选查询
+$sql = "select * from $table order by id desc limit $start_msg,$max_msg;";
+$result = mysql_query($sql);
+</pre></div>
+	<li>Jsp 连接 MySQL 数据库</li>
+	<div class="code_outline">
+	<pre class="display_code">
+String url ="jdbc:mysql://localhost/softforum?user=soft&password=soft1234&useUnicode=true&characterEncoding=8859_1"
+Connection conn= DriverManager.getConnection(url);
+Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+String sql="select * from test";
+ResultSet rs=stmt.executeQuery(sql); 
+</pre></div>
+	<li>C 语言连接 MySQL 数据库</li>
+	<div class="code_outline">
+	<pre class="display_code">
+MYSQL *mysql_real_connect(MYSQL *mysql, const char *host, const char *user, const char *passwd,
+const char *db, unsigned int port, const char *unix_socket, unsigned int client_flag)
+</pre></div>
+	<li>Python 连接数据库</li>
+	<div class="code_outline">
+	<pre class="display_code">
+import MySQLdb as mydb
+db = mydb.connect(host='192.168.0.110',user='jianjun',passwd='lovelinux',db='webdatabase', charset="utf-8")
+cur = db.cursor()
+sql = unicode("select user,id from user_table where sex = '男'","utf-8")
+print sql
+cur.execute(sql)
+cur.close()
+db.close()
+</pre></div>
+	</ul>
+<h3>图形管理工具</h3>
+<p>
+phpMyAdmin、mysql-admin、MySQL Administrator、MySQL Query Browser、phpMyBackupPro 等都是不错的图形化管理数据库工具，可以方便的进行数据库各项管理、维护操作。<br>
+phpMyAdmin 可以通过 web 界面，使用 http 方式来进行连接管理，用户在浏览器即可完成管理任务，不需要特殊软件环境。Web 服务器端必须支持php解析功能。在Web服务器端配置好 apache 和 php ，下载 phpadmin，解压到 apache 能够访问的一个目录中。修改phpadmin/config.inc.php文件，其中主要是对mysql连接方式，连接路径以及用户名密码的设置。然后运行访问 index.php 进入管理页面。<br>
+
+MySQL Administrator、MySQL Query Browser、mysql-admin 是linux系统中几款数据库管理软件，其管理功能完备，配置简单。<br>
+phpMyBackupPro 也是由 PHP 写成的，可以透过 Web 介面创建和管理数据库。它可以创建伪 cronjobs，可以用来自动在某个时间或周期备份MySQL 数据库。<br>
+
+</p>
+<h3>总结</h3>
+<h3>参考资料</h3>
+<ul>
+<li><a href="http://dev.mysql.com/doc/">MySQL 官方参考手册</a></li>
+</ul>
+
+</div>
+</div>
+
+<br clear="all">
+
+<script src="/js/footer.cn.js" language="javascript" type="text/javascript"></script>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-468239-3";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

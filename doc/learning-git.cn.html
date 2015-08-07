@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/style/zeuux.cn.css" title="ZEUUX Project style">
+<title>学习Git－文档－哲思自由软件社区</title>
+</head>
+
+<body>
+<script src="/js/header.cn.js" language="javascript" type="text/javascript"></script>
+
+<div class="main">
+  <div class="big_content" auto-index="true">
+	<h1>学习 Git</h1>
+	<h2>作者：<a href="mailto:jianjun@zeuux.org">孔建军</a></h2>
+
+	<h3>Git 介绍</h3>
+	<p>Git版本控制工具的作者是Linux之父Linus Trovalds，最初是专门针对Linux内核开发的特点编写的，即协作人员异地分布、人数众多、项目规模巨大、复杂度高等。与常用的版本控制CVS，Subversion等不同，它采用了分布式版本库的方式，不毕服务器断软件支持，使源代码的发布和维护极其方便。Git的本地查询、搜索，补丁制作、提交和应用，项目跟踪，分支合并等功能，可以大大提高开发效率，具有较强的灵活性。有人认为Git太艰涩难懂，实际上结合一些有用的脚本命令使用，会使其变得非常好用。<br>
+Linux kernel、Wine、U-boot等著名项目都采用Git管理，页面(<a href="http://git.kernel.org/">http://git.kernel.org/</a>)列举的项目全是用git维护的，比较有趣的是Git本身也采用Git进行版本控制，详见：<a href="http://git.kernel.org/?p=git/git.git;a=summary">http://git.kernel.org/?p=git/git.git;a=summary</a>。</p>
+	<h3>Git 配置</h3>
+	<p>Git命令的使用，一般有两种两种形式，一种是git后面带参数(如：git add），另一种是直接减号连接的一条命令（如：git-add），后面讲解全部使用后者，这样可以避免空格的使用带来的问题。</p>
+	<ul>
+		<li>$ ssh-keygen -b 1024 -t dsa</li>
+		生成密钥，用户通信加解密。1024为生成密钥大小，dsa为指定的加密类型。如果接受默认设置，那么私钥和公钥文件分别位于：~/.ssh/id_dsa和~/.ssh/id_dsa.pub。用户需要向服务器管理员提供公钥(id_dsa.pub)，在用户同步版本库时对用户进行身份认证。用户必须妥善保管私钥。
+		<li>$ git-config user.name jianjun</li>
+		配置用户名，在生成补丁、日志时使用。git-config命令带--global选项是对所有用户信息进行配置，默认只针对对当前用户。
+		<li>$ git-config user.email jianjun@zeuux.org</li>
+		配置用户邮件，用于发送补丁。
+		<li>$ git-config sendemail.smtpserver /usr/local/bin/msmtp</li>
+		配置补丁邮件的发送软件，这里也可以用其他的，如sendmail。
+		<li>$ git-config --list</li>
+		用户可以通过git-config的其他选项来对git做其他配置，--list可以查看用户已经选项。如：
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-config --list
+user.name=jianjun
+user.email=jianjun@zeuux.com
+sendemail.smtpserver=/usr/bin/msmtp
+diff.color=auto
+pack.window=64
+merge.summary=true
+</pre></div>
+
+	</ul>
+
+	<h3>Git 使用</h3>
+	<ul>
+		<li>创建一个版本库</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ mkdir myDir
+$ cd myDir
+$ git-init-db
+Initialized empty Git repository in .git/
+</pre></div>
+		创建工作目录 myDir，进入工作目录，并初始化版本库。此时会在myDir/目录下生成一个名为.git的目录，里边有三个文件，分别是存放指向项目当前分支索引信息的HEAD文件、包含项目所有对象的object子目录、保存指向对象索引的refs目录。
+
+		<li>植入内容跟踪信息</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ echo "new world" > newfile
+$ git-add newfile
+</pre></div>
+		创建新文件newfile，写入"new world"，并用git-add命令将此文件加入到版本库文件索引当中。
+		<li>提交内容到版本库</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-commit -m "add newfile" newfile
+Created initial commit 5ce224d: add newfile
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+ create mode 100644 newfile
+</pre></div>
+把前面的修改提交到版本库中，前提是已经用git-add命令把此文件加入到版本库文件索引当中。
+		<li>查看当前的工作</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#       new file:   h
+$ echo "Love zeuux" >> newfile
+$ git-diff 
+diff --git a/newfile b/newfile
+index e83176b..7d02259 100644
+--- a/newfile
++++ b/newfile
+@@ -1 +1,2 @@
+ new world
++Love zeuux
+</pre></div>
+git-status可查看当前分支状态，git-diff查看当前分支更改情况。
+	<li>管理分支</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-branch mybranch
+$ git-checkout mybranch
+Switched to branch "mybranch"
+$ git-branch -D mybranch
+Deleted branch mybranch.
+</pre></div>
+创建名为mybranch的分支，并把以后工作转移到这个分支上开展。git-branch带-D选项为删除指定的分支，不能删除用户所在当前分支，必须用git-checkout切换到其他分支才行。
+		<li>查看项目的发展变化和比较差异</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-show-branch
+* master
+  mybranch
+$ git-whatchanged
+commit 7182ae4912487692d4f91ded1e74d99e0fc12e49
+Author: Jianjun Kong <kongjianjun@gmail.com>
+Date:   Tue Jul 8 23:45:27 2008 +0800
+    add new line
+    :000000 100644 0000000... 6991a4a... A  h
+commit cc08d852365d605520d71a3352841a7eadf64428
+Author: Jianjun Kong <kongjianjun@gmail.com>
+Date:   Tue Jul 8 23:42:52 2008 +0800
+     update
+    :100644 100644 7d02259... 033d3e5... M  newfile
+$ git-diff mybranch
+diff --git a/h b/h
+new file mode 100644
+index 0000000..6991a4a
+--- /dev/null
++++ b/h
+@@ -0,0 +1,2 @@
++helo
+</pre></div>
+git-show-branch用来列出当前版本库中的所有分支，git-whatchanged可以列出项目开发中的修改历史。git-dff mybranch是来比较当前分支与mybranch分支的差异的，当然也可使用 git-diff mybranch anotherbranch对任意两个分支做对比。
+		<li>合并两个分支</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-checkout master
+$ git-merge "Merge work in mybranch" mybranch
+</pre></div>
+切换到master分支，并把mybranch上的工作合并到master上来。此时有可能有冲突无法合并，会给出警告，用户可根据提示手动合并一些文件。
+		<li>逆转与恢复</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-reset --soft HEAD^
+逆转上次提交的版本进度
+$ git-reset --hard 7182ae4912487692d4f91ded1e74d99e0fc12e49
+强行逆转到索引指定的版本，--hard选项要慎重使用，有事可能破坏正常文件。
+$ git-revert
+也可撤销上次对版本库的提交，但这本身也会产生一个commit，用得多了会使log看起来不那么干净。
+</pre></div>
+		<li>用 Git 协同工作</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-clone git://repo.or.cz/xylftp.git 
+克隆远程版本库
+$ git-push git+ssh://kongjianjun@repo.or.cz/srv/git/pigeons.git master:master
+将同步本地版本库中master分支同步到远程服务器上版本库的master分支
+$ git-pull git+ssh://kongjianjun@repo.or.cz/srv/git/pigeons.git master:master
+将远程服务器上的版本库中的master分支同步到本地版本库的master分支
+$ git-fetch orign
+克隆上游版本库
+$ git-format-patch -s orign
+0001-add-new-line.patch
+对比当前分支与orign生成补丁，-s选项指定生成补丁中带有Signed-off-by: jianjun<jianjun@zeuux.org>
+$ git-send-email --to zeuux-www@zeuux.org --cc wangcong@zeuux.org 0001-add-new-line.patch
+将补丁0001-add-new-line.patch发送到zeuux-www@zeuux.org，并抄送一份给wangcong@zeuux.org
+</pre></div>
+		<li>为版本库打包</li>
+		<div class="code_outline">
+		<pre class="display_code">
+$ git-repack
+将对象打包，并保存在 .git/objects/pack 目录当中
+$ git-prune-packed
+清楚那些已经被打过包的原始的对象
+</pre></div>
+
+		<li>特殊文件</li>
+		工作目录myDir/下有一个名为.gitignore的文件，用来排除一些文件，包括程序编译的中间文件和目标文件等，当然也可包括它自己在内。没用使用git-add添加的文件，不会被跟踪，但会在git-commit等是输出多余信息，也会使日志变得很乱。
+		<div class="code_outline">
+		<pre class="display_code">
+.gitignore
+.*
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so
+*.so.dbg
+*.mod.c
+*.i
+*.lst
+*.symtypes
+*.order
+</pre></div>
+
+
+	</ul>
+	<h3>Git的项目开发模式</h3>
+	<p>Git作为一个正式项目发布系统，它能够极其有效的组织松散的开发人员，是一种非常规的开发组织形式，对工作流程没有任何强迫性的约束，比较灵活。</p>
+
+	<ul>
+	<li>项目领导人</li>
+
+	1.在自己本地机器上创建主版本库，并在此进行所有工作。<br>
+	2.准备一个能让大家访问的公共版本库。<br>
+	3.将你的主版本库推入公共版本库。<br>
+	4.git-repack 公共版本库。这将建立一个包含初始化提交对象集的打包作为项目的起始线。<br>
+	5.在你的主版本库中开展工作，包括自己的工作、收到的邮件补丁、“子系统负责人” 的公共库中导入的工作等等。<br>
+	6.将项目的进度推入公共库中，并给大家公布一下。<br>
+	7.尽管一段时间以后，"git-repack" 公共库。并回到第5步继续工作。
+
+	<li>项目的子系统负责人</li>
+	1.新建一个你自己的工作目录，通过 git-clone 克隆项目领导人的公共库。<br>
+	2.准备一个可以给大家访问的公共库，就像项目领导人所做的那样。<br>
+	3.复制项目领导人的公共库中的打包文件到你的公共库中。<br>
+	4.将你的主版本库推入你的公共版本库，并运行 git-repack，如果你的公共库是通过的公共库是通过pull来导入的数据的话，再执行一下git-prune。<br>
+	5.在你的主版本库中开展工作。这些工作包括自己的工作、收到的邮件补丁、“下一级子项目负责人”的公共库中导入的工作等等。<br>
+	6.将你的变更推入公共库中，并且请“项目领导人”和“下级子系统负责人”导入这些变更。<br>
+	7.每隔一段时间之后，git-repack 公共库。回到第 5 步继续工作。
+
+	<li>一般开发人员</li>
+	1.通过git-clone克隆“项目领导人”的公共库，作为自己的工作库。<br>
+	2.在你的个人版本库中的 master 分支中开展工作。<br>
+	3.每隔一段时间，向上游的版本库运行一下 git-fetch origin 。这样只会做 git-pull 一半的操作，即只克隆不合并。<br>
+	4.用 git-cherry origin 命令，看一下你有什么补丁被接纳了。并用 git-rebase origin 命令将你以往的变更迁移到最新的上游版本库的状态中。<br>
+	5.用git-format-patch origin生成email形式的补丁并发给上游的维护者。回到第二步接着工作。
+	</ul>
+
+	<h3>免费git项目注册</h3>
+	<p>网址：<a href="http://repo.or.cz">http://repo.or.cz</a><br>
+	注册用户：<a href="http://repo.or.cz/m/reguser.cgi">http://repo.or.cz/m/reguser.cgi</a><br>
+	注册项目：<a href="http://repo.or.cz/m/regproj.cgi">http://repo.or.cz/m/regproj.cgi</a><br>
+	注册用户需要提供自己的公钥，可由上面提到的ssh-keygen生成。</p>
+	<div class="code_outline">
+	<pre class="display_code">
+0、使用git-init-db在本地创建版本库；
+1、使用git-add添加要跟踪的文件；
+2、修改，并使用git-commit提交修改到本地版本库；
+3、使用git-push命令将本地版本库同步到服务器端；
+4、其他用户可使用git-clone来克隆项目，并在本地开展自己的工作。
+</pre></div>
+	<h3>总结</h3>
+
+	<h3>参考资料</h3>
+	<ul>
+		<li><a href="http://www.linuxsir.org/main/doc/git/gittutorcn.htm">Git 中文教程</a></li>
+		<li>Git man手册</li>
+	</ul>
+
+  </div>
+</div>
+
+<br clear="all">
+
+<script src="/js/footer.cn.js" language="javascript" type="text/javascript"></script>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-468239-3";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

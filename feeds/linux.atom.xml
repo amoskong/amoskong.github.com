@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title></title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/linux.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2013-12-23T10:52:36+08:00</updated><entry><title>Fedora 20 Skype @ x86_64</title><link href="http://localhost:8000/linux/fedora-20-skype-x86_64.html" rel="alternate"></link><updated>2013-12-23T10:52:36+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2013-12-23:linux/fedora-20-skype-x86_64.html</id><summary type="html">&lt;p&gt;&lt;a href="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png"&gt;&lt;img alt="Screenshot from 2013-12-23 18:49:37" src="http://amosk.info/blog/wp-content/uploads/2013/12/Screenshot-from-2013-12-23-184937.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;http://negativo17.org/repos/skype/fedora-20/x86_64/&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//negativo17.org/repos/skype/fedora-20/x86_64/&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;DIR&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; repodata/                             2013-12-19 06:10    -   
+&lt;span class="cp"&gt;[&lt;/span&gt;   &lt;span class="cp"&gt;]&lt;/span&gt; skype-4.2.0.11-8.fc20.i686.rpm        2013-12-19 06:10   12M  
+&lt;span class="cp"&gt;[&lt;/span&gt;   &lt;span class="cp"&gt;]&lt;/span&gt; skype-data-4.2.0.11-8.fc20.noarch.rpm 2013-12-19 06:10  2.1M
+
+
+
+
+# cat /etc/yum.repos.d/skype.repo
+
+&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;skype&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+name=skype repo
+baseurl=http://negativo17.org/repos/skype/fedora-20/x86_64/
+enabled=1
+
+# yum install skype
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>在Linux下使用QEMU虚拟机U盾认证网银</title><link href="http://localhost:8000/linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html" rel="alternate"></link><updated>2013-07-04T02:18:57+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2013-07-04:linux/e59ca8linuxe4b88be4bdbfe794a8qemue8999ae68b9fe69cbaue79bbee8aea4e8af81e7bd91e993b6.html</id><summary type="html">&lt;p&gt;这里以招商银行为例， 使用 lsusb 命令查看当前usb状态，然后将招商银行U盾插入主机USB插口。再通过lsusb查看新设备的的USB串号（这里查找到的是1483:c007）。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;# lsusb
+Bus 003 Device 007: ID 1483:c007
+......&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;启动QEMU虚拟机，使用（-usbdevice host:U盾串号）把主机上的U盾指定给虚拟机使用&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;# qemu --enable-kvm /images/winXP-32-virtio.qcow2 -m 2000 -vnc :10 -usbdevice tablet -net nic,model=rtl8139 -net tap -usbdevice host:1483:c007[![Screenshot from 2013-07-04 09:34:18](http://amosk.info/blog/wp-content/uploads/2013/07/Screenshot-from-2013-07-04-093418-300x255.png)](http://amosk.info/blog/wp-content/uploads/2013/07/Screenshot-from-2013-07-04-093418.png)&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>'oVirt project: Workshop – Beijing – March 21st'</title><link href="http://localhost:8000/linux/workshop-e28093-beijing-e28093-march-21st.html" rel="alternate"></link><updated>2012-02-06T01:20:55+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2012-02-06:linux/workshop-e28093-beijing-e28093-march-21st.html</id><summary type="html">&lt;p&gt;From: &lt;a href="http://www.ovirt.org/news-and-events/workshop/"&gt;http://www.ovirt.org/news-and-events/workshop/&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Workshop&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="n"&gt;Beijing&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="n"&gt;March&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="n"&gt;st&lt;/span&gt;
+
+&lt;span class="n"&gt;To&lt;/span&gt; &lt;span class="n"&gt;RSVP&lt;/span&gt; &lt;span class="n"&gt;please&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;rsvp&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;oVirt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;During&lt;/span&gt; &lt;span class="n"&gt;this&lt;/span&gt; &lt;span class="n"&gt;workshop&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt; &lt;span class="n"&gt;learn&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;technical&lt;/span&gt; &lt;span class="n"&gt;background&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;direction&lt;/span&gt;
+&lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;You&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt; &lt;span class="n"&gt;meet&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;developers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;opportunity&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt;
+&lt;span class="n"&gt;yes&lt;/span&gt; &lt;span class="n"&gt;our&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="n"&gt;release&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;hack&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="n"&gt;right&lt;/span&gt; &lt;span class="n"&gt;away&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;workshop&lt;/span&gt; &lt;span class="n"&gt;meeting&lt;/span&gt; &lt;span class="n"&gt;March&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="n"&gt;st&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;IBM&lt;/span&gt; &lt;span class="n"&gt;Campus&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;who&lt;/span&gt; &lt;span class="n"&gt;want&lt;/span&gt;
+&lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;involved&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;learn&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;comprehensive&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;virtualization&lt;/span&gt;
+&lt;span class="n"&gt;management&lt;/span&gt; &lt;span class="n"&gt;platform&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;sessions&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;cover&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;technical&lt;/span&gt; &lt;span class="n"&gt;projects&lt;/span&gt; &lt;span class="n"&gt;details&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;governance&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;getting&lt;/span&gt; &lt;span class="n"&gt;involved&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;usage&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;much&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;If&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;any&lt;/span&gt; &lt;span class="n"&gt;interest&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;Open&lt;/span&gt; &lt;span class="n"&gt;Virtualization&lt;/span&gt; &lt;span class="n"&gt;Management&lt;/span&gt; &lt;span class="n"&gt;platform&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;need&lt;/span&gt;
+&lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;there&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;Logistics&lt;/span&gt;
+
+&lt;span class="nl"&gt;When:&lt;/span&gt; &lt;span class="n"&gt;March&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="n"&gt;st&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2012&lt;/span&gt;
+&lt;span class="nl"&gt;Location:&lt;/span&gt; &lt;span class="n"&gt;IBM&lt;/span&gt; &lt;span class="n"&gt;Campus&lt;/span&gt; &lt;span class="err"&gt;–&lt;/span&gt; &lt;span class="n"&gt;Beijing&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="n"&gt;specific&lt;/span&gt; &lt;span class="n"&gt;room&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;provided&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;rsvp&lt;/span&gt;
+&lt;span class="n"&gt;list&lt;/span&gt;
+&lt;span class="nl"&gt;Social:&lt;/span&gt; &lt;span class="n"&gt;Evening&lt;/span&gt; &lt;span class="n"&gt;March&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="n"&gt;st&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2012&lt;/span&gt; &lt;span class="err"&gt;—&lt;/span&gt; &lt;span class="n"&gt;Location&lt;/span&gt; &lt;span class="n"&gt;To&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;announced&lt;/span&gt;
+&lt;span class="nl"&gt;Coordinators:&lt;/span&gt;
+
+  &lt;span class="err"&gt;•&lt;/span&gt; &lt;span class="n"&gt;Karsten&lt;/span&gt; &lt;span class="n"&gt;Wade&lt;/span&gt; &lt;span class="n"&gt;kwade&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;redhat&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+
+&lt;span class="n"&gt;Workshop&lt;/span&gt; &lt;span class="n"&gt;agenda&lt;/span&gt;
+
+&lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;final&lt;/span&gt; &lt;span class="n"&gt;agenda&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;will&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;posted&lt;/span&gt; &lt;span class="n"&gt;here&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>网络性能测试</title><link href="http://localhost:8000/linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html" rel="alternate"></link><updated>2011-12-29T00:40:57+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-12-29:linux/e7bd91e7bb9ce680a7e883bde6b58be8af95.html</id><summary type="html">&lt;p&gt;我主要做的是Virtual IO, PCI, Network 这几块，提高虚拟机的IO性能。网络性能主要使用netperf，iperf，Ntttcp(win)，需要统计吞吐率，CPU利用率，收发包数目，收发字节数，注入中断，IO_exit 等。需要多次测试，调整测试时间，计算平均值，并求标准方差，看看同样环境结果是否稳定，从而确定一些经验值（合理的测试次数，单个测试执行时间等）。&lt;/p&gt;
+&lt;p&gt;然后对打Patch前后版本的平均值进行比较，评估是否有性能回归bug。顺便给大家推荐一本书[1]，大学学的概率论、高数基本都还给老师了，所以还得重新看资料复习。&lt;/p&gt;
+&lt;p&gt;发程序到社区的时候碰到一个版权问题，NTttcp，微软禁止其他人传播，所以只能提示用户自己去官网下载。我的程序里使用AutoIT脚本自动签订了最终用户许可协议（&lt;em&gt;EULA&lt;/em&gt; End User License Agreement），然后在文档、程序、commitlog 里提示如果不同意此协议不要使用此脚本。不清楚是否合法，所以发邮件给内部法律部门咨询了。所以离开自由软件世界是很麻烦的，哈哈。&lt;/p&gt;
+&lt;p&gt;【1】The Art of Computer Systems Performance Analysis, Raj Jain, 1991.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;average&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_STREAM&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1308.58&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;25.68&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;610.36&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1144659&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2385825&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;75548090&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;3428969637&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1055042&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;847930&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1073171&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.35&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.22&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;135.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;135.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;2303.88&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;75.86&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;30.37&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;751786&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3710773&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;49625523&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;6004979651&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;761053&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;237602&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;807396&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.17&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;4.59&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;4.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;2.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1597.22&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;51.31&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;31.12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1344860&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2840991&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;88761368&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;4181982870&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;933259&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;691258&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;951026&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.94&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.99&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;3.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.7&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;4885.64&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;69.81&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;68.28&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1546820&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3311501&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;102158968&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;12433545874&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1036179&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;649578&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1063091&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;8.02&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.97&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;49.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;37.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;13.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;111.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;101.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;110.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;46.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;78.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;97.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;136.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;95.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;103.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;10.5&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_RR&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14433.24&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.19&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;650.52&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288679&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288765&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;92951906&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;92969020&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;288733&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288781&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295057&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14473.61&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.01&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;657.84&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289486&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289595&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93211760&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93224643&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;289551&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289594&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295647&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14399.08&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.79&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;631.82&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;287996&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288063&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;166455616&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;166464572&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;288036&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;293729&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14280.03&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.11&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;646.46&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285614&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285684&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165079121&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165087633&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;285652&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285721&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;291826&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;4.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+
+&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;average&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_STREAM&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1266.19&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;50.80&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;24.93&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1119642&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2307593&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;73896989&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;3317818482&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1012795&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;774796&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1030026&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.44&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.24&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;3.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;4.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;7.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;4.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;2305.26&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;75.81&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;30.41&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;754533&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3678855&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;49804148&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;6006610984&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;788165&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;254245&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;835001&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.98&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;4.41&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;7.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;7.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;11.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;6.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;14.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;5.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;6.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;5.1&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1605.72&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;51.13&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;31.40&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1337269&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2851899&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;88260371&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;4202588460&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;925052&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;699349&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;942828&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.91&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.02&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;1.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;4.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.7&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;6122.82&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;86.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;70.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;381147&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1442374&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;25249126&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;15405306185&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;349795&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;23027&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;372068&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;16.57&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.87&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;5.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;11.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;5.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;2.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;8.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;5.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;4.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;8.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;6.9&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_RR&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14515.94&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;653.98&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290333&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290423&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93484515&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93499043&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;290387&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290436&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;296923&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14500.78&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;21.99&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;659.32&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290030&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290113&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93386788&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93396614&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;290076&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290140&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295853&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;15.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14257.76&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;23.48&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;607.39&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285169&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285244&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;164821878&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;164832698&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;285219&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285269&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;291469&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;15.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+     &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14338.74&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;632.92&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286789&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286853&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165757982&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165765159&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;286828&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286893&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;292733&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;SD&lt;/span&gt;  &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;         &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;15.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;0.0&lt;/span&gt;
+
+&lt;span class="n"&gt;Thu&lt;/span&gt; &lt;span class="n"&gt;Dec&lt;/span&gt; &lt;span class="mi"&gt;29&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;36&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;53&lt;/span&gt; &lt;span class="mi"&gt;2011&lt;/span&gt;
+&lt;span class="o"&gt;========================================================================================================================================================================&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_STREAM&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1308.58&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;25.68&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;610.36&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1144659&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2385825&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;75548090&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;3428969637&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1055042&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;847930&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1073171&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.35&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.22&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1266.19&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;50.80&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;24.93&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1119642&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2307593&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;73896989&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;3317818482&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1012795&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;774796&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1030026&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.44&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.24&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;97.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;95.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;5.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;8.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;6.7&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;2303.88&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;75.86&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;30.37&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;751786&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3710773&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;49625523&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;6004979651&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;761053&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;237602&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;807396&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;3.17&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;4.59&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;2305.26&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;75.81&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;30.41&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;754533&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3678855&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;49804148&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;6006610984&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;788165&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;254245&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;835001&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;2.98&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;4.41&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;3.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;7.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;3.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;6.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.9&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1597.22&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;51.31&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;31.12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1344860&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2840991&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;88761368&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;4181982870&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;933259&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;691258&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;951026&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.94&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.99&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;1605.72&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;51.13&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;31.40&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1337269&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;2851899&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;88260371&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;4202588460&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;925052&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;699349&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;942828&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.91&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.02&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;4885.64&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;69.81&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;68.28&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1546820&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;3311501&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;102158968&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;12433545874&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;1036179&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;649578&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1063091&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;8.02&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;2.97&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;6122.82&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;86.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mf"&gt;70.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;381147&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;1442374&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;25249126&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;15405306185&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;349795&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;23027&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;372068&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;16.57&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;3.87&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;25.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;24.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;3.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;75.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;56.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;75.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;23.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;70.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;66.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;96.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;65.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;106.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;30.3&lt;/span&gt;
+   &lt;span class="n"&gt;TCP_RR&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;sessions&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;throughput&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="n"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pkts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;byts&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trans&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;intr&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;io_exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq_inj&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;tpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;rpkt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;irq&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14433.24&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.19&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;650.52&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288679&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288765&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;92951906&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;92969020&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;288733&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288781&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295057&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14515.94&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.20&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;653.98&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290333&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290423&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93484515&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93499043&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;290387&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290436&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;296923&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.6&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14473.61&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.01&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;657.84&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289486&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289595&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93211760&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93224643&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;289551&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;289594&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295647&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;256&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14500.78&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;21.99&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;659.32&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290030&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290113&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93386788&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;93396614&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;290076&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;290140&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;295853&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;20.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14399.08&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.79&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;631.82&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;287996&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288063&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;166455616&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;166464572&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;288036&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;288100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;293729&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14257.76&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;23.48&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;607.39&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285169&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285244&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;164821878&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;164832698&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;285219&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285269&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;291469&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.9&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14280.03&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.11&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;646.46&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285614&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285684&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165079121&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165087633&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;285652&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;285721&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;291826&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mf"&gt;14338.74&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mf"&gt;22.66&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mf"&gt;632.92&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286789&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286853&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165757982&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="mi"&gt;165765159&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="mi"&gt;286828&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;286893&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="mi"&gt;292733&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="mf"&gt;0.98&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;       &lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;  &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;2.5&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.1&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;        &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;     &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;   &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;20.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.4&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.3&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;       &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;      &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>CN Opensource week &amp; FAD_2011</title><link href="http://localhost:8000/linux/cn-opensource-week-fad_2011.html" rel="alternate"></link><updated>2011-10-18T13:08:18+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-10-18:linux/cn-opensource-week-fad_2011.html</id><summary type="html">&lt;p&gt;&lt;img alt="osw-fad" src="/blog/wp-content/uploads/osw-fad.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;上周六参加了CN Opensource week &amp;amp; FAD [1]，从早上9点签到，一直玩到晚上8点多。印象当中好久没有参加社区活动了，这次是和公司的朋友们一起去参加的。&lt;/p&gt;
+&lt;p&gt;我早早过去签到，碰见了peter chen，他最近好像在搞开源硬件，还认识了中国区的fedora大使 gbraad，他很活跃。上午主要是ow2公司讲解为社区、技术人员、公司提供平台，进行相关协作；还有红帽社区关系manager - Harish Pillay讲红帽与fedora社区的关系运作模式；再下来是David li 讲的开源硬件和创科空间[2]；IBM 讲解自己的社区贡献和developerworks知识分享平台。 linuxtoys.org的编辑 tommy 同学带领大家怀念了一下 DennisRitchie。&lt;/p&gt;
+&lt;p&gt;中午提供比格比萨的自助餐卷，人很多，但吃的也不错。下午我主要是在听FAD的topic，比较有意思的有synfig studio，它是一个开源的二维动画制作软件，flash、ps都不精的我很像体验一下；csslayer同学又分享了kde开发的一些经验，并极力宣传他的KDE开发资讯网站[3]；下来是清华alink同学讲的texlive，主要讲安装步骤，其实安装步骤发给大家就可以，没必要那么细的讲；到最后大家就如何推动FOSS社区、技术发展，发表意见，比如拒绝接受DOC文档，和学校、政府沟通推广标准文件格式；反对盗版，推广FOSS；等等。&lt;/p&gt;
+&lt;p&gt;最后我跳起来，从gbraad手里抢到了firefox 公仔 ～ 欧也！&lt;/p&gt;
+&lt;p&gt;[1]https://fedoraproject.org/wiki/FAD_China_2011
+[2]http://hackerspaces.org
+[3]http://ikde.org
+&lt;!-- more --&gt;
+&lt;img alt="firefox-toys.jpg" src="/blog/wp-content/uploads/firefox-toys.jpg" /&gt;&lt;/p&gt;</summary></entry><entry><title>'自由软件日上的问答 '</title><link href="http://localhost:8000/linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html" rel="alternate"></link><updated>2011-09-24T09:48:25+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-09-24:linux/e887aae794b1e8bdafe4bbb6e697a5e4b88ae79a84e997aee7ad94.html</id><summary type="html">&lt;p&gt;自由软件日上的问答
+From: &lt;a href="http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html"&gt;http://home.lupaworld.com/home-space-uid-26540-do-blog-id-241790.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;陈莉君 2011年09月21日 星期三 23:30 | 54次浏览 | 0条评论&lt;/p&gt;
+&lt;p&gt;20日，西电举办国际自由软件日活动，邀请我去参加。比起西邮17日的隆重举办，西电的活动看起来平淡和朴素。他们本来让我从宏观上讲讲自由软件和开源软件，对于空洞的讲这些概念，自己都有点烦了，总觉得自己自以为是头头是道所讲，并非大家感兴趣的，于是准备以问答形式来解答大家提问，不管什么问题，我准备充分调动自己的内存资源，以百度搜索的速度进行检索，一旦不会，就让他们去问百度知道。&lt;/p&gt;
+&lt;p&gt;回想一下他们的问题，觉得自己回答不尽全面，但基本上能自圆其说，因此分享出来：&lt;/p&gt;
+&lt;p&gt;问：自由软件和开源软件有什么区别？&lt;/p&gt;
+&lt;p&gt;答：Richard Stallman对自由软件有一个明确的定义，但我总是记不全，因此，不打算较真Stallman的定义，而以自己的理解解释。比如，Linux和android，哪个是开源软件？二者都是，哪个自由呢，Linux。Linux身心自由，不属于任何公司。android属于google，开源但不自由。google收购moto，为什么对业界产生地震性的影响，大家去思考了。&lt;/p&gt;
+&lt;p&gt;问：windows和Linux哪个更安全？&lt;/p&gt;
+&lt;p&gt;答：不要相信window或者Linux哪一个更安全这一说法，这是商家的一种市场宣传。安全从来是一个相对概念，只是当真的出了安全问题的时候，是否能追溯问题的根源。如果是黑匣子，你只能眼睁睁的看着安全问题一再发生。但是如果是源代码开放，你可以追踪到最底层的代码，然后修复漏洞。&lt;/p&gt;
+&lt;p&gt;问：windows和Linux哪个更有前途？&lt;/p&gt;
+&lt;p&gt;答：在桌面，Linux使出浑身解数也无法取得与window一样的市场占有率，这其中有用户习惯问题，也有应用软件数量多少问题。但是，目前的时代已经是一个后PC时代，各大公司的注意力已经不在桌面，而在云端和终端。未来在这两大主战场，Linux自由自身以不可预知大速度向前发展，我们无法预测。&lt;/p&gt;
+&lt;p&gt;问：开发自由软件的价值怎样体现？&lt;/p&gt;
+&lt;p&gt;答：从软件的价值和开发者的价值两方面回答。Linux的价值几何？这是一个不可测的数。从开发者的角度，举一个例子，章文嵩，不知道现场有多少同学知道（应答者不多），10多年前开发的一款自由软件LVS，已经进入了Linux的主内核，目前的价值达3亿美元左右，他个人从中得到的也就是远方的陌生人递来的一盒饼干，以及社会给予的认可。但他本人因为对技术的孜孜追求，而被各大公司争抢。09年被淘宝挖去，主攻服务器省电。他说，目前已经给淘宝服务器省电3/4，一年节省1亿多元。更重要的是，他倡导淘宝开源文化和很多软件的开源，为整个产业链提供了一条绿色通道。&lt;/p&gt;</summary></entry><entry><title>'[ANNOUNCE] Native Linux KVM tool'</title><link href="http://localhost:8000/linux/announce-native-linux-kvm-tool.html" rel="alternate"></link><updated>2011-04-10T14:08:27+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-04-10:linux/announce-native-linux-kvm-tool.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Thu&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt; &lt;span class="n"&gt;Mar&lt;/span&gt; &lt;span class="mi"&gt;2011&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;56&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;0300&lt;/span&gt;
+&lt;span class="n"&gt;From&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Pekka&lt;/span&gt; &lt;span class="n"&gt;Enberg&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;penberg&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;To&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;vger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;
+&lt;span class="n"&gt;Cc&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;aarcange&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;redhat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;avi&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;redhat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mtosatti&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;redhat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;kvm&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;vger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;joro&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="n"&gt;bytes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;penberg&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;cs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;helsinki&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;fi&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;asias&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;hejun&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;gorcunov&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mingo&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;elte&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;hu&lt;/span&gt;
+&lt;span class="n"&gt;Subject&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ANNOUNCE&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="n"&gt;Native&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt;
+
+&lt;span class="n"&gt;Hi&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;
+
+&lt;span class="n"&gt;We&lt;/span&gt;&lt;span class="err"&gt;’&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt; &lt;span class="n"&gt;proud&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;announce&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="kd"&gt;native&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;goal&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;provide&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;scratch&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;lightweight&lt;/span&gt;
+&lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt; &lt;span class="n"&gt;implementation&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt; &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;just&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+&lt;span class="n"&gt;hobby&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;won&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t be big and professional like QEMU) with no BIOS&lt;/span&gt;
+&lt;span class="s1"&gt;dependencies and with only the minimal amount of legacy device&lt;/span&gt;
+&lt;span class="s1"&gt;emulation.&lt;/span&gt;
+
+&lt;span class="s1"&gt;Note that this is a development prototype for the time being: there&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt;
+&lt;span class="n"&gt;networking&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;graphics&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;amongst&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;missing&lt;/span&gt;
+&lt;span class="n"&gt;essentials&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;It&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s great as a learning tool if you want to get your feet wet in&lt;/span&gt;
+&lt;span class="s1"&gt;virtualization land: it&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;KLOC&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;C&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt;
+&lt;span class="n"&gt;boot&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;Right&lt;/span&gt; &lt;span class="n"&gt;now&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;provide&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="n"&gt;via&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;serial&lt;/span&gt;
+&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;over&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;e&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;boot&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt;
+&lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;terminal&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;over&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt;
+&lt;span class="n"&gt;much&lt;/span&gt; &lt;span class="n"&gt;guest&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="n"&gt;side&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt; &lt;span class="n"&gt;work&lt;/span&gt; &lt;span class="n"&gt;needed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;To&lt;/span&gt; &lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="n"&gt;out&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;repository&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/penberg/&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;git&lt;/span&gt;
+
+&lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;alternatively&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;kernel&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;tree&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;kvm&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tool&lt;/span&gt;
+  &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;pull&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/penberg/&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;git&lt;/span&gt;
+
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Compile&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;tools&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt;
+
+&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Download&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;raw&lt;/span&gt; &lt;span class="n"&gt;userspace&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;wiki&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;qemu&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="sr"&gt;/download/&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;bz2&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;bunzip2&lt;/span&gt;
+&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;img&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;bz2&lt;/span&gt;
+
+&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Build&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;kernel&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;CONFIG_VIRTIO_BLK&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt;
+&lt;span class="n"&gt;CONFIG_SERIAL_8250_CONSOLE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Note&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;also&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;sure&lt;/span&gt;
+&lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;have&lt;/span&gt; &lt;span class="n"&gt;CONFIG_EXT2_FS&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;CONFIG_EXT4_FS&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;above&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;And&lt;/span&gt; &lt;span class="n"&gt;finally&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;launch&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;hypervisor&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+  &lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;img&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;=../../&lt;/span&gt;&lt;span class="n"&gt;arch&lt;/span&gt;&lt;span class="sr"&gt;/x86/boot/&lt;/span&gt;&lt;span class="n"&gt;bzImage&lt;/span&gt;
+
+&lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;been&lt;/span&gt; &lt;span class="n"&gt;written&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;Pekka&lt;/span&gt; &lt;span class="n"&gt;Enberg&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cyrill&lt;/span&gt; &lt;span class="n"&gt;Gorcunov&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Asias&lt;/span&gt;
+&lt;span class="n"&gt;He&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Special&lt;/span&gt; &lt;span class="n"&gt;thanks&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;Avi&lt;/span&gt; &lt;span class="n"&gt;Kivity&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;his&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;KVM&lt;/span&gt; &lt;span class="n"&gt;internals&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Ingo&lt;/span&gt;
+&lt;span class="n"&gt;Molnar&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;around&lt;/span&gt; &lt;span class="n"&gt;support&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;encouragement&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+
+&lt;span class="n"&gt;See&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="n"&gt;thread&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;original&lt;/span&gt; &lt;span class="n"&gt;discussion&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;motivation&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;
+&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;gmane&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="sr"&gt;/gmane.linux.kernel/962051/&lt;/span&gt;&lt;span class="n"&gt;focus&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;962620&lt;/span&gt;
+
+            &lt;span class="n"&gt;Pekka&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>正则表达式【from javaeye.com/iteye.com】</title><link href="http://localhost:8000/linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html" rel="alternate"></link><updated>2011-04-03T23:37:18+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-04-03:linux/e6ada3e58899e8a1a8e8bebee5bc8fe38090from-javaeye-comiteye-come38091.html</id><summary type="html">&lt;p&gt;From : &lt;a href="http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0"&gt;http://www.iteye.com/wiki/Regular-Expression/910-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;正则表达式是个好东西,就是有些复杂.在验证输入,字符串查找,处理上确实很方便.&lt;/p&gt;
+&lt;p&gt;30分钟教程&lt;a href="http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm"&gt;http://www.unibetter.com/deerchao/zhengzhe-biaodashi-jiaocheng-se.htm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;D可使用的表达式:&lt;a href="http://www.digitalmars.com/ctg/regular.html"&gt;http://www.digitalmars.com/ctg/regular.html&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;常用的元字符&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="err"&gt;匹配除换行符以外的任意字符&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="err"&gt;匹配字母或数字或下划线或汉字&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="err"&gt;匹配任意的空白符&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="err"&gt;匹配数字&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="err"&gt;匹配单词的开始或结束&lt;/span&gt;
+&lt;span class="o"&gt;^&lt;/span&gt; &lt;span class="err"&gt;匹配字符串的开始&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="err"&gt;匹配字符串的结&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;!-- more --&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;常用的限定符&lt;/span&gt;
+&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="err"&gt;重复零次或更多次&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="err"&gt;重复一次或更多次&lt;/span&gt;
+&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="err"&gt;重复零次或一次&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="err"&gt;重复&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="err"&gt;次&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,}&lt;/span&gt; &lt;span class="err"&gt;重复&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="err"&gt;次或更多次&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nx"&gt;m&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="err"&gt;重复&lt;/span&gt;&lt;span class="nb"&gt;n&lt;/span&gt;&lt;span class="err"&gt;到&lt;/span&gt;&lt;span class="nx"&gt;m&lt;/span&gt;&lt;span class="err"&gt;次&lt;/span&gt;
+
+&lt;span class="err"&gt;常用的反义代码&lt;/span&gt;
+&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;W&lt;/span&gt; &lt;span class="err"&gt;匹配任意不是字母，数字，下划线，汉字的字符&lt;/span&gt;
+&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nb"&gt;S&lt;/span&gt; &lt;span class="err"&gt;匹配任意不是空白符的字符&lt;/span&gt;
+&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nb"&gt;D&lt;/span&gt; &lt;span class="err"&gt;匹配任意非数字的字符&lt;/span&gt;
+&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;B&lt;/span&gt; &lt;span class="err"&gt;匹配不是单词开头或结束的位置&lt;/span&gt;
+&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="p"&gt;^&lt;/span&gt;&lt;span class="nx"&gt;x&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; 匹配除了x以外的任意字符
+&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;^&lt;/span&gt;&lt;span class="nx"&gt;aeiou&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; 匹配除了aeiou这几个字母以外的任意字符
+
+常用的正则表达式:
+
+匹配中文字符的正则表达式： &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;u4e00&lt;/span&gt;&lt;span class="o"&gt;-\&lt;/span&gt;&lt;span class="nx"&gt;u9fa5&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;, &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="err"&gt;一&lt;/span&gt;&lt;span class="o"&gt;-\&lt;/span&gt;&lt;span class="err"&gt;龥&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; 可以.
+评注：匹配中文还真是个头疼的事，有了这个表达式就好办了
+
+匹配双字节字符(包括汉字在内)：&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;^&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nx"&gt;x00&lt;/span&gt;&lt;span class="o"&gt;-\&lt;/span&gt;&lt;span class="nx"&gt;xff&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;
+评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII字符计1）
+
+匹配空白行的正则表达式：\n\s*\r
+评注：可以用来删除空白行
+
+匹配HTML标记的正则表达式：&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;(\S*?)&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;^&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;*&amp;gt;.*?&lt;span class="err"&gt;&amp;lt;&lt;/span&gt;/\1&amp;gt;|&lt;span class="nt"&gt;&amp;lt;.&lt;/span&gt;&lt;span class="err"&gt;*?&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力
+
+匹配首尾空白字符的正则表达式：^\s*|\s*$
+评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式
+
+匹配Email地址的正则表达式：\w+(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-+&lt;/span&gt;&lt;span class="nx"&gt;.&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\w+)*@\w+(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;.&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\w+)*\.\w+(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;.&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\w+)*
+评注：表单验证时很实用
+
+匹配网址URL的正则表达式：&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="na"&gt;-zA-z&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;+://&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;^&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="nb"&gt;s&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;*
+评注：网上流传的版本功能很有限，上面这个基本可以满足需求
+
+匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="na"&gt;-zA-Z&lt;/span&gt;&lt;span class="cp"&gt;][&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="na"&gt;-zA-Z0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;{4,15}$
+评注：表单验证时很实用
+
+匹配国内电话号码：\d{3}-\d{8}|\d{4}-\d{7}
+评注：匹配形式如 0511-4405222 或 021-87888822
+
+匹配腾讯QQ号：&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;{4,}
+评注：腾讯QQ号从10000开始
+
+匹配中国邮政编码：&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d{5}(?!\d)
+评注：中国邮政编码为6位数字
+
+匹配身份证：\d{15}|\d{18}
+评注：中国的身份证为15位或18位
+
+匹配ip地址：\d+\.\d+\.\d+\.\d+
+评注：提取ip地址时有用
+
+匹配特定数字：
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*$　 　 //匹配正整数
+^-&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*$ 　 //匹配负整数
+^-?&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*$　　 //匹配整数
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*|0$　 //匹配非负整数（正整数 + 0）
+^-&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*|0$　　 //匹配非正整数（负整数 + 0）
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*\.\d*|0\.\d*&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*$　　 //匹配正浮点数
+^-(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*\.\d*|0\.\d*&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*)$　 //匹配负浮点数
+^-?(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*\.\d*|0\.\d*&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*|0?\.0+|0)$　 //匹配浮点数
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*\.\d*|0\.\d*&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*|0?\.0+|0$　　 //匹配非负浮点数（正浮点数 + 0）
+^(-(&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*\.\d*|0\.\d*&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;\d*))|0?\.0+|0$　　//匹配非正浮点数（负浮点数 + 0）
+评注：处理大量数据时有用，具体应用时注意修正
+
+匹配特定字符串：
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;A&lt;/span&gt;&lt;span class="na"&gt;-Za-z&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;+$　　//匹配由26个英文字母组成的字符串
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;A&lt;/span&gt;&lt;span class="na"&gt;-Z&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;+$　　//匹配由26个英文字母的大写组成的字符串
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="na"&gt;-z&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;+$　　//匹配由26个英文字母的小写组成的字符串
+^&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;A&lt;/span&gt;&lt;span class="na"&gt;-Za-z0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;+$　　//匹配由数字和26个英文字母组成的字符串
+^\w+$　　//匹配由数字、26个英文字母或者下划线组成的字符串
+评注：最基本也是最常用的一些表达式
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>apt , yum 相似功能命令列表</title><link href="http://localhost:8000/linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html" rel="alternate"></link><updated>2011-03-09T05:24:19+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-03-09:linux/apt-yum-e79bb8e4bcbce58a9fe883bde591bde4bba4e58897e8a1a8.html</id><summary type="html">&lt;p&gt;Below is a table of equivalent commands for package management on both Ubuntu/Debian and Red Hat/Fedora systems.&lt;/p&gt;
+&lt;h2 id="task"&gt;Task&lt;/h2&gt;
+&lt;h2 id="red-hatfedora"&gt;Red Hat/Fedora&lt;/h2&gt;
+&lt;h2 id="ubuntu"&gt;Ubuntu&lt;/h2&gt;
+&lt;h3 id="adding-removing-and-upgrading-packages"&gt;Adding, Removing and Upgrading Packages&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Refresh&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;available&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+&lt;span class="n"&gt;Yum&lt;/span&gt; &lt;span class="n"&gt;refreshes&lt;/span&gt; &lt;span class="n"&gt;each&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;used&lt;/span&gt;
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+
+&lt;span class="n"&gt;Install&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;repository&lt;/span&gt;
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+&lt;span class="n"&gt;Install&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;Remove&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;remove&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+
+&lt;span class="cp"&gt;### Check for package upgrades&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;upgrade&lt;/span&gt;
+
+
+&lt;span class="n"&gt;Upgrade&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Uvh&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;upgrade&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Upgrade&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;entire&lt;/span&gt; &lt;span class="n"&gt;system&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;upgrade&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="cp"&gt;## Package Information&lt;/span&gt;
+
+
+
+
+&lt;span class="n"&gt;Get&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;available&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Show&lt;/span&gt; &lt;span class="n"&gt;available&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;available&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;dumpavail&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt;
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qa&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Get&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Get&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qi&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ql&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;listfiles&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;documentation&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qd&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qc&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Show&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;depends&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qR&lt;/span&gt; &lt;span class="n"&gt;_package_name_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;depends&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Show&lt;/span&gt; &lt;span class="n"&gt;other&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;depend&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+&lt;span class="n"&gt;given&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reverse&lt;/span&gt; &lt;span class="n"&gt;dependency&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;whatrequires&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;rdepends&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="cp"&gt;## Package File Information&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Get&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qpi&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qpl&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;contents&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;documentation&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qpd&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;List&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qpc&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Extract&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm2cpio&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm_&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;cpio&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;vid&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;extract&lt;/span&gt; &lt;span class="n"&gt;_package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb_&lt;/span&gt; &lt;span class="n"&gt;dir&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extract&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Find&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;qf&lt;/span&gt; &lt;span class="n"&gt;_filename_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;search&lt;/span&gt; &lt;span class="n"&gt;_filename_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Find&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;that&lt;/span&gt; &lt;span class="n"&gt;provides&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;particular&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;provides&lt;/span&gt; &lt;span class="n"&gt;_filename_&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;search&lt;/span&gt; &lt;span class="n"&gt;_filename_&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="cp"&gt;## Misc. Packaging System Tools&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Show&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="n"&gt;about&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;package&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Verify&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+
+&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Va&lt;/span&gt;
+
+
+&lt;span class="n"&gt;debsums&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Remove&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Remove&lt;/span&gt; &lt;span class="n"&gt;only&lt;/span&gt; &lt;span class="n"&gt;obsolete&lt;/span&gt; &lt;span class="n"&gt;packages&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;
+
+
+&lt;span class="o"&gt;-&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;autoclean&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Remove&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;forcing&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;download&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;same&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;
+
+
+&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;purge&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="cp"&gt;## General Packaging System Informatio&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Package&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;extension&lt;/span&gt;
+
+
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+
+
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deb&lt;/span&gt;
+
+
+
+
+
+
+&lt;span class="n"&gt;Repository&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;
+
+
+&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yum&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;
+
+
+&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;sources&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>10 个最酷的 Linux 单行命令</title><link href="http://localhost:8000/linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html" rel="alternate"></link><updated>2010-11-04T14:19:50+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2010-11-04:linux/10-e4b8aae69c80e985b7e79a84-linux-e58d95e8a18ce591bde4bba4.html</id><summary type="html">&lt;p&gt;下面是来自   &lt;a href="http://commandlinefu.com/"&gt; Commandlinefu  &lt;/a&gt; 网站由用户投票决出的 10 个最酷的 Linux 单行命令，希望对你有用。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;sudo !!&lt;/code&gt;以 root 帐户执行上一条命令。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;python -m SimpleHTTPServer&lt;/code&gt;利用 Python 搭建一个简单的 Web 服务器，可通过 http://$HOSTNAME:8000 访问。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;:w !sudo tee %&lt;/code&gt;在 Vim 中无需权限保存编辑的文件。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;cd -&lt;/code&gt;更改到上一次访问的目录。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;^foo^bar&lt;/code&gt;将上一条命令中的 foo 替换为 bar，并执行。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;cp filename{,.bak}&lt;/code&gt;快速备份或复制文件。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;mtr google.com&lt;/code&gt;traceroute + ping。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;!whatever:p&lt;/code&gt;搜索命令历史，但不执行。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;$ssh-copy-id user@host&lt;/code&gt;将 ssh keys 复制到 user@host 以启用无密码 SSH 登录。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;ffmpeg -f x11grab -s wxga -r 25 -i :0.0 -sameq /tmp/out.mpg&lt;/code&gt;把 Linux 桌面录制为视频。&lt;/p&gt;
+&lt;p&gt;这里有更多有趣的命令： commandlinefu.com&lt;/p&gt;</summary></entry><entry><title>How to use kexec</title><link href="http://localhost:8000/linux/how-to-use-kexec.html" rel="alternate"></link><updated>2010-06-15T01:14:15+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2010-06-15:linux/how-to-use-kexec.html</id><summary type="html">&lt;p&gt;Tue Jun 15 09:07:36 2010&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;check if current kernel support kexec&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="grep-kexec-boogconfig-2634-rc6"&gt;grep KEXEC /boog/config-2.6.34-rc6&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;install kexec tools
+1) apt-get / yum install kexec-tools
+2) src: http://www.kernel.org/pub/linux/kernel/people/horms/kexec-tools/kexec-tools-2.0.1.tar.gz&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;get command line of new kernel&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="cat-bootgrubmenulst"&gt;cat /boot/grub/menu.lst&lt;/h1&gt;
+&lt;p&gt;title linux-2.6.34-rc7
+root (hd0,5)
+kernel /boot/vmlinuz-2.6.34-rc7 root=/dev/sda6
+initrd /boot/initrd.img-2.6.34-rc7
+boot&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;setup parameters&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="kexec-l-bootvmlinuz-2634-rc7-appendrootdevsda6-initrdbootinitrdimg-2634-rc7"&gt;kexec -l /boot/vmlinuz-2.6.34-rc7 --append="root=/dev/sda6" --initrd=/boot/initrd.img-2.6.34-rc7&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;switch to new kernel&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="kexec-e"&gt;kexec -e&lt;/h1&gt;
+&lt;p&gt;System will hot-reboot&lt;/p&gt;</summary></entry><entry><title>成功编译网卡驱动</title><link href="http://localhost:8000/linux/e68890e58a9fe7bc96e8af91e7bd91e58da1e9a9b1e58aa8.html" rel="alternate"></link><updated>2009-04-07T01:43:49+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-07:linux/e68890e58a9fe7bc96e8af91e7bd91e58da1e9a9b1e58aa8.html</id><summary type="html">&lt;p&gt;我的毕设终于有眉目了 :)
+我的网卡驱动文件是： driver/net/forcedeth.c
+最近在读代码过程中，做了一下代码汉字注释，还有一些笔记。就是编译总出现格式不可用。今天在helight的帮助下，终于把经过自己稍微修改的网卡驱动，编译、安装好，现在使用的就是“自己的网卡驱动了”。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="mf"&gt;1.&lt;/span&gt; &lt;span class="n"&gt;Install&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;kernel&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.6.27&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;generic&lt;/span&gt;
+
+&lt;span class="mf"&gt;2.&lt;/span&gt; &lt;span class="n"&gt;Get&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;forcedeth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;modify&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt;
+&lt;span class="n"&gt;kongove&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ubuntu&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;kernel&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;force&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ls&lt;/span&gt;
+&lt;span class="n"&gt;forcedeth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;  &lt;span class="n"&gt;Makefile&lt;/span&gt;
+
+&lt;span class="mf"&gt;3.&lt;/span&gt; &lt;span class="n"&gt;Write&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;Makefile&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;Makefile&lt;/span&gt;
+&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;forcedeth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;
+
+&lt;span class="n"&gt;KERNELDIR&lt;/span&gt;&lt;span class="o"&gt;=/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;modules&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="n"&gt;uname&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;build&lt;/span&gt;
+&lt;span class="cp"&gt;#KERNELDIR := /usr/src/linux-headers-2.6.22-14&lt;/span&gt;
+&lt;span class="nl"&gt;modules:&lt;/span&gt;
+        &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MAKE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KERNELDIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PWD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;modules&lt;/span&gt;
+&lt;span class="nl"&gt;clean:&lt;/span&gt;
+        &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rf&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="o"&gt;*~&lt;/span&gt; &lt;span class="n"&gt;core&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;depend&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ko&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mod&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tmp_versions&lt;/span&gt;
+
+&lt;span class="mf"&gt;4.&lt;/span&gt; &lt;span class="n"&gt;Compile&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt;
+
+&lt;span class="mf"&gt;5.&lt;/span&gt; &lt;span class="n"&gt;Remove&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rmmod&lt;/span&gt; &lt;span class="n"&gt;forcedeth&lt;/span&gt;
+
+&lt;span class="mf"&gt;6.&lt;/span&gt; &lt;span class="n"&gt;Install&lt;/span&gt; &lt;span class="n"&gt;your&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;insmod&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;forcedeth&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ko&lt;/span&gt;
+
+&lt;span class="mf"&gt;7.&lt;/span&gt; &lt;span class="n"&gt;Check&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ifconfig&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;baidu&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>ICC编译Linux内核</title><link href="http://localhost:8000/linux/icce7bc96e8af91linuxe58685e6a0b8.html" rel="alternate"></link><updated>2009-04-06T09:25:35+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-06:linux/icce7bc96e8af91linuxe58685e6a0b8.html</id><summary type="html">&lt;p&gt;听说使用ICC编译Linux内核，性能可以提升40%，我的第一感觉是，应该有提升，也没这么夸张吧，应该是有人估计夸大，玩数字游戏。  从4月1日起，开始尝试编译。从Intel官网下载ICC 10.0.022，在虚拟机的Fedora10上安装(安装需要licence)。然后从LinuxDNA.com下载2.6.22内核代码，下载最新的封装脚本(&lt;a href="http://linuxdna.com/wrapper.html"&gt;http://linuxdna.com/wrapper.html&lt;/a&gt;)，使用POE提供给我的一个补丁(针对2.6.18)，下载linuxdna配置文件(&lt;a href="http://www.linuxdna.com/configdna"&gt;http://www.linuxdna.com/configdna&lt;/a&gt;)放到内核根目录 手工对内核代码进行了修改，按照LinuxDNA网页的简单说明编译内核。  刚刚把内核安装成功，发现启动速度比原来(2.6.22)快了一半，我都怀疑是不是有其他问题，但目前的使用都正常，特别是响应速度明显提升，也不知道是不是心理作用。下面需要一些具体的测试，才能说明问题。  不过进入系统发现lsmod的结果为空，没有加载任何驱动，网络也不能用，这可能是快的原因吧，到底性能有没有提升，还是得测试。  备注：LinuxDNA是一个使用ICC编译Linux内核的项目，旨在提高内核性能。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;First get icc from Intel.com and install it.&lt;/li&gt;
+&lt;li&gt;Download the source code of kernel.  You may need to fix a patch. Or change the source code refer to some patch. You can find them on the LinuxDNA's GoogleGroup.&lt;/li&gt;
+&lt;li&gt;Get the config file from (http://www.linuxdna.com/configdna) and copy it to the root directory of kernel source code.&lt;/li&gt;
+&lt;li&gt;Next get the shell script file from (http://linuxdna.com/wrapper.html) and copy it to /usr/bin, set the filename as intelwrapper.&lt;/li&gt;
+&lt;li&gt;Next run make menuconfig / oldconfig to configure your kernel again&lt;/li&gt;
+&lt;li&gt;Compile kernel with "make HOSTCC=intelwrapper CC=intelwrapper Ar=xiar LD=xild"&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(note:This is the patch for 2.6.22. My icc version is 10.0.022, So please change the icc version number in this patch when you use it )&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="gh"&gt;diff -ur linux-2.6.22.old/arch/i386/boot/compressed/relocs.c linux-2.6.22/arch/i386/boot/compressed/relocs.c&lt;/span&gt;
+&lt;span class="gd"&gt;--- linux-2.6.22.old/arch/i386/boot/compressed/relocs.c 2009-04-06 19:04:22.000000000 +0800&lt;/span&gt;
+&lt;span class="gi"&gt;+++ linux-2.6.22/arch/i386/boot/compressed/relocs.c 2009-04-06 19:10:28.000000000 +0800&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -10,7 +10,7 @@&lt;/span&gt;
+#define USE_BSD
+#include
+
+&lt;span class="gd"&gt;-#define MAX_SHDRS 100&lt;/span&gt;
+&lt;span class="gi"&gt;+#define MAX_SHDRS 1000&lt;/span&gt;
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+static Elf32_Ehdr ehdr;
+static Elf32_Shdr shdr[MAX_SHDRS];
+&lt;span class="gh"&gt;diff -ur linux-2.6.22.old/Makefile linux-2.6.22/Makefile&lt;/span&gt;
+&lt;span class="gd"&gt;--- linux-2.6.22.old/Makefile   2009-04-06 19:04:03.000000000 +0800&lt;/span&gt;
+&lt;span class="gi"&gt;+++ linux-2.6.22/Makefile   2009-04-06 19:11:51.000000000 +0800&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -610,7 +610,7 @@&lt;/span&gt;
+quiet_cmd_vmlinux__ ?= LD      $@
+cmd_vmlinux__ ?= $(LD) $(LDFLAGS) $(LDFLAGS_vmlinux) -o $@ \
+&lt;span class="gd"&gt;-T $(vmlinux-lds) $(vmlinux-init)                          \&lt;/span&gt;
+&lt;span class="gd"&gt;-      --start-group $(vmlinux-main) /opt/intel/cc/10.1.018/lib/libirc_s.a --end-group                  \&lt;/span&gt;
+&lt;span class="gi"&gt;+      --start-group $(vmlinux-main) /opt/intel/cc/10.1.022/lib/libirc_s.a --end-group                  \&lt;/span&gt;
+$(filter-out $(vmlinux-lds) $(vmlinux-init) $(vmlinux-main) FORCE ,$^)
+
+# Generate new vmlinux version
+&lt;span class="gh"&gt;diff -ur linux-2.6.22.old/mm/slab.c linux-2.6.22/mm/slab.c&lt;/span&gt;
+&lt;span class="gd"&gt;--- linux-2.6.22.old/mm/slab.c  2009-04-06 19:04:03.000000000 +0800&lt;/span&gt;
+&lt;span class="gi"&gt;+++ linux-2.6.22/mm/slab.c  2009-04-06 19:12:04.000000000 +0800&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -326,7 +326,7 @@&lt;/span&gt;
+{
+extern void __bad_size(void);
+
+&lt;span class="gd"&gt;-   if (__builtin_constant_p(size)) {&lt;/span&gt;
+&lt;span class="gi"&gt;+// if (__builtin_constant_p(size)) {&lt;/span&gt;
+int i = 0;
+
+#define CACHE(x) \
+&lt;span class="gu"&gt;@@ -336,9 +336,9 @@&lt;/span&gt;
+i++;
+#include &amp;quot;linux/kmalloc_sizes.h&amp;quot;
+#undef CACHE
+&lt;span class="gd"&gt;-       __bad_size();&lt;/span&gt;
+&lt;span class="gd"&gt;-   } else&lt;/span&gt;
+&lt;span class="gd"&gt;-       __bad_size();&lt;/span&gt;
+&lt;span class="gi"&gt;+//     __bad_size();&lt;/span&gt;
+&lt;span class="gi"&gt;+// } else&lt;/span&gt;
+&lt;span class="gi"&gt;+//     __bad_size();&lt;/span&gt;
+return 0;
+}
+
+&lt;span class="gh"&gt;diff -ur linux-2.6.22.old/scripts/Makefile.build linux-2.6.22/scripts/Makefile.build&lt;/span&gt;
+&lt;span class="gd"&gt;--- linux-2.6.22.old/scripts/Makefile.build 2009-04-06 19:04:02.000000000 +0800&lt;/span&gt;
+&lt;span class="gi"&gt;+++ linux-2.6.22/scripts/Makefile.build 2009-04-06 19:12:58.000000000 +0800&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -299,7 +299,7 @@&lt;/span&gt;
+cmd_link_multi-y = $(LD) $(ld_flags) -r -o $@ $(link_multi_deps)
+
+quiet_cmd_link_multi-m = LD [M]  $@
+&lt;span class="gd"&gt;-cmd_link_multi-m = $(LD) $(ld_flags) $(LDFLAGS_MODULE) -o $@ $(link_multi_deps)&lt;/span&gt;
+&lt;span class="gi"&gt;+cmd_link_multi-m = $(LD) $(ld_flags) $(LDFLAGS_MODULE) -o $@ $(link_multi_deps) /opt/intel/cc/10.1.022/lib/libirc_s.a&lt;/span&gt;
+
+# We would rather have a list of rules like
+#   foo.o: $(foo-objs)
+&lt;span class="gh"&gt;diff -ur linux-2.6.22.old/scripts/Makefile.modpost linux-2.6.22/scripts/Makefile.modpost&lt;/span&gt;
+&lt;span class="gd"&gt;--- linux-2.6.22.old/scripts/Makefile.modpost   2009-04-06 19:04:02.000000000 +0800&lt;/span&gt;
+&lt;span class="gi"&gt;+++ linux-2.6.22/scripts/Makefile.modpost   2009-04-06 19:13:10.000000000 +0800&lt;/span&gt;
+&lt;span class="gu"&gt;@@ -98,7 +98,7 @@&lt;/span&gt;
+# Step 6), final link of the modules
+quiet_cmd_ld_ko_o = LD [M]  $@
+cmd_ld_ko_o = $(LD) $(LDFLAGS) $(LDFLAGS_MODULE) -o $@      \
+&lt;span class="gd"&gt;-             $(filter-out FORCE,$^)&lt;/span&gt;
+&lt;span class="gi"&gt;+             $(filter-out FORCE,$^) /opt/intel/cc/10.1.022/lib/libirc_s.a&lt;/span&gt;
+
+$(modules): %.ko :%.o %.mod.o FORCE
+$(call if_changed,ld_ko_o)
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>About DMA(Direct Memory Access)</title><link href="http://localhost:8000/linux/about-dmadirect-memory-access.html" rel="alternate"></link><updated>2009-04-05T01:09:11+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-05:linux/about-dmadirect-memory-access.html</id><summary type="html">&lt;p&gt;在PC上都有一个DMAC(直接内存访问控制器)，用于控制RMA和I/O设备之间的数据传送。DMAC需要被CPU激活，才能自行传送数据，数据传送完，DMAC发出一个中请求。一个名为存储器仲裁器的硬件电路用于解决CPU和DMAC并发访问同一存储单元时的冲突。&lt;/p&gt;
+&lt;p&gt;DMAC常使用在磁盘驱动器等一次传送大量数据的慢速设备。DMAC的设置时间长，少量数据使用CPU效率较高。&lt;/p&gt;
+&lt;p&gt;除CPU之外的硬件设备驱动数据总线所用的存储器地址，称作总线地址(bus address)。在PC体系结构中，总线地址和物理地址相同，但在Sun的SPARC和HP的Alpha体系结构中，两者不同。内核提供virt_to_bus和bus_to_virt宏转换线性地址和总线地址。&lt;/p&gt;
+&lt;p&gt;DMA操作中，I/O设备和DMAC直接驱动数据总线，需要把涉及的存储去缓冲区总线地址写入DMAC相应I/O端口，或I/O设备相应端口。&lt;/p&gt;
+&lt;p&gt;打开设备文件时，就会分配一条IRQ线准备发送DMA传送结束的信号。为了启动DMA操作，设备驱动程序只是在硬件设备的I/O端口写入DMA缓冲区的总线地址、传输方向和传输数据大小；然后驱动程序挂起当前进程。当DMA结束时，硬件设备产生一个中断唤醒设备驱动程序。当设备文件对象被最后一个进程关闭时，其release方法中释放IRQ线。&lt;/p&gt;</summary></entry><entry><title>关于Linux内核性能测试</title><link href="http://localhost:8000/linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html" rel="alternate"></link><updated>2009-04-01T11:34:03+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-01:linux/e585b3e4ba8elinuxe58685e6a0b8e680a7e883bde6b58be8af95.html</id><summary type="html">&lt;p&gt;参考上篇文章，我把自己最近碰到的内核测试方法总结了一下，希望大家指错 :)&lt;/p&gt;
+&lt;p&gt;一、概述：
+一般意义上的内核测试可能更多的偏重于功能测试，但在内核开发中，内核退化是很严重的问题，特别是在添加新特性的时候，性能测试显得尤为重要。
+内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。&lt;/p&gt;
+&lt;p&gt;二、内核性能测试开源项目：
+http://www.linuxdna.com/
+http://kernel-perf.sourceforge.net/&lt;/p&gt;
+&lt;p&gt;三、Linux内核测试法：&lt;/p&gt;
+&lt;p&gt;1.Linux测试项目(LTP)
+LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。&lt;/p&gt;
+&lt;p&gt;2.可扩展性测试平台（STP）
+开放源代码开发实验室 (Open Source Development Labs, OSDL)创建了可扩展测试平台(Scalable Test Platform，STP)系统。STP 是一个自动化的测试平台， STP可以构建内核、设置测试、运行测试，并收集结果，然后进行深入地比较。&lt;/p&gt;
+&lt;p&gt;3.代码覆盖分析
+代码覆盖分析在一个给定的测试运行时，分析出内核中哪些代码行被执行，提示内核的哪些部分还没有被测试到，并指出需要再编写哪些新测试来测试内核的相应部分，以使可以得到更完备的测试。&lt;/p&gt;
+&lt;p&gt;4.内核回归测试
+对Linux内核执行持续多日的回归测试，创建实时的、集中的档案库，以随时获得 Linux内核的快照，内核发生改变，测试人员就可进行测试。&lt;/p&gt;
+&lt;p&gt;这些方法包括：使用专门的硬件测试设备、软件测试、往内核插入测试代码等
+测试一般分三个层次：
+1）系统层：包括处理器、内存、硬盘和网络等；
+2）应用层：包括锁、线程、堆和API等；
+3）微结构层：包括数据队列、循环结构和cache优化。&lt;/p&gt;
+&lt;p&gt;四、常用测试软件：
+1、kernbench (测试CPU吞吐量)
+http://freshmeat.net/projects/kernbench/&lt;/p&gt;
+&lt;p&gt;2、hackbench (测试开销、调度程序的可伸缩性)
+http://devresources.linux-foundation.org/craiger/hackbench/&lt;/p&gt;
+&lt;p&gt;3、tbench (TCP测试)&lt;/p&gt;
+&lt;p&gt;4、Netbench (网络性能测试，是一个工业标准，用于Samba和WindowsNT这样的文件服务器的压力测试)&lt;/p&gt;
+&lt;p&gt;5、dbench (测磁盘吞吐量)&lt;/p&gt;
+&lt;p&gt;6、unixbench (虚拟处理器－VPS性能测试)
+下载：http://www.tux.org/pub/tux/benchmarks/System/unixbench/&lt;/p&gt;
+&lt;p&gt;五、网络性能测试方面：(协议栈测试)
+rfc2544规定了网络互联设备测试基准方法（如：吞吐量、延时、丢包率等）
+注意：
+1、一般要求百兆/千兆的线速
+2、采用专门的硬件测试设备 (如：smartbits)，软件测试效果不是很好
+3、发包的设备必须远强与你现有的设备
+4、根据产品的特性要求（市场的要求），平衡吞吐量/延时
+5、性能的优化，也可以对协议栈本身进行改进
+案例：网卡中断发生频率非常高，有人实践将中断处理模式改为轮询模式，这样大大的提高性能，当然这是在他们专用的应用环境下&lt;/p&gt;
+&lt;p&gt;六、干扰因素：
+1、硬件设备性能
+2、测试软件本身消耗
+3、系统服务消耗等
+4、测试覆盖率问题
+5、其他随机因素&lt;/p&gt;
+&lt;p&gt;七、服务器内核测试：
+1、偏重网络、存储两大块
+2、多核、集群、大容量存储等具体环境
+3、结合具体业务&lt;/p&gt;
+&lt;p&gt;八、其他
+1、测试结果的图形化友好显示，如图表、动态图等
+2、性能评定标准，从正确性、可靠性、工作性能三方面进行，相关参数如：响应速度、CPU时间、CPU利用率等，可靠性测试包括NFS 压力测试、内存管理压力测试、文件系统压力测试、多线程压力测试、硬盘I/O 测试、IPC测试、系统调用功能的验证测试、网络压力测试等。
+3、综合评定常用的就是打分制&lt;/p&gt;</summary></entry><entry><title>Linux系统内核性能评测</title><link href="http://localhost:8000/linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html" rel="alternate"></link><updated>2009-04-01T11:29:36+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-01:linux/linuxe7b3bbe7bb9fe58685e6a0b8e680a7e883bde8af84e6b58b.html</id><summary type="html">&lt;p&gt;Linux以其开放和自由的特性，日益受到人们的关注，并被广泛应用于科学计算、电子商务、并行运算、辅助教学、大型服务器、嵌入式应用和桌面办公等不同的领域，为我国软件产业的发展带来了契机。研究Linux内核的评测方法、评价工具和评测标准，颇具意义和实用价值，有助于 Linux国产化发展，同时也是国家电子基金项目的重要组成部分。&lt;/p&gt;
+&lt;p&gt;Linux内核是Linux操作系统最核心的部分，其性能直接决定了操作系统的性能。测试内核性能的方法是针对Linux内核五大子系统（进程调度子系统、内存管理子系统、虚拟文件子系统、进程通信子系统和网络子系统）的自身特点，测量出Linux内核完成工作量负载的响应时间、CPU时间和CPU利用率等参数，作为衡量标准。&lt;/p&gt;
+&lt;p&gt;Linux内核测试法&lt;/p&gt;
+&lt;p&gt;1.Linux测试项目(LTP)&lt;/p&gt;
+&lt;p&gt;LTP（Linux test project）套件涵盖了内核的大多数接口，如系统调用、内存、IPC、I/O、文件系统和网络。这个项目收集了各种 Linux内核测试工具和相关资料，当前包括了超过 2900个测试用例。&lt;/p&gt;
+&lt;p&gt;2.可扩展性测试平台（STP）&lt;/p&gt;
+&lt;p&gt;开放源代码开发实验室 (Open Source Development Labs, OSDL)创建了可扩展测试平台(Scalable Test Platform，STP)系统。STP 是一个自动化的测试平台， STP可以构建内核、设置测试、运行测试，并收集结果，然后进行深入地比较。&lt;/p&gt;
+&lt;p&gt;3.代码覆盖分析&lt;/p&gt;
+&lt;p&gt;代码覆盖分析在一个给定的测试运行时，分析出内核中哪些代码行被执行，提示内核的哪些部分还没有被测试到，并指出需要再编写哪些新测试来测试内核的相应部分，以使可以得到更完备的测试。&lt;/p&gt;
+&lt;p&gt;4.内核回归测试&lt;/p&gt;
+&lt;p&gt;对Linux内核执行持续多日的回归测试，创建实时的、集中的档案库，以随时获得 Linux内核的快照，内核发生改变，测试人员就可进行测试。&lt;/p&gt;
+&lt;p&gt;Linux内核架构&lt;/p&gt;
+&lt;p&gt;Linux内核主要由五大子系统组成：进程调度子系统(Process Scheduler)、内存管理子系统(Memory Manager)、虚拟文件子系统(Virtual File System)、进程通信子系统(Inter-Process Communication)和网络子系统(Network Interface)，其中进程调度子系统是 Linux操作系统的核心。这五大子系统彼此紧密协作，共同对用户程序提供服务，其系统架构如下图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://kongove.whostas.com/blog/download/kper-2008111114094987.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;图1. Linux内核结构&lt;!-- more --&gt;&lt;/p&gt;
+&lt;p&gt;核心的子系统是进程调度子系统，所有子系统依赖它来挂起/唤醒进程。当进程被唤醒后，进程调度子系统依靠内存管理子系统来对进程的内存映射(页表)进行调 整；进程间通讯子系统依靠内存管理子系统来实现共享内存通信机制，允许多个进程共享物理内存；虚拟文件子系统依靠网络接口子系统来实现网络文件系统 (NFS)，并且依靠内存管理子系统来实现 Ramdisk 设备；内存管理子系统依靠虚拟文件子系统来实现对换。&lt;/p&gt;
+&lt;p&gt;由此可见，测试Linux性能的关键在于测试Linux内核性能，而测试Linux内核性能又可以细化成五大子系统的测试。&lt;/p&gt;
+&lt;p&gt;性能评测方法学&lt;/p&gt;
+&lt;p&gt;一个性能评测实际解决方案应该包括以下三个方面：&lt;/p&gt;
+&lt;p&gt;1）．被评测系统处于压力负荷下；&lt;/p&gt;
+&lt;p&gt;2）．测量系统执行有效特定任务的能力，执行特定任务的耗时，执行特定任务的CPU 利用率；&lt;/p&gt;
+&lt;p&gt;3）．基于性价比因素考虑进行改进。&lt;/p&gt;
+&lt;p&gt;性能测试领域的自顶向下方法(Top-Down Approach)，是一种把性能测试从系统角度分层次考虑的方法。从上到下分成系统层(System Level)、应用层(Application Level)、微结构层(Micro-Architecture)三层，如图所示。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://kongove.whostas.com/blog/download/kper-2008111114102847.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;图2. 自顶向下性能测试法&lt;/p&gt;
+&lt;p&gt;1）．系统层(System Level)：包括处理器、内存、硬盘和网络等；
+2）．应用层(Application Level)：包括锁、线程、堆和API 等；
+3）．微结构层(Micro-Architecture)：包括数据队列、循环结构和cache优化。&lt;/p&gt;
+&lt;p&gt;自顶向下方法是从系统硬件层(处理器、内存、硬盘、网络等)、应用层(锁、线程、堆、API)和微结构层来考虑性能测试标准。系统层关注的是系统硬件设备 资源和外围设备；应用层关注的是操作系统和应用程序资源；微结构层关注的是 CPU 资源、逻辑单元和内存访问等细节。&lt;/p&gt;
+&lt;p&gt;内核性能评价的主要标准和参数&lt;/p&gt;
+&lt;p&gt;1.Linux内核性能评价的主要标准&lt;/p&gt;
+&lt;p&gt;从系统性能评价方法学的角度来考虑，Linux内核性能评价应该遵循以下标准。&lt;/p&gt;
+&lt;p&gt;1）．正确性&lt;/p&gt;
+&lt;p&gt;运行的正确性是首要的，运行结果出错的程序是没有应用价值的。&lt;/p&gt;
+&lt;p&gt;2）．可靠性&lt;/p&gt;
+&lt;p&gt;Linux内核直接控制和管理计算机系统硬件和软件资源，以方便用户充分而有效地利用计算机资源的程序集合，如果自身都运行不可靠，稳定性差，将直接导致硬件工作不正常和软件应用的不稳定。&lt;/p&gt;
+&lt;p&gt;3）．工作性能&lt;/p&gt;
+&lt;p&gt;(1) 处理能力，单位时间内能处理的信息量(吞吐率)；
+(2) 响应能力，包括响应时间、周转时间和排队时间等；
+(3) 利用率，时间段T内，资源被使用时间t 与T的比值。&lt;/p&gt;
+&lt;p&gt;正确性是测试的前提，可靠性和工作性能可以通过设计相应负载对内核进行压力测试。&lt;/p&gt;
+&lt;p&gt;2.Linux内核性能评价的参数&lt;/p&gt;
+&lt;p&gt;1）．响应速度&lt;/p&gt;
+&lt;p&gt;内核完成某一任务(程序)所花费的时间，如磁盘访问、存储器访问和输入/输出等待。&lt;/p&gt;
+&lt;p&gt;2）．CPU时间&lt;/p&gt;
+&lt;p&gt;程序在CPU中的执行时间。&lt;/p&gt;
+&lt;p&gt;3）．CPU利用率&lt;/p&gt;
+&lt;p&gt;因此只有充分利用 CPU，才能最大程度的提高系统的效率。&lt;/p&gt;
+&lt;p&gt;Linux内核压力测试&lt;/p&gt;
+&lt;p&gt;Linux内核压力测试使用如下图示过程。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://kongove.whostas.com/blog/download/kper-2008111114114953.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;图3. Linux内核压力测试过程&lt;/p&gt;
+&lt;p&gt;Linux内核压力测试组合了不同方面的多个测试，包括内存和网络传输负载生成器。在执行之前，测试会根据系统中存在多少物理和虚拟内存来调整其总的内存 使用情况。评价系统资源利用率所选择的测试组合必须给系统的资源带来足够的压力，可以从LTP测试套件中获得测试脚本ltpstress.sh。&lt;/p&gt;
+&lt;p&gt;Linux 内核主要有如下四个方面影响系统的响应和执行时间： CPU，用于在机器的CPU（s）上处理数据的时间；Memory，用于自真实存储器中读写数据的时间；I/O，用于自磁盘存储器读写数据的时间；Networking，用于自网络读写数据的时间。测试能得到 CPU（s）、内存、I/O 和网络等主要内核区域的资源利用率。&lt;/p&gt;
+&lt;p&gt;测试应该充分地覆盖内核代码，以帮助支持生成的稳定性声明。可使用下面两个开放源代码 Linux资源监控工具来评价资源利用率水平：Top与sar，包含于大部分 Linux 发行版本中，可用于当前的2.4 和2.6内核（目前内核为2.6.18）。&lt;/p&gt;
+&lt;p&gt;内核代码覆盖率分析&lt;/p&gt;
+&lt;p&gt;获得足够的内核覆盖率是系统压力测试的另一个职责。尽管所选的测试组合充分地利用了四种主要资源，它也有可能只是执行了内核的一小部分，因而应该对覆盖率进行分析以确保组合可以成为一个系统压力测试。&lt;/p&gt;
+&lt;p&gt;当前，有两个开放源代码工具可以帮助进行Linux 内核的代码覆盖率分析。Gcov，这个工具分析内核代码的覆盖率，并报告哪些行、函数和分支被覆盖以及它们被访问了多少次。Lcov，这个工具由一组 Perl 脚本构成，以实现基于 HTML 的输出，输出包括覆盖率百分比、图表以及概述页，可以快速浏览覆盖率数据。&lt;/p&gt;
+&lt;p&gt;Linux内核可靠性评测&lt;/p&gt;
+&lt;p&gt;系统的稳定性和可靠性通常以连续运转时间和系统的可靠运行时间来度量。&lt;/p&gt;
+&lt;p&gt;有两个特别的阶段：一个是“初始测试”阶段，另一个是“压力可靠性运转”阶段或“压力测试”阶段。初始测试执行：&lt;/p&gt;
+&lt;p&gt;文件系统压力测试。&lt;/p&gt;
+&lt;p&gt;硬盘 I/O 测试。&lt;/p&gt;
+&lt;p&gt;内存管理压力测试。&lt;/p&gt;
+&lt;p&gt;IPC 压力测试。&lt;/p&gt;
+&lt;p&gt;调试器测试。&lt;/p&gt;
+&lt;p&gt;命令功能的验证测试。&lt;/p&gt;
+&lt;p&gt;系统调用功能的验证测试。&lt;/p&gt;
+&lt;p&gt;通过初始测试是开始测试的必要条件，LTP 测试套件runalltest.sh可用于初始测试。&lt;/p&gt;
+&lt;p&gt;压力测试在使用网络与内存管理的同时，并行地运行大范围的内核组件，并在测试系统上生成高压力负荷，压力测试执行：&lt;/p&gt;
+&lt;p&gt;NFS 压力测试。&lt;/p&gt;
+&lt;p&gt;内存管理压力测试。&lt;/p&gt;
+&lt;p&gt;文件系统压力测试。&lt;/p&gt;
+&lt;p&gt;数学 (浮点) 测试。&lt;/p&gt;
+&lt;p&gt;多线程压力测试。&lt;/p&gt;
+&lt;p&gt;硬盘I/O 测试。&lt;/p&gt;
+&lt;p&gt;IPC测试。&lt;/p&gt;
+&lt;p&gt;系统调用功能的验证测试。&lt;/p&gt;
+&lt;p&gt;网络压力测试。&lt;/p&gt;
+&lt;p&gt;压力测试可以验证产品在系统高使用率时的健壮性，LTP 测试套件ltpstress.sh可用于压力测试。&lt;/p&gt;
+&lt;p&gt;评估&lt;/p&gt;
+&lt;p&gt;可靠性(reliability)是产品在规定的条件下和规定的时间内完成规定功能的能力，它的概率度量称为可靠度，是评估的依据。软件可靠性 (software reliability)是软件系统的固有特性之一，它表明了一个软件系统按照用户的要求和设计的目标，执行其功能的正确程度。可靠的软件系统应该是正 确、完整、一致和健壮的。&lt;/p&gt;
+&lt;p&gt;全文总结&lt;/p&gt;
+&lt;p&gt;本文在充分分析、总结国内外有关软硬件性能评测相关理论和研究成果的基础上，结合 Linux内核自身的特点，针对Linux五大子系统，研究评测内核的方法、工具和标准，以达到评测 Linux内核性能的目的。&lt;/p&gt;
+&lt;p&gt;From: http://blog.chinaunix.net/u2/81377/showart_1405758.html&lt;/p&gt;</summary></entry><entry><title>操作系统中的一些重要知识点</title><link href="http://localhost:8000/linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html" rel="alternate"></link><updated>2009-03-28T13:05:24+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-03-28:linux/e6938de4bd9ce7b3bbe7bb9fe4b8ade79a84e4b880e4ba9be9878de8a681e79fa5e8af86e782b9.html</id><summary type="html">&lt;p&gt;－－－操作系统中的一些重要知识点－－－(继续更新)&lt;/p&gt;
+&lt;p&gt;进程状态转换：(转换规则)
+初始化、就绪、执行、等待、终止
+进程创建和撤销&lt;/p&gt;
+&lt;p&gt;临界区：每个进程访问临界资源(一个仅允许一个进程使用的共享资源)的那段代码
+进程同步和互斥(不允许两个以上共享该资源的并发进程同时进入临界区)
+信号量和P，V原语
+生产者－消费者问题&lt;/p&gt;
+&lt;p&gt;死锁(并发进程彼此等待对方占有资源，并在得到对方资源前不会释放自己占有资源；预防、避免、检测(是否构成资源请求和保持环路)、恢复)
+哲学家就餐算法
+理发师问题
+银行家算法&lt;/p&gt;
+&lt;p&gt;进程(PCB)和线程(TCB)的区别&lt;/p&gt;
+&lt;p&gt;进程间通信：
+管道、共享内存、SOCKET、FIFO、消息队列、信号量...&lt;/p&gt;
+&lt;p&gt;调度算法：
+先来先服务FCFS、轮转法、多级反馈轮转法(3种状态)、优先级法、最短作业优先法SJF、最高响应比优先法HRN(R=(W+T)/T=1+W/T)&lt;/p&gt;
+&lt;p&gt;源代码(编译链接)-&amp;gt;虚拟空间(地址转换)-&amp;gt;物理存储器&lt;/p&gt;
+&lt;p&gt;段式与段页式管理
+地址转换
+页面管理
+缺页处理&lt;/p&gt;
+&lt;p&gt;文件的物理结构与存储设备
+文件存储空间管理
+文件目录管理
+文件存取控制
+虚拟文件系统VFS
+文件系统的注册和挂载&lt;/p&gt;
+&lt;p&gt;数据传送控制方式：
+程序直接控制方式、中断方式、DMA方式、通道控制方式&lt;/p&gt;
+&lt;p&gt;中断处理过程&lt;/p&gt;
+&lt;p&gt;设备控制(DCT)&lt;/p&gt;</summary></entry><entry><title>网络连接图标打红叉(device is unmanaged)</title><link href="http://localhost:8000/linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html" rel="alternate"></link><updated>2009-03-23T08:49:57+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-03-23:linux/e7bd91e7bb9ce8bf9ee68ea5e59bbee6a087e68993e7baa2e58f89device-is-unmanaged.html</id><summary type="html">&lt;p&gt;Fedora10安装的好几个机器都是网络设置图标打叉，还以为是BUG，上次给一朋友直接在网上复制了个网络接口配置文件就好了，当时也没仔细对比文件差异。上次我的Ubuntu升级软件、安装UbuntuStudio后也出现这个问题，但网络连接没有任何问题也就没关。今天突然发现有下面这个解决方法。&lt;/p&gt;
+&lt;p&gt;当然其他问题也可能导致图标打红叉，如没有网卡驱动、没有激活网络、没有配置等，上面是没有设置网络管理选项带来的问题。&lt;/p&gt;
+&lt;p&gt;Ubuntu网络连接图标打红叉，但通过命令行可以配置网络。将下面文件的managed值由false改为true，重启即可！&lt;/p&gt;
+&lt;p&gt;sudo vim /etc/NetworkManager/nm-system-settings.conf
+[main]
+plugins=ifupdown,keyfile
+[ifupdown]
+managed=true&lt;/p&gt;
+&lt;p&gt;Fedora10网络连接图标打红叉，但通过命令行可以配置网络。修改网络连接文件，添加 NM_CONTROLLED=yes，重启网络即可。&lt;/p&gt;
+&lt;p&gt;sudo vim /etc/sysconfig/network-scripts/ifcfg-eth0
+..
+NM_CONTROLLED=yes
+...&lt;/p&gt;</summary></entry><entry><title>校外实习</title><link href="http://localhost:8000/linux/e6a0a1e5a496e5ae9ee4b9a0.html" rel="alternate"></link><updated>2009-03-09T12:37:07+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-03-09:linux/e6a0a1e5a496e5ae9ee4b9a0.html</id><summary type="html">&lt;p&gt;从今天开始，学校安排了两周的校外实习，地点在&lt;a href="http://www.nwpu.edu.cn/web/ruanjian/xasxjd/xajdjs/"&gt;国家软件人才国际培训(西安)基地&lt;/a&gt;，听过是国内只有七家，内陆只有一家。每天早上9:00~下午5:00，中午休息两个小时，吃饭还得自己买粮票。每天都是半天理论课加半天上机实习。这段期间大家都要组队完成一个j2ee开发的“是男人就撑20秒”这个手机游戏。开发过程完全按照软件开发标准流程走，俺还是我们小组的项目组长，在这短短十天带领大家完成好项目也不容易，正好可以锻炼一下。
+今天第一天，讲了一些基地介绍、个人职业生涯规划、就业这些问题，他们那里也有很多国际资格认证，不过讲座中提及不多，感觉讲的还可以。这个地方有一点，我比较喜欢，就是把Linux提的很高，就连楼道都是Linus的头像，机房装的全是即时linux操作系统。而且他们也有Linux平台的嵌入式机顶盒、中间件、动漫等研究项目，听说成果很不错。下午的理论课程将Java，可光Linux讲了半天，那讲师装的是Ubuntu8.10，不过没见他启动。
+总得来说，这种实习比成天待宿舍要好一些，起码能更人多沟通，学习一些东西。今天第一天，回来还有点累，不过手头该做的还得做 :)&lt;/p&gt;
+&lt;p&gt;&lt;img alt="http://kongove.whostas.com/blog/download/j2me-pig.png" src="http://kongove.whostas.com/blog/download/j2me-pig.png" /&gt;&lt;img alt="" src="http://kongove.whostas.com/blog/download/20s.jpg" /&gt;&lt;/p&gt;</summary></entry></feed>

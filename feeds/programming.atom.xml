@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title></title><link href="http://localhost:8000/" rel="alternate"></link><link href="http://localhost:8000/feeds/programming.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2013-06-09T03:08:43+08:00</updated><entry><title>使用RaspberryPi 的GPIO接口控制LED灯闪烁</title><link href="http://localhost:8000/programming/raspberry-pi.html" rel="alternate"></link><updated>2013-06-09T03:08:43+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2013-06-09:programming/raspberry-pi.html</id><summary type="html">&lt;p&gt;数梅派入门设置：&lt;a href="http://my.oschina.net/quanpower/blog/105247"&gt;http://my.oschina.net/quanpower/blog/105247&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下面的 Shell 和 C 代码，都是先了通过控制GPIO针的高低电频，闪烁LED灯。可以结合其他程序来做消息提醒。Shell中使用的针号是GPIO的编号，如 GPIO11 对应 11。但C代码中需要传递broadcom编排的ID，GPIO11对应broadcom的 0。&lt;/p&gt;
+&lt;p&gt;GPIO23-&amp;gt;4, GPIO11-&amp;gt;14, GPIO24-&amp;gt;5, GPIO17-&amp;gt;0,....&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://"&gt;&lt;img alt="shumei" src="http://amosk.info/blog/wp-content/uploads/2013/06/shumei.png" /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="电路图" src="http://img.bianbian.me/blog/201207/ledtest.png" /&gt;&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c"&gt;# usage: bash led.sh $perid $repeat $pin&lt;/span&gt;
+
+&lt;span class="k"&gt;function &lt;/span&gt;set_led&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="nv"&gt;perid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+    &lt;span class="nv"&gt;repeat&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;
+    &lt;span class="nv"&gt;pin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$3&lt;/span&gt;
+
+    &lt;span class="nb"&gt;cd&lt;/span&gt; /sys/class/gpio/
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$pin&lt;/span&gt; &amp;gt; &lt;span class="nb"&gt;export&lt;/span&gt;    &lt;span class="c"&gt;#将对应pin的操作暴露再sys文件系统下&lt;/span&gt;
+    &lt;span class="nb"&gt;echo &lt;/span&gt;out &amp;gt; gpio&lt;span class="nv"&gt;$pin&lt;/span&gt;/direction &lt;span class="c"&gt;#控制电流走向，这里需要高电频的时候，电流流向接地线，从而LED发光，所以设置为out&lt;/span&gt;
+
+    &lt;span class="k"&gt;for &lt;/span&gt;i in &lt;span class="sb"&gt;`&lt;/span&gt;seq &lt;span class="nv"&gt;$repeat&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;;&lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="k"&gt;        &lt;/span&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;1 &amp;gt; gpio&lt;span class="nv"&gt;$pin&lt;/span&gt;/value &lt;span class="c"&gt;#设置高电频，点亮LED&lt;/span&gt;
+        sleep &lt;span class="nv"&gt;$perid&lt;/span&gt;
+        &lt;span class="nb"&gt;echo &lt;/span&gt;0 &amp;gt; gpio&lt;span class="nv"&gt;$pin&lt;/span&gt;/value &lt;span class="c"&gt;#设置底电频，关闭LED&lt;/span&gt;
+        sleep &lt;span class="nv"&gt;$perid&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$pin&lt;/span&gt; &amp;gt; unexport
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$# &lt;/span&gt;-eq 3 &lt;span class="o"&gt;]&lt;/span&gt;; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;span class="k"&gt;    &lt;/span&gt;set_led &lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt; &lt;span class="nv"&gt;$3&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+
+
+
+
+&lt;span class="c"&gt;#include &amp;lt;wiringpi.h&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
+&lt;span class="c"&gt;#include &amp;lt;stdlib.h&amp;gt;&lt;/span&gt;
+
+/*
+ * compile: apt-get install i2c-tools libi2c-dev python-smbus
+ *          gcc led.c -o led -lwiringPi
+ * usage ./led &lt;span class="nv"&gt;$perid&lt;/span&gt; &lt;span class="nv"&gt;$repeat&lt;/span&gt; &lt;span class="nv"&gt;$pin&lt;/span&gt;
+*/
+
+void set_led&lt;span class="o"&gt;(&lt;/span&gt;int pin, int status&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+    pinMode &lt;span class="o"&gt;(&lt;/span&gt;pin, OUTPUT&lt;span class="o"&gt;)&lt;/span&gt;; //设置输出模式
+    digitalWrite &lt;span class="o"&gt;(&lt;/span&gt;pin, status&lt;span class="o"&gt;)&lt;/span&gt;;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+void blink&lt;span class="o"&gt;(&lt;/span&gt;int pin, int perid, int repeat&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;repeat--&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt;
+        set_led&lt;span class="o"&gt;(&lt;/span&gt;pin, 1&lt;span class="o"&gt;)&lt;/span&gt;; //设置高电频
+        delay&lt;span class="o"&gt;(&lt;/span&gt;perid&lt;span class="o"&gt;)&lt;/span&gt;;
+        set_led&lt;span class="o"&gt;(&lt;/span&gt;pin, 0&lt;span class="o"&gt;)&lt;/span&gt;; //设置底电频
+        delay&lt;span class="o"&gt;(&lt;/span&gt;perid&lt;span class="o"&gt;)&lt;/span&gt;;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+int main &lt;span class="o"&gt;(&lt;/span&gt;int argc, char *argv&lt;span class="o"&gt;[])&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+    int &lt;span class="nv"&gt;pin_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 0;
+    int &lt;span class="nv"&gt;perid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 100;
+    int &lt;span class="nv"&gt;repeat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 1;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;argc &amp;gt; 1&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;perid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; atoi &lt;span class="o"&gt;(&lt;/span&gt;argv&lt;span class="o"&gt;[&lt;/span&gt;1&lt;span class="o"&gt;])&lt;/span&gt;;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;argc &amp;gt; 2&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;repeat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; atoi &lt;span class="o"&gt;(&lt;/span&gt;argv&lt;span class="o"&gt;[&lt;/span&gt;2&lt;span class="o"&gt;])&lt;/span&gt;;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;argc &amp;gt; 3&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;pin_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; atoi &lt;span class="o"&gt;(&lt;/span&gt;argv&lt;span class="o"&gt;[&lt;/span&gt;3&lt;span class="o"&gt;])&lt;/span&gt;;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;-1 &lt;span class="o"&gt;==&lt;/span&gt; wiringPiSetup&lt;span class="o"&gt;())&lt;/span&gt;
+    &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Setup wiringPi failed!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;;
+        &lt;span class="k"&gt;return &lt;/span&gt;1;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;blink pin(%d) for %d times (perid:%d)\n&amp;quot;&lt;/span&gt;,
+        pin_num, repeat, perid&lt;span class="o"&gt;)&lt;/span&gt;;
+    blink &lt;span class="o"&gt;(&lt;/span&gt;pin_num, perid, repeat&lt;span class="o"&gt;)&lt;/span&gt;;
+
+    &lt;span class="k"&gt;return &lt;/span&gt;0;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary></entry><entry><title>'BIOS: 系统Reset的方法和差异性'</title><link href="http://localhost:8000/programming/e7b3bbe7bb9fresete79a84e696b9e6b395e5928ce5b7aee5bc82e680a7.html" rel="alternate"></link><updated>2012-12-27T05:12:01+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2012-12-27:programming/e7b3bbe7bb9fresete79a84e696b9e6b395e5928ce5b7aee5bc82e680a7.html</id><summary type="html">&lt;p&gt;BIOS有三种RESET 的方法: KBC RESET、PORT92、0xCF9，方法如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;KBC Reset
+对 KBC(0x60/0x64 port) 写入 0xFE 指令。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;port 0xCF9 Reset
+对 0xCF9 port 写入 0x06、0x0E 指令 (在chipset spec会定义其 Bit 設起時，Reset不同之處).
+Bit 1 决定是否作 Reset.
+Bit 2 决定 software reset OR hardware reset
+Bit 3 决定是否 Reset S3、S4、S5 state
+所以 0x06 和0 x0E 都是hardware reset.&lt;/p&gt;
+&lt;h1 id="cat-homedevelworkingresetpy-example-to-reboot-system-by-amos-kong"&gt;cat /home/devel/working/reset.py (example to reboot system) By (Amos Kong)&lt;/h1&gt;
+&lt;p&gt;import commands&lt;/p&gt;
+&lt;p&gt;def outb(data, port):
+    print "outb(0x%x, 0x%x)" % (port, data)
+    outb_cmd = ("echo -e '\%s' | dd of=/dev/port seek=%d bs=1 count=1" %
+                (oct(data), port))
+    print outb_cmd
+    commands.getoutput(outb_cmd)&lt;/p&gt;
+&lt;p&gt;outb(0x06, 0xcf9)
+outb(0x0E, 0xcf9)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;port 0x92 (System Control Port A) Reset
+对 0x92 port 的Bit 0 设置1，发出 INIT# 对 16 PCI clocks，CPU进行初始化&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以上(1)和(3)都是做Software Reset，(2)可以做Software Reset、Hardware Reset、Global Reset. Global Reset是针对 power loss 的情況下做的完整的chipset Reset (发生情況: A global reset will occur after 4 seconds if an acknowledge from the processor is not received.)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;补充: software reset、hardware reset、warm boot、cold boot的定做和定义&lt;/li&gt;
+&lt;li&gt;Software Reset: activating INIT# for 16 PCI clocks.(只对CPU做Reset)&lt;/li&gt;
+&lt;li&gt;Hardware Reset: hardware reset by activating PLTRST# and SUS_STAT# active for a minimum of about 1 milliseconds. (对CPU和大部分的Chipset做Reset)&lt;/li&gt;
+&lt;li&gt;Warm Boot: 在UEFI BIOS中是下 Software Reset的动作。在DOS按Ctrl+ALT+DEL就是warm boot.&lt;/li&gt;
+&lt;li&gt;Cold Boot: 在ACPI spec可以查到cold boot定义为从 G3(mechanical off)、S5(G2)、S4 开机都算是cold boot.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>快速使用PIL转换照片生成预览网页</title><link href="http://localhost:8000/programming/e5bfabe9809fe4bdbfe794a8pile8bdace68da2e785a7e78987e7949fe68890e9a284e8a788e7bd91e9a1b5.html" rel="alternate"></link><updated>2011-11-01T07:25:02+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-11-01:programming/e5bfabe9809fe4bdbfe794a8pile8bdace68da2e785a7e78987e7949fe68890e9a284e8a788e7bd91e9a1b5.html</id><summary type="html">&lt;p&gt;我们常常用很多照片，需要快速通过http服务器分享，下面这个脚本，用PIL(python image library)转换固定大小的缩略图，并生成一个简易的html文件，附带的链接可以用于点击察看大图片。递归目录、其他格式什么懒的支持了，这个够用了 :-)&lt;/p&gt;
+&lt;p&gt;$ cat resize.py&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="nx"&gt;os&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;Image&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;Resize&lt;/span&gt; &lt;span class="nx"&gt;jpg&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;current&lt;/span&gt; &lt;span class="nx"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="nx"&gt;generate&lt;/span&gt; &lt;span class="nx"&gt;an&lt;/span&gt; &lt;span class="nx"&gt;html&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; 
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="nx"&gt;present&lt;/span&gt; &lt;span class="n"&gt;pictures&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="nx"&gt;light&lt;/span&gt; &lt;span class="nx"&gt;way.&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="nx"&gt;cd&lt;/span&gt; &lt;span class="nx"&gt;picture&lt;/span&gt;&lt;span class="na"&gt;-dir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="nx"&gt;python&lt;/span&gt; &lt;span class="nx"&gt;resize.py&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="nx"&gt;firefox&lt;/span&gt; &lt;span class="nx"&gt;index.html&lt;/span&gt;
+
+&lt;span class="nx"&gt;def&lt;/span&gt; &lt;span class="nx"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Image.open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;size&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;img.size&lt;/span&gt;
+    &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;img.resize&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nb"&gt;width&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;width&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;size&lt;/span&gt;&lt;span class="err"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt; / size&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;))
+    new.save(&amp;quot;.%s&amp;quot; % filename)
+
+f = open(&amp;quot;index.html&amp;quot;, &amp;quot;w&amp;quot;)
+f.write(&amp;quot;&lt;span class="nt"&gt;&amp;lt;center&amp;gt;&amp;lt;big&amp;gt;&lt;/span&gt;Click to review big pictures&lt;span class="nt"&gt;&amp;lt;/big&amp;gt;&amp;lt;/center&amp;gt;&lt;/span&gt;&amp;quot;)
+files = os.listdir(&amp;quot;.&amp;quot;)
+files.sort()
+for i in files:
+    if (i&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;==&amp;quot;.JPG&amp;quot; or i&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;==&amp;quot;.jpg&amp;quot;) and i&lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;!=&amp;#39;.&amp;#39;:
+        resize(i, 200)
+        f.write(&amp;quot;&lt;span class="nt"&gt;&amp;lt;a&lt;/span&gt; &lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%s&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;img&lt;/span&gt; &lt;span class="na"&gt;src=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.%s&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&amp;lt;/a&amp;gt;&lt;/span&gt;\n&amp;quot; % (i, i))
+        f.flush()
+f.close()
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="/blog/wp-content/uploads/resize-pic-script.png" src="/blog/wp-content/uploads/resize-pic-script.png" /&gt;&lt;/p&gt;</summary></entry><entry><title>关于 Erlang</title><link href="http://localhost:8000/programming/e585b3e4ba8e-erlang.html" rel="alternate"></link><updated>2011-04-09T05:36:18+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2011-04-09:programming/e585b3e4ba8e-erlang.html</id><summary type="html">&lt;p&gt;erlang 是一门内建支持并发的编程语言，起初是为开发通讯系统设计的，1998年开放源码，适合于构建分布式、实时软并行计算系统。erlang的分布式机制是透明的，程序并不知道&lt;/p&gt;
+&lt;p&gt;自己是分布式运行，所以编写分布式应用更简单些。&lt;/p&gt;
+&lt;p&gt;有人称erlang是OS中的OS，并且是自举的，少量核心代码是C实现的。&lt;/p&gt;
+&lt;p&gt;erlang运行是启动许多轻量级进程，进程间通过消息机制进行通信，不共享内存/变量，所以不存在同步问题。erlang进程可被映射到主机进程或线程，甚至是多台几期的多个进程/&amp;gt;线程。erlang调度不同机器上的进程是在传输层之上，考虑到安全问题，需要对通信进行加密(如ssl)。这里的网络也是依靠OTP(Open Telecom Platform)提供，所以损耗系统资源较小。OPT是一个基于erlang的高并发开发环境。&lt;/p&gt;
+&lt;p&gt;在云计算中，每个虚拟机就是一个具备执行能力的结点，可以利用erlang的并发机制，将执行任务分布到不同的虚拟机上，使用消息机制进行通信。&lt;/p&gt;
+&lt;p&gt;erlang语法很怪异，不管是变量赋值、循环实现、函数执行流程等。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;erl&lt;/span&gt; &lt;span class="o"&gt;----------------------------&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]).&lt;/span&gt;
+
+&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+    &lt;span class="nl"&gt;io:&lt;/span&gt;&lt;span class="n"&gt;fwrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello, World!∼n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[]).&lt;/span&gt;
+&lt;span class="o"&gt;--&lt;/span&gt; &lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;execute&lt;/span&gt;  &lt;span class="o"&gt;--------------------&lt;/span&gt;
+&lt;span class="nl"&gt;ekmac:&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt; &lt;span class="n"&gt;ek&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;erl&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hello.erl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;ok&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;
+&lt;span class="n"&gt;Hello&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;World&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;span class="n"&gt;ok&lt;/span&gt;
+&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;stop&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;
+&lt;span class="n"&gt;ok&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ekmac&lt;/span&gt;&lt;span class="o"&gt;:~&lt;/span&gt; &lt;span class="n"&gt;ek&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;推荐基本书、链接：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;erlang&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;
+&lt;span class="n"&gt;erlang&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;china&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;
+&lt;span class="n"&gt;docs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;huihoo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;erlang&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="n"&gt;Thinking&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;erlang&lt;/span&gt;
+&lt;span class="n"&gt;Programming&lt;/span&gt; &lt;span class="n"&gt;erlang&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="err"&gt;详读）&lt;/span&gt;
+&lt;span class="n"&gt;erlang&lt;/span&gt;&lt;span class="err"&gt;程序学习笔记&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>简单抽奖程序</title><link href="http://localhost:8000/programming/e7ae80e58d95e68abde5a596e7a88be5ba8f.html" rel="alternate"></link><updated>2009-12-13T04:18:57+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-12-13:programming/e7ae80e58d95e68abde5a596e7a88be5ba8f.html</id><summary type="html">&lt;p&gt;昨天参加技术沙龙有一些礼品发放环节，就写了个简单的抽奖程序。&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;Filename: lottery.py&lt;/span&gt;
+&lt;span class="sd"&gt;Description: a programme for allocate lottery&lt;/span&gt;
+&lt;span class="sd"&gt;Author: Amos Kong&lt;/span&gt;
+&lt;span class="sd"&gt;Date: Dec 12, 2009&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="c"&gt;# Configure parameter&lt;/span&gt;
+&lt;span class="n"&gt;num_person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;  &lt;span class="c"&gt;# Number of total persons&lt;/span&gt;
+&lt;span class="n"&gt;num_1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;        &lt;span class="c"&gt;# Number of 1th prize&lt;/span&gt;
+&lt;span class="n"&gt;num_2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;        &lt;span class="c"&gt;# Number of 2nd prize&lt;/span&gt;
+&lt;span class="n"&gt;num_3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;        &lt;span class="c"&gt;# Number of 3rd prize&lt;/span&gt;
+&lt;span class="n"&gt;num_all&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num_1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;num_2&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;num_3&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_result&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Random&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sample&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_person&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;num_all&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;1. &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;num_1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;2. &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;num_1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;num_1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;num_2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;3. &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;num_1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;num_2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;num_all&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="c"&gt;# Main&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;-h&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lottery [-h] [num_person]&amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;num_person&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;num_all&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;num_person&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;num_person should less than &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;num_all&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lottery [-h] [num_person]&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;get_result&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</summary></entry><entry><title>'[转]网络广播风暴'</title><link href="http://localhost:8000/programming/e8bdace7bd91e7bb9ce5b9bfe692ade9a38ee69ab4.html" rel="alternate"></link><updated>2009-07-28T07:44:51+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-07-28:programming/e8bdace7bd91e7bb9ce5b9bfe692ade9a38ee69ab4.html</id><summary type="html">&lt;p&gt;网吧行业竞争的加剧，出现了一些规模比较大的网吧。目前在网吧行业内，百台以上的网吧已经随处可见了。由于网吧在进行网络建设时，缺乏专业的网络技术支 持，使得网吧的网络故障频繁出现。在网吧的网络故障中，由于网络广播风暴引起的网络故障，占网吧网络故障的九成以上。网络广播风暴到底是如何形成的呢？
+要想正确理解广播风暴的具体含义，我们必须了解一下工作在网络中的网络设备的工作原理。目前，工作在网吧网络中的网络设备，基本上都是交换机了。对于交换机，大家并没有真正的了解其工作原理。&lt;/p&gt;
+&lt;p&gt;一、交换机基础知识&lt;/p&gt;
+&lt;p&gt;1、交换机的定义：交换机是一种基于MAC（网卡的硬件地址）识别，能完成封装转发数据包功能的网络设备。交换机可以“学习”MAC地址，并把其存放在内 部地址表中，通过在数据帧的始发者和目标接收者之间建立临时的交换路径，使数据帧直接由源地址到达目的地址。
+现在，交换机已经替代了我们原来比较熟悉的网络设备集线器，又称Hub。但是这并不意味着，我们不需要了解Hub的基本知识。
+2、集线器的定义：集线器（HUB）属于数据通信系统中的基础设备，它和双绞线等传输介质一样，是一种不需任何软件支持或只需很少管理软件管理的硬件设 备。它被广泛应用到各种场合。集线器工作在局域网(LAN)环境，像网卡一样，应用于OSI参考模型第一层，因此又被称为物理层设备。集线器内部采用了电 器互联，当维护LAN的环境是逻辑总线或环型结构时，完全可以用集线器建立一个物理上的星型或树型网络结构。在这方面，集线器所起的作用相当于多端口的中 继器。其实，集线器实际上就是中继器的一种，其区别仅在于集线器能够提供更多的端口服务，所以集线器又叫多口中继器。&lt;/p&gt;
+&lt;p&gt;二、交换机与集线器的区别&lt;/p&gt;
+&lt;p&gt;现在，我们经常会存在这样一个技术误区，我们用的是交换机，数据全部是点对点转发的，为什么还会产生广播风暴呢？我们在充分了解了交换机与集线器的功能区别后，就会明白，使用交换机作为网络设备的网络，为什么会出现广播风暴。&lt;/p&gt;
+&lt;p&gt;1、交换机与集线器的本质区别：用集线器组成的网络称为共享式网络，而用交换机组成的网络称为交换式网络。
+共享式以太网存 在的主要问题是所有用户共享带宽，每个用户的实际可用带宽随网络用户数的增加而递减。这是因为当信息繁忙时，多个用户可能同时“争用”一个信道，而一个信 道在某一时刻只允许一个用户占用，所以大量的用户经常处于监测等待状态，致使信号传输时产生抖动、停滞或失真，严重影响了网络的性能。
+2、 在交换式以太网中，交换机提供给每个用户专用的信息通道，除非两个源端口企图同时将信息发往同一个目的端口，否则多个源端口与目的端口之间可同时进行通信 而不会发生冲突。通过实验测得，在多服务器组成的LAN 中，处于半双工模式下的交换式以太网的实际最大传输速度是共享式网络的1.7倍，而工作在全双工状态下的交换式以太网的实际最大传输速度可达到共享式网络 的3.8倍。
+交换机只是在工作方式上与集线器不同，其他的如连接方式、速度选择等与集线器基本相同，目前的交换机同样从速度上分 为10M、100M和1000M几种，所提供的端口数多为8口、16口和24口几种。交换机在局域网中主要用于连接工作站、Hub、服务器或用于分散式主 干网。&lt;/p&gt;
+&lt;p&gt;三、产生广播风暴的原因&lt;/p&gt;
+&lt;p&gt;通过对以上网络设备的了解，我们就可以简单分析出来，网络产生广播风暴的原因了。一般情况下，产生网络广播风暴的原因，主要有以下几种：&lt;/p&gt;
+&lt;p&gt;1、网络设备原因：我们经常会有这样一个误区，交换机是点对点转发，不会产生广播风暴。在我们购买网络设置时，购买的交换机，通常是智能型的Hub，却被奸商当做交换机来卖。这样，在网络稍微繁忙的时候，肯定会产生广播风暴了。
+2、网卡损坏：如果网络机器的网卡损坏，也同样会产生广播风暴。损坏的网卡，不停向交换机发送大量的数据包，产生了大量无用的数据包，产生了广播风暴。由 于网卡物理损坏引起的广播风暴，故障比较难排除，由于损坏的网卡一般还能上网，我们一般借用Sniffer局域网管理软件，查看网络数据流量，来判断故障 点的位置。
+3、网络环路：曾经在一次的网络故障排除中，发现一个很可笑的错误，一条双绞线，两端插在同一个交换机的不同商品上，导致了网络性能急骤下降，打开网页都 非常困难。这种故障，就是典型的网络环路。网络环路的产生，一般是由于一条物理网络线路的两端，同时接在了一台网络设备中。
+4、网络病毒：目前，一些比较流行的网络病毒，Funlove、震荡波、RPC等病毒，一旦有机器中毒后，会立即通过网络进行传播。网络病毒的传播，就会损耗大量的网络带宽，引起网络堵塞，引起广播风暴。
+5、黑客软件的使用：目前，一些上网者，经常利用网络执法官、网络剪刀手等黑客软件，对网吧的内部网络进行攻击，由于这些软件的使用，网络也可能会引起广播风暴。&lt;/p&gt;
+&lt;p&gt;附注：&lt;/p&gt;
+&lt;p&gt;广播风暴是一种在网上广播的消息导致大量响应，每个响应又导致大量响应的状态。严重的广播风 暴可能封锁所有网络通讯量，导致网络灾难。一般HUB的工作方式是广播式，比如如果一台主机要向另一台主机发送文件，HUB会把这些信息发送到每个端口， 由网卡来决定是否接收，这就是广播。而交换机是端口到端口式，广播的作用主要是确定其它主机的位置和联系。现在一般采用VLAN来控制广播风暴的出现。 VLAN的优势在于VLAN内部的广播和单播流量不会被转发到其它VLAN中，从而有助于控制网络流量、减少设备投资、简化网络管理、提高网络安全性。&lt;/p&gt;</summary></entry><entry><title>网页Email地址抓取脚本</title><link href="http://localhost:8000/programming/e7bd91e9a1b5emaile59cb0e59d80e68a93e58f96e8849ae69cac.html" rel="alternate"></link><updated>2009-04-11T08:55:35+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-04-11:programming/e7bd91e9a1b5emaile59cb0e59d80e68a93e58f96e8849ae69cac.html</id><summary type="html">&lt;p&gt;今天帮你同学写了个shell脚本，抓取指定url地址的网页中的email地址。 这里字符编码转换还有点问题，只是考虑了gb2312一种情况。最好是从html源码截取字符编码，进行转换。&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class="c"&gt;# test page: http://zhidao.baidu.com/question/21631338.html&lt;/span&gt;
+
+&lt;span class="nv"&gt;f&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.tmp.txt&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;f2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.tmp2.txt&amp;quot;&lt;/span&gt;
+
+wget &lt;span class="nv"&gt;$1&lt;/span&gt; -O &lt;span class="nv"&gt;$f2&lt;/span&gt; &amp;gt;/dev/null 2&amp;gt;/dev/null
+iconv -f gb2312 -t utf-8 &lt;span class="nv"&gt;$f2&lt;/span&gt; &amp;gt; &lt;span class="nv"&gt;$f&lt;/span&gt; 2&amp;gt;/dev/null
+
+sed -i -e &lt;span class="s1"&gt;&amp;#39;s/]*&amp;gt;//g;/&amp;lt;!--/d&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$f&lt;/span&gt;
+sed -i -e &lt;span class="s1"&gt;&amp;#39;s/ //g;s/°C//g;s/^\s*//g;/^$/d&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$f&lt;/span&gt;
+
+sed -e &lt;span class="s2"&gt;&amp;quot;s/[^\-\.+_a-zA-Z0-9@]/\n/g&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;$f&lt;/span&gt; |grep @|grep ^&lt;span class="o"&gt;[&lt;/span&gt;a-zA-Z0-9&lt;span class="o"&gt;]&lt;/span&gt;|grep &lt;span class="o"&gt;[&lt;/span&gt;a-zA-Z0-9&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;|sort -u | tee
+rm -rf &lt;span class="nv"&gt;$f&lt;/span&gt; &lt;span class="nv"&gt;$f2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;运行效果：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;kongove&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ubuntu&lt;/span&gt;&lt;span class="o"&gt;:~&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//zhidao.baidu.com/question/21631338.html&lt;/span&gt;
+&lt;span class="n"&gt;aizi66742112&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;hainan&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;net&lt;/span&gt;
+&lt;span class="n"&gt;alading512&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;sina&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;bingbing43&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="mf"&gt;163.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;caoyingtj&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="mf"&gt;163.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;chenq&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;chinabyte&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;dnzb&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;pub2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;qz&lt;/span&gt;
+&lt;span class="n"&gt;duanxiaosong&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ah163&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;gxlworld&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="mf"&gt;163.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;halfmay2691&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;sina&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;hbx&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;wxjt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cn&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>参加OpenSourceCamp 09'西安</title><link href="http://localhost:8000/programming/e58f82e58aa0opensourcecamp-09e8a5bfe5ae89-2.html" rel="alternate"></link><updated>2009-03-28T13:06:53+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-03-28:programming/e58f82e58aa0opensourcecamp-09e8a5bfe5ae89-2.html</id><summary type="html">&lt;p&gt;今天和陈老师、张斌等六个人一块去参加了这个活动，第一次参加这种unconference形式的聚会，有很多东西值得借鉴，环境不错，是在一个咖啡厅。由于演讲主题由大家选举产生，而且有多个选择，这样能保证自己听的主题是最喜欢的，而且每个参与聚会的人都可以发表主题，有机会给大家讲。比起以往的传统讲座，增强了听众于演讲者之间的交流，形式更灵活。
+今天去的多数是企业的人，学生很少也就五六个吧。开始大家举手选出了四个最感兴趣的话题，一是如何平衡工作与生活，二是开源在企业的应用，三是When junit does not work，四是Groovy方面的。分两个时段进行，我们参与的是第二个和第四个。
+开源在企业的应用讲了一些法律许可、集成开发、开源咨询等方面的东西，只是感觉离自己有点远。下来是北京ThoughtWork的一个咨询师胡凯讲单元测试，讲了junit、aunit单元测试方面的东西，像创造测试环境、调用测试方法、验证测试结果，测试程序如何在不同平台正常工作。还演示了Linux平台，一个叫AB(ApacheBench)的命令行web压力测试工具。
+在讲的过程中大家提了很多问题，最后他还专门现场演示了一下TDD开发，以做一个计算器为例，边写测试程序，边进行计算器代码编写。而且也说明了这样开发软件的好处，有人提出当用户需求不断变化的时候，可能造成测试程序更大的变动，但一般的功能需求还是比较稳定的，比如计算器不可能让你一加一等于三吧？还有测试程序的复杂度必须低于软件本身代码，要不就难以起到测试验证的效果。这里我感觉主要是对功能需求的划分，保证软件代码变动时，测试程序仍然可用。
+还从企业角度，如何把程序员从单调任务解脱出来，生产高质量的软件，避免一些形式化文档、测试。目前自己的感受就是，平时和同学的项目文档还是不够重视，这也导致文档在指导项目开发方面的作用减弱，有时甚至成为累赘。写测试程序也一样，一定要从解决实际问题出发。所以100％的测试程序通过率不一定能说明程序的高质量，一定要从功能需求入手写好单元测试程序。企业里一些开发方法虽然也有接触，但平时自己的小项目却很难采用，看来以后得从方法论的角度进行实战一下。
+软件开发也是一门大学问，得专业呀！回来的路上，我们也商量把这种活动形式本地化一下，能够适合学生这个特殊群体。&lt;/p&gt;
+&lt;p&gt;活动网站：&lt;a href="http://www.opensourcecamp.org.cn/showOneNews.do?newsId=375"&gt;http://www.opensourcecamp.org.cn/showOneNews.do?newsId=375&lt;/a&gt;
+胡凯的博客：&lt;a href="http://iamhukai.blogspot.com/"&gt;http://iamhukai.blogspot.com/&lt;/a&gt;
+胡凯的一个开源项目：&lt;a href="http://code.google.com/p/junit-ext/"&gt;http://code.google.com/p/junit-ext/&lt;/a&gt;&lt;/p&gt;</summary></entry><entry><title>(la la love on my mind)拉拉爱</title><link href="http://localhost:8000/programming/la-la-love-on-my-minde68b89e68b89e788b1.html" rel="alternate"></link><updated>2009-03-05T02:09:48+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-03-05:programming/la-la-love-on-my-minde68b89e68b89e788b1.html</id><summary type="html">&lt;p&gt;By Ann Winsborn &lt;/p&gt;
+&lt;p&gt;La la la la la la… 啦……
+Mhmm... 嗯……
+You’re the la love of my life 你是我一生所爱
+One way ticket and of life to live 体验生命的单程票
+Pockets full of sunshine 装满阳光的口袋
+Lots of love to give 可以奉献许许多多的爱
+Longing for your kisses 向往你的吻
+Longing for your arms to be holding me. 期待你用双臂将我环抱
+I took the Friday night flight 我乘周五的夜机
+Paris here I come 来到巴黎
+Couldn’t live without you 生活不能没有你相伴
+You're the only one 你是唯一
+Got the note you wrote me – know it all by heart 收到你写给我的留言——明白句句情真意切
+Oh nothing’s gonna keep us apart. 哦，什么也不能把我们分开。
+There is only... 只有……
+La la love on my mind, 爱在我心中，
+Gonna leave my la la love on the line, 将要离开我的爱人，登上飞机
+Baby just surrender, you’ll be la lucky tonight. 宝贝，放纵一下，今夜你会走运的
+Looking out for ooh la la la l’amour 寻找真爱
+And I’m gonna la la love you toujours. 我将永远爱你
+There’s no doubt about it, 这毫无疑问
+You’re the la love of my life. 你是我一生所爱
+Don’t care about my suitcase, 别管我的旅行箱
+Gonna grab a cab, 去叫辆计程车
+Let your arms unfold me 向我展开你的双臂
+Give you all I have 给你我的全部
+Boy you got me dreamin’小子，你让我朝思暮想
+You’re a kiss away 你是离别的一吻
+In your arms I’m going to stay 在你怀里我不想离开
+There is only... 只有
+La la love on my mind, 爱在我心中
+Gonna leave my la la love on the line, 将要离开我的爱人，登上飞机
+Baby just surrender, you’ll be la lucky tonight. 宝贝，放纵一下，今夜你会走运的
+Looking out for ooh la la la l’amour 寻找真爱
+And I’m gonna la la love you toujours. 我将永远爱你
+There’s no doubt about it, 这毫无疑问
+You’re the la love of my life. 你是我一生所爱
+There’s no doubt about it 这毫无疑问
+You’re the la love of my life 你是我一生所爱&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;p&gt;如果你看到了这里，恭喜！这绝对不是话题广告！&lt;/p&gt;
+&lt;p&gt;我去年在DP博客上看到了，一个交易链接的网站Text-Link(http://www.text-link-ads.com/)，去注册了一个帐号，过了一段时间卖了一个链接，每月收到2.5$，去年十月又卖了一个链接，每月多6.25$，也就是说现在每月8.75$。&lt;/p&gt;
+&lt;p&gt;建站的同志们，虽然美元贬值了，但总比人民币贵吧！我只是想证明这个是真的，你们可以试试。Text-link销售链接的方式很多，我只是在wordpress上装了个插件，到目前为止我未发现有任何影响(不在页面显示任何东西)。&lt;/p&gt;
+&lt;p&gt;说实话，我现在也没搞明白怎么销售链接，我只是装了插件，刀就自动来了。&lt;/p&gt;
+&lt;p&gt;还有，被销售的两个链接都是英文字母，所以贴这篇歌词。听这首歌感觉很放松～就这么简单～&lt;/p&gt;</summary></entry><entry><title>Python查询五笔编码、拼音</title><link href="http://localhost:8000/programming/pythone69fa5e8afa2e4ba94e7ac94e7bc96e7a081e38081e68bbce99fb3.html" rel="alternate"></link><updated>2009-01-03T14:38:37+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2009-01-03:programming/pythone69fa5e8afa2e4ba94e7ac94e7bc96e7a081e38081e68bbce99fb3.html</id><summary type="html">&lt;p&gt;可以查询五笔的网站很多，还是觉得不方便，本来想利用一个字典，实现本地查询，结果没找到。下面是一个用Python写的从http://qq.ip138.com/在线查询汉字五笔编码和拼音的程序。&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c"&gt;#coding=utf-8&lt;/span&gt;
+&lt;span class="c"&gt;#author: Jianjun Kong&lt;/span&gt;
+&lt;span class="c"&gt;#website:http://kongove.whostas.com&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;cookielib&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;httplib&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;string&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;
+
+&lt;span class="n"&gt;web_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;http://qq.ip138.com/&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;web_url&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;wb/wb.asp?&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:],&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;init&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;cookie&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cookielib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CookieJar&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;opener&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;build_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HTTPCookieProcessor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cookie&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="n"&gt;exheaders&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;User-Agent&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Firefox/3.05 (X11; Linux x86_64; U;en)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Connection&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Keep-Alive&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Referer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://qq.ip138.com/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Accept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/html,application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg,image/gif, image/x-xbitmap, */*;q=0.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Accept-Charset&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;iso-8859-1,utf-8, utf-16, *;q=0.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Cookie2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;$Version=1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),]&lt;/span&gt;
+
+    &lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addheaders&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;exheaders&lt;/span&gt;
+    &lt;span class="n"&gt;urllib2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;install_opener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;opener&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;web_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;
+
+    &lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;querykey&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;gb2312&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)),)&lt;/span&gt;
+    &lt;span class="n"&gt;ret&lt;/span&gt;  &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;web_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlencode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;gb2312&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/tmp/wubi.tmp&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;opener&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;cmds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;1,/&amp;lt;form name=&amp;quot;form1&amp;quot; method=&amp;quot;post&amp;quot;/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;1,//d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;/&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;/,$d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;s/&amp;lt;tr&amp;gt;/&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;1,/汉语拼音/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;s/、/&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;s/&amp;lt;td&amp;gt;/&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;s/]*&amp;gt;//g;/&amp;lt;!--/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;
+&lt;span class="s"&gt;sed -i -e &amp;#39;s/ //g;s/°C//g;s/^\s*//g;/^$/d&amp;#39; /tmp/wubi.tmp&lt;/span&gt;
+&lt;span class="s"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;sed -i -e &amp;#39;1,/&amp;lt;form name=&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;form1&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt; method=&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;post&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;1,//d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;/\&amp;lt;br&amp;gt;&amp;lt;/br&amp;gt;/,$d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;s/&amp;lt;tr&amp;gt;/&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;r&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;n/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;1,/汉语拼音/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;s/、/&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;t/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;s/&amp;lt;td&amp;gt;/&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;t/g&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;s/]*&amp;gt;//g;/&amp;lt;!--/d&amp;#39; /tmp/wubi.tmp;&lt;/span&gt;&lt;span class="se"&gt;\&lt;/span&gt;
+&lt;span class="s"&gt;    sed -i -e &amp;#39;s/ //g;s/°C//g;s/^\s*//g;/^$/d&amp;#39; /tmp/wubi.tmp&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;  &lt;span class="s"&gt;&amp;quot;序号&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;汉字&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;五笔&lt;/span&gt;&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="s"&gt;拼音&amp;quot;&lt;/span&gt;
+    &lt;span class="c"&gt;#exit()&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/tmp/wubi.tmp&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;运行效果&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;kongove&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ubuntu&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;wubi&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;wubi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="err"&gt;汉字&lt;/span&gt; &lt;span class="err"&gt;五笔拼音&lt;/span&gt; &lt;span class="err"&gt;查询&lt;/span&gt;
+&lt;span class="err"&gt;序号&lt;/span&gt;  &lt;span class="err"&gt;汉字&lt;/span&gt;  &lt;span class="err"&gt;五笔&lt;/span&gt;  &lt;span class="err"&gt;拼音&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;   &lt;span class="err"&gt;汉&lt;/span&gt;   &lt;span class="n"&gt;icy&lt;/span&gt; &lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="err"&gt;à&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;   &lt;span class="err"&gt;字&lt;/span&gt;   &lt;span class="n"&gt;pbf&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="err"&gt;ì&lt;/span&gt;
+&lt;span class="mi"&gt;3&lt;/span&gt;   &lt;span class="err"&gt;五&lt;/span&gt;   &lt;span class="n"&gt;gghg&lt;/span&gt;    &lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="err"&gt;ǔ&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;   &lt;span class="err"&gt;笔&lt;/span&gt;   &lt;span class="n"&gt;ttfn&lt;/span&gt;    &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="err"&gt;ǐ&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;   &lt;span class="err"&gt;拼&lt;/span&gt;   &lt;span class="n"&gt;ruah&lt;/span&gt;    &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="err"&gt;ī&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+&lt;span class="mi"&gt;6&lt;/span&gt;   &lt;span class="err"&gt;音&lt;/span&gt;   &lt;span class="n"&gt;ujf&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="err"&gt;ī&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt;   &lt;span class="err"&gt;查&lt;/span&gt;   &lt;span class="n"&gt;sjgf&lt;/span&gt;    &lt;span class="n"&gt;ch&lt;/span&gt;&lt;span class="err"&gt;á&lt;/span&gt;
+&lt;span class="mi"&gt;8&lt;/span&gt;   &lt;span class="err"&gt;询&lt;/span&gt;   &lt;span class="n"&gt;yqjg&lt;/span&gt;    &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="err"&gt;ú&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+&lt;span class="n"&gt;kongove&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;ubuntu&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;wubi&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>post和get的区别</title><link href="http://localhost:8000/programming/poste5928cgete79a84e58cbae588ab.html" rel="alternate"></link><updated>2008-01-01T14:03:16+08:00</updated><author><name>Amos</name></author><id>tag:localhost:8000,2008-01-01:programming/poste5928cgete79a84e58cbae588ab.html</id><summary type="html">&lt;p&gt;前些天看了些php&amp;amp;mysql的书，这两天复习功课头晕目眩之余，读了些php代码，其中对cocobear的留言板做了深入研究。放假准备在好好看些这方面的书，越来越喜欢php编程了，语法和C很像。下面把post和get的区别总结一下。&lt;/p&gt;
+&lt;p&gt;post和get是传递表单数据两种不同方式，如果使用get方式，Url后边会包含"？name1=value1&amp;amp;name2=value2……"，而post则没有。&lt;/p&gt;
+&lt;p&gt;1、Get 方法通过 URL 请求来传递用户的数据，将表单内各字段名称与其内容，以成对的字符串连接，置于 action 属性所指程序的 url 后，如&lt;a href="http://www.mdm.com/test.asp?name=asd&amp;amp;password=sad"&gt;http://kongove.whostas.com?name=kongove&amp;amp;password=linux&lt;/a&gt;， 数据都会直接显示在 url 上；Post 方法通过 HTTP post 机制，将表单内各字段名称与其内容放置在 HTML 表头(header)内一起传送给服务器端交由 action 属性能所指的程序处理，该程序会通过标准输入(stdin)方式，将表单的数据读出并加以处理。&lt;/p&gt;
+&lt;p&gt;2、 Get 方式需要使用 Request.QueryString 来取得变量的值（ $user = $_GET['user']; ）；而 Post 方式通过Request.Form 来访问提交的内容（ $user = $_POST['user']; ）。&lt;/p&gt;
+&lt;p&gt;3、Get 方式传输的数据量非常小，一般限制在 2 KB 左右，但是执行效率却比 Post 方法好；而 Post 方式传递的数据量相对较大，它是等待服务器来读取数据。不过也有字节限制，这是为了避免对服务器用大量数据进行恶意攻击，微软对用 Request.Form() 可接收的最大数据有限制，IIS 4 中为 80 KB 字节，IIS 5 中为 100 KB 字节。除非你肯定你提交的数据可以一次性提交，否则请尽量用 Post 方法。&lt;/p&gt;
+&lt;p&gt;4、Get 方式提交数据，会带来安全问题，比如一个登陆页面，通过 Get 方式提交数据时，用户名和密码将出现在 URL 上，如果页面可以被缓存或者其他人可以访问客户这台机器，就可以从历史记录获得该用户的帐号和密码，所以出于安全性考虑表单提交建议使用 Post 方法。&lt;/p&gt;</summary></entry></feed>
