@@ -1,14 +1,15 @@
 # Site settings
-title:       Pixyll
-email:       your_email@example.com
-author:      John Otander
-description: "A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff."
+title:       Amos Kong
+email:       kongjianjun@gmail.com
+author:      Amos Kong
+description: ""
 baseurl:     ""
-url:         "https://pixyll.com"
+url:         "https://amoskong.github.io"
 date_format: "%b %-d, %Y"
 header_pages:
- - about.md
- - contact.html
+ - archive.html
+# - about.md
+# - contact.html
 
 # Google services
 google_verification:
@@ -47,11 +48,11 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username:
+github_username: amoskong
 reddit_username:
 bitbucket_username:
 stackoverflow_id:
-twitter_username:
+twitter_username: amos_kong
 skype_username:
 steam_nickname:
 google_plus_id:
