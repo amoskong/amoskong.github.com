@@ -1,17 +1,19 @@
 ---
 layout: post
-title: YAML: disable an option
-date: 2020-12-12 08:30 
+title: 'disable an option in YAML config'
+date: 2020-12-12 08:31
 ---
 
+Yaml config file:
+
 ```
-param1:  (blank)
+# remove param0 from the config
+param1:  (leave the value as blank)
 param2: ~
 param3: null
-param4: null
 ```
 
-Json
+Json:
 
 ```
 { 'param1': None,
