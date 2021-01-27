@@ -23,8 +23,8 @@ $h0-responsive-max: 5.76rem !default;
 $h1-responsive-max: 3.84rem !default;
 $abbr-border-bottom: 1px black dotted;
 
-// Page width
-$measure-width: 42rem !default;
+// Page width  # old in upstream: 42
+$measure-width: 52rem !default;
 
 // Viewport widths
 $viewport-small: 32em;
