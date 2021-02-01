@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Google indexing github page
-date: 2021-01-27 20:30
+date: 2020-12-06 20:30
 ---
 
 I'm using [Pixyll](https://github.com/johno/pixyll) to deploy [my github page](https://amoskong.github.io/).
