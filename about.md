@@ -5,7 +5,7 @@ permalink: /about/
 tags: about
 ---
 
-Software Engineer.
+VP Software Engineering, Sietium Semiconductor
 
 * [Twitter: Amos_Kong](https://twitter.com/amos_kong)
 * [Facebook: amoskong.cn](https://www.facebook.com/amoskong.cn/)
