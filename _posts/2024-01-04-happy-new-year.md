@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Enjoy the fun in Winter
+title: Happy new year! - 2024
 date: 2024-01-04 06:16
 ---
 
